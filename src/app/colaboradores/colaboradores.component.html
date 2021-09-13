@@ -1,0 +1,7 @@
+<div style="padding: 10px;">
+    <button type="button" class="btn btn-primary" (click)="agregarColaborador()">Agregar</button> &nbsp;&nbsp;
+    <button type="button" class="btn btn-warning" *ngIf="colaborador != null" >Editar</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-danger" *ngIf="colaborador">Eliminar</button>
+</div>
+
+<table datatable [dtOptions]="dtOptions" class="row-border hover"></table>
