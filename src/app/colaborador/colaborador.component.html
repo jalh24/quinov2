@@ -67,7 +67,7 @@
                         <label for="formFile" class="form-label">Foto Personal</label>
                         <input class="form-control-file" type="file" id="foto" >
                       </div>
-                      <div class="col-md-2">
+                      <!-- <div class="col-md-2">
                         <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
                         <select class="form-control" name="calificacion">
                           <option selected>Selecionar</option>
@@ -76,6 +76,14 @@
                           <option value="3">3-Promedio</option>
                           <option value="4">4-Bueno</option>
                           <option value="5">5-Muy Bueno</option>
+                        </select>
+                      </div> -->
+                      <div class="col-md-2">
+                        <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="calificacion">
+                          <option *ngFor="let calificacion of calificaciones" [value]="calificacion.id">
+                            {{calificacion.nombre}}
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -91,28 +99,52 @@
                         </div>
                         </div>
             
-                        <div class="col">
+                        <!-- <div class="col">
                         <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
                         <input maxlength="11" size="11" type="text" class="form-control" name="ldnciudad" placeholder="" value="" ngModel #ldnciudad="ngModel">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
+                        </div> -->
+                        <div class="col">
+                          <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+                          <select class="form-control" name="ciudadNac">
+                            <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+                              {{ciudad.nombre}}
+                            </option>
+                          </select>
                         </div>
             
-                        <div class="col">
+                        <!-- <div class="col">
                         <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
                         <input maxlength="11" size="11" type="text" class="form-control" name="ldnestado" placeholder="" value="" ngModel #ldnestado="ngModel">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
+                        </div> -->
+                        <div class="col">
+                          <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
+                          <select class="form-control" name="estadoNac">
+                            <option *ngFor="let estado of estados" [value]="estado.id">
+                              {{estado.nombre}}
+                            </option>
+                          </select>
                         </div>
             
-                        <div class="col">
+                        <!-- <div class="col">
                         <label for="paisNac" class="form-label">Pais<span class="text-danger"> *</span></label>
                         <input maxlength="11" size="11" type="text" class="form-control" name="ldnpais" placeholder="" value="">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
+                        </div> -->
+                        <div class="col">
+                          <label for="paisNac" class="form-label">País<span class="text-danger"> *</span></label>
+                          <select class="form-control" name="paisNac">
+                            <option *ngFor="let pais of paises" [value]="pais.id">
+                              {{pais.nombre}}
+                            </option>
+                          </select>
                         </div>
                     </div>    
             </div>
@@ -149,38 +181,70 @@
                       <input type="text" class="form-control" name="noint" placeholder="" value="">
                     </div>
           
-                    <div class="col">
+                    <!-- <div class="col">
                       <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="colonia" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
+                    </div> -->
+                    <div class="col">
+                      <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
+                      <select class="form-control" name="colonia">
+                        <option *ngFor="let colonia of colonias" [value]="colonia.id">
+                          {{colonia.nombre}}
+                        </option>
+                      </select>
                     </div>
                   </div>
           
                   <div class="row mt-4">
-                    <div class="col">
+                    <!-- <div class="col">
                       <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="ciudad" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
+                    </div> -->
+                    <div class="col">
+                      <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+                      <select class="form-control" name="ciudad">
+                        <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+                          {{ciudad.nombre}}
+                        </option>
+                      </select>
                     </div>
           
-                    <div class="col">
+                    <!-- <div class="col">
                       <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="estado" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
+                    </div> -->
+                    <div class="col">
+                      <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
+                      <select class="form-control" name="estado">
+                        <option *ngFor="let estado of estados" [value]="estado.id">
+                          {{estado.nombre}}
+                        </option>
+                      </select>
                     </div>
           
-                    <div class="col">
+                    <!-- <div class="col">
                       <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="pais" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
+                    </div> -->
+                    <div class="col">
+                      <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
+                      <select class="form-control" name="pais">
+                        <option *ngFor="let pais of paises" [value]="pais.id">
+                          {{pais.nombre}}
+                        </option>
+                      </select>
                     </div>
           
                     <div class="col-md-2">
@@ -239,16 +303,19 @@
                     <div class="col-md-2">
                       <label for="tez" class="form-label">Tez</label>
                       <select class="form-control" name="tez">
-                        <option selected>Selecionar</option>
+                        <option *ngFor="let tez of teces" [value]="tez.id">
+                          {{tez.nombre}}
+                        </option>
+                        <!-- <option selected>Selecionar</option>
                         <option value="Negra">Negra</option>
                         <option value="Morena">Morena</option>
                         <option value="Aperlada">Aperlada</option>
                         <option value="Clara">Clara</option>
-                        <option value="Blanca">Blanca</option>
+                        <option value="Blanca">Blanca</option> -->
                       </select>
                     </div>
           
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                       <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
                       <select class="form-control" name="estadocivil">
                         <option selected>Selecionar</option>
@@ -256,6 +323,14 @@
                         <option value="Casado(a)">Casado(a)</option>
                         <option value="Divorciado(a)">Divorciado(a)</option>
                         <option value="Unión Libre">Unión Libre</option>
+                      </select>
+                    </div> -->
+                    <div class="col-md-2">
+                      <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
+                      <select class="form-control" name="estadocivil">
+                        <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.id">
+                          {{estadoCivil.nombre}}
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -270,7 +345,7 @@
                       </div>
                     </div>
           
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                       <label for="tipoTel" class="form-label">Tipo de Teléfono 1</label>
                       <select class="form-control" name="tipoTel">
                         <option selected>Selecionar</option>
@@ -280,6 +355,14 @@
                         <option value="Familiar">Familiar</option>
                         <option value="Amigo">Amigo</option>
                         <option value="Vecino">Vecino</option>
+                      </select>
+                    </div> -->
+                    <div class="col-md-2">
+                      <label for="tipoTel" class="form-label">Tipo de Teléfono 1</label>
+                      <select class="form-control" name="tipoTel">
+                        <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
+                          {{tipoTelefono.nombre}}
+                        </option>
                       </select>
                     </div>
           
@@ -292,7 +375,7 @@
                       </div>
                     </div>
           
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                       <label for="tipoTel1" class="form-label">Tipo de Teléfono 2</label>
                       <select class="form-control" name="tipoTel1">
                         <option selected>Selecionar</option>
@@ -302,6 +385,14 @@
                         <option value="Familiar">Familiar</option>
                         <option value="Amigo">Amigo</option>
                         <option value="Vecino">Vecino</option>
+                      </select>
+                    </div> -->
+                    <div class="col-md-2">
+                      <label for="tipoTel1" class="form-label">Tipo de Teléfono 2</label>
+                      <select class="form-control" name="tipoTel1">
+                        <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
+                          {{tipoTelefono.nombre}}
+                        </option>
                       </select>
                     </div>
           
@@ -644,7 +735,7 @@
                     <div class="col-md-6">
                       <h5 class="pb-1">Otros</h5>
                       <div class="row">
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                           <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
                           <select class="form-control" id="permanencia">
                             <option selected>Selecionar</option>
@@ -652,6 +743,14 @@
                             <option value="2">Entrada</option>
                             <option value="3">Salida</option>
                             <option value="4">Ambas</option>
+                          </select>
+                        </div> -->
+                        <div class="col-md-4">
+                          <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
+                          <select class="form-control" name="permanencia">
+                            <option *ngFor="let permanencia of permanencias" [value]="permanencia.id">
+                              {{permanencia.nombre}}
+                            </option>
                           </select>
                         </div>
                         <!-- <div class="col-md-4">
@@ -671,7 +770,7 @@
                             <option value="11">Apodaca</option>
                           </select>
                         </div> -->
-                        <div class="col-md-5">
+                        <!-- <div class="col-md-5">
                           <label for="zona" class="form-label">Zonas Laborales</label>
                           <select multiple class="form-control" id="zona_laboral">
                             <option value="1">Centro</option>
@@ -685,6 +784,14 @@
                             <option value="9">Escobedo</option>
                             <option value="10">Cadereyta</option>
                             <option value="11">Apodaca</option>
+                          </select>
+                        </div> -->
+                        <div class="col-md-5">
+                          <label for="zona" class="form-label">Zonas Laborales</label>
+                          <select multiple class="form-control" id="zona">
+                            <option *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.id">
+                              {{zonaLaboral.nombre}}
+                            </option>
                           </select>
                         </div>
                       </div>

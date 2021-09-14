@@ -78,6 +78,16 @@ export class ColaboradorComponent implements OnInit {
     estudios: []
   };
 
+  colonias:any[];
+  ciudades:any[];
+  estados:any[];
+  paises:any[];
+  calificaciones:any[];
+  teces:any[];
+  estadosCiviles:any[];
+  tiposTelefono:any[];
+  permanencias:any[];
+  zonasLaborales:any[];
   estudios:Estudio[];
   estudio:Estudio;
   dtOptionsEstudio: any = {};
@@ -100,6 +110,16 @@ export class ColaboradorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.comboColonias();
+    this.comboCiudades();
+    this.comboEstados();
+    this.comboPaises();
+    this.comboCalificaciones();
+    this.comboTeces();
+    this.comboEstadosCiviles();
+    this.comboTiposTelefono();
+    this.comboPermanencias();
+    this.comboZonasLaborales();
     this.idEstudio = 0;
     this.colaborador.ine=null;
     this.estudios=[];
@@ -285,5 +305,75 @@ export class ColaboradorComponent implements OnInit {
       if(element.idEstudio==estudioTmp.idEstudio) delete this.estudios[index];
    });
    this.rerender();
+  }
+
+  public comboCalificaciones(){
+    this.http.get<any>('/api/catalogo/calificaciones').subscribe(data => {
+        console.log(data);
+        this.calificaciones = data.data;
+    });
+  }
+
+  public comboTeces(){
+    this.http.get<any>('/api/catalogo/teces').subscribe(data => {
+        console.log(data);
+        this.teces = data.data;
+    });
+  }
+
+  public comboEstadosCiviles(){
+    this.http.get<any>('/api/catalogo/estadosCiviles').subscribe(data => {
+        console.log(data);
+        this.estadosCiviles = data.data;
+    });
+  }
+
+  public comboTiposTelefono(){
+    this.http.get<any>('/api/catalogo/tiposTelefono').subscribe(data => {
+        console.log(data);
+        this.tiposTelefono = data.data;
+    });
+  }
+
+  public comboPermanencias(){
+    this.http.get<any>('/api/catalogo/permanencias').subscribe(data => {
+        console.log(data);
+        this.permanencias = data.data;
+    });
+  }
+
+  public comboZonasLaborales(){
+    this.http.get<any>('/api/catalogo/zonasLaborales').subscribe(data => {
+        console.log(data);
+        this.zonasLaborales = data.data;
+    });
+  }
+
+  public comboColonias(){
+    this.http.get<any>('/api/catalogo/colonias').subscribe(data => {
+        console.log(data);
+        this.colonias = data.data;
+    });
+  }
+
+  public comboCiudades(){
+    this.http.get<any>('/api/catalogo/ciudades').subscribe(data => {
+        console.log(data);
+        this.ciudades = data.data;
+    });
+  }
+
+  public comboEstados(){
+    this.http.get<any>('/api/catalogo/estados').subscribe(data => {
+        console.log(data);
+        this.estados = data.data;
+    });
+  }
+
+  public comboPaises(){
+    this.http.get<any>('/api/catalogo/paises').subscribe(data => {
+        console.log(data);
+        this.paises = data.data;
+    });
   }
 }
