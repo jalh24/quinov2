@@ -1,12 +1,12 @@
-<form  #myForm="ngForm">
-    <mat-tab-group style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4); " mat-align-tabs="center">
+<form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
+    <mat-tab-group mat-align-tabs="center">
         <mat-tab label="General" > 
-            <div class="container mt-5 bg-white rounded shadow">
+            <div class="container mt-5 bg-white rounded-top shadow">
               <h4 class="pt-4 pb-1">Información General</h4>
                     <div class="row">           
                         <div class="col">
                         <label for="nombre" class="form-label">Nombre(s)<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control-file valGlobal" name="nombre" 
+                        <input type="text" class="form-control valGlobal" name="nombre" 
                         ngModel #nombre="ngModel" [(ngModel)]="colaborador.nombre">
                         <div class="invalid-feedback">
                             *Campo Requerido!
@@ -15,7 +15,7 @@
             
                         <div class="col">
                         <label for="paterno" class="form-label">Apellido Paterno<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control-file valGlobal" name="apaterno"  ngModel #apaterno="ngModel"
+                        <input type="text" class="form-control valGlobal" name="apaterno"  ngModel #apaterno="ngModel"
                         [(ngModel)]="colaborador.a_paterno">
                         <div class="invalid-feedback">
                             *Campo Requerido!
@@ -24,7 +24,7 @@
             
                         <div class="col">
                         <label for="materno" class="form-label">Apellido Materno<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control-file" name="amaterno"  ngModel #amaterno="ngModel"
+                        <input type="text" class="form-control" name="amaterno"  ngModel #amaterno="ngModel"
                         [(ngModel)]="colaborador.a_materno">
                         <div class="invalid-feedback">
                             *Campo Requerido!
@@ -35,7 +35,7 @@
                     <div class="row mt-4">
                         <div class="col">
                         <label for="rfc" class="form-label">RFC<span class="text-danger"> *</span></label>
-                        <input maxlength="13" size="13" type="text" class="form-control-file" name="rfc" placeholder="" value="" 
+                        <input maxlength="13" size="13" type="text" class="form-control" name="rfc" placeholder="" value="" 
                         ngModel #rfc="ngModel" [(ngModel)]="colaborador.rfc">
                         <div class="invalid-feedback">
                             *Campo Requerido!
@@ -44,32 +44,48 @@
             
                         <div class="col">
                         <label for="nss" class="form-label">NSS</label>
-                        <input maxlength="11" size="11" type="text" class="form-control-file" name="nss" ngModel #nss="ngModel"
+                        <input maxlength="11" size="11" type="text" class="form-control" name="nss" ngModel #nss="ngModel"
                         [(ngModel)]="colaborador.nss">
                         </div>
             
                         <div class="col">
-                        <label for="ine" class="form-label">Imagen INE<span class="text-danger"> *</span></label>
-                        <input class="form-control-file" type="file" name="ine" accept=".png, .jpg, .jpeg" 
+                        <label for="identificacionF" class="form-label">Identificación (Frontal)<span class="text-danger"> *</span></label>
+                        <input class="form-control-file" type="file" name="identificacionF" accept=".png, .jpg, .jpeg" 
                          (change)="onIneFileSelected($event.target.files)" #ineUpload>
                         <div class="invalid-feedback">
                             *Imagen Requerida
                         </div>
                         </div>
-            
                         <div class="col">
+                          <label for="identificacionR" class="form-label">Identificación (Reverso)</label>
+                          <input class="form-control-file" type="file" name="identificacionR" accept=".png, .jpg, .jpeg" 
+                           (change)="onIneFileSelected($event.target.files)" #ineUpload>
+                          </div>  
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-md-3">
                         <label for="formFile" class="form-label">Foto Personal</label>
                         <input class="form-control-file" type="file" id="foto" >
-                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="calificacion">
+                          <option selected>Selecionar</option>
+                          <option value="1">1-Muy Malo</option>
+                          <option value="2">2-Malo</option>
+                          <option value="3">3-Promedio</option>
+                          <option value="4">4-Bueno</option>
+                          <option value="5">5-Muy Bueno</option>
+                        </select>
+                      </div>
                     </div>
-            
+          
                     <hr class="py-1" />
                     <h4 class="pb-1">Lugar y Fecha de Nacimiento</h4>
-                    <div class="row mt-4">
-                        
+                    <div class="row mt-4 pb-4">                      
                         <div class="col">
                         <label for="nacimiento" class="form-label">Fecha de Nacimiento<span class="text-danger"> *</span></label>
-                        <input type="date" class="form-control-file" name="fechanacimiento" value="yyyy-MM-dd" ngModel #fechanacimiento="ngModel">
+                        <input type="date" class="form-control" name="fechanacimiento" value="yyyy-MM-dd" ngModel #fechanacimiento="ngModel">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
@@ -77,7 +93,7 @@
             
                         <div class="col">
                         <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                        <input maxlength="11" size="11" type="text" class="form-control-file" name="ldnciudad" placeholder="" value="" ngModel #ldnciudad="ngModel">
+                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnciudad" placeholder="" value="" ngModel #ldnciudad="ngModel">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
@@ -85,7 +101,7 @@
             
                         <div class="col">
                         <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-                        <input maxlength="11" size="11" type="text" class="form-control-file" name="ldnestado" placeholder="" value="" ngModel #ldnestado="ngModel">
+                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnestado" placeholder="" value="" ngModel #ldnestado="ngModel">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
@@ -93,7 +109,7 @@
             
                         <div class="col">
                         <label for="paisNac" class="form-label">Pais<span class="text-danger"> *</span></label>
-                        <input maxlength="11" size="11" type="text" class="form-control-file" name="ldnpais" placeholder="" value="">
+                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnpais" placeholder="" value="">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
@@ -102,12 +118,12 @@
             </div>
         </mat-tab>
         <mat-tab label="Dirección"> 
-            <div class="container mt-5 bg-white rounded shadow">
+            <div class="container mt-5 bg-white rounded-top shadow">
               <h4 class="pt-4 pb-1">Dirección</h4>
                 <div class="row">
                     <div class="col">
                       <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control-file" name="calle1" placeholder="" value="">
+                      <input type="text" class="form-control" name="calle1" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
@@ -115,14 +131,14 @@
           
                     <div class="col">
                       <label for="calle2" class="form-label">Calle 2</label>
-                      <input type="text" class="form-control-file" name="calle2" placeholder="" value="">
+                      <input type="text" class="form-control" name="calle2" placeholder="" value="">
                     </div>
                   </div>
           
                   <div class="row mt-4">
                     <div class="col-md-2">
                       <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control-file" name="noext" placeholder="" value="">
+                      <input type="text" class="form-control" name="noext" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
@@ -130,12 +146,12 @@
           
                     <div class="col-md-2">
                       <label for="numInterior" class="form-label">Número Interior</label>
-                      <input type="text" class="form-control-file" name="noint" placeholder="" value="">
+                      <input type="text" class="form-control" name="noint" placeholder="" value="">
                     </div>
           
                     <div class="col">
                       <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control-file" name="colonia" placeholder="" value="">
+                      <input type="text" class="form-control" name="colonia" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
@@ -145,7 +161,7 @@
                   <div class="row mt-4">
                     <div class="col">
                       <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control-file" name="ciudad" placeholder="" value="">
+                      <input type="text" class="form-control" name="ciudad" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
@@ -153,7 +169,7 @@
           
                     <div class="col">
                       <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control-file" name="estado" placeholder="" value="">
+                      <input type="text" class="form-control" name="estado" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
@@ -161,7 +177,7 @@
           
                     <div class="col">
                       <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control-file" name="pais" placeholder="" value="">
+                      <input type="text" class="form-control" name="pais" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
@@ -169,17 +185,17 @@
           
                     <div class="col-md-2">
                       <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control-file" name="codigopostal" placeholder="" value="">
+                      <input type="text" class="form-control" name="codigopostal" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
                     </div>
                   </div>
           
-                  <div class="row mt-4">
+                  <div class="row mt-4 pb-4">
                     <div class="col">
                       <label for="referencia" class="form-label">Referencia</label>
-                      <textarea name="referencia" class="form-control-file" rows="3"></textarea>
+                      <textarea name="referencia" class="form-control" rows="3"></textarea>
                     </div>
           
                     <div class="col">
@@ -190,7 +206,7 @@
             </div>
         </mat-tab>
         <mat-tab label="Información Personal"> 
-            <div class="container mt-5 bg-white rounded shadow">
+            <div class="container mt-5 bg-white rounded-top shadow">
               <h4 class="pt-4 pb-1">Información Personal</h4>
                 <div class="row">
                     <div class="col-md-4">
@@ -212,17 +228,17 @@
           
                     <div class="col-md-1">
                       <label for="peso" class="form-label">Peso (Kg)</label>
-                      <input maxlength="3" size="2" type="text" class="form-control-file" name="peso" placeholder="" value="">
+                      <input maxlength="3" size="2" type="text" class="form-control" name="peso" placeholder="" value="">
                     </div>
           
                     <div class="col-md-1">
                       <label for="estatura" class="form-label">Estatura(mts)</label>
-                      <input maxlength="4" size="4" type="text" class="form-control-file" name="estatura" placeholder="" value="">
+                      <input maxlength="4" size="4" type="text" class="form-control" name="estatura" placeholder="" value="">
                     </div>
           
                     <div class="col-md-2">
                       <label for="tez" class="form-label">Tez</label>
-                      <select class="form-control-file" name="tez">
+                      <select class="form-control" name="tez">
                         <option selected>Selecionar</option>
                         <option value="Negra">Negra</option>
                         <option value="Morena">Morena</option>
@@ -234,7 +250,7 @@
           
                     <div class="col-md-2">
                       <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
-                      <select class="form-control-file" name="estadocivil">
+                      <select class="form-control" name="estadocivil">
                         <option selected>Selecionar</option>
                         <option value="Soltero(a)">Soltero(a)</option>
                         <option value="Casado(a)">Casado(a)</option>
@@ -247,7 +263,7 @@
                   <div class="row mt-4">
                     <div class="col-md-2">
                       <label for="telefono" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
-                      <input maxlength="10" size="10" type="tel" class="form-control-file" name="telefono1" placeholder="10 Dígitos"
+                      <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" placeholder="10 Dígitos"
                         value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
@@ -256,7 +272,7 @@
           
                     <div class="col-md-2">
                       <label for="tipoTel" class="form-label">Tipo de Teléfono 1</label>
-                      <select class="form-control-file" name="telefonotipo1">
+                      <select class="form-control" name="tipoTel">
                         <option selected>Selecionar</option>
                         <option value="Casa">Casa</option>
                         <option value="Oficina">Oficina</option>
@@ -269,7 +285,7 @@
           
                     <div class="col-md-2">
                       <label for="telefono1" class="form-label">Teléfono 2</label>
-                      <input maxlength="10" size="10" type="tel" class="form-control-file" name="telefono2" placeholder="10 Dígitos"
+                      <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" placeholder="10 Dígitos"
                         value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
@@ -278,7 +294,7 @@
           
                     <div class="col-md-2">
                       <label for="tipoTel1" class="form-label">Tipo de Teléfono 2</label>
-                      <select class="form-control-file" name="telefonotipo2">
+                      <select class="form-control" name="tipoTel1">
                         <option selected>Selecionar</option>
                         <option value="Casa">Casa</option>
                         <option value="Oficina">Oficina</option>
@@ -291,14 +307,14 @@
           
                     <div class="col-md-4">
                       <label for="correo" class="form-label">Correo Electrónico<span class="text-danger"> *</span></label>
-                      <input type="email" class="form-control-file" name="correoelectronico" placeholder="" value="">
+                      <input type="email" class="form-control" name="correoelectronico" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
                     </div>
                   </div>
           
-                  <div class="row mt-4">
+                  <div class="row mt-4 pb-4">
                     <div class="col-md-4">
                       <label class="pb-2">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
                       <br>
@@ -316,14 +332,14 @@
           
                     <div class="col">
                       <label for="sgmm" class="form-label">Aseguradora</label>
-                      <input type="text" class="form-control-file" name="aseguradora" placeholder="Nombre" value=""
+                      <input type="text" class="form-control" name="aseguradora" placeholder="Nombre" value=""
                         disabled="disabled">
                     </div>
                   </div>
             </div>    
         </mat-tab>
         <mat-tab label="Estudios"> 
-            <div class="container mt-5 bg-white rounded shadow">
+            <div class="container mt-5 bg-white rounded-top shadow">
                 <h4 class="pt-4 pb-1">Estudios</h4>
                 <div class="form-group dynamic-element">
                 <div class="row">
@@ -331,7 +347,7 @@
                     <div class="row">
                         <div class="col-md-12">
                         <label for="institucion" class="form-label">Institución</label>
-                        <input type="text" class="form-control-file" id="institucion" name="institucion" 
+                        <input type="text" class="form-control" id="institucion" name="institucion" 
                         #institucion="ngModel" [(ngModel)]="estudio.institucion">
                         </div>
                     </div>
@@ -339,13 +355,13 @@
                     <div class="row mt-3">
                         <div class="col-md-2">
                         <label for="inicioEst" class="form-label">Inicio</label>
-                        <input type="text" class="form-control-file datepicker" name="inicioEst" 
+                        <input type="text" class="form-control datepicker" name="inicioEst" 
                         #inicioEst="ngModel" [(ngModel)]="estudio.inicio"/>
                         </div>
 
                         <div class="col-md-2">
                         <label for="terminacionEst" class="form-label">Terminación</label>
-                        <input type="text" class="form-control-file datepicker" name="terminacionEst" 
+                        <input type="text" class="form-control datepicker" name="terminacionEst" 
                         #terminacionEst="ngModel" 
                         [(ngModel)]="estudio.fin"/>
                         </div>
@@ -373,7 +389,7 @@
 
                     <div class="col-md-6">
                     <label for="comentarioEstudio" class="form-label">Estudio / Carrera / Curso</label>
-                    <textarea name="comentarioEstudio" class="form-control-file" rows="5" #comentarioEstudio="ngModel" [(ngModel)]="estudio.comentarios"></textarea>
+                    <textarea name="comentarioEstudio" class="form-control" rows="5" #comentarioEstudio="ngModel" [(ngModel)]="estudio.comentarios"></textarea>
                     </div>
                 </div>
                 <hr class="mt-3 mb-3" />
@@ -390,7 +406,7 @@
                         <button class="btn btn-warning delete ml-3">Cancelar</button>
                     </div>
                 </div>
-                <div class="row mt-5">
+                <div class="row mt-4 pb-4">
                     <div class="col-md-12 text-center">
                         <table datatable [dtOptions]="dtOptionsEstudio" 
                         [dtTrigger]="dtTriggerEstudio" class="row-border hover">
@@ -425,7 +441,7 @@
             </div>    
         </mat-tab>
         <mat-tab label="Experiencia"> 
-            <div class="container mt-5 bg-white rounded shadow">
+            <div class="container mt-5 bg-white rounded-top shadow">
                 <h4 class="pt-4 pb-1">Experiencia</h4>
                 <div class="form-group dynamic-element1">
                   <div class="row">
@@ -433,30 +449,30 @@
                       <div class="row">
                         <div class="col-md-12">
                           <label for="institucion" class="form-label">Empresa/Institución</label>
-                          <input type="text" class="form-control-file" id="institucion" placeholder="" value="">
+                          <input type="text" class="form-control" id="institucion" placeholder="" value="">
                         </div>
                       </div>
         
                       <div class="row mt-3">
                         <div class="col-md-2">
                           <label for="inicioEst" class="form-label">Inicio</label>
-                          <input type="text" class="form-control-file datepicker" name="inicioEst" />
+                          <input type="text" class="form-control datepicker" name="inicioEst" />
                         </div>
         
                         <div class="col-md-2">
                           <label for="terminacionEst" class="form-label">Terminación</label>
-                          <input type="text" class="form-control-file datepicker" name="terminacionEst" />
+                          <input type="text" class="form-control datepicker" name="terminacionEst" />
                         </div>
         
                         <div class="col-md-8">
                           <label for="institucion" class="form-label">Nombre de Referencia</label>
-                          <input type="text" class="form-control-file" id="institucion" placeholder="" value="">
+                          <input type="text" class="form-control" id="institucion" placeholder="" value="">
                         </div>
                       </div>
                       <div class="row mt-3">
                         <div class="col-md-4">
                           <label for="telefono" class="form-label">Teléfono de Referencia</label>
-                          <input maxlength="10" size="10" type="tel" class="form-control-file" id="telefono" placeholder="10 Dígitos"
+                          <input maxlength="10" size="10" type="tel" class="form-control" id="telefono" placeholder="10 Dígitos"
                             value="">
                         </div>
                       </div>
@@ -464,7 +480,7 @@
         
                     <div class="col-md-6">
                       <label for="estudio" class="form-label">Actividades Realizadas</label>
-                      <textarea name="estudio" class="form-control-file" rows="5"></textarea>
+                      <textarea name="estudio" class="form-control" rows="5"></textarea>
                     </div>
                   </div>
                   <hr class="mt-3 mb-3" />
@@ -475,7 +491,7 @@
                   </div>
                 </div>
         
-                <div class="row mt-5">
+                <div class="row mt-4 pb-4">
                   <div class="col-md-12 text-center">
                     <button class="btn btn-primary add-one1">Agregar Otra Experiencia</button>
                     <button class="btn btn-primary delete1 ml-3">Eliminar Experiencia</button>
@@ -484,7 +500,7 @@
             </div>    
         </mat-tab>
         <mat-tab label="Adicional"> 
-            <div class="container mt-5 bg-white rounded shadow">
+            <div class="container mt-5 bg-white rounded-top shadow">
               <h4 class="pt-4 pb-1">Información Adicional</h4>
                 <div class="row">
                     <hr class="mt-2 mb-3" />
@@ -499,12 +515,12 @@
                         <div class="row">
                           <div class="col-md-7">
                             <label for="desdeL" class="form-label">Desde</label>
-                            <input type="time" class="form-control-file input-sm" id="desdeL" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="desdeL" placeholder="" value=""
                               disabled="disabled">
                           </div>
                           <div class="col-md-7">
                             <label for="hastaL" class="form-label">Hasta</label>
-                            <input type="time" class="form-control-file input-sm" id="hastaL" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="hastaL" placeholder="" value=""
                               disabled="disabled">
                           </div>
                         </div>
@@ -519,12 +535,12 @@
                         <div class="row">
                           <div class="col-md-7">
                             <label for="desdeM" class="form-label">Desde</label>
-                            <input type="time" class="form-control-file input-sm" id="desdeM" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="desdeM" placeholder="" value=""
                               disabled="disabled">
                           </div>
                           <div class="col-md-7">
                             <label for="hastaM" class="form-label">Hasta</label>
-                            <input type="time" class="form-control-file input-sm" id="hastaM" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="hastaM" placeholder="" value=""
                               disabled="disabled">
                           </div>
                         </div>
@@ -537,12 +553,12 @@
                         <div class="row">
                           <div class="col-md-7">
                             <label for="desdeMi" class="form-label">Desde</label>
-                            <input type="time" class="form-control-file input-sm" id="desdeMi" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="desdeMi" placeholder="" value=""
                               disabled="disabled">
                           </div>
                           <div class="col-md-7">
                             <label for="hastaMi" class="form-label">Hasta</label>
-                            <input type="time" class="form-control-file input-sm" id="hastaMi" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="hastaMi" placeholder="" value=""
                               disabled="disabled">
                           </div>
                         </div>
@@ -556,12 +572,12 @@
                         <div class="row">
                           <div class="col-md-7">
                             <label for="desdeJ" class="form-label">Desde</label>
-                            <input type="time" class="form-control-file input-sm" id="desdeJ" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="desdeJ" placeholder="" value=""
                               disabled="disabled">
                           </div>
                           <div class="col-md-7">
                             <label for="hastaJ" class="form-label">Hasta</label>
-                            <input type="time" class="form-control-file input-sm" id="hastaJ" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="hastaJ" placeholder="" value=""
                               disabled="disabled">
                           </div>
                         </div>
@@ -575,12 +591,12 @@
                         <div class="row">
                           <div class="col-md-7">
                             <label for="desdeV" class="form-label">Desde</label>
-                            <input type="time" class="form-control-file input-sm" id="desdeV" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="desdeV" placeholder="" value=""
                               disabled="disabled">
                           </div>
                           <div class="col-md-7">
                             <label for="hastaV" class="form-label">Hasta</label>
-                            <input type="time" class="form-control-file input-sm" id="hastaV" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="hastaV" placeholder="" value=""
                               disabled="disabled">
                           </div>
                         </div>
@@ -594,12 +610,12 @@
                         <div class="row">
                           <div class="col-md-7">
                             <label for="desdeS" class="form-label">Desde</label>
-                            <input type="time" class="form-control-file input-sm" id="desdeS" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="desdeS" placeholder="" value=""
                               disabled="disabled">
                           </div>
                           <div class="col-md-7">
                             <label for="hastaS" class="form-label">Hasta</label>
-                            <input type="time" class="form-control-file input-sm" id="hastaS" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="hastaS" placeholder="" value=""
                               disabled="disabled">
                           </div>
                         </div>
@@ -610,15 +626,15 @@
                           <p class="font-weight-bold">Domingo
                           </p>
                         </label>
-                        <div class="row">
+                        <div class="row mt-4 pb-4">
                           <div class="col-md-7">
                             <label for="desdeD" class="form-label">Desde</label>
-                            <input type="time" class="form-control-file input-sm" id="desdeD" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="desdeD" placeholder="" value=""
                               disabled="disabled">
                           </div>
                           <div class="col-md-7">
                             <label for="hastaD" class="form-label">Hasta</label>
-                            <input type="time" class="form-control-file input-sm" id="hastaD" placeholder="" value=""
+                            <input type="time" class="form-control input-sm" id="hastaD" placeholder="" value=""
                               disabled="disabled">
                           </div>
                         </div>
@@ -630,7 +646,7 @@
                       <div class="row">
                         <div class="col-md-4">
                           <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
-                          <select class="form-control-file" id="permanencia">
+                          <select class="form-control" id="permanencia">
                             <option selected>Selecionar</option>
                             <option value="1">Quedada</option>
                             <option value="2">Entrada</option>
@@ -638,10 +654,26 @@
                             <option value="4">Ambas</option>
                           </select>
                         </div>
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                           <label for="zona" class="form-label">Zona Laboral</label>
-                          <select class="form-control-file" id="zona_laboral">
+                          <select class="form-control" id="zona_laboral">
                             <option selected>Selecionar</option>
+                            <option value="1">Centro</option>
+                            <option value="2">Cumbres</option>
+                            <option value="3">Zona Sur</option>
+                            <option value="4">Carretera Nacional</option>
+                            <option value="5">Zona Valle</option>
+                            <option value="6">Santa Catarina</option>
+                            <option value="7">Guadalupe</option>
+                            <option value="8">San Nicolás</option>
+                            <option value="9">Escobedo</option>
+                            <option value="10">Cadereyta</option>
+                            <option value="11">Apodaca</option>
+                          </select>
+                        </div> -->
+                        <div class="col-md-5">
+                          <label for="zona" class="form-label">Zonas Laborales</label>
+                          <select multiple class="form-control" id="zona_laboral">
                             <option value="1">Centro</option>
                             <option value="2">Cumbres</option>
                             <option value="3">Zona Sur</option>
@@ -659,7 +691,7 @@
           
                       <div class="row">
                         <div class="col-md-4">
-                          <label class="pb-2">¿Atiende COVID?<span class="text-danger"> *</span></label>
+                          <label class="mt-3 mb-1">¿Atiende COVID?<span class="text-danger"> *</span></label>
                           <br>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="atiendecovid"
@@ -675,7 +707,7 @@
           
                       <div class="row">
                         <div class="col-md-4">
-                          <label class="pb-2">Antecedentes Penales</label>
+                          <label class="mt-3 mb-1">Antecedentes Penales</label>
                           <br>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="apenales" value="option1">
@@ -691,7 +723,7 @@
           
                       <div class="row">
                         <div class="col-md-4">
-                          <label class="pb-2">Auto Propio</label>
+                          <label class="mt-3 mb-1">Auto Propio</label>
                           <br>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="autopropio"
@@ -708,7 +740,7 @@
           
                       <div class="row">
                         <div class="col-md-4">
-                          <label class="pb-2">Disponibilidad para viajar</label>
+                          <label class="mt-3 mb-1">Disponibilidad para viajar</label>
                           <br>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="disponibilidadS"
@@ -725,7 +757,7 @@
           
                       <div class="row">
                         <div class="col-md-4">
-                          <label class="pb-2">Visa</label>
+                          <label class="mt-3 mb-1">Visa</label>
                           <br>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1"
@@ -742,25 +774,31 @@
                       <div class="row">
                         <div class="col-md-4">
                           <label for="visaNum" class="form-label">Número de Visa</label>
-                          <input type="text" class="form-control-file" id="numvisa" placeholder="" value="" disabled="disabled">
+                          <input type="text" class="form-control" id="numvisa" placeholder="" value="" disabled="disabled">
                         </div>
                         <div class="col-md-4">
                           <label for="tipNum" class="form-label">Tipo de Visa</label>
-                          <input type="text" class="form-control-file" id="tipovisa" placeholder="" value="" disabled="disabled">
+                          <input type="text" class="form-control" id="tipovisa" placeholder="" value="" disabled="disabled">
                         </div>
                         <div class="col-md-4">
                           <label for="visaExp" class="form-label">Expiración</label>
-                          <input type="date" class="form-control-file" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy"
+                          <input type="date" class="form-control" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy"
                             disabled="disabled">
                           <div class="invalid-feedback">
                             *Campo Requerido!
                           </div>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-md-12 mt-3">
+                          <label for="visaImg" class="form-label">Imagen de la Visa</label>
+                          <input class="form-control-file" type="file" id="visaImg" disabled="disabled">
+                        </div>
+                      </div>
           
                       <div class="row">
                         <div class="col-md-4">
-                          <label class="pb-2">Pasaporte</label>
+                          <label class="mt-3 mb-1">Pasaporte</label>
                           <br>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporte" value="option1"
@@ -777,25 +815,34 @@
                       <div class="row">
                         <div class="col-md-4">
                           <label for="pasaporteNum" class="form-label">Número de Pasaporte</label>
-                          <input type="text" class="form-control-file" id="numpasaporte" placeholder="" value="" disabled="disabled">
+                          <input type="text" class="form-control" id="numpasaporte" placeholder="" value="" disabled="disabled">
                         </div>
                         <div class="col-md-4">
                           <label for="pasaporteExp" class="form-label">Expiración</label>
-                          <input type="date" class="form-control-file" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy"
+                          <input type="date" class="form-control" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy"
                             disabled="disabled">
                           <div class="invalid-feedback">
                             *Campo Requerido!
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-12 pt-2 pb-1 text-center">
-          
-                    </div>
-                
+                      <div class="row">
+                        <div class="col-md-12 mt-3">
+                          <label for="pasaporteImg" class="form-label">Imagen del Pasaporte</label>
+                          <input class="form-control-file" type="file" id="pasaporteImg" disabled="disabled">
+                        </div>
+                      </div>
+                    </div>                
                   </div>
             </div>    
         </mat-tab>
     </mat-tab-group>
-    <button type="button" (click)="guardarColaborador(myForm)"> Send </button>
+    <div class="container bg-white rounded-bottom shadow">
+      <div class="row text-center pb-4">
+        <div class="col">
+          <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Enviar </button>
+        </div>       
+      </div>     
+    </div>
+    
 </form>
