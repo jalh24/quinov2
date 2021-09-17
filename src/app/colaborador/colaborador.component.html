@@ -317,7 +317,7 @@
       <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Información Personal</h4>
         <div class="row">
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <label class="pb-2">Genero<span class="text-danger"> *</span></label>
             <br>
             <div class="form-check form-check-inline">
@@ -332,6 +332,20 @@
               <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Otro">
               <label class="form-check-label" for="inlineRadio3">Otro</label>
             </div>
+          </div> -->
+          <div class="col-md-4">
+            <label for="sexo" class="form-label">Genero<span class="text-danger"> *</span></label>
+            <select class="form-control" name="sexo">
+              <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">
+                {{sexo.nombre}}
+              </option>
+              <!-- <option selected>Selecionar</option>
+                        <option value="Negra">Negra</option>
+                        <option value="Morena">Morena</option>
+                        <option value="Aperlada">Aperlada</option>
+                        <option value="Clara">Clara</option>
+                        <option value="Blanca">Blanca</option> -->
+            </select>
           </div>
 
           <div class="col-md-1">
@@ -455,12 +469,12 @@
             <br>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sgmm" value="option1"
-                onclick="EnableTextBox(this)">
+              (click)="enableSeguros()">
               <label class="form-check-label" for="inlineRadio1">Sí</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
-                onclick="DisableTextBox(this)">
+              (click)="disableSeguros()">
               <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
           </div>
@@ -468,7 +482,7 @@
           <div class="col">
             <label for="sgmm" class="form-label">Aseguradora</label>
             <input type="text" class="form-control" name="aseguradora" placeholder="Nombre" value=""
-              disabled="disabled">
+              disabled="disabled" [disabled]="textBoxDisabledSeg">
           </div>
         </div>
       </div>
@@ -546,7 +560,7 @@
                 </div>
               </div>
 
-              <div class="row mt-12">
+              <div class="row py-3">
                 <div class="col-md-6">
                   <label for="inicioEst" class="form-label">Inicio</label>
                   <input type="month" class="form-control datepicker" name="inicioEst" #inicioEst="ngModel"
@@ -558,8 +572,9 @@
                   <input type="month" class="form-control datepicker" name="terminacionEst" #terminacionEst="ngModel"
                     min="1900-02" [(ngModel)]="estudio.fin">
                 </div>
-
-                <div class="col-md-8">
+              </div>
+              <div class="row">
+                <div class="col-md-6">
                   <label class="pb-2">¿Se terminaron los estudios?</label>
                   <br>
                   <mat-radio-group aria-label="Select an option">
@@ -570,6 +585,7 @@
                   </mat-radio-group>
 
                 </div>
+                
               </div>
               <div class="row mt-3">
                 <div class="col-md-12">
@@ -611,8 +627,7 @@
                   <td>Inicio</td>
                   <td>Terminación</td>
                   <td>Estatus de terminación</td>
-                  <td>Acción</td>
-                  <td>Acción</td>
+                  <td>Acciones</td>
                 </tr>
               </thead>
               <tbody *ngIf="estudios?.length != 0">
@@ -655,7 +670,7 @@
                 </div>
               </div>
 
-              <div class="row mt-12">
+              <div class="row pt-3 pb-3">
                 <div class="col-md-6">
                   <label for="inicioEst" class="form-label">Inicio</label>
                   <input type="month" class="form-control datepicker" name="inicioExp"
@@ -667,13 +682,14 @@
                   <input type="month" class="form-control datepicker" name="terminacionExp"
                     min="1900-02">
                 </div>
-
-                <div class="col-md-8">
+              </div>
+              <div class="row">
+                <div class="col-md-6">
                   <label for="institucion" class="form-label">Nombre de Referencia</label>
                   <input type="text" class="form-control" id="institucion" placeholder="" value="">
                 </div>
               </div>
-              <div class="row mt-3">
+              <div class="row pt-3">
                 <div class="col-md-4">
                   <label for="telefono" class="form-label">Teléfono de Referencia</label>
                   <input maxlength="10" size="10" type="tel" class="form-control" id="telefono" placeholder="10 Dígitos"
@@ -969,12 +985,12 @@
                 <label class="mt-3 mb-1">¿Atiende COVID?<span class="text-danger"> *</span></label>
                 <br>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="atiendecovid"
+                  <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovid"
                     value="option1">
                   <label class="form-check-label" for="covids">Sí</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="covidn" value="option2">
+                  <input class="form-check-input" type="radio" name="atiendecovid" id="covidn" value="option2">
                   <label class="form-check-label" for="covidn">No</label>
                 </div>
               </div>
@@ -985,11 +1001,11 @@
                 <label class="mt-3 mb-1">Antecedentes Penales</label>
                 <br>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="apenales" value="option1">
+                  <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1">
                   <label class="form-check-label" for="antecedentesS">Sí</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="antecedentesN"
+                  <input class="form-check-input" type="radio" name="apenales" id="antecedentesN"
                     value="option2">
                   <label class="form-check-label" for="antecedentesN">No</label>
                 </div>
@@ -1001,14 +1017,14 @@
                 <label class="mt-3 mb-1">Auto Propio</label>
                 <br>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="autopropio"
+                  <input class="form-check-input" type="radio" name="autopropio" id="autopropioS"
                     value="option1">
-                  <label class="form-check-label" for="antecedentesS">Sí</label>
+                  <label class="form-check-label" for="autopropioS">Sí</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="antecedentesN"
+                  <input class="form-check-input" type="radio" name="autopropio" id="autopropioN"
                     value="option2">
-                  <label class="form-check-label" for="antecedentesN">No</label>
+                  <label class="form-check-label" for="autopropioN">No</label>
                 </div>
               </div>
             </div>
@@ -1018,12 +1034,12 @@
                 <label class="mt-3 mb-1">Disponibilidad para viajar</label>
                 <br>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="disponibilidadS"
+                  <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadS"
                     value="option1">
                   <label class="form-check-label" for="disponibilidadS">Sí</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="disponibilidadN"
+                  <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadN"
                     value="option2">
                   <label class="form-check-label" for="disponibilidadN">No</label>
                 </div>

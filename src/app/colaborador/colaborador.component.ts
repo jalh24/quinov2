@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradorComponent implements OnInit {
+  textBoxDisabledSeg = true;
   textBoxDisabledVis = true;
   textBoxDisabledPas = true;
   textBoxDisabledDateofWorkL = true;
@@ -114,6 +115,7 @@ export class ColaboradorComponent implements OnInit {
     domingoDesde:null,
     domingoHasta:null
   };
+  sexos:any[];
   colonias:any[];
   ciudades:any[];
   ciudadesDir:any[];
@@ -152,6 +154,7 @@ export class ColaboradorComponent implements OnInit {
     this.comboPaises();
     this.comboCalificaciones();
     this.comboTeces();
+    this.comboSexos();
     this.comboEstadosCiviles();
     this.comboTiposTelefono();
     this.comboPermanencias();
@@ -191,6 +194,12 @@ export class ColaboradorComponent implements OnInit {
       }
 
     };
+  }
+  enableSeguros(){
+    this.textBoxDisabledSeg = false;
+  }
+  disableSeguros(){
+    this.textBoxDisabledSeg = true;
   }
   enableTextBoxVis(){
     this.textBoxDisabledVis = false;
@@ -454,6 +463,13 @@ export class ColaboradorComponent implements OnInit {
     this.http.get<any>('/api/catalogo/colonias').subscribe(data => {
         console.log(data);
         this.colonias = data.data;
+    });
+  }
+
+  public comboSexos(){
+    this.http.get<any>('/api/catalogo/sexos').subscribe(data => {
+        console.log(data);
+        this.sexos = data.data;
     });
   }
 
