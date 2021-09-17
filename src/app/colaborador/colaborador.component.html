@@ -98,39 +98,6 @@
                             *Campo Requerido!
                         </div>
                         </div>
-            
-                        <!-- <div class="col">
-                        <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnciudad" placeholder="" value="" ngModel #ldnciudad="ngModel">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div> -->
-                        <div class="col">
-                          <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                          <select class="form-control" name="ciudadNac">
-                            <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
-                              {{ciudad.nombre}}
-                            </option>
-                          </select>
-                        </div>
-            
-                        <!-- <div class="col">
-                        <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnestado" placeholder="" value="" ngModel #ldnestado="ngModel">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div> -->
-                        <div class="col">
-                          <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-                          <select class="form-control" name="estadoNac">
-                            <option *ngFor="let estado of estados" [value]="estado.id">
-                              {{estado.nombre}}
-                            </option>
-                          </select>
-                        </div>
-            
                         <!-- <div class="col">
                         <label for="paisNac" class="form-label">Pais<span class="text-danger"> *</span></label>
                         <input maxlength="11" size="11" type="text" class="form-control" name="ldnpais" placeholder="" value="">
@@ -146,6 +113,46 @@
                             </option>
                           </select>
                         </div>
+                        <!-- <div class="col">
+                        <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
+                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnestado" placeholder="" value="" ngModel #ldnestado="ngModel">
+                        <div class="invalid-feedback">
+                            *Campo Requerido!
+                        </div>
+                        </div> -->
+                        <!-- <div class="col">
+                          <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
+                          <select class="form-control" name="estadoNac">
+                            <option *ngFor="let estado of estados" [value]="estado.id">
+                              {{estado.nombre}}
+                            </option>
+                          </select>
+                        </div> -->
+
+                        <div class="col">
+                          <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
+                          <select class="form-control" name="estadoNac" ngModel #estado="ngModel" [(ngModel)]="selectedEstado" (change)="comboCiudades($event.target.value)">
+                            <option *ngFor="let estado of estados" [value]="estado.idEstado">
+                              {{estado.nombre}}
+                            </option>
+                          </select>
+                        </div>
+                        <!-- <div class="col">
+                        <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnciudad" placeholder="" value="" ngModel #ldnciudad="ngModel">
+                        <div class="invalid-feedback">
+                            *Campo Requerido!
+                        </div>
+                        </div> -->
+                        <div class="col">
+                          <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+                          <select class="form-control" name="ciudadNac">
+                            <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+                              {{ciudad.nombre}}
+                            </option>
+                          </select>
+                        </div>
+    
                     </div>    
             </div>
         </mat-tab>
@@ -180,7 +187,25 @@
                       <label for="numInterior" class="form-label">Número Interior</label>
                       <input type="text" class="form-control" name="noint" placeholder="" value="">
                     </div>
-          
+
+                    <!-- <div class="col-md-2">
+                      <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
+                      <input type="text" class="form-control" name="codigopostal" placeholder="" value="">
+                      <div class="invalid-feedback">
+                        *Campo Requerido!
+                      </div>
+                    </div> -->
+                    
+                    <div class="col-md-2">
+                      <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
+                      <input type="text" class="form-control" name="codigopostal" placeholder="" value="" [ngModel]="selectedCodigoPostal" (change)="onCodigoPostal($event.target.value)">
+                      <div class="invalid-feedback">
+                        *Campo Requerido!
+                      </div>
+                    </div>
+            
+
+
                     <!-- <div class="col">
                       <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="colonia" placeholder="" value="">
@@ -209,7 +234,7 @@
                     <div class="col">
                       <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
                       <select class="form-control" name="ciudad">
-                        <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+                        <option *ngFor="let ciudad of ciudadesDir" [value]="ciudad.id">
                           {{ciudad.nombre}}
                         </option>
                       </select>
@@ -222,10 +247,18 @@
                         *Campo Requerido!
                       </div>
                     </div> -->
+                    <!-- <div class="col">
+                      <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
+                      <select class="form-control" name="estado" ngModel #estado="ngModel" [(ngModel)]="selectedEstado" (change)="comboCiudades($event.target.value)">
+                        <option *ngFor="let estado of estados" [value]="estado.idEstado">
+                          {{estado.nombre}}
+                        </option>
+                      </select>
+                    </div> -->
                     <div class="col">
                       <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
                       <select class="form-control" name="estado">
-                        <option *ngFor="let estado of estados" [value]="estado.id">
+                        <option *ngFor="let estado of estadosDir" [value]="estado.id">
                           {{estado.nombre}}
                         </option>
                       </select>
@@ -247,13 +280,13 @@
                       </select>
                     </div>
           
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                       <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="codigopostal" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
-                    </div>
+                    </div> -->
                   </div>
           
                   <div class="row mt-4 pb-4">
@@ -598,138 +631,163 @@
                     <div class="col-md-6">
                       <h5 class="pb-1">Días y Horarios de Disponibilidad<span class="text-danger"> *</span></h5>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="lunes" onclick="EnableTextBoxDays(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="lunes" name="lunes" ngModel #lunes="ngModel" [(ngModel)]="diasLaborales.lunes" (click)="DisableTextBoxDateofWorkL()">
                         <label class="form-check-label" for="lunes">
-                          <p class="font-weight-bold">Lunes
-                          </p>
+                          <p class="font-weight-bold">Lunes</p>
                         </label>
-                        <div class="row">
-                          <div class="col-md-7">
+                      </div>
+                        <div class="row pb-3">
+                          <div class="col-md-6">
                             <label for="desdeL" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeL" placeholder="" value=""
-                              disabled="disabled">
+                            name="lunesDesde" ngModel #lunesDesde="ngModel" [(ngModel)]="diasLaborales.lunesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkL">
                           </div>
-                          <div class="col-md-7">
+                          <div class="col-md-6">
                             <label for="hastaL" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaL" placeholder="" value=""
-                              disabled="disabled">
+                            name="lunesHasta" ngModel #lunesHasta="ngModel" [(ngModel)]="diasLaborales.lunesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkL">
                           </div>
                         </div>
-                      </div>
+                      <!-- </div> -->
           
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="martes" onclick="EnableTextBoxDays(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="martes" (click)="DisableTextBoxDateofWorkM()">
                         <label class="form-check-label" for="martes">
                           <p class="font-weight-bold">Martes
                           </p>
                         </label>
-                        <div class="row">
-                          <div class="col-md-7">
+                      </div>
+                      <div class="row pb-3">
+                        <div class="col-md-6">
                             <label for="desdeM" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeM" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
                           </div>
-                          <div class="col-md-7">
+                          <div class="col-md-6">
                             <label for="hastaM" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaM" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
                           </div>
                         </div>
-                      </div>
+                      <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="miercoles" onclick="EnableTextBoxDays(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="miercoles" (click)="DisableTextBoxDateofWorkMi()">
                         <label class="form-check-label" for="miercoles">
                           <p class="font-weight-bold">Miércoles</p>
                         </label>
-                        <div class="row">
-                          <div class="col-md-7">
+                      </div>
+                      <div class="row pb-3">
+                        <div class="col-md-6">
                             <label for="desdeMi" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeMi" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
                           </div>
-                          <div class="col-md-7">
+                          <div class="col-md-6">
                             <label for="hastaMi" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaMi" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
                           </div>
                         </div>
-                      </div>
+                      <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="jueves" onclick="EnableTextBoxDays(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="jueves" (click)="DisableTextBoxDateofWorkJ()">
                         <label class="form-check-label" for="jueves">
                           <p class="font-weight-bold">Jueves
                           </p>
                         </label>
-                        <div class="row">
-                          <div class="col-md-7">
+                      </div>
+                      <div class="row pb-3">
+                        <div class="col-md-6">
                             <label for="desdeJ" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeJ" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
                           </div>
-                          <div class="col-md-7">
+                          <div class="col-md-6">
                             <label for="hastaJ" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaJ" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
                           </div>
                         </div>
-                      </div>
+                      <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="viernes" onclick="EnableTextBoxDays(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="viernes" (click)="DisableTextBoxDateofWorkV()">
                         <label class="form-check-label" for="viernes">
                           <p class="font-weight-bold">Viernes
                           </p>
                         </label>
-                        <div class="row">
-                          <div class="col-md-7">
+                      </div>
+                      <div class="row pb-3">
+                        <div class="col-md-6">
                             <label for="desdeV" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeV" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
                           </div>
-                          <div class="col-md-7">
+                          <div class="col-md-6">
                             <label for="hastaV" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaV" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
                           </div>
                         </div>
-                      </div>
+                      <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="sabado" onclick="EnableTextBoxDays(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="sabado" (click)="DisableTextBoxDateofWorkS()">
                         <label class="form-check-label" for="sabado">
                           <p class="font-weight-bold">Sábado
                           </p>
                         </label>
-                        <div class="row">
-                          <div class="col-md-7">
+                      </div>
+                      <div class="row pb-3">
+                        <div class="col-md-6">
                             <label for="desdeS" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeS" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
                           </div>
-                          <div class="col-md-7">
+                          <div class="col-md-6">
                             <label for="hastaS" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaS" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
                           </div>
                         </div>
-                      </div>
+                      <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="domingo" onclick="EnableTextBoxDays(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="domingo" (click)="DisableTextBoxDateofWorkD()">
                         <label class="form-check-label" for="domingo">
                           <p class="font-weight-bold">Domingo
                           </p>
                         </label>
-                        <div class="row mt-4 pb-4">
-                          <div class="col-md-7">
+                      </div>
+                      <div class="row pb-3">
+                        <div class="col-md-6">
                             <label for="desdeD" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeD" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
                           </div>
-                          <div class="col-md-7">
+                          <div class="col-md-6">
                             <label for="hastaD" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaD" placeholder="" value=""
-                              disabled="disabled">
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
                           </div>
                         </div>
-                      </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" value="" id="todos" (click)="DisableTextBoxDateofWorkT()">
+                          <label class="form-check-label" for="todos">
+                            <p class="font-weight-bold">Todos los Dias
+                            </p>
+                          </label>
+                        </div>
+                        <div class="row pb-3">
+                          <div class="col-md-6">
+                              <label for="desdeD" class="form-label">Desde</label>
+                              <input type="time" class="form-control input-sm" id="desdeD" placeholder="" value=""
+                                disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
+                            </div>
+                            <div class="col-md-6">
+                              <label for="hastaD" class="form-label">Hasta</label>
+                              <input type="time" class="form-control input-sm" id="hastaD" placeholder="" value=""
+                                disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
+                            </div>
+                          </div>
+                      <!-- </div> -->
                     </div>
           
                     <div class="col-md-6">
@@ -867,13 +925,11 @@
                           <label class="mt-3 mb-1">Visa</label>
                           <br>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1"
-                              onclick="EnableTextBoxVis(this)">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1" (click)="EnableTextBoxVis()">
                             <label class="form-check-label" for="visaS">Sí</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visaN" value="option2"
-                              onclick="DisableTextBoxVis(this)">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visaN" value="option2" (click)="DisableTextBoxVis()">
                             <label class="form-check-label" for="visaN">No</label>
                           </div>
                         </div>
@@ -881,16 +937,15 @@
                       <div class="row">
                         <div class="col-md-4">
                           <label for="visaNum" class="form-label">Número de Visa</label>
-                          <input type="text" class="form-control" id="numvisa" placeholder="" value="" disabled="disabled">
+                          <input type="text" class="form-control" id="numvisa" placeholder="" value="" disabled="disabled" [disabled]="textBoxDisabledVis">
                         </div>
                         <div class="col-md-4">
                           <label for="tipNum" class="form-label">Tipo de Visa</label>
-                          <input type="text" class="form-control" id="tipovisa" placeholder="" value="" disabled="disabled">
+                          <input type="text" class="form-control" id="tipovisa" placeholder="" value="" disabled="disabled" [disabled]="textBoxDisabledVis">
                         </div>
                         <div class="col-md-4">
                           <label for="visaExp" class="form-label">Expiración</label>
-                          <input type="date" class="form-control" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy"
-                            disabled="disabled">
+                          <input type="date" class="form-control" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy" disabled="disabled" [disabled]="textBoxDisabledVis">
                           <div class="invalid-feedback">
                             *Campo Requerido!
                           </div>
@@ -899,7 +954,7 @@
                       <div class="row">
                         <div class="col-md-12 mt-3">
                           <label for="visaImg" class="form-label">Imagen de la Visa</label>
-                          <input class="form-control-file" type="file" id="visaImg" disabled="disabled">
+                          <input class="form-control-file" type="file" id="visaImg" disabled="disabled" [disabled]="textBoxDisabledVis">
                         </div>
                       </div>
           
@@ -908,13 +963,11 @@
                           <label class="mt-3 mb-1">Pasaporte</label>
                           <br>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporte" value="option1"
-                              onclick="EnableTextBoxPas(this)">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporte" value="option1" (click)="EnableTextBoxPas()">
                             <label class="form-check-label" for="pasaporteS">Sí</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporteN"
-                              value="option2" onclick="DisableTextBoxPas(this)">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporteN" value="option2" (click)="DisableTextBoxPas()">
                             <label class="form-check-label" for="pasaporteN">No</label>
                           </div>
                         </div>
@@ -922,12 +975,11 @@
                       <div class="row">
                         <div class="col-md-4">
                           <label for="pasaporteNum" class="form-label">Número de Pasaporte</label>
-                          <input type="text" class="form-control" id="numpasaporte" placeholder="" value="" disabled="disabled">
+                          <input type="text" class="form-control" id="numpasaporte" placeholder="" value="" disabled="disabled" [disabled]="textBoxDisabledPas">
                         </div>
                         <div class="col-md-4">
                           <label for="pasaporteExp" class="form-label">Expiración</label>
-                          <input type="date" class="form-control" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy"
-                            disabled="disabled">
+                          <input type="date" class="form-control" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy" disabled="disabled" [disabled]="textBoxDisabledPas">
                           <div class="invalid-feedback">
                             *Campo Requerido!
                           </div>
@@ -936,7 +988,7 @@
                       <div class="row">
                         <div class="col-md-12 mt-3">
                           <label for="pasaporteImg" class="form-label">Imagen del Pasaporte</label>
-                          <input class="form-control-file" type="file" id="pasaporteImg" disabled="disabled">
+                          <input class="form-control-file" type="file" id="pasaporteImg" disabled="disabled" [disabled]="textBoxDisabledPas">
                         </div>
                       </div>
                     </div>                

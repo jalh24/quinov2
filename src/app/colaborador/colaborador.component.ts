@@ -13,6 +13,20 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradorComponent implements OnInit {
+  textBoxDisabledVis = true;
+  textBoxDisabledPas = true;
+  textBoxDisabledDateofWorkL = true;
+  textBoxDisabledDateofWorkM = true;
+  textBoxDisabledDateofWorkMi = true;
+  textBoxDisabledDateofWorkJ = true;
+  textBoxDisabledDateofWorkV = true;
+  textBoxDisabledDateofWorkS = true;
+  textBoxDisabledDateofWorkD = true;
+  textBoxDisabledDateofWorkT = true;
+
+  selectedPais = 1;
+  selectedEstado = null;
+  selectedCodigoPostal=null;
 
   tabVisible:any = 1;
   @ViewChild('myForm') ngForm: NgForm;
@@ -77,9 +91,15 @@ export class ColaboradorComponent implements OnInit {
     auto_propio:null,
     estudios: []
   };
-
+  diasLaborales:any = {
+    lunes:false,
+    lunesDesde:null,
+    lunesHasta:null
+  };
   colonias:any[];
   ciudades:any[];
+  ciudadesDir:any[];
+  estadosDir:any[];
   estados:any[];
   paises:any[];
   calificaciones:any[];
@@ -110,8 +130,6 @@ export class ColaboradorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.comboColonias();
-    this.comboCiudades();
     this.comboEstados();
     this.comboPaises();
     this.comboCalificaciones();
@@ -156,6 +174,53 @@ export class ColaboradorComponent implements OnInit {
 
     };
   }
+  EnableTextBoxVis(){
+    this.textBoxDisabledVis = false;
+  }
+  DisableTextBoxVis(){
+    this.textBoxDisabledVis = true;
+  }
+  EnableTextBoxPas(){
+    this.textBoxDisabledPas = false;
+  }
+  DisableTextBoxPas(){
+    this.textBoxDisabledPas = true;
+  }
+  DisableTextBoxDateofWorkL(){
+    this.textBoxDisabledDateofWorkL = !this.textBoxDisabledDateofWorkL;
+  }
+  DisableTextBoxDateofWorkM(){
+    this.textBoxDisabledDateofWorkM = !this.textBoxDisabledDateofWorkM;
+  }
+  DisableTextBoxDateofWorkMi(){
+    this.textBoxDisabledDateofWorkMi = !this.textBoxDisabledDateofWorkMi;
+  }
+  DisableTextBoxDateofWorkJ(){
+    this.textBoxDisabledDateofWorkJ = !this.textBoxDisabledDateofWorkJ;
+  }
+  DisableTextBoxDateofWorkV(){
+    this.textBoxDisabledDateofWorkV = !this.textBoxDisabledDateofWorkV;
+  }
+  DisableTextBoxDateofWorkS(){
+    this.textBoxDisabledDateofWorkS = !this.textBoxDisabledDateofWorkS;
+  }
+  DisableTextBoxDateofWorkD(){
+    this.textBoxDisabledDateofWorkD = !this.textBoxDisabledDateofWorkD;
+  }
+  DisableTextBoxDateofWorkT(){
+    this.textBoxDisabledDateofWorkT = !this.textBoxDisabledDateofWorkT;
+    this.textBoxDisabledDateofWorkL = true;
+    this.textBoxDisabledDateofWorkM = true;
+    this.textBoxDisabledDateofWorkMi = true;
+    this.textBoxDisabledDateofWorkJ = true;
+    this.textBoxDisabledDateofWorkV = true;
+    this.textBoxDisabledDateofWorkS = true;
+    this.textBoxDisabledDateofWorkD = true;
+    this.diasLaborales.lunes = false;
+    this.diasLaborales.lunesDesde = null;
+    this.diasLaborales.lunesHasta = null;
+  }
+  
 
   ngAfterViewInit(): void {
     this.dtTriggerEstudio.next();
@@ -322,7 +387,7 @@ export class ColaboradorComponent implements OnInit {
   }
 
   public comboEstadosCiviles(){
-    this.http.get<any>('/api/catalogo/estadosCiviles').subscribe(data => {
+    this.http.get<any>('/api/catalogo/comboEstadosCiviles').subscribe(data => {
         console.log(data);
         this.estadosCiviles = data.data;
     });
@@ -356,15 +421,15 @@ export class ColaboradorComponent implements OnInit {
     });
   }
 
-  public comboCiudades(){
-    this.http.get<any>('/api/catalogo/ciudades').subscribe(data => {
+  public comboCiudades(e){
+    this.http.get<any>('/api/catalogo/ciudades?idEstado='+ e).subscribe(data => {
         console.log(data);
         this.ciudades = data.data;
     });
   }
 
   public comboEstados(){
-    this.http.get<any>('/api/catalogo/estados').subscribe(data => {
+    this.http.get<any>('/api/catalogo/estados?idPais='+ this.selectedPais).subscribe(data => {
         console.log(data);
         this.estados = data.data;
     });
@@ -375,5 +440,19 @@ export class ColaboradorComponent implements OnInit {
         console.log(data);
         this.paises = data.data;
     });
+  }
+
+  public onCodigoPostal(selectedCodigoPostal){
+    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal='+ selectedCodigoPostal).subscribe(data => {
+      console.log(data);
+      this.colonias = data.data;
+      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad='+ data.data[0].idCiudad).subscribe(data => {
+        this.ciudadesDir = data.data;
+        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado='+ data.data[0].idEstado).subscribe(data => {
+          console.log(data.data[0].idEstado);
+          this.estadosDir = data.data;
+      });
+    });
+  }); 
   }
 }
