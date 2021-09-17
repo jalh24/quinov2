@@ -1,73 +1,74 @@
 <form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
-    <mat-tab-group mat-align-tabs="center">
-        <mat-tab label="General" > 
-            <div class="container mt-5 bg-white rounded-top shadow">
-              <h4 class="pt-4 pb-1">Información General</h4>
-                    <div class="row">           
-                        <div class="col">
-                        <label for="nombre" class="form-label">Nombre(s)<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control valGlobal" name="nombre" 
-                        ngModel #nombre="ngModel" [(ngModel)]="colaborador.nombre">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div>
-            
-                        <div class="col">
-                        <label for="paterno" class="form-label">Apellido Paterno<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control valGlobal" name="apaterno"  ngModel #apaterno="ngModel"
-                        [(ngModel)]="colaborador.a_paterno">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div>
-            
-                        <div class="col">
-                        <label for="materno" class="form-label">Apellido Materno<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control" name="amaterno"  ngModel #amaterno="ngModel"
-                        [(ngModel)]="colaborador.a_materno">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div>
-                    </div>
-            
-                    <div class="row mt-4">
-                        <div class="col">
-                        <label for="rfc" class="form-label">RFC<span class="text-danger"> *</span></label>
-                        <input maxlength="13" size="13" type="text" class="form-control" name="rfc" placeholder="" value="" 
-                        ngModel #rfc="ngModel" [(ngModel)]="colaborador.rfc">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div>
-            
-                        <div class="col">
-                        <label for="nss" class="form-label">NSS</label>
-                        <input maxlength="11" size="11" type="text" class="form-control" name="nss" ngModel #nss="ngModel"
-                        [(ngModel)]="colaborador.nss">
-                        </div>
-            
-                        <div class="col">
-                        <label for="identificacionF" class="form-label">Identificación (Frontal)<span class="text-danger"> *</span></label>
-                        <input class="form-control-file" type="file" name="identificacionF" accept=".png, .jpg, .jpeg" 
-                         (change)="onIneFileSelected($event.target.files)" #ineUpload>
-                        <div class="invalid-feedback">
-                            *Imagen Requerida
-                        </div>
-                        </div>
-                        <div class="col">
-                          <label for="identificacionR" class="form-label">Identificación (Reverso)</label>
-                          <input class="form-control-file" type="file" name="identificacionR" accept=".png, .jpg, .jpeg" 
-                           (change)="onIneFileSelected($event.target.files)" #ineUpload>
-                          </div>  
-                    </div>
-                    <div class="row mt-4">
-                      <div class="col-md-3">
-                        <label for="formFile" class="form-label">Foto Personal</label>
-                        <input class="form-control-file" type="file" id="foto" >
-                      </div>
-                      <!-- <div class="col-md-2">
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="General">
+      <div class="container mt-5 bg-white rounded-top shadow">
+        <h4 class="pt-4 pb-1">Información General</h4>
+        <div class="row">
+          <div class="col">
+            <label for="nombre" class="form-label">Nombre(s)<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control valGlobal" name="nombre" ngModel #nombre="ngModel"
+              [(ngModel)]="colaborador.nombre">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="paterno" class="form-label">Apellido Paterno<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control valGlobal" name="apaterno" ngModel #apaterno="ngModel"
+              [(ngModel)]="colaborador.a_paterno">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="materno" class="form-label">Apellido Materno<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" name="amaterno" ngModel #amaterno="ngModel"
+              [(ngModel)]="colaborador.a_materno">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col">
+            <label for="rfc" class="form-label">RFC<span class="text-danger"> *</span></label>
+            <input maxlength="13" size="13" type="text" class="form-control" name="rfc" placeholder="" value="" ngModel
+              #rfc="ngModel" [(ngModel)]="colaborador.rfc">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="nss" class="form-label">NSS</label>
+            <input maxlength="11" size="11" type="text" class="form-control" name="nss" ngModel #nss="ngModel"
+              [(ngModel)]="colaborador.nss">
+          </div>
+
+          <div class="col">
+            <label for="identificacionF" class="form-label">Identificación (Frontal)<span class="text-danger">
+                *</span></label>
+            <input class="form-control-file" type="file" name="identificacionF" accept=".png, .jpg, .jpeg"
+              (change)="onIneFileSelected($event.target.files)" #ineUpload>
+            <div class="invalid-feedback">
+              *Imagen Requerida
+            </div>
+          </div>
+          <div class="col">
+            <label for="identificacionR" class="form-label">Identificación (Reverso)</label>
+            <input class="form-control-file" type="file" name="identificacionR" accept=".png, .jpg, .jpeg"
+              (change)="onIneFileSelected($event.target.files)" #ineUpload>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-3">
+            <label for="formFile" class="form-label">Foto Personal</label>
+            <input class="form-control-file" type="file" id="foto">
+          </div>
+          <!-- <div class="col-md-2">
                         <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
                         <select class="form-control" name="calificacion">
                           <option selected>Selecionar</option>
@@ -78,49 +79,57 @@
                           <option value="5">5-Muy Bueno</option>
                         </select>
                       </div> -->
-                      <div class="col-md-2">
-                        <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="calificacion">
-                          <option *ngFor="let calificacion of calificaciones" [value]="calificacion.id">
-                            {{calificacion.nombre}}
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-          
-                    <hr class="py-1" />
-                    <h4 class="pb-1">Lugar y Fecha de Nacimiento</h4>
-                    <div class="row mt-4 pb-4">                      
-                        <div class="col">
-                        <label for="nacimiento" class="form-label">Fecha de Nacimiento<span class="text-danger"> *</span></label>
-                        <input type="date" class="form-control" name="fechanacimiento" value="yyyy-MM-dd" ngModel #fechanacimiento="ngModel">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div>
-                        <!-- <div class="col">
+          <div class="col-md-2">
+            <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
+            <select class="form-control" name="calificacion">
+              <option *ngFor="let calificacion of calificaciones" [value]="calificacion.id">
+                {{calificacion.nombre}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="calificacion" class="form-label">Tipo de Colaborador<span class="text-danger"> *</span></label>
+            <select class="form-control" name="calificacion">
+              <option selected>Selecionar</option>
+              <option value="1">Enfermero(a)</option>                         
+            </select>
+          </div>
+        </div>
+
+        <hr class="py-1" />
+        <h4 class="pb-1">Lugar y Fecha de Nacimiento</h4>
+        <div class="row mt-4 pb-4">
+          <div class="col">
+            <label for="nacimiento" class="form-label">Fecha de Nacimiento<span class="text-danger"> *</span></label>
+            <input type="date" class="form-control" name="fechanacimiento" value="yyyy-MM-dd" ngModel
+              #fechanacimiento="ngModel">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+          <!-- <div class="col">
                         <label for="paisNac" class="form-label">Pais<span class="text-danger"> *</span></label>
                         <input maxlength="11" size="11" type="text" class="form-control" name="ldnpais" placeholder="" value="">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
                         </div> -->
-                        <div class="col">
-                          <label for="paisNac" class="form-label">País<span class="text-danger"> *</span></label>
-                          <select class="form-control" name="paisNac">
-                            <option *ngFor="let pais of paises" [value]="pais.id">
-                              {{pais.nombre}}
-                            </option>
-                          </select>
-                        </div>
-                        <!-- <div class="col">
+          <div class="col">
+            <label for="paisNac" class="form-label">País<span class="text-danger"> *</span></label>
+            <select class="form-control" name="paisNac">
+              <option *ngFor="let pais of paises" [value]="pais.id">
+                {{pais.nombre}}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="col">
                         <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
                         <input maxlength="11" size="11" type="text" class="form-control" name="ldnestado" placeholder="" value="" ngModel #ldnestado="ngModel">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
                         </div> -->
-                        <!-- <div class="col">
+          <!-- <div class="col">
                           <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
                           <select class="form-control" name="estadoNac">
                             <option *ngFor="let estado of estados" [value]="estado.id">
@@ -129,125 +138,127 @@
                           </select>
                         </div> -->
 
-                        <div class="col">
-                          <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-                          <select class="form-control" name="estadoNac" ngModel #estado="ngModel" [(ngModel)]="selectedEstado" (change)="comboCiudades($event.target.value)">
-                            <option *ngFor="let estado of estados" [value]="estado.idEstado">
-                              {{estado.nombre}}
-                            </option>
-                          </select>
-                        </div>
-                        <!-- <div class="col">
+          <div class="col">
+            <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
+            <select class="form-control" name="estadoNac" ngModel #estado="ngModel" [(ngModel)]="selectedEstado"
+              (change)="comboCiudades($event.target.value)">
+              <option *ngFor="let estado of estados" [value]="estado.idEstado">
+                {{estado.nombre}}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="col">
                         <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
                         <input maxlength="11" size="11" type="text" class="form-control" name="ldnciudad" placeholder="" value="" ngModel #ldnciudad="ngModel">
                         <div class="invalid-feedback">
                             *Campo Requerido!
                         </div>
                         </div> -->
-                        <div class="col">
-                          <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                          <select class="form-control" name="ciudadNac">
-                            <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
-                              {{ciudad.nombre}}
-                            </option>
-                          </select>
-                        </div>
-    
-                    </div>    
-            </div>
-        </mat-tab>
-        <mat-tab label="Dirección"> 
-            <div class="container mt-5 bg-white rounded-top shadow">
-              <h4 class="pt-4 pb-1">Dirección</h4>
-                <div class="row">
-                    <div class="col">
-                      <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control" name="calle1" placeholder="" value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div>
-          
-                    <div class="col">
-                      <label for="calle2" class="form-label">Calle 2</label>
-                      <input type="text" class="form-control" name="calle2" placeholder="" value="">
-                    </div>
-                  </div>
-          
-                  <div class="row mt-4">
-                    <div class="col-md-2">
-                      <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control" name="noext" placeholder="" value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div>
-          
-                    <div class="col-md-2">
-                      <label for="numInterior" class="form-label">Número Interior</label>
-                      <input type="text" class="form-control" name="noint" placeholder="" value="">
-                    </div>
+          <div class="col">
+            <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+            <select class="form-control" name="ciudadNac">
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+                {{ciudad.nombre}}
+              </option>
+            </select>
+          </div>
 
-                    <!-- <div class="col-md-2">
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Dirección">
+      <div class="container mt-5 bg-white rounded-top shadow">
+        <h4 class="pt-4 pb-1">Dirección</h4>
+        <div class="row">
+          <div class="col">
+            <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" name="calle1" placeholder="" value="">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="calle2" class="form-label">Calle 2</label>
+            <input type="text" class="form-control" name="calle2" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-2">
+            <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" name="noext" placeholder="" value="">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <label for="numInterior" class="form-label">Número Interior</label>
+            <input type="text" class="form-control" name="noint" placeholder="" value="">
+          </div>
+
+          <!-- <div class="col-md-2">
                       <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="codigopostal" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
                     </div> -->
-                    
-                    <div class="col-md-2">
-                      <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control" name="codigopostal" placeholder="" value="" [ngModel]="selectedCodigoPostal" (change)="onCodigoPostal($event.target.value)">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div>
-            
+
+          <div class="col-md-2">
+            <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" name="codigopostal" placeholder="" value=""
+              [ngModel]="selectedCodigoPostal" (change)="onCodigoPostal($event.target.value)">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
 
 
-                    <!-- <div class="col">
+
+          <!-- <div class="col">
                       <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="colonia" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
                     </div> -->
-                    <div class="col">
-                      <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-                      <select class="form-control" name="colonia">
-                        <option *ngFor="let colonia of colonias" [value]="colonia.id">
-                          {{colonia.nombre}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-          
-                  <div class="row mt-4">
-                    <!-- <div class="col">
+          <div class="col">
+            <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
+            <select class="form-control" name="colonia">
+              <option *ngFor="let colonia of colonias" [value]="colonia.id">
+                {{colonia.nombre}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <!-- <div class="col">
                       <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="ciudad" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
                     </div> -->
-                    <div class="col">
-                      <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                      <select class="form-control" name="ciudad">
-                        <option *ngFor="let ciudad of ciudadesDir" [value]="ciudad.id">
-                          {{ciudad.nombre}}
-                        </option>
-                      </select>
-                    </div>
-          
-                    <!-- <div class="col">
+          <div class="col">
+            <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+            <select class="form-control" name="ciudad">
+              <option *ngFor="let ciudad of ciudadesDir" [value]="ciudad.id">
+                {{ciudad.nombre}}
+              </option>
+            </select>
+          </div>
+
+          <!-- <div class="col">
                       <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="estado" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
                     </div> -->
-                    <!-- <div class="col">
+          <!-- <div class="col">
                       <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
                       <select class="form-control" name="estado" ngModel #estado="ngModel" [(ngModel)]="selectedEstado" (change)="comboCiudades($event.target.value)">
                         <option *ngFor="let estado of estados" [value]="estado.idEstado">
@@ -255,100 +266,100 @@
                         </option>
                       </select>
                     </div> -->
-                    <div class="col">
-                      <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
-                      <select class="form-control" name="estado">
-                        <option *ngFor="let estado of estadosDir" [value]="estado.id">
-                          {{estado.nombre}}
-                        </option>
-                      </select>
-                    </div>
-          
-                    <!-- <div class="col">
+          <div class="col">
+            <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
+            <select class="form-control" name="estado">
+              <option *ngFor="let estado of estadosDir" [value]="estado.id">
+                {{estado.nombre}}
+              </option>
+            </select>
+          </div>
+
+          <!-- <div class="col">
                       <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="pais" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
                     </div> -->
-                    <div class="col">
-                      <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
-                      <select class="form-control" name="pais">
-                        <option *ngFor="let pais of paises" [value]="pais.id">
-                          {{pais.nombre}}
-                        </option>
-                      </select>
-                    </div>
-          
-                    <!-- <div class="col-md-2">
+          <div class="col">
+            <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
+            <select class="form-control" name="pais">
+              <option *ngFor="let pais of paises" [value]="pais.id">
+                {{pais.nombre}}
+              </option>
+            </select>
+          </div>
+
+          <!-- <div class="col-md-2">
                       <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" name="codigopostal" placeholder="" value="">
                       <div class="invalid-feedback">
                         *Campo Requerido!
                       </div>
                     </div> -->
-                  </div>
-          
-                  <div class="row mt-4 pb-4">
-                    <div class="col">
-                      <label for="referencia" class="form-label">Referencia</label>
-                      <textarea name="referencia" class="form-control" rows="3"></textarea>
-                    </div>
-          
-                    <div class="col">
-                      <label for="formFile" class="form-label">Comprobante de Domicilio</label>
-                      <input class="form-control-file" type="file" name="comprobante">
-                    </div>
-                  </div>
+        </div>
+
+        <div class="row mt-4 pb-4">
+          <div class="col">
+            <label for="referencia" class="form-label">Referencia</label>
+            <textarea name="referencia" class="form-control" rows="3"></textarea>
+          </div>
+
+          <div class="col">
+            <label for="formFile" class="form-label">Comprobante de Domicilio</label>
+            <input class="form-control-file" type="file" name="comprobante">
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Información Personal">
+      <div class="container mt-5 bg-white rounded-top shadow">
+        <h4 class="pt-4 pb-1">Información Personal</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="pb-2">Genero<span class="text-danger"> *</span></label>
+            <br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Masculino">
+              <label class="form-check-label" for="inlineRadio1">Masculino</label>
             </div>
-        </mat-tab>
-        <mat-tab label="Información Personal"> 
-            <div class="container mt-5 bg-white rounded-top shadow">
-              <h4 class="pt-4 pb-1">Información Personal</h4>
-                <div class="row">
-                    <div class="col-md-4">
-                      <label class="pb-2">Genero<span class="text-danger"> *</span></label>
-                      <br>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Masculino">
-                        <label class="form-check-label" for="inlineRadio1">Masculino</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Femenino">
-                        <label class="form-check-label" for="inlineRadio2">Femenino</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Otro">
-                        <label class="form-check-label" for="inlineRadio3">Otro</label>
-                      </div>
-                    </div>
-          
-                    <div class="col-md-1">
-                      <label for="peso" class="form-label">Peso (Kg)</label>
-                      <input maxlength="3" size="2" type="text" class="form-control" name="peso" placeholder="" value="">
-                    </div>
-          
-                    <div class="col-md-1">
-                      <label for="estatura" class="form-label">Estatura(mts)</label>
-                      <input maxlength="4" size="4" type="text" class="form-control" name="estatura" placeholder="" value="">
-                    </div>
-          
-                    <div class="col-md-2">
-                      <label for="tez" class="form-label">Tez</label>
-                      <select class="form-control" name="tez">
-                        <option *ngFor="let tez of teces" [value]="tez.id">
-                          {{tez.nombre}}
-                        </option>
-                        <!-- <option selected>Selecionar</option>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Femenino">
+              <label class="form-check-label" for="inlineRadio2">Femenino</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Otro">
+              <label class="form-check-label" for="inlineRadio3">Otro</label>
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <label for="peso" class="form-label">Peso (Kg)</label>
+            <input maxlength="3" size="2" type="text" class="form-control" name="peso" placeholder="" value="">
+          </div>
+
+          <div class="col-md-1">
+            <label for="estatura" class="form-label">Estatura(mts)</label>
+            <input maxlength="4" size="4" type="text" class="form-control" name="estatura" placeholder="" value="">
+          </div>
+
+          <div class="col-md-2">
+            <label for="tez" class="form-label">Tez</label>
+            <select class="form-control" name="tez">
+              <option *ngFor="let tez of teces" [value]="tez.id">
+                {{tez.nombre}}
+              </option>
+              <!-- <option selected>Selecionar</option>
                         <option value="Negra">Negra</option>
                         <option value="Morena">Morena</option>
                         <option value="Aperlada">Aperlada</option>
                         <option value="Clara">Clara</option>
                         <option value="Blanca">Blanca</option> -->
-                      </select>
-                    </div>
-          
-                    <!-- <div class="col-md-2">
+            </select>
+          </div>
+
+          <!-- <div class="col-md-2">
                       <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
                       <select class="form-control" name="estadocivil">
                         <option selected>Selecionar</option>
@@ -358,27 +369,27 @@
                         <option value="Unión Libre">Unión Libre</option>
                       </select>
                     </div> -->
-                    <div class="col-md-2">
-                      <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
-                      <select class="form-control" name="estadocivil">
-                        <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.id">
-                          {{estadoCivil.nombre}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-          
-                  <div class="row mt-4">
-                    <div class="col-md-2">
-                      <label for="telefono" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
-                      <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" placeholder="10 Dígitos"
-                        value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div>
-          
-                    <!-- <div class="col-md-2">
+          <div class="col-md-2">
+            <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
+            <select class="form-control" name="estadocivil">
+              <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.id">
+                {{estadoCivil.nombre}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-2">
+            <label for="telefono" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
+            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" placeholder="10 Dígitos"
+              value="">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+
+          <!-- <div class="col-md-2">
                       <label for="tipoTel" class="form-label">Tipo de Teléfono 1</label>
                       <select class="form-control" name="tipoTel">
                         <option selected>Selecionar</option>
@@ -390,25 +401,25 @@
                         <option value="Vecino">Vecino</option>
                       </select>
                     </div> -->
-                    <div class="col-md-2">
-                      <label for="tipoTel" class="form-label">Tipo de Teléfono 1</label>
-                      <select class="form-control" name="tipoTel">
-                        <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
-                          {{tipoTelefono.nombre}}
-                        </option>
-                      </select>
-                    </div>
-          
-                    <div class="col-md-2">
-                      <label for="telefono1" class="form-label">Teléfono 2</label>
-                      <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" placeholder="10 Dígitos"
-                        value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div>
-          
-                    <!-- <div class="col-md-2">
+          <div class="col-md-2">
+            <label for="tipoTel" class="form-label">Tipo de Teléfono 1</label>
+            <select class="form-control" name="tipoTel">
+              <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
+                {{tipoTelefono.nombre}}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="telefono1" class="form-label">Teléfono 2</label>
+            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" placeholder="10 Dígitos"
+              value="">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+
+          <!-- <div class="col-md-2">
                       <label for="tipoTel1" class="form-label">Tipo de Teléfono 2</label>
                       <select class="form-control" name="tipoTel1">
                         <option selected>Selecionar</option>
@@ -420,380 +431,479 @@
                         <option value="Vecino">Vecino</option>
                       </select>
                     </div> -->
-                    <div class="col-md-2">
-                      <label for="tipoTel1" class="form-label">Tipo de Teléfono 2</label>
-                      <select class="form-control" name="tipoTel1">
-                        <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
-                          {{tipoTelefono.nombre}}
-                        </option>
-                      </select>
-                    </div>
-          
-                    <div class="col-md-4">
-                      <label for="correo" class="form-label">Correo Electrónico<span class="text-danger"> *</span></label>
-                      <input type="email" class="form-control" name="correoelectronico" placeholder="" value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div>
+          <div class="col-md-2">
+            <label for="tipoTel1" class="form-label">Tipo de Teléfono 2</label>
+            <select class="form-control" name="tipoTel1">
+              <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
+                {{tipoTelefono.nombre}}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="correo" class="form-label">Correo Electrónico<span class="text-danger"> *</span></label>
+            <input type="email" class="form-control" name="correoelectronico" placeholder="" value="">
+            <div class="invalid-feedback">
+              *Campo Requerido!
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4 pb-4">
+          <div class="col-md-4">
+            <label class="pb-2">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
+            <br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sgmm" value="option1"
+                onclick="EnableTextBox(this)">
+              <label class="form-check-label" for="inlineRadio1">Sí</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
+                onclick="DisableTextBox(this)">
+              <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="sgmm" class="form-label">Aseguradora</label>
+            <input type="text" class="form-control" name="aseguradora" placeholder="Nombre" value=""
+              disabled="disabled">
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Pago"> 
+      <div class="container mt-5 bg-white rounded-top shadow">
+          <h4 class="pt-4 pb-1">Pago</h4>
+          <div class="form-group dynamic-element1">
+            <div class="row">
+             
+                <div class="col-md-3">
+                  <label for="nombre" class="form-label">Nombre del Beneficiario<span class="text-danger"> *</span></label>
+                  <input type="text" class="form-control valGlobal" name="nombre" 
+                  >
+                  <div class="invalid-feedback">
+                      *Campo Requerido!
                   </div>
-          
-                  <div class="row mt-4 pb-4">
-                    <div class="col-md-4">
-                      <label class="pb-2">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
-                      <br>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sgmm" value="option1"
-                          onclick="EnableTextBox(this)">
-                        <label class="form-check-label" for="inlineRadio1">Sí</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
-                          onclick="DisableTextBox(this)">
-                        <label class="form-check-label" for="inlineRadio2">No</label>
-                      </div>
-                    </div>
-          
-                    <div class="col">
-                      <label for="sgmm" class="form-label">Aseguradora</label>
-                      <input type="text" class="form-control" name="aseguradora" placeholder="Nombre" value=""
-                        disabled="disabled">
-                    </div>
                   </div>
-            </div>    
-        </mat-tab>
-        <mat-tab label="Estudios"> 
-            <div class="container mt-5 bg-white rounded-top shadow">
-                <h4 class="pt-4 pb-1">Estudios</h4>
-                <div class="form-group dynamic-element">
-                <div class="row">
-                    <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                        <label for="institucion" class="form-label">Institución</label>
-                        <input type="text" class="form-control" id="institucion" name="institucion" 
-                        #institucion="ngModel" [(ngModel)]="estudio.institucion">
-                        </div>
-                    </div>
 
-                    <div class="row mt-3">
-                        <div class="col-md-2">
-                        <label for="inicioEst" class="form-label">Inicio</label>
-                        <input type="text" class="form-control datepicker" name="inicioEst" 
-                        #inicioEst="ngModel" [(ngModel)]="estudio.inicio"/>
-                        </div>
-
-                        <div class="col-md-2">
-                        <label for="terminacionEst" class="form-label">Terminación</label>
-                        <input type="text" class="form-control datepicker" name="terminacionEst" 
-                        #terminacionEst="ngModel" 
-                        [(ngModel)]="estudio.fin"/>
-                        </div>
-
-                        <div class="col-md-8">
-                        <label class="pb-2">¿Se terminaron los estudios?</label>
-                        <br>
-                        <mat-radio-group aria-label="Select an option" >
-                            <mat-radio-button class="example-radio-button" *ngFor="let estatusEstudio of estatusEstudios" [value]="estatusEstudio"
-                            (change)="onEstudioChange(estatusEstudio)">
-                                {{estatusEstudio}}
-                              </mat-radio-button>
-                          </mat-radio-group>
-                        
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                        <label for="formFile" class="form-label">Imagen de la Cédula</label>
-                        <input class="form-control-file" type="file" id="formFile" accept=".png, .jpg, .jpeg" 
-                        (change)="onCedulaFileSelected($event.target.files)">
-                        </div>
-                    </div>
-                    </div>
-
-                    <div class="col-md-6">
-                    <label for="comentarioEstudio" class="form-label">Estudio / Carrera / Curso</label>
-                    <textarea name="comentarioEstudio" class="form-control" rows="5" #comentarioEstudio="ngModel" [(ngModel)]="estudio.comentarios"></textarea>
-                    </div>
-                </div>
-                <hr class="mt-3 mb-3" />
-                </div>
-                <div class="form-container">
-                <div class="dynamic-stuff">
-                    <!-- Dynamic element will be cloned here -->
-                </div>
-                </div>
-
-                <div class="row mt-5">
-                    <div class="col-md-12 text-center">
-                        <button class="btn btn-primary add-one" (click) = "agregarEstudio()">Agregar</button>
-                        <button class="btn btn-warning delete ml-3">Cancelar</button>
-                    </div>
-                </div>
-                <div class="row mt-4 pb-4">
-                    <div class="col-md-12 text-center">
-                        <table datatable [dtOptions]="dtOptionsEstudio" 
-                        [dtTrigger]="dtTriggerEstudio" class="row-border hover">
-                            <thead>
-                                <tr>
-                                    <td>ID</td>
-                                    <td>Institución</td>
-                                    <td>Estatus</td>
-                                    <td>Acción</td>
-                                    <td>Acción</td>
-                                </tr>
-                            </thead>
-                            <tbody *ngIf="estudios?.length != 0">
-                                <tr *ngFor="let estudioTmp of estudios">
-                                    <td>
-                                            {{estudioTmp.idEstudio}}
-                                    </td>
-                                    <td>
-                                        {{estudioTmp.institucion}}
-                                    </td>
-                                    <td>
-                                        {{estudioTmp.estatus}}
-                                    </td>
-                                    <td><button class="getDetails" (click)="editaEstudio(estudioTmp)">Editar</button></td>
-                                    <td><button class="getDetails" (click)="borraEstudio(estudioTmp)">Borrar</button></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>    
-        </mat-tab>
-        <mat-tab label="Experiencia"> 
-            <div class="container mt-5 bg-white rounded-top shadow">
-                <h4 class="pt-4 pb-1">Experiencia</h4>
-                <div class="form-group dynamic-element1">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <label for="institucion" class="form-label">Empresa/Institución</label>
-                          <input type="text" class="form-control" id="institucion" placeholder="" value="">
-                        </div>
-                      </div>
-        
-                      <div class="row mt-3">
-                        <div class="col-md-2">
-                          <label for="inicioEst" class="form-label">Inicio</label>
-                          <input type="text" class="form-control datepicker" name="inicioEst" />
-                        </div>
-        
-                        <div class="col-md-2">
-                          <label for="terminacionEst" class="form-label">Terminación</label>
-                          <input type="text" class="form-control datepicker" name="terminacionEst" />
-                        </div>
-        
-                        <div class="col-md-8">
-                          <label for="institucion" class="form-label">Nombre de Referencia</label>
-                          <input type="text" class="form-control" id="institucion" placeholder="" value="">
-                        </div>
-                      </div>
-                      <div class="row mt-3">
-                        <div class="col-md-4">
-                          <label for="telefono" class="form-label">Teléfono de Referencia</label>
-                          <input maxlength="10" size="10" type="tel" class="form-control" id="telefono" placeholder="10 Dígitos"
-                            value="">
-                        </div>
-                      </div>
-                    </div>
-        
-                    <div class="col-md-6">
-                      <label for="estudio" class="form-label">Actividades Realizadas</label>
-                      <textarea name="estudio" class="form-control" rows="5"></textarea>
-                    </div>
+                  <div class="col-md-3">
+                    <label for="tipoTel1" class="form-label">Banco</label>
+                    <select class="form-control" name="tipoTel1">
+                      <option selected>Selecionar</option>
+                      <option value="HSBC">HSBC</option>
+                      <option value="Santander">Santander</option>
+                      
+                    </select>
                   </div>
-                  <hr class="mt-3 mb-3" />
-                </div>
-                <div class="form-container">
-                  <div class="dynamic-stuff1">
-                    <!-- Dynamic element will be cloned here -->
+
+                  <div class="col-md-3">
+                    <label for="tipoTel1" class="form-label">Tipo de Cuenta</label>
+                    <select class="form-control" name="tipoTel1">
+                      <option selected>Selecionar</option>
+                      <option value="Casa">CLABE</option>
+                      <option value="Oficina">Numero de Tarjeta</option>
+                      
+                    </select>
                   </div>
-                </div>
-        
-                <div class="row mt-4 pb-4">
-                  <div class="col-md-12 text-center">
-                    <button class="btn btn-primary add-one1">Agregar Otra Experiencia</button>
-                    <button class="btn btn-primary delete1 ml-3">Eliminar Experiencia</button>
+      
+                  <div class="col-md-3">
+                  <label for="materno" class="form-label">Numero<span class="text-danger"> *</span></label>
+                  <input type="text" class="form-control" name="amaterno"  
+                  >
+                  <div class="invalid-feedback">
+                      *Campo Requerido!
                   </div>
-                </div>
-            </div>    
-        </mat-tab>
-        <mat-tab label="Adicional"> 
-            <div class="container mt-5 bg-white rounded-top shadow">
-              <h4 class="pt-4 pb-1">Información Adicional</h4>
-                <div class="row">
-                    <hr class="mt-2 mb-3" />
-                    <div class="col-md-6">
-                      <h5 class="pb-1">Días y Horarios de Disponibilidad<span class="text-danger"> *</span></h5>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="todos" (click)="disableTextBoxDateofWorkT()">
-                        <label class="form-check-label" for="todos">
-                          <p class="font-weight-bold">Todos los Dias
-                          </p>
-                        </label>
-                      </div>
-                      <div class="row pb-3">
-                        <div class="col-md-6">
-                            <label for="desdeT" class="form-label">Desde</label>
-                            <input type="time" class="form-control input-sm" id="desdeT" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="hastaT" class="form-label">Hasta</label>
-                            <input type="time" class="form-control input-sm" id="hastaT" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
-                          </div>
-                        </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="lunes" name="lunes" ngModel #lunes="ngModel" [(ngModel)]="diasLaborales.lunes" (click)="disableTextBoxDateofWorkL()">
-                        <label class="form-check-label" for="lunes">
-                          <p class="font-weight-bold">Lunes</p>
-                        </label>
-                      </div>
-                        <div class="row pb-3">
-                          <div class="col-md-6">
-                            <label for="desdeL" class="form-label">Desde</label>
-                            <input type="time" class="form-control input-sm" id="desdeL" placeholder="" value=""
-                            name="lunesDesde" ngModel #lunesDesde="ngModel" [(ngModel)]="diasLaborales.lunesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkL">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="hastaL" class="form-label">Hasta</label>
-                            <input type="time" class="form-control input-sm" id="hastaL" placeholder="" value=""
-                            name="lunesHasta" ngModel #lunesHasta="ngModel" [(ngModel)]="diasLaborales.lunesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkL">
-                          </div>
-                        </div>
-                      <!-- </div> -->
+                  </div>
+              
+  
+              
+            </div>
+            
+          </div>
           
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="martes" name="martes" ngModel #martes="ngModel" [(ngModel)]="diasLaborales.martes" (click)="disableTextBoxDateofWorkM()">
-                        <label class="form-check-label" for="martes">
-                          <p class="font-weight-bold">Martes
-                          </p>
-                        </label>
-                      </div>
-                      <div class="row pb-3">
-                        <div class="col-md-6">
-                            <label for="desdeM" class="form-label">Desde</label>
-                            <input type="time" class="form-control input-sm" id="desdeM" placeholder="" value=""
-                            name="martesDesde" ngModel #martesDesde="ngModel" [(ngModel)]="diasLaborales.martesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="hastaM" class="form-label">Hasta</label>
-                            <input type="time" class="form-control input-sm" id="hastaM" placeholder="" value=""
-                            name="martesHasta" ngModel #martesHasta="ngModel" [(ngModel)]="diasLaborales.martesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
-                          </div>
-                        </div>
-                      <!-- </div> -->
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="miercoles" name="miercoles" ngModel #miercoles="ngModel" [(ngModel)]="diasLaborales.miercoles" (click)="disableTextBoxDateofWorkMi()">
-                        <label class="form-check-label" for="miercoles">
-                          <p class="font-weight-bold">Miércoles</p>
-                        </label>
-                      </div>
-                      <div class="row pb-3">
-                        <div class="col-md-6">
-                            <label for="desdeMi" class="form-label">Desde</label>
-                            <input type="time" class="form-control input-sm" id="desdeMi" placeholder="" value=""
-                            name="miercolesDesde" ngModel #miercolesDesde="ngModel" [(ngModel)]="diasLaborales.miercolesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="hastaMi" class="form-label">Hasta</label>
-                            <input type="time" class="form-control input-sm" id="hastaMi" placeholder="" value=""
-                            name="miercolesHasta" ngModel #miercolesHasta="ngModel" [(ngModel)]="diasLaborales.miercolesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
-                          </div>
-                        </div>
-                      <!-- </div> -->
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="jueves" name="jueves" ngModel #jueves="ngModel" [(ngModel)]="diasLaborales.jueves" (click)="disableTextBoxDateofWorkJ()">
-                        <label class="form-check-label" for="jueves">
-                          <p class="font-weight-bold">Jueves
-                          </p>
-                        </label>
-                      </div>
-                      <div class="row pb-3">
-                        <div class="col-md-6">
-                            <label for="desdeJ" class="form-label">Desde</label>
-                            <input type="time" class="form-control input-sm" id="desdeJ" placeholder="" value=""
-                            name="juevesDesde" ngModel #juevesDesde="ngModel" [(ngModel)]="diasLaborales.juevesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="hastaJ" class="form-label">Hasta</label>
-                            <input type="time" class="form-control input-sm" id="hastaJ" placeholder="" value=""
-                            name="juevesHasta" ngModel #juevesHasta="ngModel" [(ngModel)]="diasLaborales.juevesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
-                          </div>
-                        </div>
-                      <!-- </div> -->
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="viernes" name="viernes" ngModel #viernes="ngModel" [(ngModel)]="diasLaborales.viernes" (click)="disableTextBoxDateofWorkV()">
-                        <label class="form-check-label" for="viernes">
-                          <p class="font-weight-bold">Viernes
-                          </p>
-                        </label>
-                      </div>
-                      <div class="row pb-3">
-                        <div class="col-md-6">
-                            <label for="desdeV" class="form-label">Desde</label>
-                            <input type="time" class="form-control input-sm" id="desdeV" placeholder="" value=""
-                            name="viernesDesde" ngModel #viernesDesde="ngModel" [(ngModel)]="diasLaborales.viernesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="hastaV" class="form-label">Hasta</label>
-                            <input type="time" class="form-control input-sm" id="hastaV" placeholder="" value=""
-                            name="viernesHasta" ngModel #viernesHasta="ngModel" [(ngModel)]="diasLaborales.viernesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
-                          </div>
-                        </div>
-                      <!-- </div> -->
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="sabado" name="sabado" ngModel #sabado="ngModel" [(ngModel)]="diasLaborales.sabado" (click)="disableTextBoxDateofWorkS()">
-                        <label class="form-check-label" for="sabado">
-                          <p class="font-weight-bold">Sábado
-                          </p>
-                        </label>
-                      </div>
-                      <div class="row pb-3">
-                        <div class="col-md-6">
-                            <label for="desdeS" class="form-label">Desde</label>
-                            <input type="time" class="form-control input-sm" id="desdeS" placeholder="" value=""
-                            name="sabadoDesde" ngModel #sabadoDesde="ngModel" [(ngModel)]="diasLaborales.sabadoDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="hastaS" class="form-label">Hasta</label>
-                            <input type="time" class="form-control input-sm" id="hastaS" placeholder="" value=""
-                            name="sabadoHasta" ngModel #sabadoHasta="ngModel" [(ngModel)]="diasLaborales.sabadoHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
-                          </div>
-                        </div>
-                      <!-- </div> -->
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="domingo" name="domingo" ngModel #domingo="ngModel" [(ngModel)]="diasLaborales.domingo" (click)="disableTextBoxDateofWorkD()">
-                        <label class="form-check-label" for="domingo">
-                          <p class="font-weight-bold">Domingo
-                          </p>
-                        </label>
-                      </div>
-                      <div class="row pb-3">
-                        <div class="col-md-6">
-                            <label for="desdeD" class="form-label">Desde</label>
-                            <input type="time" class="form-control input-sm" id="desdeD" placeholder="" value=""
-                            name="domingoDesde" ngModel #domingoDesde="ngModel" [(ngModel)]="diasLaborales.domingoDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
-                          </div>
-                          <div class="col-md-6">
-                            <label for="hastaD" class="form-label">Hasta</label>
-                            <input type="time" class="form-control input-sm" id="hastaD" placeholder="" value=""
-                            name="domingoHasta" ngModel #domingoHasta="ngModel" [(ngModel)]="diasLaborales.domingoHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
-                          </div>
-                        </div>
-                      <!-- </div> -->
-                    </div>
-          
-                    <div class="col-md-6">
-                      <h5 class="pb-1">Otros</h5>
-                      <div class="row">
-                        <!-- <div class="col-md-4">
+  
+          <div class="row mt-4 pb-4">
+            <div class="col-md-12 text-center">
+              <button class="btn btn-primary add-one1">Agregar Otra Tarjeta</button>
+              <button class="btn btn-primary delete1 ml-3">Eliminar Tarjeta</button>
+            </div>
+          </div>
+      </div>    
+  </mat-tab>
+    <mat-tab label="Estudios">
+      <div class="container mt-5 bg-white rounded-top shadow">
+        <h4 class="pt-4 pb-1">Estudios</h4>
+        <div class="form-group dynamic-element">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="institucion" class="form-label">Institución</label>
+                  <input type="text" class="form-control" id="institucion" name="institucion" #institucion="ngModel"
+                    [(ngModel)]="estudio.institucion">
+                </div>
+              </div>
+
+              <div class="row mt-12">
+                <div class="col-md-6">
+                  <label for="inicioEst" class="form-label">Inicio</label>
+                  <input type="month" class="form-control datepicker" name="inicioEst" #inicioEst="ngModel"
+                    min="1900-01" [(ngModel)]="estudio.inicio" />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="terminacionEst" class="form-label">Terminación</label>
+                  <input type="month" class="form-control datepicker" name="terminacionEst" #terminacionEst="ngModel"
+                    min="1900-02" [(ngModel)]="estudio.fin">
+                </div>
+
+                <div class="col-md-8">
+                  <label class="pb-2">¿Se terminaron los estudios?</label>
+                  <br>
+                  <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button class="example-radio-button" *ngFor="let estatusEstudio of estatusEstudios"
+                      [value]="estatusEstudio" (change)="onEstudioChange(estatusEstudio)">
+                      {{estatusEstudio}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <label for="formFile" class="form-label">Imagen de la Cédula</label>
+                  <input class="form-control-file" type="file" id="formFile" accept=".png, .jpg, .jpeg"
+                    (change)="onCedulaFileSelected($event.target.files)">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="comentarioEstudio" class="form-label">Estudio / Carrera / Curso</label>
+              <textarea name="comentarioEstudio" class="form-control" rows="5" #comentarioEstudio="ngModel"
+                [(ngModel)]="estudio.comentarios"></textarea>
+            </div>
+          </div>
+          <hr class="mt-3 mb-3" />
+        </div>
+        <div class="form-container">
+          <div class="dynamic-stuff">
+            <!-- Dynamic element will be cloned here -->
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-md-12 text-center">
+            <button class="btn btn-primary add-one" (click)="agregarEstudio()">Agregar</button>
+            <button class="btn btn-warning delete ml-3">Cancelar</button>
+          </div>
+        </div>
+        <div class="row mt-4 pb-4">
+          <div class="col-md-12 text-center">
+            <table datatable [dtOptions]="dtOptionsEstudio" [dtTrigger]="dtTriggerEstudio" class="row-border hover">
+              <thead>
+                <tr>
+                  <td>ID</td>
+                  <td>Institución</td>
+                  <td>Estudio</td>
+                  <td>Inicio</td>
+                  <td>Terminación</td>
+                  <td>Estatus de terminación</td>
+                  <td>Acción</td>
+                  <td>Acción</td>
+                </tr>
+              </thead>
+              <tbody *ngIf="estudios?.length != 0">
+                <tr *ngFor="let estudioTmp of estudios">
+                  <td>
+                    {{estudioTmp.idEstudio}}
+                  </td>
+                  <td>
+                    {{estudioTmp.institucion}}
+                  </td>
+                  <td>
+                    {{estudioTmp.comentarios}}
+                  </td>
+                  <td>
+                    {{estudioTmp.fin}}
+                  </td>
+                  <td>
+                    {{estudioTmp.estatus}}
+                  </td>
+                  <td><button class="getDetails" (click)="editaEstudio(estudioTmp)">Editar</button></td>
+                  <td><button class="getDetails" (click)="borraEstudio(estudioTmp)">Borrar</button></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Experiencia">
+      <div class="container mt-5 bg-white rounded-top shadow">
+        <h4 class="pt-4 pb-1">Experiencia</h4>
+        <div class="form-group dynamic-element1">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="institucion" class="form-label">Empresa/Institución</label>
+                  <input type="text" class="form-control" id="institucion" placeholder="" value="">
+                </div>
+              </div>
+
+              <div class="row mt-12">
+                <div class="col-md-6">
+                  <label for="inicioEst" class="form-label">Inicio</label>
+                  <input type="month" class="form-control datepicker" name="inicioExp"
+                    min="1900-01">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="terminacionEst" class="form-label">Terminación</label>
+                  <input type="month" class="form-control datepicker" name="terminacionExp"
+                    min="1900-02">
+                </div>
+
+                <div class="col-md-8">
+                  <label for="institucion" class="form-label">Nombre de Referencia</label>
+                  <input type="text" class="form-control" id="institucion" placeholder="" value="">
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-4">
+                  <label for="telefono" class="form-label">Teléfono de Referencia</label>
+                  <input maxlength="10" size="10" type="tel" class="form-control" id="telefono" placeholder="10 Dígitos"
+                    value="">
+                </div>
+                <div class="col-md-4">
+                  <label for="especialidad" class="form-label">Especialidad</label>
+                  <select class="form-control" name="especialidad">
+                    <option selected>Selecionar</option>
+                    <option value="Enfermeria">Enfermeria</option>
+                    <option value="Cuidados Geriatricos">Cuidados Geriatricos</option>
+                    
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="estudio" class="form-label">Actividades Realizadas</label>
+              <textarea name="estudio" class="form-control" rows="5"></textarea>
+            </div>
+          </div>
+          <hr class="mt-3 mb-3" />
+        </div>
+        <div class="form-container">
+          <div class="dynamic-stuff1">
+            <!-- Dynamic element will be cloned here -->
+          </div>
+        </div>
+
+        <div class="row mt-4 pb-4">
+          <div class="col-md-12 text-center">
+            <button class="btn btn-primary add-one1">Agregar Otra Experiencia</button>
+            <button class="btn btn-primary delete1 ml-3">Eliminar Experiencia</button>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Adicional">
+      <div class="container mt-5 bg-white rounded-top shadow">
+        <h4 class="pt-4 pb-1">Información Adicional</h4>
+        <div class="row">
+          <hr class="mt-2 mb-3" />
+          <div class="col-md-6">
+            <h5 class="pb-1">Días y Horarios de Disponibilidad<span class="text-danger"> *</span></h5>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="todos" (click)="disableTextBoxDateofWorkT()">
+              <label class="form-check-label" for="todos">
+                <p class="font-weight-bold">Todos los Dias
+                </p>
+              </label>
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <label for="desdeT" class="form-label">Desde</label>
+                <input type="time" class="form-control input-sm" id="desdeT" placeholder="" value="" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkT">
+              </div>
+              <div class="col-md-6">
+                <label for="hastaT" class="form-label">Hasta</label>
+                <input type="time" class="form-control input-sm" id="hastaT" placeholder="" value="" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkT">
+              </div>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lunes" name="lunes" ngModel #lunes="ngModel"
+                [(ngModel)]="diasLaborales.lunes" (click)="disableTextBoxDateofWorkL()">
+              <label class="form-check-label" for="lunes">
+                <p class="font-weight-bold">Lunes</p>
+              </label>
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <label for="desdeL" class="form-label">Desde</label>
+                <input type="time" class="form-control input-sm" id="desdeL" placeholder="" value="" name="lunesDesde"
+                  ngModel #lunesDesde="ngModel" [(ngModel)]="diasLaborales.lunesDesde" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkL">
+              </div>
+              <div class="col-md-6">
+                <label for="hastaL" class="form-label">Hasta</label>
+                <input type="time" class="form-control input-sm" id="hastaL" placeholder="" value="" name="lunesHasta"
+                  ngModel #lunesHasta="ngModel" [(ngModel)]="diasLaborales.lunesHasta" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkL">
+              </div>
+            </div>
+            <!-- </div> -->
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="martes" name="martes" ngModel
+                #martes="ngModel" [(ngModel)]="diasLaborales.martes" (click)="disableTextBoxDateofWorkM()">
+              <label class="form-check-label" for="martes">
+                <p class="font-weight-bold">Martes
+                </p>
+              </label>
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <label for="desdeM" class="form-label">Desde</label>
+                <input type="time" class="form-control input-sm" id="desdeM" placeholder="" value="" name="martesDesde"
+                  ngModel #martesDesde="ngModel" [(ngModel)]="diasLaborales.martesDesde" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkM">
+              </div>
+              <div class="col-md-6">
+                <label for="hastaM" class="form-label">Hasta</label>
+                <input type="time" class="form-control input-sm" id="hastaM" placeholder="" value="" name="martesHasta"
+                  ngModel #martesHasta="ngModel" [(ngModel)]="diasLaborales.martesHasta" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkM">
+              </div>
+            </div>
+            <!-- </div> -->
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="miercoles" name="miercoles" ngModel
+                #miercoles="ngModel" [(ngModel)]="diasLaborales.miercoles" (click)="disableTextBoxDateofWorkMi()">
+              <label class="form-check-label" for="miercoles">
+                <p class="font-weight-bold">Miércoles</p>
+              </label>
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <label for="desdeMi" class="form-label">Desde</label>
+                <input type="time" class="form-control input-sm" id="desdeMi" placeholder="" value=""
+                  name="miercolesDesde" ngModel #miercolesDesde="ngModel" [(ngModel)]="diasLaborales.miercolesDesde"
+                  disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
+              </div>
+              <div class="col-md-6">
+                <label for="hastaMi" class="form-label">Hasta</label>
+                <input type="time" class="form-control input-sm" id="hastaMi" placeholder="" value=""
+                  name="miercolesHasta" ngModel #miercolesHasta="ngModel" [(ngModel)]="diasLaborales.miercolesHasta"
+                  disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
+              </div>
+            </div>
+            <!-- </div> -->
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="jueves" name="jueves" ngModel
+                #jueves="ngModel" [(ngModel)]="diasLaborales.jueves" (click)="disableTextBoxDateofWorkJ()">
+              <label class="form-check-label" for="jueves">
+                <p class="font-weight-bold">Jueves
+                </p>
+              </label>
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <label for="desdeJ" class="form-label">Desde</label>
+                <input type="time" class="form-control input-sm" id="desdeJ" placeholder="" value="" name="juevesDesde"
+                  ngModel #juevesDesde="ngModel" [(ngModel)]="diasLaborales.juevesDesde" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkJ">
+              </div>
+              <div class="col-md-6">
+                <label for="hastaJ" class="form-label">Hasta</label>
+                <input type="time" class="form-control input-sm" id="hastaJ" placeholder="" value="" name="juevesHasta"
+                  ngModel #juevesHasta="ngModel" [(ngModel)]="diasLaborales.juevesHasta" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkJ">
+              </div>
+            </div>
+            <!-- </div> -->
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="viernes" name="viernes" ngModel
+                #viernes="ngModel" [(ngModel)]="diasLaborales.viernes" (click)="disableTextBoxDateofWorkV()">
+              <label class="form-check-label" for="viernes">
+                <p class="font-weight-bold">Viernes
+                </p>
+              </label>
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <label for="desdeV" class="form-label">Desde</label>
+                <input type="time" class="form-control input-sm" id="desdeV" placeholder="" value="" name="viernesDesde"
+                  ngModel #viernesDesde="ngModel" [(ngModel)]="diasLaborales.viernesDesde" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkV">
+              </div>
+              <div class="col-md-6">
+                <label for="hastaV" class="form-label">Hasta</label>
+                <input type="time" class="form-control input-sm" id="hastaV" placeholder="" value="" name="viernesHasta"
+                  ngModel #viernesHasta="ngModel" [(ngModel)]="diasLaborales.viernesHasta" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkV">
+              </div>
+            </div>
+            <!-- </div> -->
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="sabado" name="sabado" ngModel
+                #sabado="ngModel" [(ngModel)]="diasLaborales.sabado" (click)="disableTextBoxDateofWorkS()">
+              <label class="form-check-label" for="sabado">
+                <p class="font-weight-bold">Sábado
+                </p>
+              </label>
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <label for="desdeS" class="form-label">Desde</label>
+                <input type="time" class="form-control input-sm" id="desdeS" placeholder="" value="" name="sabadoDesde"
+                  ngModel #sabadoDesde="ngModel" [(ngModel)]="diasLaborales.sabadoDesde" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkS">
+              </div>
+              <div class="col-md-6">
+                <label for="hastaS" class="form-label">Hasta</label>
+                <input type="time" class="form-control input-sm" id="hastaS" placeholder="" value="" name="sabadoHasta"
+                  ngModel #sabadoHasta="ngModel" [(ngModel)]="diasLaborales.sabadoHasta" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkS">
+              </div>
+            </div>
+            <!-- </div> -->
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="domingo" name="domingo" ngModel
+                #domingo="ngModel" [(ngModel)]="diasLaborales.domingo" (click)="disableTextBoxDateofWorkD()">
+              <label class="form-check-label" for="domingo">
+                <p class="font-weight-bold">Domingo
+                </p>
+              </label>
+            </div>
+            <div class="row pb-3">
+              <div class="col-md-6">
+                <label for="desdeD" class="form-label">Desde</label>
+                <input type="time" class="form-control input-sm" id="desdeD" placeholder="" value="" name="domingoDesde"
+                  ngModel #domingoDesde="ngModel" [(ngModel)]="diasLaborales.domingoDesde" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkD">
+              </div>
+              <div class="col-md-6">
+                <label for="hastaD" class="form-label">Hasta</label>
+                <input type="time" class="form-control input-sm" id="hastaD" placeholder="" value="" name="domingoHasta"
+                  ngModel #domingoHasta="ngModel" [(ngModel)]="diasLaborales.domingoHasta" disabled="disabled"
+                  [disabled]="textBoxDisabledDateofWorkD">
+              </div>
+            </div>
+            <!-- </div> -->
+          </div>
+
+          <div class="col-md-6">
+            <h5 class="pb-1">Otros</h5>
+            <div class="row">
+              <!-- <div class="col-md-4">
                           <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
                           <select class="form-control" id="permanencia">
                             <option selected>Selecionar</option>
@@ -803,15 +913,15 @@
                             <option value="4">Ambas</option>
                           </select>
                         </div> -->
-                        <div class="col-md-4">
-                          <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
-                          <select class="form-control" name="permanencia">
-                            <option *ngFor="let permanencia of permanencias" [value]="permanencia.id">
-                              {{permanencia.nombre}}
-                            </option>
-                          </select>
-                        </div>
-                        <!-- <div class="col-md-4">
+              <div class="col-md-4">
+                <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
+                <select class="form-control" name="permanencia">
+                  <option *ngFor="let permanencia of permanencias" [value]="permanencia.id">
+                    {{permanencia.nombre}}
+                  </option>
+                </select>
+              </div>
+              <!-- <div class="col-md-4">
                           <label for="zona" class="form-label">Zona Laboral</label>
                           <select class="form-control" id="zona_laboral">
                             <option selected>Selecionar</option>
@@ -828,7 +938,7 @@
                             <option value="11">Apodaca</option>
                           </select>
                         </div> -->
-                        <!-- <div class="col-md-5">
+              <!-- <div class="col-md-5">
                           <label for="zona" class="form-label">Zonas Laborales</label>
                           <select multiple class="form-control" id="zona_laboral">
                             <option value="1">Centro</option>
@@ -844,164 +954,175 @@
                             <option value="11">Apodaca</option>
                           </select>
                         </div> -->
-                        <div class="col-md-5">
-                          <label for="zona" class="form-label">Zonas Laborales</label>
-                          <select multiple class="form-control" id="zona">
-                            <option *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.id">
-                              {{zonaLaboral.nombre}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-          
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label class="mt-3 mb-1">¿Atiende COVID?<span class="text-danger"> *</span></label>
-                          <br>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="atiendecovid"
-                              value="option1">
-                            <label class="form-check-label" for="covids">Sí</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="covidn" value="option2">
-                            <label class="form-check-label" for="covidn">No</label>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label class="mt-3 mb-1">Antecedentes Penales</label>
-                          <br>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="apenales" value="option1">
-                            <label class="form-check-label" for="antecedentesS">Sí</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="antecedentesN"
-                              value="option2">
-                            <label class="form-check-label" for="antecedentesN">No</label>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label class="mt-3 mb-1">Auto Propio</label>
-                          <br>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="autopropio"
-                              value="option1">
-                            <label class="form-check-label" for="antecedentesS">Sí</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="antecedentesN"
-                              value="option2">
-                            <label class="form-check-label" for="antecedentesN">No</label>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label class="mt-3 mb-1">Disponibilidad para viajar</label>
-                          <br>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="disponibilidadS"
-                              value="option1">
-                            <label class="form-check-label" for="disponibilidadS">Sí</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="disponibilidadN"
-                              value="option2">
-                            <label class="form-check-label" for="disponibilidadN">No</label>
-                          </div>
-                        </div>
-                      </div>
-          
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label class="mt-3 mb-1">Visa</label>
-                          <br>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1" (click)="enableTextBoxVis()">
-                            <label class="form-check-label" for="visaS">Sí</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visaN" value="option2" (click)="disableTextBoxVis()">
-                            <label class="form-check-label" for="visaN">No</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label for="visaNum" class="form-label">Número de Visa</label>
-                          <input type="text" class="form-control" id="numvisa" placeholder="" value="" disabled="disabled" [disabled]="textBoxDisabledVis">
-                        </div>
-                        <div class="col-md-4">
-                          <label for="tipNum" class="form-label">Tipo de Visa</label>
-                          <input type="text" class="form-control" id="tipovisa" placeholder="" value="" disabled="disabled" [disabled]="textBoxDisabledVis">
-                        </div>
-                        <div class="col-md-4">
-                          <label for="visaExp" class="form-label">Expiración</label>
-                          <input type="date" class="form-control" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy" disabled="disabled" [disabled]="textBoxDisabledVis">
-                          <div class="invalid-feedback">
-                            *Campo Requerido!
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12 mt-3">
-                          <label for="visaImg" class="form-label">Imagen de la Visa</label>
-                          <input class="form-control-file" type="file" id="visaImg" disabled="disabled" [disabled]="textBoxDisabledVis">
-                        </div>
-                      </div>
-          
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label class="mt-3 mb-1">Pasaporte</label>
-                          <br>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporte" value="option1" (click)="enableTextBoxPas()">
-                            <label class="form-check-label" for="pasaporteS">Sí</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporteN" value="option2" (click)="disableTextBoxPas()">
-                            <label class="form-check-label" for="pasaporteN">No</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label for="pasaporteNum" class="form-label">Número de Pasaporte</label>
-                          <input type="text" class="form-control" id="numpasaporte" placeholder="" value="" disabled="disabled" [disabled]="textBoxDisabledPas">
-                        </div>
-                        <div class="col-md-4">
-                          <label for="pasaporteExp" class="form-label">Expiración</label>
-                          <input type="date" class="form-control" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy" disabled="disabled" [disabled]="textBoxDisabledPas">
-                          <div class="invalid-feedback">
-                            *Campo Requerido!
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12 mt-3">
-                          <label for="pasaporteImg" class="form-label">Imagen del Pasaporte</label>
-                          <input class="form-control-file" type="file" id="pasaporteImg" disabled="disabled" [disabled]="textBoxDisabledPas">
-                        </div>
-                      </div>
-                    </div>                
-                  </div>
-            </div>    
-        </mat-tab>
-    </mat-tab-group>
-    <div class="container bg-white rounded-bottom shadow">
-      <div class="row text-center pb-4">
-        <div class="col">
-          <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Enviar </button>
-        </div>       
-      </div>     
+              <div class="col-md-5">
+                <label for="zona" class="form-label">Zonas Laborales</label>
+                <select multiple class="form-control" id="zona">
+                  <option *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.id">
+                    {{zonaLaboral.nombre}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="mt-3 mb-1">¿Atiende COVID?<span class="text-danger"> *</span></label>
+                <br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="atiendecovid"
+                    value="option1">
+                  <label class="form-check-label" for="covids">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="covidn" value="option2">
+                  <label class="form-check-label" for="covidn">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="mt-3 mb-1">Antecedentes Penales</label>
+                <br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="apenales" value="option1">
+                  <label class="form-check-label" for="antecedentesS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="antecedentesN"
+                    value="option2">
+                  <label class="form-check-label" for="antecedentesN">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="mt-3 mb-1">Auto Propio</label>
+                <br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="autopropio"
+                    value="option1">
+                  <label class="form-check-label" for="antecedentesS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="antecedentesN"
+                    value="option2">
+                  <label class="form-check-label" for="antecedentesN">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="mt-3 mb-1">Disponibilidad para viajar</label>
+                <br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="disponibilidadS"
+                    value="option1">
+                  <label class="form-check-label" for="disponibilidadS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="disponibilidadN"
+                    value="option2">
+                  <label class="form-check-label" for="disponibilidadN">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="mt-3 mb-1">Visa</label>
+                <br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1"
+                    (click)="enableTextBoxVis()">
+                  <label class="form-check-label" for="visaS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visaN" value="option2"
+                    (click)="disableTextBoxVis()">
+                  <label class="form-check-label" for="visaN">No</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="visaNum" class="form-label">Número de Visa</label>
+                <input type="text" class="form-control" id="numvisa" placeholder="" value="" disabled="disabled"
+                  [disabled]="textBoxDisabledVis">
+              </div>
+              <div class="col-md-4">
+                <label for="tipNum" class="form-label">Tipo de Visa</label>
+                <input type="text" class="form-control" id="tipovisa" placeholder="" value="" disabled="disabled"
+                  [disabled]="textBoxDisabledVis">
+              </div>
+              <div class="col-md-4">
+                <label for="visaExp" class="form-label">Expiración</label>
+                <input type="date" class="form-control" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy"
+                  disabled="disabled" [disabled]="textBoxDisabledVis">
+                <div class="invalid-feedback">
+                  *Campo Requerido!
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-3">
+                <label for="visaImg" class="form-label">Imagen de la Visa</label>
+                <input class="form-control-file" type="file" id="visaImg" disabled="disabled"
+                  [disabled]="textBoxDisabledVis">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="mt-3 mb-1">Pasaporte</label>
+                <br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporte" value="option1"
+                    (click)="enableTextBoxPas()">
+                  <label class="form-check-label" for="pasaporteS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporteN"
+                    value="option2" (click)="disableTextBoxPas()">
+                  <label class="form-check-label" for="pasaporteN">No</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="pasaporteNum" class="form-label">Número de Pasaporte</label>
+                <input type="text" class="form-control" id="numpasaporte" placeholder="" value="" disabled="disabled"
+                  [disabled]="textBoxDisabledPas">
+              </div>
+              <div class="col-md-4">
+                <label for="pasaporteExp" class="form-label">Expiración</label>
+                <input type="date" class="form-control" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy"
+                  disabled="disabled" [disabled]="textBoxDisabledPas">
+                <div class="invalid-feedback">
+                  *Campo Requerido!
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-3">
+                <label for="pasaporteImg" class="form-label">Imagen del Pasaporte</label>
+                <input class="form-control-file" type="file" id="pasaporteImg" disabled="disabled"
+                  [disabled]="textBoxDisabledPas">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="container bg-white rounded-bottom shadow">
+    <div class="row text-center pb-4">
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Enviar </button>
+      </div>
     </div>
-    
+  </div>
+
 </form>
