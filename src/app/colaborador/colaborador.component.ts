@@ -94,7 +94,25 @@ export class ColaboradorComponent implements OnInit {
   diasLaborales:any = {
     lunes:false,
     lunesDesde:null,
-    lunesHasta:null
+    lunesHasta:null,
+    martes:false,
+    martesDesde:null,
+    martesHasta:null,
+    miercoles:false,
+    miercolesDesde:null,
+    miercolesHasta:null,
+    jueves:false,
+    juevesDesde:null,
+    juevesHasta:null,
+    viernes:false,
+    viernesDesde:null,
+    viernesHasta:null,
+    sabado:false,
+    sabadoDesde:null,
+    sabadoHasta:null,
+    domingo:false,
+    domingoDesde:null,
+    domingoHasta:null
   };
   colonias:any[];
   ciudades:any[];
@@ -174,40 +192,40 @@ export class ColaboradorComponent implements OnInit {
 
     };
   }
-  EnableTextBoxVis(){
+  enableTextBoxVis(){
     this.textBoxDisabledVis = false;
   }
-  DisableTextBoxVis(){
+  disableTextBoxVis(){
     this.textBoxDisabledVis = true;
   }
-  EnableTextBoxPas(){
+  enableTextBoxPas(){
     this.textBoxDisabledPas = false;
   }
-  DisableTextBoxPas(){
+  disableTextBoxPas(){
     this.textBoxDisabledPas = true;
   }
-  DisableTextBoxDateofWorkL(){
+  disableTextBoxDateofWorkL(){
     this.textBoxDisabledDateofWorkL = !this.textBoxDisabledDateofWorkL;
   }
-  DisableTextBoxDateofWorkM(){
+  disableTextBoxDateofWorkM(){
     this.textBoxDisabledDateofWorkM = !this.textBoxDisabledDateofWorkM;
   }
-  DisableTextBoxDateofWorkMi(){
+  disableTextBoxDateofWorkMi(){
     this.textBoxDisabledDateofWorkMi = !this.textBoxDisabledDateofWorkMi;
   }
-  DisableTextBoxDateofWorkJ(){
+  disableTextBoxDateofWorkJ(){
     this.textBoxDisabledDateofWorkJ = !this.textBoxDisabledDateofWorkJ;
   }
-  DisableTextBoxDateofWorkV(){
+  disableTextBoxDateofWorkV(){
     this.textBoxDisabledDateofWorkV = !this.textBoxDisabledDateofWorkV;
   }
-  DisableTextBoxDateofWorkS(){
+  disableTextBoxDateofWorkS(){
     this.textBoxDisabledDateofWorkS = !this.textBoxDisabledDateofWorkS;
   }
-  DisableTextBoxDateofWorkD(){
+  disableTextBoxDateofWorkD(){
     this.textBoxDisabledDateofWorkD = !this.textBoxDisabledDateofWorkD;
   }
-  DisableTextBoxDateofWorkT(){
+  disableTextBoxDateofWorkT(){
     this.textBoxDisabledDateofWorkT = !this.textBoxDisabledDateofWorkT;
     this.textBoxDisabledDateofWorkL = true;
     this.textBoxDisabledDateofWorkM = true;
@@ -219,6 +237,24 @@ export class ColaboradorComponent implements OnInit {
     this.diasLaborales.lunes = false;
     this.diasLaborales.lunesDesde = null;
     this.diasLaborales.lunesHasta = null;
+    this.diasLaborales.martes=false;
+    this.diasLaborales.martesDesde=null;
+    this.diasLaborales.martesHasta=null;
+    this.diasLaborales.miercoles=false;
+    this.diasLaborales.miercolesDesde=null;
+    this.diasLaborales.miercolesHasta=null;
+    this.diasLaborales.jueves=false;
+    this.diasLaborales.juevesDesde=null;
+    this.diasLaborales.juevesHasta=null;
+    this.diasLaborales.viernes=false;
+    this.diasLaborales.viernesDesde=null;
+    this.diasLaborales.viernesHasta=null;
+    this.diasLaborales.sabado=false;
+    this.diasLaborales.sabadoDesde=null;
+    this.diasLaborales.sabadoHasta=null;
+    this.diasLaborales.domingo=false;
+    this.diasLaborales.domingoDesde=null;
+    this.diasLaborales.domingoHasta=null;
   }
   
 

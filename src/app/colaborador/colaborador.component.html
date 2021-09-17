@@ -631,7 +631,26 @@
                     <div class="col-md-6">
                       <h5 class="pb-1">Días y Horarios de Disponibilidad<span class="text-danger"> *</span></h5>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="lunes" name="lunes" ngModel #lunes="ngModel" [(ngModel)]="diasLaborales.lunes" (click)="DisableTextBoxDateofWorkL()">
+                        <input class="form-check-input" type="checkbox" value="" id="todos" (click)="disableTextBoxDateofWorkT()">
+                        <label class="form-check-label" for="todos">
+                          <p class="font-weight-bold">Todos los Dias
+                          </p>
+                        </label>
+                      </div>
+                      <div class="row pb-3">
+                        <div class="col-md-6">
+                            <label for="desdeT" class="form-label">Desde</label>
+                            <input type="time" class="form-control input-sm" id="desdeT" placeholder="" value=""
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="hastaT" class="form-label">Hasta</label>
+                            <input type="time" class="form-control input-sm" id="hastaT" placeholder="" value=""
+                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
+                          </div>
+                        </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="lunes" name="lunes" ngModel #lunes="ngModel" [(ngModel)]="diasLaborales.lunes" (click)="disableTextBoxDateofWorkL()">
                         <label class="form-check-label" for="lunes">
                           <p class="font-weight-bold">Lunes</p>
                         </label>
@@ -651,7 +670,7 @@
                       <!-- </div> -->
           
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="martes" (click)="DisableTextBoxDateofWorkM()">
+                        <input class="form-check-input" type="checkbox" value="" id="martes" name="martes" ngModel #martes="ngModel" [(ngModel)]="diasLaborales.martes" (click)="disableTextBoxDateofWorkM()">
                         <label class="form-check-label" for="martes">
                           <p class="font-weight-bold">Martes
                           </p>
@@ -661,17 +680,17 @@
                         <div class="col-md-6">
                             <label for="desdeM" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeM" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
+                            name="martesDesde" ngModel #martesDesde="ngModel" [(ngModel)]="diasLaborales.martesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
                           </div>
                           <div class="col-md-6">
                             <label for="hastaM" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaM" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
+                            name="martesHasta" ngModel #martesHasta="ngModel" [(ngModel)]="diasLaborales.martesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
                           </div>
                         </div>
                       <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="miercoles" (click)="DisableTextBoxDateofWorkMi()">
+                        <input class="form-check-input" type="checkbox" value="" id="miercoles" name="miercoles" ngModel #miercoles="ngModel" [(ngModel)]="diasLaborales.miercoles" (click)="disableTextBoxDateofWorkMi()">
                         <label class="form-check-label" for="miercoles">
                           <p class="font-weight-bold">Miércoles</p>
                         </label>
@@ -680,17 +699,17 @@
                         <div class="col-md-6">
                             <label for="desdeMi" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeMi" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
+                            name="miercolesDesde" ngModel #miercolesDesde="ngModel" [(ngModel)]="diasLaborales.miercolesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
                           </div>
                           <div class="col-md-6">
                             <label for="hastaMi" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaMi" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
+                            name="miercolesHasta" ngModel #miercolesHasta="ngModel" [(ngModel)]="diasLaborales.miercolesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
                           </div>
                         </div>
                       <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="jueves" (click)="DisableTextBoxDateofWorkJ()">
+                        <input class="form-check-input" type="checkbox" value="" id="jueves" name="jueves" ngModel #jueves="ngModel" [(ngModel)]="diasLaborales.jueves" (click)="disableTextBoxDateofWorkJ()">
                         <label class="form-check-label" for="jueves">
                           <p class="font-weight-bold">Jueves
                           </p>
@@ -700,17 +719,17 @@
                         <div class="col-md-6">
                             <label for="desdeJ" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeJ" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
+                            name="juevesDesde" ngModel #juevesDesde="ngModel" [(ngModel)]="diasLaborales.juevesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
                           </div>
                           <div class="col-md-6">
                             <label for="hastaJ" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaJ" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
+                            name="juevesHasta" ngModel #juevesHasta="ngModel" [(ngModel)]="diasLaborales.juevesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
                           </div>
                         </div>
                       <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="viernes" (click)="DisableTextBoxDateofWorkV()">
+                        <input class="form-check-input" type="checkbox" value="" id="viernes" name="viernes" ngModel #viernes="ngModel" [(ngModel)]="diasLaborales.viernes" (click)="disableTextBoxDateofWorkV()">
                         <label class="form-check-label" for="viernes">
                           <p class="font-weight-bold">Viernes
                           </p>
@@ -720,17 +739,17 @@
                         <div class="col-md-6">
                             <label for="desdeV" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeV" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
+                            name="viernesDesde" ngModel #viernesDesde="ngModel" [(ngModel)]="diasLaborales.viernesDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
                           </div>
                           <div class="col-md-6">
                             <label for="hastaV" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaV" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
+                            name="viernesHasta" ngModel #viernesHasta="ngModel" [(ngModel)]="diasLaborales.viernesHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
                           </div>
                         </div>
                       <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="sabado" (click)="DisableTextBoxDateofWorkS()">
+                        <input class="form-check-input" type="checkbox" value="" id="sabado" name="sabado" ngModel #sabado="ngModel" [(ngModel)]="diasLaborales.sabado" (click)="disableTextBoxDateofWorkS()">
                         <label class="form-check-label" for="sabado">
                           <p class="font-weight-bold">Sábado
                           </p>
@@ -740,17 +759,17 @@
                         <div class="col-md-6">
                             <label for="desdeS" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeS" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
+                            name="sabadoDesde" ngModel #sabadoDesde="ngModel" [(ngModel)]="diasLaborales.sabadoDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
                           </div>
                           <div class="col-md-6">
                             <label for="hastaS" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaS" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
+                            name="sabadoHasta" ngModel #sabadoHasta="ngModel" [(ngModel)]="diasLaborales.sabadoHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
                           </div>
                         </div>
                       <!-- </div> -->
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="domingo" (click)="DisableTextBoxDateofWorkD()">
+                        <input class="form-check-input" type="checkbox" value="" id="domingo" name="domingo" ngModel #domingo="ngModel" [(ngModel)]="diasLaborales.domingo" (click)="disableTextBoxDateofWorkD()">
                         <label class="form-check-label" for="domingo">
                           <p class="font-weight-bold">Domingo
                           </p>
@@ -760,33 +779,14 @@
                         <div class="col-md-6">
                             <label for="desdeD" class="form-label">Desde</label>
                             <input type="time" class="form-control input-sm" id="desdeD" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
+                            name="domingoDesde" ngModel #domingoDesde="ngModel" [(ngModel)]="diasLaborales.domingoDesde" disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
                           </div>
                           <div class="col-md-6">
                             <label for="hastaD" class="form-label">Hasta</label>
                             <input type="time" class="form-control input-sm" id="hastaD" placeholder="" value=""
-                              disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
+                            name="domingoHasta" ngModel #domingoHasta="ngModel" [(ngModel)]="diasLaborales.domingoHasta" disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
                           </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" value="" id="todos" (click)="DisableTextBoxDateofWorkT()">
-                          <label class="form-check-label" for="todos">
-                            <p class="font-weight-bold">Todos los Dias
-                            </p>
-                          </label>
-                        </div>
-                        <div class="row pb-3">
-                          <div class="col-md-6">
-                              <label for="desdeD" class="form-label">Desde</label>
-                              <input type="time" class="form-control input-sm" id="desdeD" placeholder="" value=""
-                                disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
-                            </div>
-                            <div class="col-md-6">
-                              <label for="hastaD" class="form-label">Hasta</label>
-                              <input type="time" class="form-control input-sm" id="hastaD" placeholder="" value=""
-                                disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
-                            </div>
-                          </div>
                       <!-- </div> -->
                     </div>
           
@@ -925,11 +925,11 @@
                           <label class="mt-3 mb-1">Visa</label>
                           <br>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1" (click)="EnableTextBoxVis()">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1" (click)="enableTextBoxVis()">
                             <label class="form-check-label" for="visaS">Sí</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visaN" value="option2" (click)="DisableTextBoxVis()">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visaN" value="option2" (click)="disableTextBoxVis()">
                             <label class="form-check-label" for="visaN">No</label>
                           </div>
                         </div>
@@ -963,11 +963,11 @@
                           <label class="mt-3 mb-1">Pasaporte</label>
                           <br>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporte" value="option1" (click)="EnableTextBoxPas()">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporte" value="option1" (click)="enableTextBoxPas()">
                             <label class="form-check-label" for="pasaporteS">Sí</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporteN" value="option2" (click)="DisableTextBoxPas()">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporteN" value="option2" (click)="disableTextBoxPas()">
                             <label class="form-check-label" for="pasaporteN">No</label>
                           </div>
                         </div>
