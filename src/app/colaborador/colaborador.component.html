@@ -712,21 +712,10 @@
                   <label for="institucion" class="form-label">Nombre de Referencia</label>
                   <input type="text" class="form-control" id="institucion" placeholder="" value="">
                 </div>
-              </div>
-              <div class="row pt-3">
                 <div class="col-md-4">
                   <label for="telefono" class="form-label">Teléfono de Referencia</label>
                   <input maxlength="10" size="10" type="tel" class="form-control" id="telefono" placeholder="10 Dígitos"
                     value="">
-                </div>
-                <div class="col-md-4">
-                  <label for="especialidad" class="form-label">Especialidad</label>
-                  <select class="form-control" name="especialidad">
-                    <option value="" selected disabled hidden>Seleccionar</option>
-                    <option value="Enfermeria">Enfermeria</option>
-                    <option value="Cuidados Geriatricos">Cuidados Geriatricos</option>
-                    
-                  </select>
                 </div>
               </div>
             </div>
@@ -734,6 +723,68 @@
             <div class="col-md-6">
               <label for="estudio" class="form-label">Actividades Realizadas</label>
               <textarea name="estudio" class="form-control" rows="5"></textarea>
+              <div class="row pt-3">
+                <legend class="col-form-label col-sm-2 pt-0">Especialidad</legend>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios1" value="option1" (click)="disableOtraEsp()">
+                    <label class="form-check-label" for="especialidadRadios1">
+                      Cuidados Intensivos
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios2" value="option2" (click)="disableOtraEsp()">
+                    <label class="form-check-label" for="especialidadRadios2">
+                      Cuidados Paliativos
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios3" value="option3" (click)="disableOtraEsp()">
+                    <label class="form-check-label" for="especialidadRadios3">
+                      Geriatría
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios4" value="option4" (click)="disableOtraEsp()">
+                    <label class="form-check-label" for="especialidadRadios4">
+                      Pediatra
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios5" value="option5" (click)="disableOtraEsp()">
+                    <label class="form-check-label" for="especialidadRadios5">
+                      Pediatra
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios6" value="option6" (click)="disableOtraEsp()">
+                    <label class="form-check-label" for="especialidadRadios6">
+                      Salud Mental
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios6" value="option6" (click)="disableOtraEsp()">
+                    <label class="form-check-label" for="especialidadRadios6">
+                      Obstetra
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios7" value="option7" (click)="disableOtraEsp()">
+                    <label class="form-check-label" for="especialidadRadios7">
+                      Ortopédica
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios8" value="option8" (click)="enableOtraEsp()">
+                    <label class="form-check-label" for="especialidadRadios8">
+                      Otra
+                    </label>
+                  </div>
+                  <div class="col-md-12">
+                    <input type="text" class="form-control" id="especialidadOtra" placeholder="" value="" disabled [disabled]="textBoxDisabledOtraEsp">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <hr class="mt-3 mb-3" />
