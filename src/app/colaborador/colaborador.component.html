@@ -512,7 +512,7 @@
                     <label for="banco" class="form-label">Banco</label>
                     <select class="form-control" name="banco" [(ngModel)]="pago.banco">
                       <option selected>Selecionar</option>
-                      <option *ngFor="let banco of bancos" [value]="banco.id">
+                      <option *ngFor="let banco of bancos" [value]="banco.nombre">
                         {{banco.nombre}}
                       </option>
                       
