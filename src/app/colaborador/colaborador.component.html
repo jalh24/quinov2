@@ -82,6 +82,7 @@
           <div class="col-md-2">
             <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
             <select class="form-control" name="calificacion">
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let calificacion of calificaciones" [value]="calificacion.id">
                 {{calificacion.nombre}}
               </option>
@@ -90,7 +91,7 @@
           <div class="col-md-2">
             <label for="calificacion" class="form-label">Tipo de Colaborador<span class="text-danger"> *</span></label>
             <select class="form-control" name="calificacion">
-              <option selected>Selecionar</option>
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option value="1">Enfermero(a)</option>                         
             </select>
           </div>
@@ -361,6 +362,7 @@
           <div class="col-md-2">
             <label for="tez" class="form-label">Tez</label>
             <select class="form-control" name="tez">
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tez of teces" [value]="tez.id">
                 {{tez.nombre}}
               </option>
@@ -386,6 +388,7 @@
           <div class="col-md-2">
             <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
             <select class="form-control" name="estadocivil">
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.id">
                 {{estadoCivil.nombre}}
               </option>
@@ -418,6 +421,7 @@
           <div class="col-md-2">
             <label for="tipoTel" class="form-label">Tipo de Teléfono 1</label>
             <select class="form-control" name="tipoTel">
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
                 {{tipoTelefono.nombre}}
               </option>
@@ -448,6 +452,7 @@
           <div class="col-md-2">
             <label for="tipoTel1" class="form-label">Tipo de Teléfono 2</label>
             <select class="form-control" name="tipoTel1">
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
                 {{tipoTelefono.nombre}}
               </option>
@@ -505,7 +510,7 @@
                   <div class="col-md-3">
                     <label for="tipoTel1" class="form-label">Banco</label>
                     <select class="form-control" name="tipoTel1">
-                      <option selected>Selecionar</option>
+                      <option value="" selected disabled hidden>Seleccionar</option>
                       <option value="HSBC">HSBC</option>
                       <option value="Santander">Santander</option>
                       
@@ -515,7 +520,7 @@
                   <div class="col-md-3">
                     <label for="tipoTel1" class="form-label">Tipo de Cuenta</label>
                     <select class="form-control" name="tipoTel1">
-                      <option selected>Selecionar</option>
+                      <option value="" selected disabled hidden>Seleccionar</option>
                       <option value="Casa">CLABE</option>
                       <option value="Oficina">Numero de Tarjeta</option>
                       
@@ -573,7 +578,7 @@
                     min="1900-02" [(ngModel)]="estudio.fin">
                 </div>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-6">
                   <label class="pb-2">¿Se terminaron los estudios?</label>
                   <br>
@@ -586,12 +591,31 @@
 
                 </div>
                 
+              </div> -->
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="pb-1">¿Se terminaron los estudios?<span class="text-danger"> *</span></label>
+                  <br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstS"
+                      value="option1" (click)="enableCed()">
+                    <label class="form-check-label" for="estudiosEstS">Sí</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstN" value="option2" (click)="disableCed()">
+                    <label class="form-check-label" for="estudiosEstN">No</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstT" value="option3" (click)="disableCed()">
+                    <label class="form-check-label" for="estudiosEstT">Trunco</label>
+                  </div>
+                </div>
               </div>
               <div class="row mt-3">
                 <div class="col-md-12">
                   <label for="formFile" class="form-label">Imagen de la Cédula</label>
                   <input class="form-control-file" type="file" id="formFile" accept=".png, .jpg, .jpeg"
-                    (change)="onCedulaFileSelected($event.target.files)">
+                    (change)="onCedulaFileSelected($event.target.files)" disabled="disabled" [disabled]="textBoxDisabledCed">
                 </div>
               </div>
             </div>
@@ -698,7 +722,7 @@
                 <div class="col-md-4">
                   <label for="especialidad" class="form-label">Especialidad</label>
                   <select class="form-control" name="especialidad">
-                    <option selected>Selecionar</option>
+                    <option value="" selected disabled hidden>Seleccionar</option>
                     <option value="Enfermeria">Enfermeria</option>
                     <option value="Cuidados Geriatricos">Cuidados Geriatricos</option>
                     
@@ -932,6 +956,7 @@
               <div class="col-md-4">
                 <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
                 <select class="form-control" name="permanencia">
+                  <option value="" selected disabled hidden>Seleccionar</option>
                   <option *ngFor="let permanencia of permanencias" [value]="permanencia.id">
                     {{permanencia.nombre}}
                   </option>

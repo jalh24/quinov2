@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradorComponent implements OnInit {
+  textBoxDisabledCed = true;
   textBoxDisabledSeg = true;
   textBoxDisabledVis = true;
   textBoxDisabledPas = true;
@@ -200,6 +201,12 @@ export class ColaboradorComponent implements OnInit {
   }
   disableSeguros(){
     this.textBoxDisabledSeg = true;
+  }
+  enableCed(){
+    this.textBoxDisabledCed = false;
+  }
+  disableCed(){
+    this.textBoxDisabledCed = true;
   }
   enableTextBoxVis(){
     this.textBoxDisabledVis = false;
