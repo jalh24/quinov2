@@ -508,17 +508,17 @@
                   </div>
 
                   <div class="col-md-3">
-                    <label for="tipoTel1" class="form-label">Banco</label>
-                    <select class="form-control" name="tipoTel1">
+                    <label for="banco" class="form-label">Banco<span class="text-danger"> *</span></label>
+                    <select class="form-control" name="banco">
                       <option value="" selected disabled hidden>Seleccionar</option>
-                      <option value="HSBC">HSBC</option>
-                      <option value="Santander">Santander</option>
-                      
+                      <option *ngFor="let banco of bancos" [value]="banco.id">
+                        {{banco.nombre}}
+                      </option>
                     </select>
                   </div>
 
                   <div class="col-md-3">
-                    <label for="tipoTel1" class="form-label">Tipo de Cuenta</label>
+                    <label for="tipoTel1" class="form-label">Tipo de Cuenta<span class="text-danger"> *</span></label>
                     <select class="form-control" name="tipoTel1">
                       <option value="" selected disabled hidden>Seleccionar</option>
                       <option value="Casa">CLABE</option>

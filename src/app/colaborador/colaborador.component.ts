@@ -126,6 +126,7 @@ export class ColaboradorComponent implements OnInit {
   paises:any[];
   calificaciones:any[];
   teces:any[];
+  bancos:any[];
   estadosCiviles:any[];
   tiposTelefono:any[];
   permanencias:any[];
@@ -156,6 +157,7 @@ export class ColaboradorComponent implements OnInit {
     this.comboPaises();
     this.comboCalificaciones();
     this.comboTeces();
+    this.comboBancos();
     this.comboSexos();
     this.comboEstadosCiviles();
     this.comboTiposTelefono();
@@ -442,6 +444,13 @@ export class ColaboradorComponent implements OnInit {
     this.http.get<any>('/api/catalogo/teces').subscribe(data => {
         console.log(data);
         this.teces = data.data;
+    });
+  }
+
+  public comboBancos(){
+    this.http.get<any>('/api/catalogo/bancos').subscribe(data => {
+        console.log(data);
+        this.bancos = data.data;
     });
   }
 
