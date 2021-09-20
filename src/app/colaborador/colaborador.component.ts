@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Colaborador } from '../_model/colaborador';
+import {Pago} from '../_model/pago';
 import { DataTableDirective } from 'angular-datatables';
 import { Estudio } from '../_model/estudio';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Experiencia } from '../_model/experiencia';
 
 @Component({
   selector: 'app-colaborador',
@@ -35,8 +37,12 @@ export class ColaboradorComponent implements OnInit {
   @ViewChild('myForm') ngForm: NgForm;
   
   dtTriggerEstudio = new Subject();
+  dtTriggerPago = new Subject();
+  dtTriggerExperiencia = new Subject();
 
+  idPago:number;
   idEstudio:number;
+  idExperiencia:number;
   public colaborador:Colaborador = {
     rfc:null,
     foto:null,
@@ -131,9 +137,15 @@ export class ColaboradorComponent implements OnInit {
   tiposTelefono:any[];
   permanencias:any[];
   zonasLaborales:any[];
+  pagos:Pago[];
+  pago:Pago;
   estudios:Estudio[];
   estudio:Estudio;
+  experiencias:Experiencia[];
+  experiencia:Experiencia;
+  dtOptionsPago: any = {};
   dtOptionsEstudio: any = {};
+  dtOptionsExperiencia: any = {};
   estatusEstudios: string[] = ['Si', 'No', 'Trunco'];
   estatusSelected:string;
 
@@ -164,7 +176,17 @@ export class ColaboradorComponent implements OnInit {
     this.comboPermanencias();
     this.comboZonasLaborales();
     this.idEstudio = 0;
+    this.idPago = 0;
+    this.idExperiencia = 0;
     this.colaborador.ine=null;
+    this.pagos=[];
+    this.pago = {
+      idPago:null,
+      nombre:null,
+      banco:null,
+      tipocuenta:null,
+      numero:null
+    };
     this.estudios=[];
     this.estudio = {
       idEstudio:null,
@@ -176,6 +198,41 @@ export class ColaboradorComponent implements OnInit {
       cedula:null,
       comentarios:null
     };
+    this.experiencias=[];
+    this.experiencia = {
+      idExperiencia:null,
+      lugar:null,
+      actividades:null,
+      inicio:null,
+      fin:null,
+      referencia:null,
+      telefono:null,
+      especialidad:null
+    };
+
+    this.dtOptionsPago = {
+      select: true,
+      rowCallback: (row: Node, data: any | Object, index: number) => {
+      console.log(data);     
+        const self = this;
+        
+        $('td', row).on('click', () => {
+          if(self.pago !== null){
+            if(self.pago.idPago === data.idPago){
+              this.pago= null;
+            } else{
+              self.pago=data;
+            }
+          } else{
+            self.colaborador=data;
+          }
+        });
+
+        return row;
+      }
+
+    };
+
     this.dtOptionsEstudio = {
       select: true,
       rowCallback: (row: Node, data: any | Object, index: number) => {
@@ -188,6 +245,28 @@ export class ColaboradorComponent implements OnInit {
               this.estudio= null;
             } else{
               self.estudio=data;
+            }
+          } else{
+            self.colaborador=data;
+          }
+        });
+
+        return row;
+      }
+
+    };
+    this.dtOptionsExperiencia = {
+      select: true,
+      rowCallback: (row: Node, data: any | Object, index: number) => {
+      console.log(data);     
+        const self = this;
+        
+        $('td', row).on('click', () => {
+          if(self.experiencia !== null){
+            if(self.experiencia.idExperiencia === data.idExperiencia){
+              this.experiencia= null;
+            } else{
+              self.experiencia=data;
             }
           } else{
             self.colaborador=data;
@@ -401,9 +480,7 @@ export class ColaboradorComponent implements OnInit {
     if(this.estudio.idEstudio == null)    {
       this.idEstudio++;
       this.estudio.idEstudio=this.idEstudio;
-    }else{
-
-    }
+    }else{}
 
     this.estudio.estatus = this.estatusSelected;
     console.log(this.estudio);
@@ -419,6 +496,50 @@ export class ColaboradorComponent implements OnInit {
       comentarios:null
     };
     this.estatusSelected = "";
+  
+  }
+
+  agregarPago(){
+    if(this.pago.idPago == null)    {
+      this.idPago++;
+      this.pago.idPago=this.idPago;
+    }else{}
+
+    
+    console.log(this.pago);
+    this.pagos.push(this.pago);
+    this.pago ={
+      idPago:null,
+      nombre:null,
+      banco:null,
+      tipocuenta:null,
+      numero:null,
+    };
+    
+  
+  }
+
+  agregarExperiencia(){
+    if(this.experiencia.idExperiencia == null)    {
+      this.idExperiencia++;
+      this.experiencia.idExperiencia=this.idExperiencia;
+    }else{}
+
+    
+    console.log(this.experiencia);
+    this.experiencias.push(this.experiencia);
+    this.experiencia ={
+      idExperiencia:null,
+      lugar:null,
+      actividades:null,
+      inicio:null,
+      fin:null,
+      referencia:null,
+      telefono:null,
+      especialidad:null
+    };
+    
+  
   }
 
   editaEstudio(estudioTmp:any){
@@ -428,7 +549,11 @@ export class ColaboradorComponent implements OnInit {
   borraEstudio(estudioTmp){
 
     this.estudios.forEach((element,index)=>{
-      if(element.idEstudio==estudioTmp.idEstudio) delete this.estudios[index];
+      if(element.idEstudio==estudioTmp.idEstudio)
+      {
+        this.estudios.splice(index,1);
+        //delete this.estudios[estudioTmp.idEstudio];
+      } 
    });
    this.rerender();
   }

@@ -501,36 +501,38 @@
                 <div class="col-md-3">
                   <label for="nombre" class="form-label">Nombre del Beneficiario<span class="text-danger"> *</span></label>
                   <input type="text" class="form-control valGlobal" name="nombre" 
-                  >
+                 
+                [(ngModel)]="pago.nombre">
                   <div class="invalid-feedback">
                       *Campo Requerido!
                   </div>
                   </div>
 
                   <div class="col-md-3">
-                    <label for="banco" class="form-label">Banco<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="banco">
-                      <option value="" selected disabled hidden>Seleccionar</option>
+                    <label for="banco" class="form-label">Banco</label>
+                    <select class="form-control" name="banco" [(ngModel)]="pago.banco">
+                      <option selected>Selecionar</option>
                       <option *ngFor="let banco of bancos" [value]="banco.id">
                         {{banco.nombre}}
                       </option>
+                      
                     </select>
                   </div>
 
                   <div class="col-md-3">
-                    <label for="tipoTel1" class="form-label">Tipo de Cuenta<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="tipoTel1">
-                      <option value="" selected disabled hidden>Seleccionar</option>
-                      <option value="Casa">CLABE</option>
-                      <option value="Oficina">Numero de Tarjeta</option>
+                    <label for="tipocuenta" class="form-label">Tipo de Cuenta</label>
+                    <select class="form-control" name="tipocuenta" [(ngModel)]="pago.tipocuenta">
+                      <option selected>Selecionar</option>
+                      <option value="CLABE">CLABE</option>
+                      <option value="Numero de Tarjeta">Numero de Tarjeta</option>
                       
                     </select>
                   </div>
       
                   <div class="col-md-3">
-                  <label for="materno" class="form-label">Numero<span class="text-danger"> *</span></label>
-                  <input type="text" class="form-control" name="amaterno"  
-                  >
+                  <label for="numerocuenta" class="form-label">Numero<span class="text-danger"> *</span></label>
+                  <input type="text" class="form-control" name="numerocuenta"  
+                  [(ngModel)]="pago.numero">
                   <div class="invalid-feedback">
                       *Campo Requerido!
                   </div>
@@ -543,10 +545,44 @@
           </div>
           
   
+          <div class="row mt-5">
+            <div class="col-md-12 text-center">
+              <button class="btn btn-primary add-one" (click)="agregarPago()">Agregar</button>
+              <button class="btn btn-warning delete ml-3">Cancelar</button>
+            </div>
+          </div>
           <div class="row mt-4 pb-4">
             <div class="col-md-12 text-center">
-              <button class="btn btn-primary add-one1">Agregar Otra Tarjeta</button>
-              <button class="btn btn-primary delete1 ml-3">Eliminar Tarjeta</button>
+              <table datatable [dtOptions]="dtOptionsPago" [dtTrigger]="dtTriggerEstudio" class="row-border hover">
+                <thead>
+                  <tr>                   
+                    <td>Propietario</td>
+                    <td>Banco</td>
+                    <td>Tipo de Cuenta</td>
+                    <td>Numero</td>
+                    <td>Acciones</td>
+                  </tr>
+                </thead>
+                <tbody *ngIf="pagos?.length != 0">
+                  <tr *ngFor="let pagoTmp of pagos">
+                    
+                    <td>
+                      {{pagoTmp.nombre}}
+                    </td>
+                    <td>
+                      {{pagoTmp.banco}}
+                    </td>
+                    <td>
+                      {{pagoTmp.tipocuenta}}
+                    </td>
+                    <td>
+                      {{pagoTmp.numero}}
+                    </td>
+                    <td><button class="getDetails" (click)="editaPago(pagoTmp)">Editar</button><button class="getDetails" (click)="borraPago(pagoTmp)">Borrar</button></td>
+                  </tr>
+  
+                </tbody>
+              </table>
             </div>
           </div>
       </div>    
@@ -645,7 +681,7 @@
             <table datatable [dtOptions]="dtOptionsEstudio" [dtTrigger]="dtTriggerEstudio" class="row-border hover">
               <thead>
                 <tr>
-                  <td>ID</td>
+                  
                   <td>Institución</td>
                   <td>Estudio</td>
                   <td>Inicio</td>
@@ -656,9 +692,7 @@
               </thead>
               <tbody *ngIf="estudios?.length != 0">
                 <tr *ngFor="let estudioTmp of estudios">
-                  <td>
-                    {{estudioTmp.idEstudio}}
-                  </td>
+                  
                   <td>
                     {{estudioTmp.institucion}}
                   </td>
@@ -666,13 +700,15 @@
                     {{estudioTmp.comentarios}}
                   </td>
                   <td>
+                    {{estudioTmp.inicio}}
+                  </td>
+                  <td>
                     {{estudioTmp.fin}}
                   </td>
                   <td>
                     {{estudioTmp.estatus}}
                   </td>
-                  <td><button class="getDetails" (click)="editaEstudio(estudioTmp)">Editar</button></td>
-                  <td><button class="getDetails" (click)="borraEstudio(estudioTmp)">Borrar</button></td>
+                  <td><button class="getDetails" (click)="editaEstudio(estudioTmp)">Editar</button><button class="getDetails" (click)="borraEstudio(estudioTmp)">Borrar</button></td>
                 </tr>
 
               </tbody>
@@ -690,7 +726,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <label for="institucion" class="form-label">Empresa/Institución</label>
-                  <input type="text" class="form-control" id="institucion" placeholder="" value="">
+                  <input type="text" class="form-control" name="lugar"  [(ngModel)]="experiencia.lugar" >
                 </div>
               </div>
 
@@ -698,24 +734,33 @@
                 <div class="col-md-6">
                   <label for="inicioEst" class="form-label">Inicio</label>
                   <input type="month" class="form-control datepicker" name="inicioExp"
-                    min="1900-01">
+                    min="1900-01" [(ngModel)]="experiencia.inicio">
                 </div>
 
                 <div class="col-md-6">
                   <label for="terminacionEst" class="form-label">Terminación</label>
                   <input type="month" class="form-control datepicker" name="terminacionExp"
-                    min="1900-02">
+                    min="1900-02" [(ngModel)]="experiencia.fin">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <label for="institucion" class="form-label">Nombre de Referencia</label>
-                  <input type="text" class="form-control" id="institucion" placeholder="" value="">
+                  <input type="text" class="form-control"  placeholder="" name="referencia"  [(ngModel)]="experiencia.referencia" >
                 </div>
                 <div class="col-md-4">
                   <label for="telefono" class="form-label">Teléfono de Referencia</label>
-                  <input maxlength="10" size="10" type="tel" class="form-control" id="telefono" placeholder="10 Dígitos"
-                    value="">
+                  <input maxlength="10" size="10" type="tel" class="form-control" name="telefono"  [(ngModel)]="experiencia.telefono" placeholder="10 Dígitos"
+                     >
+                </div>
+                <div class="col-md-4">
+                  <label for="especialidad" class="form-label">Especialidad</label>
+                  <select class="form-control" name="especialidad" [(ngModel)]="experiencia.especialidad">
+                    <option selected>Selecionar</option>
+                    <option value="Enfermeria">Enfermeria</option>
+                    <option value="Cuidados Geriatricos">Cuidados Geriatricos</option>
+                    
+                  </select>
                 </div>
               </div>
             </div>
@@ -795,10 +840,56 @@
           </div>
         </div>
 
+        <div class="row mt-5">
+          <div class="col-md-12 text-center">
+            <button class="btn btn-primary add-one" (click)="agregarExperiencia()">Agregar</button>
+            <button class="btn btn-warning delete ml-3">Cancelar</button>
+          </div>
+        </div>
         <div class="row mt-4 pb-4">
           <div class="col-md-12 text-center">
-            <button class="btn btn-primary add-one1">Agregar Otra Experiencia</button>
-            <button class="btn btn-primary delete1 ml-3">Eliminar Experiencia</button>
+            <table datatable [dtOptions]="dtOptionsExperiencia" [dtTrigger]="dtTriggerEstudio" class="row-border hover">
+              <thead>
+                <tr>                   
+                  <td>Empresa/Institucion</td>
+                  <td>Actividades</td>
+                  <td>Inicio</td>
+                  <td>Fin</td>
+                  <td>Nombre de Referencia</td>
+                  <td>Telefono de Referencia</td>
+                  <td>Especialidad</td>
+                  <td>Acciones</td>
+                </tr>
+              </thead>
+              <tbody *ngIf="experiencias?.length != 0">
+                <tr *ngFor="let experienciaTmp of experiencias">
+                  
+                  <td>
+                    {{experienciaTmp.lugar}}
+                  </td>
+                  <td>
+                    {{experienciaTmp.actividades}}
+                  </td>
+                  <td>
+                    {{experienciaTmp.inicio}}
+                  </td>
+                  <td>
+                    {{experienciaTmp.fin}}
+                  </td>
+                  <td>
+                    {{experienciaTmp.referencia}}
+                  </td>
+                  <td>
+                    {{experienciaTmp.telefono}}
+                  </td>
+                  <td>
+                    {{experienciaTmp.especialidad}}
+                  </td>
+                  <td><button class="getDetails" (click)="editaExperiencia(experienciaTmp)">Editar</button><button class="getDetails" (click)="borraExperiencia(experienciaTmp)">Borrar</button></td>
+                </tr>
+
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
