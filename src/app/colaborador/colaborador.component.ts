@@ -285,10 +285,7 @@ export class ColaboradorComponent implements OnInit {
     this.textBoxDisabledSeg = true;
   }
   enableOtraEsp(){
-    this.textBoxDisabledOtraEsp = false;
-  }
-  disableOtraEsp(){
-    this.textBoxDisabledOtraEsp = true;
+    this.textBoxDisabledOtraEsp = !this.textBoxDisabledOtraEsp;
   }
   enableCed(){
     this.textBoxDisabledCed = false;

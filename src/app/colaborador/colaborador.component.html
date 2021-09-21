@@ -759,60 +759,78 @@
             <div class="col-md-6">
               <label for="estudio" class="form-label">Actividades Realizadas</label>
               <textarea name="estudio" class="form-control" rows="5"></textarea>
-              <div class="row pt-3">
-                <legend class="col-form-label col-sm-2 pt-0">Especialidad</legend>
+              <div class="form-group row pt-3">
+                <div class="col-sm-2">Especialidad</div>
                 <div class="col-sm-10">
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios1" value="option1" (click)="disableOtraEsp()">
-                    <label class="form-check-label" for="especialidadRadios1">
-                      Cuidados Intensivos
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck1">
+                    <label class="form-check-label" for="especialidadCheck1">
+                      Parkinson
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios2" value="option2" (click)="disableOtraEsp()">
-                    <label class="form-check-label" for="especialidadRadios2">
-                      Cuidados Paliativos
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck2">
+                    <label class="form-check-label" for="especialidadCheck2">
+                      Alzheimer
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios3" value="option3" (click)="disableOtraEsp()">
-                    <label class="form-check-label" for="especialidadRadios3">
-                      Geriatría
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck3">
+                    <label class="form-check-label" for="especialidadCheck3">
+                      Diabetes
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios4" value="option4" (click)="disableOtraEsp()">
-                    <label class="form-check-label" for="especialidadRadios4">
-                      Pediatra
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck4">
+                    <label class="form-check-label" for="especialidadCheck4">
+                      Demencia Senil
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios5" value="option5" (click)="disableOtraEsp()">
-                    <label class="form-check-label" for="especialidadRadios5">
-                      Pediatra
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck5">
+                    <label class="form-check-label" for="especialidadCheck5">
+                      Esclerosis Múltiple
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios6" value="option6" (click)="disableOtraEsp()">
-                    <label class="form-check-label" for="especialidadRadios6">
-                      Salud Mental
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck6">
+                    <label class="form-check-label" for="especialidadCheck6">
+                      Paraplégico
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios6" value="option6" (click)="disableOtraEsp()">
-                    <label class="form-check-label" for="especialidadRadios6">
-                      Obstetra
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck7">
+                    <label class="form-check-label" for="especialidadCheck7">
+                      Covid
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios7" value="option7" (click)="disableOtraEsp()">
-                    <label class="form-check-label" for="especialidadRadios7">
-                      Ortopédica
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck8">
+                    <label class="form-check-label" for="especialidadCheck8">
+                      Enfermedades Cardiovasculares / Hipertensión
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="especialidadRadios" id="especialidadRadios8" value="option8" (click)="enableOtraEsp()">
-                    <label class="form-check-label" for="especialidadRadios8">
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck9">
+                    <label class="form-check-label" for="especialidadCheck9">
+                      Artrosis
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck10">
+                    <label class="form-check-label" for="especialidadCheck10">
+                      Enfermedades Renales
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck11">
+                    <label class="form-check-label" for="especialidadCheck11">
+                      Cáncer
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="especialidadCheck12" (click)="enableOtraEsp()">
+                    <label class="form-check-label" for="especialidadCheck12">
                       Otra
                     </label>
                   </div>
