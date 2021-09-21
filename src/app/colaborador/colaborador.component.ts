@@ -18,6 +18,7 @@ export class ColaboradorComponent implements OnInit {
   textBoxDisabledCed = true;
   textBoxDisabledSeg = true;
   textBoxDisabledOtraEsp = true;
+  textBoxDisabledOtraZon = true;
   textBoxDisabledOtraHab = true;
   textBoxDisabledVis = true;
   textBoxDisabledPas = true;
@@ -139,6 +140,8 @@ export class ColaboradorComponent implements OnInit {
   tiposTelefono:any[];
   permanencias:any[];
   zonasLaborales:any[];
+  especialidades:any[];
+  habilidades:any[];
   pagos:Pago[];
   pago:Pago;
   estudios:Estudio[];
@@ -178,6 +181,8 @@ export class ColaboradorComponent implements OnInit {
     this.comboTiposTelefono();
     this.comboPermanencias();
     this.comboZonasLaborales();
+    this.comboEspecialidades();
+    this.comboHabilidades();
     this.idEstudio = 0;
     this.idPago = 0;
     this.idExperiencia = 0;
@@ -289,6 +294,9 @@ export class ColaboradorComponent implements OnInit {
   }
   enableOtraEsp(){
     this.textBoxDisabledOtraEsp = !this.textBoxDisabledOtraEsp;
+  }
+  enableOtraZon(){
+    this.textBoxDisabledOtraZon = !this.textBoxDisabledOtraZon;
   }
   enableOtraHab(){
     this.textBoxDisabledOtraHab = !this.textBoxDisabledOtraHab;
@@ -614,6 +622,20 @@ export class ColaboradorComponent implements OnInit {
     this.http.get<any>('/api/catalogo/zonasLaborales').subscribe(data => {
         console.log(data);
         this.zonasLaborales = data.data;
+    });
+  }
+
+  public comboEspecialidades(){
+    this.http.get<any>('/api/catalogo/especialidades').subscribe(data => {
+        console.log(data);
+        this.especialidades = data.data;
+    });
+  }
+
+  public comboHabilidades(){
+    this.http.get<any>('/api/catalogo/habilidades').subscribe(data => {
+        console.log(data);
+        this.habilidades = data.data;
     });
   }
 

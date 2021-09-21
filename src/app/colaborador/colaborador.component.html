@@ -761,70 +761,10 @@
               <div class="form-group row pt-3">
                 <div class="col-sm-2">Especialidades</div>
                 <div class="col-sm-10">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck1">
-                    <label class="form-check-label" for="especialidadCheck1">
-                      Parkinson
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck2">
-                    <label class="form-check-label" for="especialidadCheck2">
-                      Alzheimer
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck3">
-                    <label class="form-check-label" for="especialidadCheck3">
-                      Diabetes
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck4">
-                    <label class="form-check-label" for="especialidadCheck4">
-                      Demencia Senil
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck5">
-                    <label class="form-check-label" for="especialidadCheck5">
-                      Esclerosis Múltiple
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck6">
-                    <label class="form-check-label" for="especialidadCheck6">
-                      Paraplégico
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck7">
-                    <label class="form-check-label" for="especialidadCheck7">
-                      Covid
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck8">
-                    <label class="form-check-label" for="especialidadCheck8">
-                      Enfermedades Cardiovasculares / Hipertensión
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck9">
-                    <label class="form-check-label" for="especialidadCheck9">
-                      Artrosis
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck10">
-                    <label class="form-check-label" for="especialidadCheck10">
-                      Enfermedades Renales
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="especialidadCheck11">
-                    <label class="form-check-label" for="especialidadCheck11">
-                      Cáncer
+                  <div class="form-check" *ngFor="let especialidad of especialidades" [value]="especialidad.id">
+                    <input class="form-check-input" type="checkbox" id="{{especialidad.nombre}}">
+                    <label class="form-check-label" for="{{especialidad.nombre}}">
+                      {{especialidad.nombre}}
                     </label>
                   </div>
                   <div class="form-check">
@@ -841,118 +781,10 @@
               <div class="form-group row pt-3">
                 <div class="col-sm-2">Habilidades</div>
                 <div class="col-sm-10">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck1">
-                    <label class="form-check-label" for="habilidadCheck1">
-                      Canalizar
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck2">
-                    <label class="form-check-label" for="habilidadCheck2">
-                      Alimentación por Sonda
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck3">
-                    <label class="form-check-label" for="habilidadCheck3">
-                      Manejo de Cateter
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck4">
-                    <label class="form-check-label" for="habilidadCheck4">
-                      Administración de Medicamentos
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck5">
-                    <label class="form-check-label" for="habilidadCheck5">
-                      Administración de Medicamentos intravenosos
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck6">
-                    <label class="form-check-label" for="habilidadCheck6">
-                      Manejo de Grúa
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck7">
-                    <label class="form-check-label" for="habilidadCheck7">
-                      Manejo de equipo de Oxigeno
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck8">
-                    <label class="form-check-label" for="habilidadCheck8">
-                      Curaciones
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck9">
-                    <label class="form-check-label" for="habilidadCheck9">
-                      Medición de Signos Vitales
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck10">
-                    <label class="form-check-label" for="habilidadCheck10">
-                      Suturas
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck11">
-                    <label class="form-check-label" for="habilidadCheck11">
-                      Movilización de Pacientes pesados (>80Kg)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck12">
-                    <label class="form-check-label" for="habilidadCheck12">
-                      Diálisis
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck13">
-                    <label class="form-check-label" for="habilidadCheck13">
-                      Baño en cama
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck14">
-                    <label class="form-check-label" for="habilidadCheck14">
-                      Cambio de Pañal
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck15">
-                    <label class="form-check-label" for="habilidadCheck15">
-                      Cocina Básica
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck16">
-                    <label class="form-check-label" for="habilidadCheck16">
-                      Aseo Doméstico
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck17">
-                    <label class="form-check-label" for="habilidadCheck17">
-                      Manejo de automóvil
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck18">
-                    <label class="form-check-label" for="habilidadCheck18">
-                      Aplicar Inyecciones
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck19">
-                    <label class="form-check-label" for="habilidadCheck19">
-                      Terapia Física
+                  <div class="form-check" *ngFor="let habilidad of habilidades" [value]="habilidad.id">
+                    <input class="form-check-input" type="checkbox" id="{{habilidad.nombre}}">
+                    <label class="form-check-label" for="{{habilidad.nombre}}">
+                      {{habilidad.nombre}}
                     </label>
                   </div>
                   <div class="form-check">
@@ -1273,14 +1105,25 @@
                             <option value="11">Apodaca</option>
                           </select>
                         </div> -->
-              <div class="col-md-5">
-                <label for="zona" class="form-label">Zonas Laborales</label>
+              <div class="col-md-6">
+                <!-- <label for="zona" class="form-label">Zonas Laborales</label>
                 <select multiple class="form-control" id="zona">
                   <option *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.id">
                     {{zonaLaboral.nombre}}
                   </option>
-                </select>
-              </div>
+                </select> -->
+                <label>Zonas Laborales</label>
+                <div class="form-group row pt-1">
+                  <div class="col-sm-10">
+                    <div class="form-check" *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.id">
+                      <input class="form-check-input" type="checkbox" id={{zonaLaboral.nombre}}>
+                      <label class="form-check-label" for={{zonaLaboral.nombre}}>
+                        {{zonaLaboral.nombre}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>             
             </div>
 
             <div class="row">
