@@ -18,6 +18,7 @@ export class ColaboradorComponent implements OnInit {
   textBoxDisabledCed = true;
   textBoxDisabledSeg = true;
   textBoxDisabledOtraEsp = true;
+  textBoxDisabledOtraHab = true;
   textBoxDisabledVis = true;
   textBoxDisabledPas = true;
   textBoxDisabledDateofWorkL = true;
@@ -131,6 +132,7 @@ export class ColaboradorComponent implements OnInit {
   estados:any[];
   paises:any[];
   calificaciones:any[];
+  tiposColaboradores:any[];
   teces:any[];
   bancos:any[];
   estadosCiviles:any[];
@@ -168,6 +170,7 @@ export class ColaboradorComponent implements OnInit {
     this.comboEstados();
     this.comboPaises();
     this.comboCalificaciones();
+    this.comboTiposColaboradores();
     this.comboTeces();
     this.comboBancos();
     this.comboSexos();
@@ -286,6 +289,9 @@ export class ColaboradorComponent implements OnInit {
   }
   enableOtraEsp(){
     this.textBoxDisabledOtraEsp = !this.textBoxDisabledOtraEsp;
+  }
+  enableOtraHab(){
+    this.textBoxDisabledOtraHab = !this.textBoxDisabledOtraHab;
   }
   enableCed(){
     this.textBoxDisabledCed = false;
@@ -559,6 +565,13 @@ export class ColaboradorComponent implements OnInit {
     this.http.get<any>('/api/catalogo/calificaciones').subscribe(data => {
         console.log(data);
         this.calificaciones = data.data;
+    });
+  }
+
+  public comboTiposColaboradores(){
+    this.http.get<any>('/api/catalogo/tiposColaboradores').subscribe(data => {
+        console.log(data);
+        this.tiposColaboradores = data.data;
     });
   }
 
