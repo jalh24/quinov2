@@ -510,8 +510,8 @@
 
                   <div class="col-md-3">
                     <label for="banco" class="form-label">Banco</label>
-                    <select class="form-control" name="banco" [(ngModel)]="pago.banco">
-                      <option selected>Selecionar</option>
+                    <select class="form-control" name="banco">
+                      <option value="" selected disabled hidden>Seleccionar</option>
                       <option *ngFor="let banco of bancos" [value]="banco.nombre">
                         {{banco.nombre}}
                       </option>
@@ -521,8 +521,8 @@
 
                   <div class="col-md-3">
                     <label for="tipocuenta" class="form-label">Tipo de Cuenta</label>
-                    <select class="form-control" name="tipocuenta" [(ngModel)]="pago.tipocuenta">
-                      <option selected>Selecionar</option>
+                    <select class="form-control" name="tipocuenta">
+                      <option value="" selected disabled hidden>Seleccionar</option>
                       <option value="CLABE">CLABE</option>
                       <option value="Numero de Tarjeta">Numero de Tarjeta</option>
                       
@@ -752,15 +752,6 @@
                   <label for="telefono" class="form-label">Teléfono de Referencia</label>
                   <input maxlength="10" size="10" type="tel" class="form-control" name="telefono"  [(ngModel)]="experiencia.telefono" placeholder="10 Dígitos"
                      >
-                </div>
-                <div class="col-md-4">
-                  <label for="especialidad" class="form-label">Especialidad</label>
-                  <select class="form-control" name="especialidad" [(ngModel)]="experiencia.especialidad">
-                    <option selected>Selecionar</option>
-                    <option value="Enfermeria">Enfermeria</option>
-                    <option value="Cuidados Geriatricos">Cuidados Geriatricos</option>
-                    
-                  </select>
                 </div>
               </div>
             </div>
