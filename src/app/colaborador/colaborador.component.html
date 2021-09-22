@@ -778,29 +778,10 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group row pt-3">
-                <div class="col-sm-2">Habilidades</div>
-                <div class="col-sm-10">
-                  <div class="form-check" *ngFor="let habilidad of habilidades" [value]="habilidad.id">
-                    <input class="form-check-input" type="checkbox" id="{{habilidad.nombre}}">
-                    <label class="form-check-label" for="{{habilidad.nombre}}">
-                      {{habilidad.nombre}}
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="habilidadCheck20" (click)="enableOtraHab()">
-                    <label class="form-check-label" for="habilidadCheck20">
-                      Otras
-                    </label>
-                  </div>
-                  <div class="col-md-12">
-                    <input type="text" class="form-control" id="habilidadOtra" placeholder="" value="" disabled [disabled]="textBoxDisabledOtraHab">
-                  </div>
-                </div>
-              </div>
+              
             </div>
           </div>
-          <hr class="mt-3 mb-3" />
+          <!-- <hr class="mt-3 mb-3" /> -->
         </div>
         <div class="form-container">
           <div class="dynamic-stuff1">
@@ -814,6 +795,28 @@
             <button class="btn btn-warning delete ml-3">Cancelar</button>
           </div>
         </div>
+        <hr class="mt-3 mb-3" />
+        <div class="form-group row pt-3">
+          <div class="col-sm-2">Habilidades</div>
+          <div class="col-sm-10">
+            <div class="form-check" *ngFor="let habilidad of habilidades" [value]="habilidad.id">
+              <input class="form-check-input" type="checkbox" id="{{habilidad.nombre}}">
+              <label class="form-check-label" for="{{habilidad.nombre}}">
+                {{habilidad.nombre}}
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="habilidadCheck20" (click)="enableOtraHab()">
+              <label class="form-check-label" for="habilidadCheck20">
+                Otras
+              </label>
+            </div>
+            <div class="col-md-12">
+              <input type="text" class="form-control" id="habilidadOtra" placeholder="" value="" disabled [disabled]="textBoxDisabledOtraHab">
+            </div>
+          </div>
+        </div>
+        <hr class="mt-3 mb-3" />
         <div class="row mt-4 pb-4">
           <div class="col-md-12 text-center">
             <table datatable [dtOptions]="dtOptionsExperiencia" [dtTrigger]="dtTriggerEstudio" class="row-border hover">
