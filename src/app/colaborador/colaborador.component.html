@@ -6,29 +6,53 @@
         <div class="row">
           <div class="col">
             <label for="nombre" class="form-label">Nombre(s)<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control valGlobal" name="nombre" ngModel #nombre="ngModel"
-              [(ngModel)]="colaborador.nombre">
-            <div class="invalid-feedback">
+            <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel #nombre="ngModel"
+              [(ngModel)]="colaborador.nombre" pattern="[a-zA-Z ]*" required>
+              <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
+                <div *ngIf="nombre.errors?.required">
+                  El nombre es obligatorio.
+                </div>
+              <div *ngIf="nombre.errors?.pattern">
+                  El nombre solo debe de contener letras y/o espacios.
+              </div>
+              </div>
+            <!-- <div class="invalid-feedback">
               *Campo Requerido!
-            </div>
+            </div> -->
           </div>
 
           <div class="col">
             <label for="paterno" class="form-label">Apellido Paterno<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control valGlobal" name="apaterno" ngModel #apaterno="ngModel"
-              [(ngModel)]="colaborador.a_paterno">
-            <div class="invalid-feedback">
+            <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno" ngModel #apaterno="ngModel"
+              [(ngModel)]="colaborador.a_paterno" pattern="[a-zA-Z ]*" required>
+              <div *ngIf="apaterno.invalid && (apaterno.dirty || apaterno.touched)" class="alert">
+                <div *ngIf="apaterno.errors?.required">
+                  El apellido es obligatorio.
+                </div>
+              <div *ngIf="apaterno.errors?.pattern">
+                  El apellido solo debe de contener letras y/o espacios.
+              </div>
+              </div>
+            <!-- <div class="invalid-feedback">
               *Campo Requerido!
-            </div>
+            </div> -->
           </div>
 
           <div class="col">
             <label for="materno" class="form-label">Apellido Materno<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" name="amaterno" ngModel #amaterno="ngModel"
-              [(ngModel)]="colaborador.a_materno">
-            <div class="invalid-feedback">
+            <input type="text" class="form-control" id="amaterno" name="amaterno" ngModel #amaterno="ngModel"
+              [(ngModel)]="colaborador.a_materno" pattern="[a-zA-Z ]*" required>
+              <div *ngIf="amaterno.invalid && (amaterno.dirty || amaterno.touched)" class="alert">
+                <div *ngIf="amaterno.errors?.required">
+                  El apellido es obligatorio.
+                </div>
+              <div *ngIf="amaterno.errors?.pattern">
+                  El apellido solo debe de contener letras y/o espacios.
+              </div>
+              </div>
+            <!-- <div class="invalid-feedback">
               *Campo Requerido!
-            </div>
+            </div> -->
           </div>
         </div>
 
@@ -78,21 +102,34 @@
                       </div> -->
           <div class="col-md-2">
             <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
-            <select class="form-control" name="calificacion">
+            <select class="form-control" name="calificacion" ngModel
+            #calificacion="ngModel" required>
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let calificacion of calificaciones" [value]="calificacion.id">
                 {{calificacion.nombre}}
               </option>
             </select>
+            <div *ngIf="calificacion.invalid && (calificacion.dirty || calificacion.touched)" class="alert">
+              <div *ngIf="calificacion.errors?.required">
+                La calificación es obligatoria.
+              </div>
+            </div>
           </div>
+
           <div class="col-md-2">
             <label for="tipoColaborador" class="form-label">Tipo de Colaborador<span class="text-danger"> *</span></label>
-            <select class="form-control" name="tipoColaborador">
+            <select class="form-control" name="tipoColaborador" ngModel
+            #tipoColaborador="ngModel" required>
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tipoColaborador of tiposColaboradores" [value]="tipoColaborador.id">
                 {{tipoColaborador.nombre}}
               </option>                         
             </select>
+            <div *ngIf="tipoColaborador.invalid && (tipoColaborador.dirty || tipoColaborador.touched)" class="alert">
+              <div *ngIf="tipoColaborador.errors?.required">
+                La calificación es obligatoria.
+              </div>
+            </div>
           </div>
         </div>
 
@@ -101,11 +138,16 @@
         <div class="row mt-4 pb-4">
           <div class="col">
             <label for="nacimiento" class="form-label">Fecha de Nacimiento<span class="text-danger"> *</span></label>
-            <input type="date" class="form-control" name="fechanacimiento" value="yyyy-MM-dd" ngModel
-              #fechanacimiento="ngModel">
-            <div class="invalid-feedback">
+            <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
+              #fechanacimiento="ngModel" required>
+              <div *ngIf="fechanacimiento.invalid && (fechanacimiento.dirty || fechanacimiento.touched)" class="alert">
+                <div *ngIf="fechanacimiento.errors?.required">
+                  La fecha de nacimiento es obligatoria.
+                </div>
+              </div>
+            <!-- <div class="invalid-feedback">
               *Campo Requerido!
-            </div>
+            </div> -->
           </div>
           <!-- <div class="col">
                         <label for="paisNac" class="form-label">Pais<span class="text-danger"> *</span></label>
@@ -116,11 +158,18 @@
                         </div> -->
           <div class="col">
             <label for="paisNac" class="form-label">País<span class="text-danger"> *</span></label>
-            <select class="form-control" name="paisNac">
+            <select class="form-control" name="paisNac" ngModel
+            #paisNac="ngModel" required>
+            <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let pais of paises" [value]="pais.id">
                 {{pais.nombre}}
               </option>
             </select>
+            <div *ngIf="paisNac.invalid && (paisNac.dirty || paisNac.touched)" class="alert">
+              <div *ngIf="paisNac.errors?.required">
+                El país es obligatorio.
+              </div>
+            </div>
           </div>
           <!-- <div class="col">
                         <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
@@ -137,15 +186,20 @@
                             </option>
                           </select>
                         </div> -->
-
           <div class="col">
             <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-            <select class="form-control" name="estadoNac" ngModel #estado="ngModel" [(ngModel)]="selectedEstado"
-              (change)="comboCiudades($event.target.value)">
+            <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" [(ngModel)]="selectedEstado"
+              (change)="comboCiudades($event.target.value)" required>
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let estado of estados" [value]="estado.idEstado">
                 {{estado.nombre}}
               </option>
             </select>
+            <div *ngIf="estadoNac.invalid && (estadoNac.dirty || estadoNac.touched)" class="alert">
+              <div *ngIf="estadoNac.errors?.required">
+                El estado es obligatorio.
+              </div>
+            </div>
           </div>
           <!-- <div class="col">
                         <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
@@ -156,11 +210,18 @@
                         </div> -->
           <div class="col">
             <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-            <select class="form-control" name="ciudadNac">
+            <select class="form-control" name="ciudadNac" ngModel
+            #ciudadNac="ngModel" required>
+            <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
                 {{ciudad.nombre}}
               </option>
             </select>
+            <div *ngIf="ciudadNac.invalid && (ciudadNac.dirty || ciudadNac.touched)" class="alert">
+              <div *ngIf="ciudadNac.errors?.required">
+                La ciudad es obligatoria.
+              </div>
+            </div>
           </div>
 
         </div>
@@ -172,10 +233,15 @@
         <div class="row">
           <div class="col">
             <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" name="calle1" placeholder="" value="">
-            <div class="invalid-feedback">
-              *Campo Requerido!
+            <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel" [(ngModel)]="colaborador.calle1" required>
+            <div *ngIf="calle1.invalid && (calle1.dirty || calle1.touched)" class="alert">
+              <div *ngIf="calle1.errors?.required">
+                La calle es obligatoria.
+              </div>
             </div>
+            <!-- <div class="invalid-feedback">
+              *Campo Requerido!
+            </div> -->
           </div>
 
           <div class="col">
@@ -187,15 +253,21 @@
         <div class="row mt-4">
           <div class="col-md-2">
             <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" name="noext" placeholder="" value="">
-            <div class="invalid-feedback">
-              *Campo Requerido!
+            <input type="text" class="form-control" name="numExterior" ngModel
+            #numExterior="ngModel" required>
+            <div *ngIf="numExterior.invalid && (numExterior.dirty || numExterior.touched)" class="alert">
+              <div *ngIf="numExterior.errors?.required">
+                El número exterior es obligatorio.
+              </div>
             </div>
+            <!-- <div class="invalid-feedback">
+              *Campo Requerido!
+            </div> -->
           </div>
 
           <div class="col-md-2">
             <label for="numInterior" class="form-label">Número Interior</label>
-            <input type="text" class="form-control" name="noint" placeholder="" value="">
+            <input type="text" class="form-control" name="numInterior" placeholder="" value="">
           </div>
 
           <!-- <div class="col-md-2">
@@ -207,12 +279,21 @@
                     </div> -->
 
           <div class="col-md-2">
-            <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" name="codigopostal" placeholder="" value=""
-              [ngModel]="selectedCodigoPostal" (change)="onCodigoPostal($event.target.value)">
-            <div class="invalid-feedback">
+            <label for="codigopostal" class="form-label">Código Postal<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" maxlength="5" name="codigopostal" placeholder="" value=""
+              [ngModel]="selectedCodigoPostal" (change)="onCodigoPostal($event.target.value)" ngModel
+              #codigopostal="ngModel" pattern="[0-9]*" required>
+              <div *ngIf="codigopostal.invalid && (codigopostal.dirty || codigopostal.touched)" class="alert">
+                <div *ngIf="codigopostal.errors?.required">
+                  El número exterior es obligatorio.
+                </div>
+                <div *ngIf="nombre.errors?.pattern">
+                  El codigo postal son solo numeros.
+              </div>
+              </div>
+            <!-- <div class="invalid-feedback">
               *Campo Requerido!
-            </div>
+            </div> -->
           </div>
 
 
@@ -226,11 +307,17 @@
                     </div> -->
           <div class="col">
             <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-            <select class="form-control" name="colonia">
+            <select class="form-control" name="colonia" ngModel
+            #colonia="ngModel" required>
               <option *ngFor="let colonia of colonias" [value]="colonia.id">
                 {{colonia.nombre}}
               </option>
             </select>
+            <div *ngIf="colonia.invalid && (colonia.dirty || colonia.touched)" class="alert">
+              <div *ngIf="colonia.errors?.required">
+                La colonia es obligatoria.
+              </div>
+            </div>
           </div>
         </div>
 
@@ -335,7 +422,9 @@
           </div> -->
           <div class="col-md-4">
             <label for="sexo" class="form-label">Genero<span class="text-danger"> *</span></label>
-            <select class="form-control" name="sexo">
+            <select class="form-control" name="sexo" ngModel
+            #sexo="ngModel" required>
+            <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">
                 {{sexo.nombre}}
               </option>
@@ -346,6 +435,11 @@
                         <option value="Clara">Clara</option>
                         <option value="Blanca">Blanca</option> -->
             </select>
+            <div *ngIf="sexo.invalid && (sexo.dirty || sexo.touched)" class="alert">
+              <div *ngIf="sexo.errors?.required">
+                El genero es obligatorio.
+              </div>
+            </div>
           </div>
 
           <div class="col-md-1">
@@ -386,23 +480,41 @@
                     </div> -->
           <div class="col-md-2">
             <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
-            <select class="form-control" name="estadocivil">
+            <select class="form-control" name="estadocivil" ngModel
+            #estadocivil="ngModel" required>
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.id">
                 {{estadoCivil.nombre}}
               </option>
             </select>
+            <div *ngIf="estadocivil.invalid && (estadocivil.dirty || estadocivil.touched)" class="alert">
+              <div *ngIf="estadocivil.errors?.required">
+                El estado civil es obligatorio.
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="row mt-4">
           <div class="col-md-2">
-            <label for="telefono" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
+            <label for="telefono1" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
             <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" placeholder="10 Dígitos"
-              value="">
-            <div class="invalid-feedback">
+              value="" ngModel
+              #telefono1="ngModel" pattern="[0-9]*" minlength="10" required>
+              <div *ngIf="telefono1.invalid && (telefono1.dirty || telefono1.touched)" class="alert">
+                <div *ngIf="telefono1.errors?.required">
+                  El telefono es obligatorio.
+                </div>
+                <div *ngIf="telefono1.errors?.pattern">
+                  El telefono debe contener solamente numeros.
+                </div>
+                <div *ngIf="telefono1.errors?.minlength">
+                  El telefono debe contener 10 digitos.
+                </div>
+              </div>
+            <!-- <div class="invalid-feedback">
               *Campo Requerido!
-            </div>
+            </div> -->
           </div>
 
           <!-- <div class="col-md-2">
@@ -459,11 +571,20 @@
           </div>
 
           <div class="col-md-4">
-            <label for="correo" class="form-label">Correo Electrónico<span class="text-danger"> *</span></label>
-            <input type="email" class="form-control" name="correoelectronico" placeholder="" value="">
-            <div class="invalid-feedback">
-              *Campo Requerido!
+            <label for="correoelectronico" class="form-label">Correo Electrónico<span class="text-danger"> *</span></label>
+            <input type="email" class="form-control" name="correoelectronico" ngModel
+            #correoelectronico="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+            <div *ngIf="correoelectronico.invalid && (correoelectronico.dirty || correoelectronico.touched)" class="alert">
+              <div *ngIf="correoelectronico.errors?.required">
+                El correo es obligatorio.
+              </div>
+              <div *ngIf="correoelectronico.errors?.pattern">
+                El correo es incorrecto.
+              </div>
             </div>
+            <!-- <div class="invalid-feedback">
+              *Campo Requerido!
+            </div> -->
           </div>
         </div>
 
@@ -498,43 +619,66 @@
             <div class="row">
              
                 <div class="col-md-3">
-                  <label for="nombre" class="form-label">Nombre del Beneficiario<span class="text-danger"> *</span></label>
-                  <input type="text" class="form-control valGlobal" name="nombre" 
-                 
-                [(ngModel)]="pago.nombre">
-                  <div class="invalid-feedback">
-                      *Campo Requerido!
+                  <label for="nombreBenef" class="form-label">Nombre del Beneficiario<span class="text-danger"> *</span></label>
+                  <input type="text" class="form-control valGlobal" name="nombreBenef"                
+                [(ngModel)]="pago.nombre" ngModel #nombreBenef="ngModel" pattern="[a-zA-Z ]*" required>
+                <div *ngIf="nombreBenef.invalid && (nombreBenef.dirty || nombreBenef.touched)" class="alert">
+                  <div *ngIf="nombreBenef.errors?.required">
+                    El nombre es obligatorio.
                   </div>
+                  <div *ngIf="nombreBenef.errors?.pattern">
+                    El nombre solo debe de contener letras y/o espacios.
+                  </div>
+                </div>
+                  <!-- <div class="invalid-feedback">
+                      *Campo Requerido!
+                  </div> -->
                   </div>
 
                   <div class="col-md-3">
-                    <label for="banco" class="form-label">Banco</label>
-                    <select class="form-control" name="banco">
+                    <label for="banco" class="form-label">Banco<span class="text-danger"> *</span></label>
+                    <select class="form-control" name="banco" ngModel #banco="ngModel" required>
                       <option value="" selected disabled hidden>Seleccionar</option>
                       <option *ngFor="let banco of bancos" [value]="banco.nombre">
                         {{banco.nombre}}
-                      </option>
-                      
+                      </option>                     
                     </select>
+                    <div *ngIf="banco.invalid && (banco.dirty || banco.touched)" class="alert">
+                      <div *ngIf="banco.errors?.required">
+                        El banco es obligatorio.
+                      </div>
+                    </div>
                   </div>
 
                   <div class="col-md-3">
-                    <label for="tipocuenta" class="form-label">Tipo de Cuenta</label>
-                    <select class="form-control" name="tipocuenta">
+                    <label for="tipocuenta" class="form-label">Tipo de Cuenta<span class="text-danger"> *</span></label>
+                    <select class="form-control" name="tipocuenta" ngModel #tipocuenta="ngModel" required>
                       <option value="" selected disabled hidden>Seleccionar</option>
                       <option value="CLABE">CLABE</option>
-                      <option value="Numero de Tarjeta">Numero de Tarjeta</option>
-                      
+                      <option value="Numero de Tarjeta">Numero de Tarjeta</option>                     
                     </select>
+                    <div *ngIf="tipocuenta.invalid && (tipocuenta.dirty || tipocuenta.touched)" class="alert">
+                      <div *ngIf="tipocuenta.errors?.required">
+                        El tipo de cuenta es obligatorio.
+                      </div>
+                    </div>
                   </div>
       
                   <div class="col-md-3">
                   <label for="numerocuenta" class="form-label">Numero<span class="text-danger"> *</span></label>
                   <input type="text" class="form-control" name="numerocuenta"  
-                  [(ngModel)]="pago.numero">
-                  <div class="invalid-feedback">
-                      *Campo Requerido!
+                  [(ngModel)]="pago.numero" ngModel #numerocuenta="ngModel" pattern="[0-9]*" required>
+                  <div *ngIf="numerocuenta.invalid && (numerocuenta.dirty || numerocuenta.touched)" class="alert">
+                    <div *ngIf="numerocuenta.errors?.required">
+                      El numero de tarjeta o CLABE de la cuenta es obligatorio.
+                    </div>
+                    <div *ngIf="numerocuenta.errors?.pattern">
+                      Solamente debe de contener digitos numericos.
+                   </div>
                   </div>
+                  <!-- <div class="invalid-feedback">
+                      *Campo Requerido!
+                  </div> -->
                   </div>
               
   
@@ -594,23 +738,33 @@
             <div class="col-md-6">
               <div class="row">
                 <div class="col-md-12">
-                  <label for="institucion" class="form-label">Institución</label>
+                  <label for="institucion" class="form-label">Institución<span class="text-danger"> *</span></label>
                   <input type="text" class="form-control" id="institucion" name="institucion" #institucion="ngModel"
-                    [(ngModel)]="estudio.institucion">
+                    [(ngModel)]="estudio.institucion" required>
+                    <div *ngIf="institucion.invalid && (institucion.dirty || institucion.touched)" class="alert">
+                      <div *ngIf="institucion.errors?.required">
+                        El nombre de la institución es obligatorio
+                      </div>
+                    </div>
                 </div>
               </div>
 
               <div class="row py-3">
                 <div class="col-md-6">
-                  <label for="inicioEst" class="form-label">Inicio</label>
+                  <label for="inicioEst" class="form-label">Inicio<span class="text-danger"> *</span></label>
                   <input type="month" class="form-control datepicker" name="inicioEst" #inicioEst="ngModel"
-                    min="1900-01" [(ngModel)]="estudio.inicio" />
+                    min="1900-01" [(ngModel)]="estudio.inicio" required/>
+                    <div *ngIf="inicioEst.invalid && (inicioEst.dirty || inicioEst.touched)" class="alert">
+                      <div *ngIf="inicioEst.errors?.required">
+                        El inicio es obligatorio
+                      </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
                   <label for="terminacionEst" class="form-label">Terminación</label>
                   <input type="month" class="form-control datepicker" name="terminacionEst" #terminacionEst="ngModel"
-                    min="1900-02" [(ngModel)]="estudio.fin">
+                    min="1900-02" [(ngModel)]="estudio.fin" disabled="disabled" [disabled]="textBoxDisabledCed">
                 </div>
               </div>
               <!-- <div class="row">
@@ -656,9 +810,14 @@
             </div>
 
             <div class="col-md-6">
-              <label for="comentarioEstudio" class="form-label">Estudio / Carrera / Curso</label>
+              <label for="comentarioEstudio" class="form-label">Estudio / Carrera / Curso<span class="text-danger"> *</span></label>
               <textarea name="comentarioEstudio" class="form-control" rows="5" #comentarioEstudio="ngModel"
-                [(ngModel)]="estudio.comentarios"></textarea>
+                [(ngModel)]="estudio.comentarios" required></textarea>
+                <div *ngIf="comentarioEstudio.invalid && (comentarioEstudio.dirty || comentarioEstudio.touched)" class="alert">
+                  <div *ngIf="comentarioEstudio.errors?.required">
+                    El nombre de estudio, carrera o curso es obligatorio
+                  </div>
+                </div>
             </div>
           </div>
           <hr class="mt-3 mb-3" />
@@ -724,22 +883,37 @@
             <div class="col-md-6">
               <div class="row">
                 <div class="col-md-12">
-                  <label for="institucion" class="form-label">Empresa/Institución</label>
-                  <input type="text" class="form-control" name="lugar"  [(ngModel)]="experiencia.lugar" >
+                  <label for="empresa" class="form-label">Empresa/Institución<span class="text-danger"> *</span></label>
+                  <input type="text" class="form-control" name="empresa"  [(ngModel)]="experiencia.lugar" ngModel #empresa="ngModel" required>
+                  <div *ngIf="empresa.invalid && (empresa.dirty || empresa.touched)" class="alert">
+                    <div *ngIf="empresa.errors?.required">
+                      El nombre de la institución y/o empresa es obligatorio
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="row pt-3 pb-3">
                 <div class="col-md-6">
-                  <label for="inicioEst" class="form-label">Inicio</label>
+                  <label for="inicioExp" class="form-label">Inicio<span class="text-danger"> *</span></label>
                   <input type="month" class="form-control datepicker" name="inicioExp"
-                    min="1900-01" [(ngModel)]="experiencia.inicio">
+                    min="1900-01" [(ngModel)]="experiencia.inicio" ngModel #inicioExp="ngModel" required>
+                    <div *ngIf="inicioExp.invalid && (inicioExp.dirty || inicioExp.touched)" class="alert">
+                      <div *ngIf="inicioExp.errors?.required">
+                        La fecha de inicio es obligatoria
+                      </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
-                  <label for="terminacionEst" class="form-label">Terminación</label>
+                  <label for="terminacionExp" class="form-label">Terminación<span class="text-danger"> *</span></label>
                   <input type="month" class="form-control datepicker" name="terminacionExp"
-                    min="1900-02" [(ngModel)]="experiencia.fin">
+                    min="1900-02" [(ngModel)]="experiencia.fin" ngModel #terminacionExp="ngModel" required>
+                    <div *ngIf="terminacionExp.invalid && (terminacionExp.dirty || terminacionExp.touched)" class="alert">
+                      <div *ngIf="terminacionExp.errors?.required">
+                        La fecha de terminación es obligatoria
+                      </div>
+                    </div>
                 </div>
               </div>
               <div class="row">
@@ -756,10 +930,15 @@
             </div>
 
             <div class="col-md-6">
-              <label for="estudio" class="form-label">Actividades Realizadas</label>
-              <textarea name="estudio" class="form-control" rows="3"></textarea>
+              <label for="experienciaAct" class="form-label">Actividades Realizadas<span class="text-danger"> *</span></label>
+              <textarea name="experienciaAct" class="form-control" rows="3" ngModel #experienciaAct="ngModel" required></textarea>
+              <div *ngIf="experienciaAct.invalid && (experienciaAct.dirty || experienciaAct.touched)" class="alert">
+                <div *ngIf="experienciaAct.errors?.required">
+                  Las actividades son obligatorias
+                </div>
+              </div>
               <div class="form-group row pt-3">
-                <div class="col-sm-2">Especialidades</div>
+                <div class="col-sm-2">Especialidades<span class="text-danger"> *</span></div>
                 <div class="col-sm-10">
                   <div class="form-check" *ngFor="let especialidad of especialidades" [value]="especialidad.id">
                     <input class="form-check-input" type="checkbox" id="{{especialidad.nombre}}">
@@ -797,7 +976,7 @@
         </div>
         <hr class="mt-3 mb-3" />
         <div class="form-group row pt-3">
-          <div class="col-sm-2">Habilidades</div>
+          <div class="col-sm-2">Habilidades<span class="text-danger"> *</span></div>
           <div class="col-sm-10">
             <div class="form-check" *ngFor="let habilidad of habilidades" [value]="habilidad.id">
               <input class="form-check-input" type="checkbox" id="{{habilidad.nombre}}">
@@ -1068,12 +1247,17 @@
                         </div> -->
               <div class="col-md-4">
                 <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
-                <select class="form-control" name="permanencia">
+                <select class="form-control" name="permanencia" ngModel #permanencia="ngModel" required>
                   <option value="" selected disabled hidden>Seleccionar</option>
                   <option *ngFor="let permanencia of permanencias" [value]="permanencia.id">
                     {{permanencia.nombre}}
                   </option>
                 </select>
+                <div *ngIf="permanencia.invalid && (permanencia.dirty || permanencia.touched)" class="alert">
+                  <div *ngIf="permanencia.errors?.required">
+                    La permanencia es obligatoria
+                  </div>
+                </div>
               </div>
               <!-- <div class="col-md-4">
                           <label for="zona" class="form-label">Zona Laboral</label>
@@ -1132,7 +1316,6 @@
             <div class="row">
               <div class="col-md-4">
                 <label class="mt-3 mb-1">¿Atiende COVID?<span class="text-danger"> *</span></label>
-                <br>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovid"
                     value="option1">
@@ -1147,8 +1330,7 @@
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Antecedentes Penales</label>
-                <br>
+                <label class="mt-3 mb-1">Antecedentes Penales<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1">
                   <label class="form-check-label" for="antecedentesS">Sí</label>
@@ -1163,8 +1345,7 @@
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Auto Propio</label>
-                <br>
+                <label class="mt-3 mb-1">Auto Propio<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="autopropio" id="autopropioS"
                     value="option1">
@@ -1180,8 +1361,7 @@
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Disponibilidad para viajar</label>
-                <br>
+                <label class="mt-3 mb-1">Disponibilidad para viajar<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadS"
                     value="option1">
@@ -1197,8 +1377,7 @@
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Visa</label>
-                <br>
+                <label class="mt-3 mb-1">Visa<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1"
                     (click)="enableTextBoxVis()">
@@ -1241,8 +1420,7 @@
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Pasaporte</label>
-                <br>
+                <label class="mt-3 mb-1">Pasaporte<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporte" value="option1"
                     (click)="enableTextBoxPas()">

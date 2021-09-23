@@ -87,7 +87,9 @@ export class ColaboradorComponent implements OnInit {
     idColonia:null,
     noExt:null,
     noInt:null,
-    horario:null
+    horario:null,
+    paisNac:null,
+    estadoNac:null
   };
   diasLaborales:any = {
     lunes:false,

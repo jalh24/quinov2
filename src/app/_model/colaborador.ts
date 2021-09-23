@@ -10,6 +10,8 @@ export class Colaborador {
     public rfc:string;
     public nss:string;
     public fecha_nacimiento:Date;
+    public paisNac:string;
+    public estadoNac:string;
     public idSexo:number;
     public peso:number;
     public estatura:number;
