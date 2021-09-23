@@ -46,61 +46,48 @@ export class ColaboradorComponent implements OnInit {
   idEstudio:number;
   idExperiencia:number;
   public colaborador:Colaborador = {
-    rfc:null,
-    foto:null,
+    idColaborador:null,
     nombre:null,
     a_paterno:null,
     a_materno:null,
+    correoElectronico:null,
+    foto:null,
+    rfc:null,
     nss:null,
-    ine:null,
     fecha_nacimiento:null,
-    ldn_ciudad:null,
-    ldn_pais:null,
+    idSexo:null,
+    peso:null,
+    estatura:null,
+    idZonaLaboral:null,
+    idEstadoCivil:null,
+    idTez:null,
+    sgmm:null,
+    atiendeCovid:null,
+    antecedentePenales:null,
+    autoPropio:false,
+    dispuestoViajar:false,
+    visa:false,
+    visaNumero:null,
+    tipoVisa:null,
+    expiracionVisa:null,
+    visaImagen:null,
+    pasaporte:false,
+    pasaporteNumero:null,
+    expiracionPasaporte:null,
+    pasaporteImagen:null,
+    ine1:null,
+    ine2:null,
+    idEstatus:null,
     calle1:null,
     calle2:null,
-    no_ext:null,
-    no_int:null,
-    colonia:null,
-    ciudad:null,
-    estado:null,
-    pais:null,
-    codigo_postal:null,
-    comprobante:null,
-    sexo:null,
-    peso:null,
-    tez:null,
-    estado_civil:null,
-    telefono1:null,
-    telefono1_tipo:null,
-    telefono2:null,
-    telefono2_tipo:null,
-    correo_electronico:null,
-    sgmm:null,
-    aseguradora:null,
-    permanencia:null,
-    atiende_covid:null,
-    a_penales:null,
-    disp_viajar:null,
-    visa:null,
-    num_visa:null,
-    tipo_visa:null,
-    fechaexp_visa:null,
-    pasaporte:null,
-    num_pasaporte:null,
-    fechaexp_pasaporte:null,
-    referencia:null,
-    estatura:null,
-    contacto1:null,
-    parentesco_con1:null,
-    telefono_con1:null,
-    correo_con1:null,
-    contacto2:null,
-    parentesco_con2:null,
-    telefono_con2:null,
-    correo_con2:null,
-    zona_laboral:null,
-    auto_propio:null,
-    estudios: []
+    codigoPostal:null,
+    idPais:null,
+    idEstado:null,
+    idCiudad:null,
+    idColonia:null,
+    noExt:null,
+    noInt:null,
+    horario:null
   };
   diasLaborales:any = {
     lunes:false,
@@ -183,40 +170,8 @@ export class ColaboradorComponent implements OnInit {
     this.comboZonasLaborales();
     this.comboEspecialidades();
     this.comboHabilidades();
-    this.idEstudio = 0;
-    this.idPago = 0;
-    this.idExperiencia = 0;
-    this.colaborador.ine=null;
-    this.pagos=[];
-    this.pago = {
-      idPago:null,
-      nombre:null,
-      banco:null,
-      tipocuenta:null,
-      numero:null
-    };
-    this.estudios=[];
-    this.estudio = {
-      idEstudio:null,
-      idColaborador:null,
-      institucion:null,
-      inicio:null,
-      fin:null,
-      estatus:null,
-      cedula:null,
-      comentarios:null
-    };
-    this.experiencias=[];
-    this.experiencia = {
-      idExperiencia:null,
-      lugar:null,
-      actividades:null,
-      inicio:null,
-      fin:null,
-      referencia:null,
-      telefono:null,
-      especialidad:null
-    };
+    this.inicializaObjetos();
+    
 
     this.dtOptionsPago = {
       select: true,
@@ -286,6 +241,89 @@ export class ColaboradorComponent implements OnInit {
 
     };
   }
+
+  inicializaObjetos(){
+    
+    this.colaborador.idColaborador=null;
+    this.colaborador.nombre=null;
+    this.colaborador.a_paterno=null;
+    this.colaborador.a_materno=null;
+    this.colaborador.correoElectronico=null;
+    this.colaborador.foto=null;
+    this.colaborador.rfc=null;
+    this.colaborador.nss=null;
+    this.colaborador.fecha_nacimiento=null;
+    this.colaborador.idSexo=null;
+    this.colaborador.peso=null;
+    this.colaborador.estatura=null;
+    this.colaborador.idZonaLaboral=null;
+    this.colaborador.idEstadoCivil=null;
+    this.colaborador.idTez=null;
+    this.colaborador.sgmm=null;
+    this.colaborador.atiendeCovid=null;
+    this.colaborador.antecedentePenales=null;
+    this.colaborador.autoPropio=false;
+    this.colaborador.dispuestoViajar=false;
+    this.colaborador.visa=false;
+    this.colaborador.visaNumero=null;
+    this.colaborador.tipoVisa=null;
+    this.colaborador.expiracionVisa=null;
+    this.colaborador.visaImagen=null;
+    this.colaborador.pasaporte=false;
+    this.colaborador.pasaporteNumero=null;
+    this.colaborador.expiracionPasaporte=null;
+    this.colaborador.pasaporteImagen=null;
+    this.colaborador.ine1=null;
+    this.colaborador.ine2=null;
+    this.colaborador.idEstatus=null;
+    this.colaborador.calle1=null;
+    this.colaborador.calle2=null;
+    this.colaborador.codigoPostal=null;
+    this.colaborador.idPais=null;
+    this.colaborador.idEstado=null;
+    this.colaborador.idCiudad=null;
+    this.colaborador.idColonia=null;
+    this.colaborador.noExt=null;
+    this.colaborador.noInt=null;
+    this.colaborador.horario=null;
+
+    this.idEstudio = 0;
+    this.idPago = 0;
+    this.idExperiencia = 0;
+    
+    this.pagos=[];
+    this.pago = {
+      idPago:null,
+      nombre:null,
+      banco:null,
+      tipocuenta:null,
+      numero:null
+    };
+    this.estudios=[];
+    this.estudio = {
+      idEstudio:null,
+      idColaborador:null,
+      institucion:null,
+      inicio:null,
+      fin:null,
+      estatus:null,
+      cedula:null,
+      comentarios:null
+    };
+    this.experiencias=[];
+    this.experiencia = {
+      idExperiencia:null,
+      lugar:null,
+      actividades:null,
+      inicio:null,
+      fin:null,
+      referencia:null,
+      telefono:null,
+      especialidad:null
+    };
+    
+  }
+
   enableSeguros(){
     this.textBoxDisabledSeg = false;
   }
@@ -390,63 +428,7 @@ export class ColaboradorComponent implements OnInit {
         console.log(data);
         alert("Se guardo");
     })
-    this.colaborador= {
-      rfc:null,
-      foto:null,
-      nombre:null,
-      a_paterno:null,
-      a_materno:null,
-      nss:null,
-      ine:null,
-      fecha_nacimiento:null,
-      ldn_ciudad:null,
-      ldn_pais:null,
-      calle1:null,
-      calle2:null,
-      no_ext:null,
-      no_int:null,
-      colonia:null,
-      ciudad:null,
-      estado:null,
-      pais:null,
-      codigo_postal:null,
-      comprobante:null,
-      sexo:null,
-      peso:null,
-      tez:null,
-      estado_civil:null,
-      telefono1:null,
-      telefono1_tipo:null,
-      telefono2:null,
-      telefono2_tipo:null,
-      correo_electronico:null,
-      sgmm:null,
-      aseguradora:null,
-      permanencia:null,
-      atiende_covid:null,
-      a_penales:null,
-      disp_viajar:null,
-      visa:null,
-      num_visa:null,
-      tipo_visa:null,
-      fechaexp_visa:null,
-      pasaporte:null,
-      num_pasaporte:null,
-      fechaexp_pasaporte:null,
-      referencia:null,
-      estatura:null,
-      contacto1:null,
-      parentesco_con1:null,
-      telefono_con1:null,
-      correo_con1:null,
-      contacto2:null,
-      parentesco_con2:null,
-      telefono_con2:null,
-      correo_con2:null,
-      zona_laboral:null,
-      auto_propio:null,
-      estudios: []
-    };
+    this.inicializaObjetos();
   }
 
   public onIneFileSelected(files: FileList) {
@@ -455,7 +437,7 @@ export class ColaboradorComponent implements OnInit {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      me.colaborador.ine=reader.result;
+      me.colaborador.ine1=reader.result;
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
