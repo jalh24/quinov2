@@ -45,52 +45,7 @@ export class ColaboradorComponent implements OnInit {
   idPago:number;
   idEstudio:number;
   idExperiencia:number;
-  public colaborador:Colaborador = {
-    idColaborador:null,
-    nombre:null,
-    a_paterno:null,
-    a_materno:null,
-    correoElectronico:null,
-    foto:null,
-    rfc:null,
-    nss:null,
-    fecha_nacimiento:null,
-    idSexo:null,
-    peso:null,
-    estatura:null,
-    idZonaLaboral:null,
-    idEstadoCivil:null,
-    idTez:null,
-    sgmm:null,
-    atiendeCovid:null,
-    antecedentePenales:null,
-    autoPropio:false,
-    dispuestoViajar:false,
-    visa:false,
-    visaNumero:null,
-    tipoVisa:null,
-    expiracionVisa:null,
-    visaImagen:null,
-    pasaporte:false,
-    pasaporteNumero:null,
-    expiracionPasaporte:null,
-    pasaporteImagen:null,
-    ine1:null,
-    ine2:null,
-    idEstatus:null,
-    calle1:null,
-    calle2:null,
-    codigoPostal:null,
-    idPais:null,
-    idEstado:null,
-    idCiudad:null,
-    idColonia:null,
-    noExt:null,
-    noInt:null,
-    horario:null,
-    paisNac:null,
-    estadoNac:null
-  };
+  public colaborador:Colaborador;
   diasLaborales:any = {
     lunes:false,
     lunesDesde:null,
@@ -245,7 +200,7 @@ export class ColaboradorComponent implements OnInit {
   }
 
   inicializaObjetos(){
-    
+    this.colaborador = new Colaborador();
     this.colaborador.idColaborador=null;
     this.colaborador.nombre=null;
     this.colaborador.a_paterno=null;
@@ -288,6 +243,10 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.noExt=null;
     this.colaborador.noInt=null;
     this.colaborador.horario=null;
+    this.colaborador.estudios=[];
+    this.colaborador.experiencias=[];
+    this.colaborador.cuentasColaborador=[];
+    this.colaborador.contactosColaborador=[];
 
     this.idEstudio = 0;
     this.idPago = 0;
@@ -426,6 +385,11 @@ export class ColaboradorComponent implements OnInit {
   public guardarColaborador(ngForm: NgForm){
     //this.colaborador.estudios = this.estudios;
     console.log(this.colaborador);
+    this.colaborador.horario = this.diasLaborales;
+    this.colaborador.codigoPostal = this.selectedCodigoPostal;
+    this.colaborador.idPais=1;
+    this.colaborador.idEstatus=1;
+    this.colaborador.idZonaLaboral=1;
     this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
         console.log(data);
         alert("Se guardo");
@@ -660,15 +624,40 @@ export class ColaboradorComponent implements OnInit {
 
   public onCodigoPostal(selectedCodigoPostal){
     this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal='+ selectedCodigoPostal).subscribe(data => {
-      console.log(data);
       this.colonias = data.data;
-      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad='+ data.data[0].idCiudad).subscribe(data => {
-        this.ciudadesDir = data.data;
-        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado='+ data.data[0].idEstado).subscribe(data => {
-          console.log(data.data[0].idEstado);
+      this.colaborador.idCiudad = data.data[0].idCiudad;
+      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad='+ data.data[0].idCiudad).subscribe(dataCiudad => {
+        this.ciudadesDir = dataCiudad.data;
+        this.colaborador.idEstado = dataCiudad.data[0].idEstado;
+        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado='+ dataCiudad.data[0].idEstado).subscribe(data => {
           this.estadosDir = data.data;
       });
     });
   }); 
+  }
+
+  onColonia(value:any){
+    console.log(value);
+    this.colaborador.idColonia = value;
+  }
+  
+  onCiudad(value:any){
+    this.colaborador.idCiudad = value;
+  }
+
+  onEstado(value:any){
+    this.colaborador.idEstado = value;
+  }
+
+  onEstadoCivil(value:any){
+    this.colaborador.idEstadoCivil = value;
+  }
+
+  onTez(value:any){
+    this.colaborador.idTez = value;
+  }
+
+  onSexo(value:any){
+    this.colaborador.idSexo = value;
   }
 }

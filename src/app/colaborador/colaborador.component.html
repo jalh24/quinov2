@@ -246,7 +246,7 @@
 
           <div class="col">
             <label for="calle2" class="form-label">Calle 2</label>
-            <input type="text" class="form-control" name="calle2" placeholder="" value="">
+            <input type="text" class="form-control" id="calle1" name="calle2" ngModel #calle2="ngModel" [(ngModel)]="colaborador.calle2">
           </div>
         </div>
 
@@ -254,7 +254,7 @@
           <div class="col-md-2">
             <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
             <input type="text" class="form-control" name="numExterior" ngModel
-            #numExterior="ngModel" required>
+            #numExterior="ngModel"  required>
             <div *ngIf="numExterior.invalid && (numExterior.dirty || numExterior.touched)" class="alert">
               <div *ngIf="numExterior.errors?.required">
                 El número exterior es obligatorio.
@@ -308,8 +308,8 @@
           <div class="col">
             <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
             <select class="form-control" name="colonia" ngModel
-            #colonia="ngModel" required>
-              <option *ngFor="let colonia of colonias" [value]="colonia.id">
+            #colonia="ngModel"  required (change)="onColonia($event.target.value)">
+              <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
                 {{colonia.nombre}}
               </option>
             </select>
@@ -322,57 +322,28 @@
         </div>
 
         <div class="row mt-4">
-          <!-- <div class="col">
-                      <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control" name="ciudad" placeholder="" value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div> -->
           <div class="col">
             <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-            <select class="form-control" name="ciudad">
-              <option *ngFor="let ciudad of ciudadesDir" [value]="ciudad.id">
+            <select class="form-control" name="ciudad" (change)="onCiudad($event.target.value)">
+              <option *ngFor="let ciudad of ciudadesDir" [value]="ciudad.idCiudad">
                 {{ciudad.nombre}}
               </option>
             </select>
           </div>
 
-          <!-- <div class="col">
-                      <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control" name="estado" placeholder="" value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div> -->
-          <!-- <div class="col">
-                      <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
-                      <select class="form-control" name="estado" ngModel #estado="ngModel" [(ngModel)]="selectedEstado" (change)="comboCiudades($event.target.value)">
-                        <option *ngFor="let estado of estados" [value]="estado.idEstado">
-                          {{estado.nombre}}
-                        </option>
-                      </select>
-                    </div> -->
           <div class="col">
             <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
-            <select class="form-control" name="estado">
-              <option *ngFor="let estado of estadosDir" [value]="estado.id">
+            <select class="form-control" name="estado" (change)="onEstado($event.target.value)">
+              <option *ngFor="let estado of estadosDir" [value]="estado.idEstado">
                 {{estado.nombre}}
               </option>
             </select>
           </div>
 
-          <!-- <div class="col">
-                      <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control" name="pais" placeholder="" value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div> -->
           <div class="col">
             <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
-            <select class="form-control" name="pais">
-              <option *ngFor="let pais of paises" [value]="pais.id">
+            <select class="form-control" name="pais" >
+              <option *ngFor="let pais of paises" [value]="pais.idPais">
                 {{pais.nombre}}
               </option>
             </select>
@@ -422,18 +393,13 @@
           </div> -->
           <div class="col-md-4">
             <label for="sexo" class="form-label">Genero<span class="text-danger"> *</span></label>
-            <select class="form-control" name="sexo" ngModel
-            #sexo="ngModel" required>
+            <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)"
+            #sexo="ngModel" [ngModel]="colaborador.idSexo" required >
             <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">
                 {{sexo.nombre}}
               </option>
-              <!-- <option selected>Selecionar</option>
-                        <option value="Negra">Negra</option>
-                        <option value="Morena">Morena</option>
-                        <option value="Aperlada">Aperlada</option>
-                        <option value="Clara">Clara</option>
-                        <option value="Blanca">Blanca</option> -->
+              
             </select>
             <div *ngIf="sexo.invalid && (sexo.dirty || sexo.touched)" class="alert">
               <div *ngIf="sexo.errors?.required">
@@ -454,41 +420,26 @@
 
           <div class="col-md-2">
             <label for="tez" class="form-label">Tez</label>
-            <select class="form-control" name="tez">
+            <select class="form-control" name="tez"   ngModel
+            #tez="ngModel" [ngModel]="colaborador.idTez" (change)="onTez($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let tez of teces" [value]="tez.id">
+              <option *ngFor="let tez of teces" [value]="tez.idTez">
                 {{tez.nombre}}
               </option>
-              <!-- <option selected>Selecionar</option>
-                        <option value="Negra">Negra</option>
-                        <option value="Morena">Morena</option>
-                        <option value="Aperlada">Aperlada</option>
-                        <option value="Clara">Clara</option>
-                        <option value="Blanca">Blanca</option> -->
+              
             </select>
           </div>
-
-          <!-- <div class="col-md-2">
-                      <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
-                      <select class="form-control" name="estadocivil">
-                        <option selected>Selecionar</option>
-                        <option value="Soltero(a)">Soltero(a)</option>
-                        <option value="Casado(a)">Casado(a)</option>
-                        <option value="Divorciado(a)">Divorciado(a)</option>
-                        <option value="Unión Libre">Unión Libre</option>
-                      </select>
-                    </div> -->
           <div class="col-md-2">
             <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
-            <select class="form-control" name="estadocivil" ngModel
-            #estadocivil="ngModel" required>
+            <select class="form-control" name="estadoCivil" ngModel
+            #estadoCivil="ngModel" [ngModel]="colaborador.idEstadoCivil" (change)="onEstadoCivil($event.target.value)" required>
               <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.id">
+              <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.idEstadoCivil">
                 {{estadoCivil.nombre}}
               </option>
             </select>
-            <div *ngIf="estadocivil.invalid && (estadocivil.dirty || estadocivil.touched)" class="alert">
-              <div *ngIf="estadocivil.errors?.required">
+            <div *ngIf="estadoCivil.invalid && (estadoCivil.dirty || estadoCivil.touched)" class="alert">
+              <div *ngIf="estadoCivil.errors?.required">
                 El estado civil es obligatorio.
               </div>
             </div>

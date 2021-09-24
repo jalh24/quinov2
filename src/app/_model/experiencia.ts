@@ -2,10 +2,10 @@ export class Experiencia {
     public idExperiencia:number;
     public lugar:string;
     public actividades:string;
-    public inicio:number;
-    public fin:number;
+    public inicio:any;
+    public fin:any;
     public referencia:string;
-    public telefono:number;
+    public telefono:string;
     public especialidad:string;
     constructor() {
     }

@@ -45,7 +45,10 @@ export class Colaborador {
     public noExt:string;
     public noInt:string;
     public horario:any;
-    
+    public estudios:any[];
+    public experiencias:any[];
+    public cuentasColaborador:any[];
+    public contactosColaborador:any[];
     constructor() {
     }
 }            
