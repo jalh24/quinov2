@@ -541,7 +541,29 @@
 
         <div class="row mt-4 pb-4">
           <div class="col-md-4">
-            <label class="pb-2">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
+            <div class="form-group">
+              <label class="control-label">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
+              <div class="form-control">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="sgmm" id="sgmm" value="option1"
+                  (click)="enableSeguros()" ngModel
+                  #sgmm="ngModel" required>
+                  <label class="form-check-label" for="inlineRadio1">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="sgmm" id="inlineRadio2" value="option2"
+                  (click)="disableSeguros()" ngModel
+                  #sgmm="ngModel" required>
+                  <label class="form-check-label" for="inlineRadio2">No</label>
+                </div>
+              </div>
+              <div *ngIf="sgmm.invalid && (sgmm.dirty || sgmm.touched)" class="alert">
+                  <div *ngIf="sgmm.errors?.required">
+                    El campo es obligatorio.
+                  </div>
+                </div>
+            </div>
+            <!-- <label class="pb-2">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
             <br>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sgmm" value="option1"
@@ -552,7 +574,7 @@
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
               (click)="disableSeguros()">
               <label class="form-check-label" for="inlineRadio2">No</label>
-            </div>
+            </div> -->
           </div>
 
           <div class="col">
@@ -734,7 +756,33 @@
               </div> -->
               <div class="row">
                 <div class="col-md-6">
-                  <label class="pb-1">¿Se terminaron los estudios?<span class="text-danger"> *</span></label>
+                  <div class="form-group">
+                    <label class="control-label">¿Se terminaron los estudios?<span class="text-danger"> *</span></label>
+                    <div class="form-control">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstS"
+                          value="option1" (click)="enableCed()" ngModel
+                          #estudiosEst="ngModel" required>
+                        <label class="form-check-label" for="estudiosEstS">Sí</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstN" value="option2" (click)="disableCed()" ngModel
+                        #estudiosEst="ngModel" required>
+                        <label class="form-check-label" for="estudiosEstN">No</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstT" value="option3" (click)="disableCed()" ngModel
+                        #estudiosEst="ngModel" required>
+                        <label class="form-check-label" for="estudiosEstT">Trunco</label>
+                      </div>                
+                    </div>
+                    <div *ngIf="estudiosEst.invalid && (estudiosEst.dirty || estudiosEst.touched)" class="alert">
+                        <div *ngIf="estudiosEst.errors?.required">
+                          El campo es obligatorio.
+                        </div>
+                      </div>
+                  </div>
+                  <!-- <label class="pb-1">¿Se terminaron los estudios?<span class="text-danger"> *</span></label>
                   <br>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstS"
@@ -748,7 +796,7 @@
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstT" value="option3" (click)="disableCed()">
                     <label class="form-check-label" for="estudiosEstT">Trunco</label>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div class="row mt-3">
@@ -1254,7 +1302,7 @@
                 <div class="form-group row pt-1">
                   <div class="col-sm-10">
                     <div class="form-check" *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.id">
-                      <input class="form-check-input" type="checkbox" id={{zonaLaboral.nombre}}>
+                      <input class="form-check-input" type="checkbox" id={{zonaLaboral.nombre}} required>
                       <label class="form-check-label" for={{zonaLaboral.nombre}}>
                         {{zonaLaboral.nombre}}
                       </label>
@@ -1266,7 +1314,29 @@
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">¿Atiende COVID?<span class="text-danger"> *</span></label>
+                <div class="form-group">
+                  <label class="control-label">¿Atiende COVID?<span class="text-danger"> *</span></label>
+                  <div class="form-control">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovid"
+                        value="option1" ngModel
+                        #atiendecovid="ngModel" required>
+                      <label class="form-check-label" for="covids">Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="atiendecovid" id="covidn" value="option2" ngModel
+                      #atiendecovid="ngModel" required>
+                      <label class="form-check-label" for="covidn">No</label>
+                    </div>
+                    
+                  </div>
+                  <div *ngIf="atiendecovid.invalid && (atiendecovid.dirty || atiendecovid.touched)" class="alert">
+                      <div *ngIf="atiendecovid.errors?.required">
+                        El campo es obligatorio.
+                      </div>
+                    </div>
+                </div>
+                <!-- <label class="mt-3 mb-1">¿Atiende COVID?<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovid"
                     value="option1">
@@ -1275,13 +1345,35 @@
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="atiendecovid" id="covidn" value="option2">
                   <label class="form-check-label" for="covidn">No</label>
-                </div>
+                </div> -->
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Antecedentes Penales<span class="text-danger"> *</span></label>
+                <div class="form-group">
+                  <label class="control-label">Antecedentes Penales<span class="text-danger"> *</span></label>
+                  <div class="form-control">
+                    <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1" ngModel
+                  #apenales="ngModel" required>
+                  <label class="form-check-label" for="antecedentesS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="apenales" id="antecedentesN"
+                    value="option2" ngModel
+                    #apenales="ngModel" required>
+                  <label class="form-check-label" for="antecedentesN">No</label>
+                </div>
+                    
+                  </div>
+                  <div *ngIf="apenales.invalid && (apenales.dirty || apenales.touched)" class="alert">
+                      <div *ngIf="apenales.errors?.required">
+                        El campo es obligatorio.
+                      </div>
+                    </div>
+                </div>
+                <!-- <label class="mt-3 mb-1">Antecedentes Penales<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1">
                   <label class="form-check-label" for="antecedentesS">Sí</label>
@@ -1290,13 +1382,35 @@
                   <input class="form-check-input" type="radio" name="apenales" id="antecedentesN"
                     value="option2">
                   <label class="form-check-label" for="antecedentesN">No</label>
-                </div>
+                </div> -->
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Auto Propio<span class="text-danger"> *</span></label>
+                <div class="form-group">
+                  <label class="control-label">Auto Propio<span class="text-danger"> *</span></label>
+                  <div class="form-control">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="autopropio" id="autopropioS"
+                        value="option1" ngModel
+                        #autopropio="ngModel" required>
+                      <label class="form-check-label" for="autopropioS">Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="autopropio" id="autopropioN"
+                        value="option2" ngModel
+                        #autopropio="ngModel" required>
+                      <label class="form-check-label" for="autopropioN">No</label>
+                    </div>                    
+                  </div>
+                  <div *ngIf="autopropio.invalid && (autopropio.dirty || autopropio.touched)" class="alert">
+                      <div *ngIf="autopropio.errors?.required">
+                        El campo es obligatorio.
+                      </div>
+                    </div>
+                </div>
+                <!-- <label class="mt-3 mb-1">Auto Propio<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="autopropio" id="autopropioS"
                     value="option1">
@@ -1306,13 +1420,35 @@
                   <input class="form-check-input" type="radio" name="autopropio" id="autopropioN"
                     value="option2">
                   <label class="form-check-label" for="autopropioN">No</label>
-                </div>
+                </div> -->
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Disponibilidad para viajar<span class="text-danger"> *</span></label>
+                <div class="form-group">
+                  <label class="control-label">Disponibilidad para viajar<span class="text-danger"> *</span></label>
+                  <div class="form-control">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadS"
+                        value="option1" ngModel
+                        #disponibilidad="ngModel" required>
+                      <label class="form-check-label" for="disponibilidadS">Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadN"
+                        value="option2" ngModel
+                        #disponibilidad="ngModel" required>
+                      <label class="form-check-label" for="disponibilidadN">No</label>
+                    </div>                  
+                  </div>
+                  <div *ngIf="disponibilidad.invalid && (disponibilidad.dirty || disponibilidad.touched)" class="alert">
+                      <div *ngIf="disponibilidad.errors?.required">
+                        El campo es obligatorio.
+                      </div>
+                    </div>
+                </div>
+                <!-- <label class="mt-3 mb-1">Disponibilidad para viajar<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadS"
                     value="option1">
@@ -1322,13 +1458,35 @@
                   <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadN"
                     value="option2">
                   <label class="form-check-label" for="disponibilidadN">No</label>
-                </div>
+                </div> -->
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Visa<span class="text-danger"> *</span></label>
+                <div class="form-group">
+                  <label class="control-label">Visa<span class="text-danger"> *</span></label>
+                  <div class="form-control">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" name="visa" id="visa" value="option1"
+                        (click)="enableTextBoxVis()" ngModel
+                        #visa="ngModel" required>
+                      <label class="form-check-label" for="visaS">Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" name="visa" id="visaN" value="option2"
+                        (click)="disableTextBoxVis()" ngModel
+                        #visa="ngModel" required>
+                      <label class="form-check-label" for="visaN">No</label>
+                    </div>                 
+                  </div>
+                  <div *ngIf="visa.invalid && (visa.dirty || visa.touched)" class="alert">
+                      <div *ngIf="visa.errors?.required">
+                        El campo es obligatorio.
+                      </div>
+                    </div>
+                </div>
+                <!-- <label class="mt-3 mb-1">Visa<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1"
                     (click)="enableTextBoxVis()">
@@ -1338,7 +1496,7 @@
                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visaN" value="option2"
                     (click)="disableTextBoxVis()">
                   <label class="form-check-label" for="visaN">No</label>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="row">
@@ -1371,7 +1529,29 @@
 
             <div class="row">
               <div class="col-md-4">
-                <label class="mt-3 mb-1">Pasaporte<span class="text-danger"> *</span></label>
+                <div class="form-group">
+                  <label class="control-label">Pasaporte<span class="text-danger"> *</span></label>
+                  <div class="form-control">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="pasaporte" id="pasaporte" value="option1"
+                        (click)="enableTextBoxPas()" ngModel
+                        #pasaporte="ngModel" required>
+                      <label class="form-check-label" for="pasaporteS">Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="pasaporte" id="pasaporteN"
+                        value="option2" (click)="disableTextBoxPas()" ngModel
+                        #pasaporte="ngModel" required>
+                      <label class="form-check-label" for="pasaporteN">No</label>
+                    </div>               
+                  </div>
+                  <div *ngIf="pasaporte.invalid && (pasaporte.dirty || pasaporte.touched)" class="alert">
+                      <div *ngIf="pasaporte.errors?.required">
+                        El campo es obligatorio.
+                      </div>
+                    </div>
+                </div>
+                <!-- <label class="mt-3 mb-1">Pasaporte<span class="text-danger"> *</span></label>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporte" value="option1"
                     (click)="enableTextBoxPas()">
@@ -1381,7 +1561,7 @@
                   <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="pasaporteN"
                     value="option2" (click)="disableTextBoxPas()">
                   <label class="form-check-label" for="pasaporteN">No</label>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="row">
