@@ -73,7 +73,7 @@
             <label for="identificacionF" class="form-label">Identificación (Frontal)<span class="text-danger">
                 *</span></label>
             <input class="form-control-file" type="file" name="identificacionF" accept=".png, .jpg, .jpeg"
-              (change)="onIneFileSelected($event.target.files)" #ineUpload>
+              (change)="ineFrontal($event.target.files)" #ineUpload>
             <div class="invalid-feedback">
               *Imagen Requerida
             </div>
@@ -81,13 +81,15 @@
           <div class="col">
             <label for="identificacionR" class="form-label">Identificación (Reverso)</label>
             <input class="form-control-file" type="file" name="identificacionR" accept=".png, .jpg, .jpeg"
-              (change)="onIneFileSelected($event.target.files)" #ineUpload>
+              (change)="ineReverso($event.target.files)" #ineUpload1>
           </div>
         </div>
         <div class="row mt-4">
           <div class="col-md-3">
             <label for="formFile" class="form-label">Foto Personal</label>
-            <input class="form-control-file" type="file" id="foto">
+            <input class="form-control-file" type="file" name="fotoPersonal" accept=".png, .jpg, .jpeg"
+              (change)="fotoPersonal($event.target.files)" #fotoPersonal>
+            <!-- <input class="form-control-file" type="file" id="foto"> -->
           </div>
           <!-- <div class="col-md-2">
                         <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
@@ -102,10 +104,10 @@
                       </div> -->
           <div class="col-md-2">
             <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
-            <select class="form-control" name="calificacion" ngModel
-            #calificacion="ngModel" required>
+            <select class="form-control" name="calificacion" (change)="onCalificacion($event.target.value)"
+            #calificacion="ngModel" [ngModel]="colaborador.idCalificacion" ngModel required>
               <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let calificacion of calificaciones" [value]="calificacion.id">
+              <option *ngFor="let calificacion of calificaciones" [value]="calificacion.idCalificacion">
                 {{calificacion.nombre}}
               </option>
             </select>
@@ -118,10 +120,9 @@
 
           <div class="col-md-2">
             <label for="tipoColaborador" class="form-label">Tipo de Colaborador<span class="text-danger"> *</span></label>
-            <select class="form-control" name="tipoColaborador" ngModel
-            #tipoColaborador="ngModel" required>
+            <select class="form-control" name="tipoColaborador" (change)="onTipoColaborador($event.target.value)" #tipoColaborador="ngModel" [ngModel]="colaborador.idTipoColaborador" ngModel required>
               <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let tipoColaborador of tiposColaboradores" [value]="tipoColaborador.id">
+              <option *ngFor="let tipoColaborador of tiposColaboradores" [value]="tipoColaborador.idTipoColaborador">
                 {{tipoColaborador.nombre}}
               </option>                         
             </select>
@@ -139,7 +140,7 @@
           <div class="col">
             <label for="nacimiento" class="form-label">Fecha de Nacimiento<span class="text-danger"> *</span></label>
             <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
-              #fechanacimiento="ngModel" required>
+              #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required>
               <div *ngIf="fechanacimiento.invalid && (fechanacimiento.dirty || fechanacimiento.touched)" class="alert">
                 <div *ngIf="fechanacimiento.errors?.required">
                   La fecha de nacimiento es obligatoria.
@@ -188,7 +189,7 @@
                         </div> -->
           <div class="col">
             <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-            <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" [(ngModel)]="selectedEstado"
+            <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" [(ngModel)]="colaborador.idEstadoNacimiento"
               (change)="comboCiudades($event.target.value)" required>
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let estado of estados" [value]="estado.idEstado">
@@ -210,10 +211,9 @@
                         </div> -->
           <div class="col">
             <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-            <select class="form-control" name="ciudadNac" ngModel
-            #ciudadNac="ngModel" required>
+            <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel" [ngModel]="colaborador.ciudadNac" ngModel required>
             <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
                 {{ciudad.nombre}}
               </option>
             </select>
@@ -253,8 +253,7 @@
         <div class="row mt-4">
           <div class="col-md-2">
             <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" name="numExterior" ngModel
-            #numExterior="ngModel"  required>
+            <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel" [(ngModel)]="colaborador.noExt" required>
             <div *ngIf="numExterior.invalid && (numExterior.dirty || numExterior.touched)" class="alert">
               <div *ngIf="numExterior.errors?.required">
                 El número exterior es obligatorio.
@@ -267,7 +266,7 @@
 
           <div class="col-md-2">
             <label for="numInterior" class="form-label">Número Interior</label>
-            <input type="text" class="form-control" name="numInterior" placeholder="" value="">
+            <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel" [(ngModel)]="colaborador.noInt">
           </div>
 
           <!-- <div class="col-md-2">
@@ -280,12 +279,12 @@
 
           <div class="col-md-2">
             <label for="codigopostal" class="form-label">Código Postal<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" maxlength="5" name="codigopostal" placeholder="" value=""
+            <input type="text" class="form-control" maxlength="5" name="codigopostal"
               [ngModel]="selectedCodigoPostal" (change)="onCodigoPostal($event.target.value)" ngModel
               #codigopostal="ngModel" pattern="[0-9]*" required>
               <div *ngIf="codigopostal.invalid && (codigopostal.dirty || codigopostal.touched)" class="alert">
                 <div *ngIf="codigopostal.errors?.required">
-                  El número exterior es obligatorio.
+                  El codigo postal es obligatorio.
                 </div>
                 <div *ngIf="nombre.errors?.pattern">
                   El codigo postal son solo numeros.
@@ -365,8 +364,10 @@
           </div>
 
           <div class="col">
-            <label for="formFile" class="form-label">Comprobante de Domicilio</label>
-            <input class="form-control-file" type="file" name="comprobante">
+            <label for="comprobante" class="form-label">Comprobante de Domicilio</label>
+            <!-- <input class="form-control-file" type="file" name="comprobante"> -->
+            <input class="form-control-file" type="file" name="comprobante" accept=".png, .jpg, .jpeg"
+              (change)="comprobanteDomicilio($event.target.files)" #domicilioUpload>
           </div>
         </div>
       </div>
@@ -410,12 +411,12 @@
 
           <div class="col-md-1">
             <label for="peso" class="form-label">Peso (Kg)</label>
-            <input maxlength="3" size="2" type="text" class="form-control" name="peso" placeholder="" value="">
+            <input maxlength="3" size="2" type="text" class="form-control" name="peso" ngModel #peso="ngModel" [(ngModel)]="colaborador.peso">
           </div>
 
           <div class="col-md-1">
-            <label for="estatura" class="form-label">Estatura(mts)</label>
-            <input maxlength="4" size="4" type="text" class="form-control" name="estatura" placeholder="" value="">
+            <label for="estatura" class="form-label">Estatura(cm)</label>
+            <input maxlength="3" size="3" type="text" class="form-control" name="estatura" ngModel #estatura="ngModel" [(ngModel)]="colaborador.estatura">
           </div>
 
           <div class="col-md-2">
@@ -449,9 +450,7 @@
         <div class="row mt-4">
           <div class="col-md-2">
             <label for="telefono1" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
-            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" placeholder="10 Dígitos"
-              value="" ngModel
-              #telefono1="ngModel" pattern="[0-9]*" minlength="10" required>
+            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="colaborador.telefono1" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required>
               <div *ngIf="telefono1.invalid && (telefono1.dirty || telefono1.touched)" class="alert">
                 <div *ngIf="telefono1.errors?.required">
                   El telefono es obligatorio.
@@ -481,19 +480,18 @@
                       </select>
                     </div> -->
           <div class="col-md-2">
-            <label for="tipoTel" class="form-label">Tipo de Teléfono 1</label>
-            <select class="form-control" name="tipoTel">
+            <label for="tipoTel1" class="form-label">Tipo de Teléfono 1</label>
+            <select class="form-control" name="tipoTel1" ngModel #tipoTel1="ngModel" [ngModel]="colaborador.tipoTelefono1" (change)="onTipoTel1($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
+              <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
                 {{tipoTelefono.nombre}}
               </option>
             </select>
           </div>
 
           <div class="col-md-2">
-            <label for="telefono1" class="form-label">Teléfono 2</label>
-            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" placeholder="10 Dígitos"
-              value="">
+            <label for="telefono2" class="form-label">Teléfono 2</label>
+            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" ngModel #telefono2="ngModel" [(ngModel)]="colaborador.telefono2" placeholder="10 Dígitos">
             <div class="invalid-feedback">
               *Campo Requerido!
             </div>
@@ -512,10 +510,10 @@
                       </select>
                     </div> -->
           <div class="col-md-2">
-            <label for="tipoTel1" class="form-label">Tipo de Teléfono 2</label>
-            <select class="form-control" name="tipoTel1">
+            <label for="tipoTel2" class="form-label">Tipo de Teléfono 2</label>
+            <select class="form-control" name="tipoTel2" ngModel #tipoTel2="ngModel" [ngModel]="colaborador.tipoTelefono2" (change)="onTipoTel2($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.id">
+              <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
                 {{tipoTelefono.nombre}}
               </option>
             </select>
@@ -523,8 +521,7 @@
 
           <div class="col-md-4">
             <label for="correoelectronico" class="form-label">Correo Electrónico<span class="text-danger"> *</span></label>
-            <input type="email" class="form-control" name="correoelectronico" ngModel
-            #correoelectronico="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+            <input type="email" class="form-control" name="correoelectronico" ngModel #correoelectronico="ngModel" [(ngModel)]="colaborador.correoElectronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
             <div *ngIf="correoelectronico.invalid && (correoelectronico.dirty || correoelectronico.touched)" class="alert">
               <div *ngIf="correoelectronico.errors?.required">
                 El correo es obligatorio.
@@ -578,9 +575,8 @@
           </div>
 
           <div class="col">
-            <label for="sgmm" class="form-label">Aseguradora</label>
-            <input type="text" class="form-control" name="aseguradora" placeholder="Nombre" value=""
-              disabled="disabled" [disabled]="textBoxDisabledSeg">
+            <label for="aseguradora" class="form-label">Aseguradora</label>
+            <input type="text" class="form-control" name="aseguradora" ngModel #aseguradora="ngModel" [(ngModel)]="colaborador.sgmm" placeholder="Nombre" disabled="disabled" [disabled]="textBoxDisabledSeg">
           </div>
         </div>
       </div>
@@ -1246,9 +1242,9 @@
                         </div> -->
               <div class="col-md-4">
                 <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
-                <select class="form-control" name="permanencia" ngModel #permanencia="ngModel" required>
+                <select class="form-control" name="permanencia" ngModel #permanencia="ngModel" [ngModel]="colaborador.idPermanencia" (change)="onPermanencia($event.target.value)"   required>
                   <option value="" selected disabled hidden>Seleccionar</option>
-                  <option *ngFor="let permanencia of permanencias" [value]="permanencia.id">
+                  <option *ngFor="let permanencia of permanencias" [value]="permanencia.idPermanencia">
                     {{permanencia.nombre}}
                   </option>
                 </select>
@@ -1502,18 +1498,15 @@
             <div class="row">
               <div class="col-md-4">
                 <label for="visaNum" class="form-label">Número de Visa</label>
-                <input type="text" class="form-control" id="numvisa" placeholder="" value="" disabled="disabled"
-                  [disabled]="textBoxDisabledVis">
+                <input type="text" class="form-control" id="numvisa" name="numvisa" ngModel #numvisa="ngModel" [(ngModel)]="colaborador.visaNumero" disabled="disabled" [disabled]="textBoxDisabledVis">
               </div>
               <div class="col-md-4">
                 <label for="tipNum" class="form-label">Tipo de Visa</label>
-                <input type="text" class="form-control" id="tipovisa" placeholder="" value="" disabled="disabled"
-                  [disabled]="textBoxDisabledVis">
+                <input type="text" class="form-control" id="tipovisa" name="tipovisa" ngModel #tipovisa="ngModel" [(ngModel)]="colaborador.tipoVisa" disabled="disabled" [disabled]="textBoxDisabledVis">
               </div>
               <div class="col-md-4">
                 <label for="visaExp" class="form-label">Expiración</label>
-                <input type="date" class="form-control" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy"
-                  disabled="disabled" [disabled]="textBoxDisabledVis">
+                <input type="date" class="form-control" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy" ngModel #visaExp="ngModel" [(ngModel)]="colaborador.expiracionVisa" disabled="disabled" [disabled]="textBoxDisabledVis">
                 <div class="invalid-feedback">
                   *Campo Requerido!
                 </div>
@@ -1522,8 +1515,10 @@
             <div class="row">
               <div class="col-md-12 mt-3">
                 <label for="visaImg" class="form-label">Imagen de la Visa</label>
-                <input class="form-control-file" type="file" id="visaImg" disabled="disabled"
-                  [disabled]="textBoxDisabledVis">
+                <input class="form-control-file" type="file" id="visaImg" name="visaImg" accept=".png, .jpg, .jpeg" (change)="onVisa($event.target.files)" #visaUpload disabled="disabled"
+                [disabled]="textBoxDisabledVis">
+                <!-- <input class="form-control-file" type="file" id="visaImg" disabled="disabled"
+                  [disabled]="textBoxDisabledVis"> -->
               </div>
             </div>
 
@@ -1567,13 +1562,11 @@
             <div class="row">
               <div class="col-md-4">
                 <label for="pasaporteNum" class="form-label">Número de Pasaporte</label>
-                <input type="text" class="form-control" id="numpasaporte" placeholder="" value="" disabled="disabled"
-                  [disabled]="textBoxDisabledPas">
+                <input type="text" class="form-control" id="pasaporteNum" name="pasaporteNum" ngModel #pasaporteNum="ngModel" [(ngModel)]="colaborador.pasaporteNumero" disabled="disabled" [disabled]="textBoxDisabledPas">
               </div>
               <div class="col-md-4">
                 <label for="pasaporteExp" class="form-label">Expiración</label>
-                <input type="date" class="form-control" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy"
-                  disabled="disabled" [disabled]="textBoxDisabledPas">
+                <input type="date" class="form-control" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy" ngModel #pasaporteExp="ngModel" [(ngModel)]="colaborador.expiracionPasaporte" disabled="disabled" [disabled]="textBoxDisabledPas">
                 <div class="invalid-feedback">
                   *Campo Requerido!
                 </div>
@@ -1582,8 +1575,9 @@
             <div class="row">
               <div class="col-md-12 mt-3">
                 <label for="pasaporteImg" class="form-label">Imagen del Pasaporte</label>
-                <input class="form-control-file" type="file" id="pasaporteImg" disabled="disabled"
-                  [disabled]="textBoxDisabledPas">
+                <input class="form-control-file" type="file" id="pasaporteImg" name="pasaporteImg" accept=".png, .jpg, .jpeg" (change)="onPasaporte($event.target.files)" #pasaporteUpload disabled="disabled" [disabled]="textBoxDisabledPas">
+                <!-- <input class="form-control-file" type="file" id="pasaporteImg" disabled="disabled"
+                  [disabled]="textBoxDisabledPas"> -->
               </div>
             </div>
             <!-- <div class="row"> -->
