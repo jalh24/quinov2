@@ -59,6 +59,8 @@ export class Colaborador {
     public cuentasColaborador:any[];
     public contactosColaborador:any[];
     public idPermanencia:number;
+    public referenciaDireccion:string;
+    public observaciones:string;
     constructor() {
     }
 }            
