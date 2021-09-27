@@ -111,7 +111,9 @@ export class ColaboradorComponent implements OnInit {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       dtInstance.destroy();
       this.dtTriggerEstudio.next();
-      console.log(this.dtTriggerEstudio);
+      this.dtTriggerPago.next();
+      this.dtOptionsExperiencia.next();
+      //console.log(this.dtTriggerEstudio);
     });
   }
 
@@ -554,11 +556,16 @@ export class ColaboradorComponent implements OnInit {
     if(this.estudio.idEstudio == null)    {
       this.idEstudio++;
       this.estudio.idEstudio=this.idEstudio;
-    }else{}
+      this.estudio.estatus = this.estatusSelected;
+      console.log(this.estudio);
+      this.estudios.push(this.estudio);
+    }else{
+      this.estudio.estatus = this.estatusSelected;
+      console.log(this.estudio);
+      this.estudios.splice(this.estudio.idEstudio,1, this.estudio);
+    }
 
-    this.estudio.estatus = this.estatusSelected;
-    console.log(this.estudio);
-    this.estudios.push(this.estudio);
+   
     this.estudio ={
       idEstudio:null,
       idColaborador:null,
@@ -597,7 +604,9 @@ export class ColaboradorComponent implements OnInit {
     if(this.experiencia.idExperiencia == null)    {
       this.idExperiencia++;
       this.experiencia.idExperiencia=this.idExperiencia;
-    }else{}
+    }else{
+      
+    }
 
     
     console.log(this.experiencia);
@@ -619,17 +628,75 @@ export class ColaboradorComponent implements OnInit {
   editaEstudio(estudioTmp:any){
     this.estudio = estudioTmp;
   }
+  editaPago(pagoTmp:any){
+    this.pago = pagoTmp;
+  }
+  editaExperiencia(experienciaTmp:any){
+    this.experiencia = experienciaTmp;
+  }
 
   borraEstudio(estudioTmp){
-
     this.estudios.forEach((element,index)=>{
       if(element.idEstudio==estudioTmp.idEstudio)
       {
         this.estudios.splice(index,1);
-        //delete this.estudios[estudioTmp.idEstudio];
       } 
    });
    this.rerender();
+  }
+
+  borraPago(pagoTmp){
+    this.pagos.forEach((element,index)=>{
+      if(element.idPago==pagoTmp.idPago)
+      {
+        this.pagos.splice(index,1);
+      } 
+   });
+  // this.rerender();
+  }
+
+  borraExperiencia(experienciaTmp){
+    this.experiencias.forEach((element,index)=>{
+      if(element.idExperiencia==experienciaTmp.idExperiencia)
+      {
+        this.experiencias.splice(index,1);
+      } 
+   });
+  // this.rerender();
+  }
+
+  limpiarEstudio(){
+    this.estudio ={
+      idEstudio:null,
+      idColaborador:null,
+      institucion:null,
+      inicio:null,
+      fin:null,
+      estatus:null,
+      cedula:null,
+      comentarios:null
+    };
+  }
+  limpiarPago(){
+    this.pago ={
+      idPago:null,
+      nombre:null,
+      banco:null,
+      tipocuenta:null,
+      numero:null,
+    };
+  }
+  limpiarExperiencia(){
+    this.experiencia ={
+      idExperiencia:null,
+      lugar:null,
+      actividades:null,
+      inicio:null,
+      fin:null,
+      referencia:null,
+      telefono:null,
+      especialidad:null
+    };
   }
 
   public comboCalificaciones(){
