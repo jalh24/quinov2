@@ -612,7 +612,7 @@
 
                   <div class="col-md-3">
                     <label for="banco" class="form-label">Banco<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="banco" ngModel #banco="ngModel" required>
+                    <select class="form-control" name="banco" ngModel #banco="ngModel" [(ngModel)]="pago.banco" required>
                       <option value="" selected disabled hidden>Seleccionar</option>
                       <option *ngFor="let banco of bancos" [value]="banco.nombre">
                         {{banco.nombre}}
@@ -627,7 +627,7 @@
 
                   <div class="col-md-3">
                     <label for="tipocuenta" class="form-label">Tipo de Cuenta<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="tipocuenta" ngModel #tipocuenta="ngModel" required>
+                    <select class="form-control" name="tipocuenta" ngModel #tipocuenta="ngModel" [(ngModel)]="pago.tipocuenta" required>
                       <option value="" selected disabled hidden>Seleccionar</option>
                       <option value="CLABE">CLABE</option>
                       <option value="Numero de Tarjeta">Numero de Tarjeta</option>                     
@@ -666,7 +666,7 @@
           <div class="row mt-5">
             <div class="col-md-12 text-center">
               <button class="btn btn-primary add-one" (click)="agregarPago()">Agregar</button>
-              <button class="btn btn-warning delete ml-3">Cancelar</button>
+              <button class="btn btn-warning delete ml-3" (click)="limpiarPago()">Cancelar</button>
             </div>
           </div>
           <div class="row mt-4 pb-4">
@@ -832,7 +832,7 @@
         <div class="row mt-5">
           <div class="col-md-12 text-center">
             <button class="btn btn-primary add-one" (click)="agregarEstudio()">Agregar</button>
-            <button class="btn btn-warning delete ml-3">Cancelar</button>
+            <button class="btn btn-warning delete ml-3" (click)="limpiarEstudio()">Cancelar</button>
           </div>
         </div>
         <div class="row mt-4 pb-4">
@@ -972,7 +972,7 @@
         <div class="row mt-5">
           <div class="col-md-12 text-center">
             <button class="btn btn-primary add-one" (click)="agregarExperiencia()">Agregar</button>
-            <button class="btn btn-warning delete ml-3">Cancelar</button>
+            <button class="btn btn-warning delete ml-3" (click)="limpiarEstudio()">Cancelar</button>
           </div>
         </div>
         <hr class="mt-3 mb-3" />
