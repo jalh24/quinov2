@@ -397,17 +397,8 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.paisNac=1;
     this.colaborador.idEstatus=1;
     this.colaborador.idZonaLaboral=1;
-<<<<<<< HEAD
     console.log(this.colaborador);
-    // this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
-    //     console.log(data);
-    //     alert("Se guardo");
-    // })
-    // this.inicializaObjetos();
-  }
 
-  public ineFrontal(files: FileList) {
-=======
     if(ngForm.valid){
       this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
         this.showSuccess(NgbToastType.Success,"Se creo el colaborador exitosamente");
@@ -436,8 +427,7 @@ export class ColaboradorComponent implements OnInit {
 		this.toastService.remove(toast);
 	}
   
-  public onIneFileSelected(files: FileList) {
->>>>>>> 35b54a67865c0e961e6360000c9ccaacaec5a5b0
+  public ineFrontal(files: FileList) {
     let me = this;
     let file = files[0];
     let reader = new FileReader();
