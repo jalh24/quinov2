@@ -5,19 +5,27 @@ export class Colaborador {
     public nombre:string;
     public a_paterno:string;
     public a_materno:string;
+    public idCalificacion:number;
+    public idTipoColaborador:number;
+    public idEstadoNacimiento:number;
     public correoElectronico:string;
     public foto:any;
     public rfc:string;
     public nss:string;
     public fecha_nacimiento:Date;
-    public paisNac:string;
-    public estadoNac:string;
+    public paisNac:number;
+    public estadoNac:number;
+    public ciudadNac:number;
     public idSexo:number;
     public peso:number;
     public estatura:number;
     public idZonaLaboral:number;
     public idEstadoCivil:number;
     public idTez:number;
+    public telefono1:number;
+    public tipoTelefono1:number;
+    public telefono2:number;
+    public tipoTelefono2:number;
     public sgmm:string;
     public atiendeCovid:boolean;
     public antecedentePenales:boolean;
@@ -25,7 +33,7 @@ export class Colaborador {
     public dispuestoViajar:boolean;
     public visa:boolean;
     public visaNumero:string;
-    public tipoVisa:number;
+    public tipoVisa:string;
     public expiracionVisa:Date;
     public visaImagen:any;
     public pasaporte:boolean;
@@ -44,11 +52,13 @@ export class Colaborador {
     public idColonia:number;
     public noExt:string;
     public noInt:string;
+    public comprobanteDomicilio:any;
     public horario:any;
     public estudios:any[];
     public experiencias:any[];
     public cuentasColaborador:any[];
     public contactosColaborador:any[];
+    public idPermanencia:number;
     constructor() {
     }
 }            

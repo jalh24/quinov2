@@ -393,12 +393,23 @@ export class ColaboradorComponent implements OnInit {
 
   public guardarColaborador(ngForm: NgForm){
     //this.colaborador.estudios = this.estudios;
-    console.log(this.colaborador);
     this.colaborador.horario = this.diasLaborales;
-    this.colaborador.codigoPostal = this.selectedCodigoPostal;
+    // this.colaborador.codigoPostal = this.selectedCodigoPostal;
     this.colaborador.idPais=1;
+    this.colaborador.paisNac=1;
     this.colaborador.idEstatus=1;
     this.colaborador.idZonaLaboral=1;
+<<<<<<< HEAD
+    console.log(this.colaborador);
+    // this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
+    //     console.log(data);
+    //     alert("Se guardo");
+    // })
+    // this.inicializaObjetos();
+  }
+
+  public ineFrontal(files: FileList) {
+=======
     if(ngForm.valid){
       this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
         this.showSuccess(NgbToastType.Success,"Se creo el colaborador exitosamente");
@@ -428,6 +439,7 @@ export class ColaboradorComponent implements OnInit {
 	}
   
   public onIneFileSelected(files: FileList) {
+>>>>>>> 35b54a67865c0e961e6360000c9ccaacaec5a5b0
     let me = this;
     let file = files[0];
     let reader = new FileReader();
@@ -440,6 +452,77 @@ export class ColaboradorComponent implements OnInit {
     };
 
   }
+
+  public ineReverso(files: FileList) {
+    let me = this;
+    let file = files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.colaborador.ine2=reader.result;
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+
+  }
+
+  public fotoPersonal(files: FileList) {
+    let me = this;
+    let file = files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.colaborador.foto=reader.result;
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+
+  }
+
+  public comprobanteDomicilio(files: FileList) {
+    let me = this;
+    let file = files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.colaborador.comprobanteDomicilio=reader.result;
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+
+  }
+
+  public onVisa(files: FileList) {
+    let me = this;
+    let file = files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.colaborador.visaImagen=reader.result;
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+
+  }
+
+  public onPasaporte(files: FileList) {
+    let me = this;
+    let file = files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.colaborador.pasaporteImagen=reader.result;
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+
+  }
+
 
   public onCedulaFileSelected(files: FileList) {
     console.log("entro cedula");
@@ -710,10 +793,11 @@ export class ColaboradorComponent implements OnInit {
     });
   }
 
-  public comboCiudades(e){
-    this.http.get<any>('/api/catalogo/ciudades?idEstado='+ e).subscribe(data => {
+  public comboCiudades(idEstadoNacimiento){
+    this.colaborador.idEstadoNacimiento = idEstadoNacimiento;
+    this.http.get<any>('/api/catalogo/ciudades?idEstado='+ idEstadoNacimiento).subscribe(data => {
         console.log(data);
-        this.ciudades = data.data;
+        this.ciudades = data.data;    
     });
   }
 
@@ -732,6 +816,8 @@ export class ColaboradorComponent implements OnInit {
   }
 
   public onCodigoPostal(selectedCodigoPostal){
+    this.colaborador.codigoPostal = selectedCodigoPostal;
+    console.log(this.colaborador.codigoPostal);
     this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal='+ selectedCodigoPostal).subscribe(data => {
       this.colonias = data.data;
       this.colaborador.idCiudad = data.data[0].idCiudad;
@@ -768,5 +854,29 @@ export class ColaboradorComponent implements OnInit {
 
   onSexo(value:any){
     this.colaborador.idSexo = value;
+  }
+
+  onCalificacion(value:any){
+    this.colaborador.idCalificacion = value;
+  }
+
+  onTipoColaborador(value:any){
+    this.colaborador.idTipoColaborador = value;
+  }
+
+  onCiudadNacimiento(value:any){
+    this.colaborador.ciudadNac = value;
+  }
+
+  onTipoTel1(value:any){
+    this.colaborador.tipoTelefono1 = value;
+  }
+
+  onTipoTel2(value:any){
+    this.colaborador.tipoTelefono2 = value;
+  }
+
+  onPermanencia(value:any){
+    this.colaborador.idPermanencia = value;
   }
 }
