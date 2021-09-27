@@ -12,6 +12,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbToastModule } from  'ngb-toast';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     BrowserAnimationsModule,
     MatRadioModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]
