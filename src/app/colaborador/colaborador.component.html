@@ -1,4 +1,5 @@
 <form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
+  <ngb-toast-container></ngb-toast-container>
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="General">
       <div class="container mt-5 bg-white rounded-top shadow">
@@ -87,9 +88,14 @@
         <div class="row mt-4">
           <div class="col-md-3">
             <label for="formFile" class="form-label">Foto Personal</label>
+<<<<<<< HEAD
             <input class="form-control-file" type="file" name="fotoPersonal" accept=".png, .jpg, .jpeg"
               (change)="fotoPersonal($event.target.files)" #fotoPersonal>
             <!-- <input class="form-control-file" type="file" id="foto"> -->
+=======
+            <input class="form-control-file" type="file" id="foto" accept=".png, .jpg, .jpeg"
+            (change)="cargaFotoPersonal($event.target.files)">
+>>>>>>> 35b54a67865c0e961e6360000c9ccaacaec5a5b0
           </div>
           <!-- <div class="col-md-2">
                         <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>

@@ -24,7 +24,7 @@ export class ColaboradoresComponent implements OnInit {
       ajax: '/api/colaborador',
       columns: [{
         title: 'ID',
-        data: 'num_colaborador'
+        data: 'idColaborador'
       }, {
         title: 'Nombre',
         data: 'nombre'

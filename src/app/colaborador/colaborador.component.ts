@@ -7,6 +7,8 @@ import { Estudio } from '../_model/estudio';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Experiencia } from '../_model/experiencia';
+import  {  NgbToastService, NgbToastType,NgbToast }  from  'ngb-toast';
+
 
 @Component({
   selector: 'app-colaborador',
@@ -15,6 +17,10 @@ import { Experiencia } from '../_model/experiencia';
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradorComponent implements OnInit {
+
+  show = false;
+  autohide = true;
+
   textBoxDisabledCed = true;
   textBoxDisabledSeg = true;
   textBoxDisabledOtraEsp = true;
@@ -110,7 +116,8 @@ export class ColaboradorComponent implements OnInit {
   }
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private  toastService:  NgbToastService
   ) { }
 
   ngOnInit(): void {
@@ -390,6 +397,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.paisNac=1;
     this.colaborador.idEstatus=1;
     this.colaborador.idZonaLaboral=1;
+<<<<<<< HEAD
     console.log(this.colaborador);
     // this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
     //     console.log(data);
@@ -399,6 +407,37 @@ export class ColaboradorComponent implements OnInit {
   }
 
   public ineFrontal(files: FileList) {
+=======
+    if(ngForm.valid){
+      this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
+        this.showSuccess(NgbToastType.Success,"Se creo el colaborador exitosamente");
+        });
+        this.inicializaObjetos();
+    } else{
+      this.showSuccess(NgbToastType.Danger,"Debe llenar todos los campos obligatorios");
+    }
+    
+  }
+
+  showSuccess(type:any,message:string): void {
+		const toast: NgbToast = {
+			toastType:  type,
+			text:  message,
+			dismissible:  true,
+      timeInSeconds:5,
+			onDismiss: () => {
+				console.log("Toast dismissed!!");
+			}
+		}
+		this.toastService.show(toast);
+	}
+	
+	removeToast(toast: NgbToast): void {
+		this.toastService.remove(toast);
+	}
+  
+  public onIneFileSelected(files: FileList) {
+>>>>>>> 35b54a67865c0e961e6360000c9ccaacaec5a5b0
     let me = this;
     let file = files[0];
     let reader = new FileReader();
@@ -491,6 +530,20 @@ export class ColaboradorComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.estudio.cedula=reader.result;
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+
+  }
+
+  public cargaFotoPersonal(files: FileList) {
+    let me = this;
+    let file = files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.colaborador.foto=reader.result;
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
