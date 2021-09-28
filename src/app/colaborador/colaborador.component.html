@@ -411,12 +411,22 @@
 
           <div class="col-md-1">
             <label for="peso" class="form-label">Peso (Kg)</label>
-            <input maxlength="3" size="2" type="text" class="form-control" name="peso" ngModel #peso="ngModel" [(ngModel)]="colaborador.peso">
+            <input maxlength="3" size="3" type="text" class="form-control" name="peso" ngModel #peso="ngModel" [(ngModel)]="colaborador.peso" pattern="[0-9]*">
+            <div *ngIf="peso.invalid && (peso.dirty || peso.touched)" class="alert">
+              <div *ngIf="peso.errors?.pattern">
+                El peso debe contener solamente numeros.
+              </div>
+            </div>
           </div>
 
           <div class="col-md-1">
             <label for="estatura" class="form-label">Estatura(cm)</label>
-            <input maxlength="3" size="3" type="text" class="form-control" name="estatura" ngModel #estatura="ngModel" [(ngModel)]="colaborador.estatura">
+            <input maxlength="3" size="3" type="text" class="form-control" name="estatura" ngModel #estatura="ngModel" [(ngModel)]="colaborador.estatura" pattern="[0-9]*">
+            <div *ngIf="estatura.invalid && (estatura.dirty || estatura.touched)" class="alert">
+              <div *ngIf="estatura.errors?.pattern">
+                La estatura debe contener solamente numeros.
+              </div>
+            </div>
           </div>
 
           <div class="col-md-2">
@@ -491,9 +501,14 @@
 
           <div class="col-md-2">
             <label for="telefono2" class="form-label">Teléfono 2</label>
-            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" ngModel #telefono2="ngModel" [(ngModel)]="colaborador.telefono2" placeholder="10 Dígitos">
-            <div class="invalid-feedback">
-              *Campo Requerido!
+            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" ngModel #telefono2="ngModel" [(ngModel)]="colaborador.telefono2" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+            <div *ngIf="telefono2.invalid && (telefono2.dirty || telefono2.touched)" class="alert">
+              <div *ngIf="telefono2.errors?.pattern">
+                El telefono debe contener solamente numeros.
+              </div>
+              <div *ngIf="telefono2.errors?.minlength">
+                El telefono debe contener 10 digitos.
+              </div>
             </div>
           </div>
 
@@ -1507,6 +1522,8 @@
     <div class="row text-center pb-4">
       <div class="col">
         <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Enviar </button>
+        <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
+        <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Enviar </button> -->
       </div>
     </div>
   </div>
