@@ -53,6 +53,9 @@ export class ColaboradorComponent implements OnInit {
   idExperiencia:number;
   public colaborador:Colaborador;
   diasLaborales:any = {
+    todosDias:false,
+    todosDiasDesde:null,
+    todosDiasHasta:null,
     lunes:false,
     lunesDesde:null,
     lunesHasta:null,
@@ -357,6 +360,7 @@ export class ColaboradorComponent implements OnInit {
     this.textBoxDisabledDateofWorkV = true;
     this.textBoxDisabledDateofWorkS = true;
     this.textBoxDisabledDateofWorkD = true;
+    this.diasLaborales.todosDias = !this.diasLaborales.todosDias;
     this.diasLaborales.lunes = false;
     this.diasLaborales.lunesDesde = null;
     this.diasLaborales.lunesHasta = null;
