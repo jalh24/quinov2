@@ -966,12 +966,14 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="desdeT" class="form-label">Desde</label>
-                <input type="time" class="form-control input-sm" id="desdeT" placeholder="" value="" disabled="disabled"
+                <input type="time" class="form-control input-sm" id="desdeT" placeholder="" value="" name="todosDiasDesde"
+                ngModel #todosDiasDesde="ngModel" [(ngModel)]="diasLaborales.todosDiasDesde" disabled="disabled"
                   [disabled]="textBoxDisabledDateofWorkT">
               </div>
               <div class="col-md-6">
                 <label for="hastaT" class="form-label">Hasta</label>
-                <input type="time" class="form-control input-sm" id="hastaT" placeholder="" value="" disabled="disabled"
+                <input type="time" class="form-control input-sm" id="hastaT" placeholder="" value="" name="todosDiasHasta"
+                ngModel #todosDiasHasta="ngModel" [(ngModel)]="diasLaborales.todosDiasHasta" disabled="disabled"
                   [disabled]="textBoxDisabledDateofWorkT">
               </div>
             </div>
@@ -1207,7 +1209,7 @@
                 <label>Zonas Laborales</label>
                 <div class="form-group row pt-1">
                   <div class="col-sm-10">
-                    <div class="form-check" *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.id">
+                    <div class="form-check" *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.idZonaLaboral">
                       <input class="form-check-input" type="checkbox" id={{zonaLaboral.nombre}} required>
                       <label class="form-check-label" for={{zonaLaboral.nombre}}>
                         {{zonaLaboral.nombre}}
