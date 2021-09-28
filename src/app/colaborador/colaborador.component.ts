@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Colaborador } from '../_model/colaborador';
 import {Pago} from '../_model/pago';
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Experiencia } from '../_model/experiencia';
 import  {  NgbToastService, NgbToastType,NgbToast }  from  'ngb-toast';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -20,6 +21,18 @@ export class ColaboradorComponent implements OnInit {
 
   show = false;
   autohide = true;
+
+  ESTUDIO_DATA: Estudio[] = [];
+  estudioSource = new MatTableDataSource<Estudio>(this.ESTUDIO_DATA);
+
+  estudioColumns: string[] = ['institucion', 'comentarios', 'inicio', 'fin','estatus', 'deleteColaborador'];
+  @ViewChild('estudiosTable',{static:true}) estudiosTable: MatTable<any>;
+  
+  PAGO_DATA: Pago[] = [];
+  pagoSource = new MatTableDataSource<Pago>(this.PAGO_DATA);
+
+  pagoColumns: string[] = ['nombre', 'banco', 'tipoCuenta', 'numero', 'deletePago'];
+  @ViewChild('pagosTable',{static:true}) pagosTable: MatTable<any>;
 
   textBoxDisabledCed = true;
   textBoxDisabledSeg = true;
@@ -119,7 +132,8 @@ export class ColaboradorComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private  toastService:  NgbToastService
+    private  toastService:  NgbToastService,
+    private changeDetectorRefs: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -266,7 +280,7 @@ export class ColaboradorComponent implements OnInit {
       idPago:null,
       nombre:null,
       banco:null,
-      tipocuenta:null,
+      tipoCuenta:null,
       numero:null
     };
     this.estudios=[];
@@ -309,11 +323,13 @@ export class ColaboradorComponent implements OnInit {
   enableOtraHab(){
     this.textBoxDisabledOtraHab = !this.textBoxDisabledOtraHab;
   }
-  enableCed(){
+  enableCed(event){
     this.textBoxDisabledCed = false;
+    this.estudio.estatus = event;
   }
-  disableCed(){
+  disableCed(event){
     this.textBoxDisabledCed = true;
+    this.estudio.estatus = event;
   }
   enableTextBoxVis(){
     this.textBoxDisabledVis = false;
@@ -399,6 +415,9 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.paisNac=1;
     this.colaborador.idEstatus=1;
     this.colaborador.idZonaLaboral=1;
+    this.colaborador.pagos = this.pagos;
+    this.colaborador.estudios = this.estudios;
+    this.colaborador.experiencias= this.experiencias;
     console.log(this.colaborador);
 
     if(ngForm.valid){
@@ -515,7 +534,6 @@ export class ColaboradorComponent implements OnInit {
 
 
   public onCedulaFileSelected(files: FileList) {
-    console.log("entro cedula");
     let me = this;
     let file = files[0];
     let reader = new FileReader();
@@ -547,25 +565,21 @@ export class ColaboradorComponent implements OnInit {
     datatableElement.dtInstance.then((dtInstance: DataTables.Api) => console.log(dtInstance));
   }
 
-  onEstudioChange(data:string){
-    console.log(data);
-    this.estatusSelected = data;
-  }
-
   agregarEstudio(){
     if(this.estudio.idEstudio == null)    {
-      this.idEstudio++;
+      if(this.estudios.length==0){
+        this.idEstudio= this.estudioSource.data.length + 1;
+      } else{
+        this.idEstudio++;
+      }
       this.estudio.idEstudio=this.idEstudio;
-      this.estudio.estatus = this.estatusSelected;
-      console.log(this.estudio);
-      this.estudios.push(this.estudio);
+      this.ESTUDIO_DATA.push(this.estudio);
+      this.estudioSource= new MatTableDataSource(this.ESTUDIO_DATA);
     }else{
       this.estudio.estatus = this.estatusSelected;
-      console.log(this.estudio);
       this.estudios.splice(this.estudio.idEstudio,1, this.estudio);
     }
-
-   
+    
     this.estudio ={
       idEstudio:null,
       idColaborador:null,
@@ -577,39 +591,62 @@ export class ColaboradorComponent implements OnInit {
       comentarios:null
     };
     this.estatusSelected = "";
-  
+    this.changeDetectorRefs.detectChanges();
+    this.estudiosTable.renderRows();
+  }
+
+  borraEstudio(estudioTmp){
+    this.ESTUDIO_DATA = this.ESTUDIO_DATA.filter((value,key)=>{
+      return value.idEstudio != estudioTmp.idEstudio;
+    });
+    this.estudioSource.data = this.estudioSource.data.filter((value,key)=>{
+      return value.idEstudio != estudioTmp.idEstudio;
+    });
+  }
+
+  onTipoCuenta(event){
+    this.pago.tipoCuenta=event;
+    console.log(event);
+  }
+
+  onBanco(event){
+    console.log(event);
   }
 
   agregarPago(){
     if(this.pago.idPago == null)    {
-      this.idPago++;
+      if(this.pagoSource.data.length==0){
+        this.idPago= this.pagoSource.data.length + 1;
+      } else{
+        this.idPago++;
+      }
       this.pago.idPago=this.idPago;
-    }else{}
-
-    
+    }
     console.log(this.pago);
-    this.pagos.push(this.pago);
+    this.PAGO_DATA.push(this.pago);
+    this.pagoSource= new MatTableDataSource(this.PAGO_DATA);
+
     this.pago ={
       idPago:null,
       nombre:null,
       banco:null,
-      tipocuenta:null,
+      tipoCuenta:null,
       numero:null,
     };
-    
-  
+      
   }
 
   agregarExperiencia(){
     if(this.experiencia.idExperiencia == null)    {
-      this.idExperiencia++;
-      this.experiencia.idExperiencia=this.idExperiencia;
-    }else{
+      if(this.experiencias.length==0){
+        this.idExperiencia= Math.random();
+      } else{
+        this.idExperiencia++;
+      }
       
+      this.experiencia.idExperiencia=this.idExperiencia;
     }
 
-    
-    console.log(this.experiencia);
     this.experiencias.push(this.experiencia);
     this.experiencia ={
       idExperiencia:null,
@@ -635,15 +672,7 @@ export class ColaboradorComponent implements OnInit {
     this.experiencia = experienciaTmp;
   }
 
-  borraEstudio(estudioTmp){
-    this.estudios.forEach((element,index)=>{
-      if(element.idEstudio==estudioTmp.idEstudio)
-      {
-        this.estudios.splice(index,1);
-      } 
-   });
-   this.rerender();
-  }
+  
 
   borraPago(pagoTmp){
     this.pagos.forEach((element,index)=>{
@@ -682,7 +711,7 @@ export class ColaboradorComponent implements OnInit {
       idPago:null,
       nombre:null,
       banco:null,
-      tipocuenta:null,
+      tipoCuenta:null,
       numero:null,
     };
   }

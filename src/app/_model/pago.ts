@@ -2,7 +2,7 @@ export class Pago {
     public idPago:number;
     public nombre:string;
     public banco:string;
-    public tipocuenta:string;
+    public tipoCuenta:string;
     public numero:number;
     constructor() {
     }

@@ -77,3 +77,18 @@ select {
   width: 100%;
   padding: .5rem;
 }
+
+table {
+  width: 100%;
+}
+.mat-cell {
+  color: black;
+}
+
+.mat-row:nth-child(even){
+  background-color: #e4f0ec;
+}
+
+.mat-row:nth-child(odd){
+  background-color:#ffffff;
+}

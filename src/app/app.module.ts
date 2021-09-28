@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbToastModule } from  'ngb-toast';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { NgbToastModule } from  'ngb-toast';
     BrowserAnimationsModule,
     MatRadioModule,
     HttpClientModule,
-    NgbToastModule
+    NgbToastModule,
+    MatTableModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
