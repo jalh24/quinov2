@@ -312,7 +312,8 @@ export class ColaboradorComponent implements OnInit {
       fechaFin:null,
       referencia:null,
       telefono:null,
-      especialidad:null
+      especialidades:[],
+      habilidades:[]
     };
     
   }
@@ -674,7 +675,8 @@ export class ColaboradorComponent implements OnInit {
       fechaFin:null,
       referencia:null,
       telefono:null,
-      especialidad:null
+      especialidades:[],
+      habilidades:[]
     };
     
   
@@ -689,8 +691,6 @@ export class ColaboradorComponent implements OnInit {
   editaExperiencia(experienciaTmp:any){
     this.experiencia = experienciaTmp;
   }
-
-  
 
   borraPago(pagoTmp){
     this.pagos.forEach((element,index)=>{
@@ -742,7 +742,8 @@ export class ColaboradorComponent implements OnInit {
       fechaFin:null,
       referencia:null,
       telefono:null,
-      especialidad:null
+      especialidades:[],
+      habilidades:[]
     };
   }
 
