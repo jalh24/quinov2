@@ -426,9 +426,7 @@ export class ColaboradorComponent implements OnInit {
   }
 
   public guardarColaborador(ngForm: NgForm){
-    //this.colaborador.estudios = this.estudios;
     this.colaborador.horario = this.diasLaborales;
-    // this.colaborador.codigoPostal = this.selectedCodigoPostal;
     this.colaborador.idPais=1;
     this.colaborador.idPaisNacimiento=1;
     this.colaborador.idEstatus=1;
