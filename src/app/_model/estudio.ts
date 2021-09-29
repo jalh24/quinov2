@@ -8,6 +8,7 @@ export class Estudio {
     public fechaFin:any;
     public estatus:Estatus;
     public cedula:any;
+    public cedulaNombre:string;
     public comentarios:string;
     constructor() {
     }

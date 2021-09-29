@@ -35,6 +35,12 @@ export class ColaboradorComponent implements OnInit {
   pagoColumns: string[] = ['nombre', 'banco', 'tipoCuenta', 'numero', 'deletePago'];
   @ViewChild('pagosTable',{static:true}) pagosTable: MatTable<any>;
 
+  EXPERIENCIA_DATA: Experiencia[] = [];
+  experienciaSource = new MatTableDataSource<Experiencia>(this.EXPERIENCIA_DATA);
+
+  experienciaColumns: string[] = ['institucion', 'comentario', 'fechaInicio', 'fechaFin','telefono','especialidades', 'deleteExperiencia'];
+  @ViewChild('experiencasTable',{static:true}) experiencasTable: MatTable<any>;
+
   textBoxDisabledCed = true;
   textBoxDisabledSeg = true;
   textBoxDisabledOtraEsp = true;
@@ -108,7 +114,10 @@ export class ColaboradorComponent implements OnInit {
   permanencias:any[];
   zonasLaborales:any[];
   especialidades:any[];
+  especialidadesSelected:any[];
   habilidades:any[];
+  habilidadesSelected:any[];
+  zonasSelected:any[];
   pagos:Pago[];
   pago:Pago;
   estudios:Estudio[];
@@ -235,13 +244,14 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.a_materno=null;
     this.colaborador.correoElectronico=null;
     this.colaborador.foto=null;
+    this.colaborador.fotoNombre=null;
     this.colaborador.rfc=null;
     this.colaborador.nss=null;
     this.colaborador.fecha_nacimiento=null;
     this.colaborador.idSexo=null;
     this.colaborador.peso=null;
     this.colaborador.estatura=null;
-    this.colaborador.idZonaLaboral=null;
+    this.colaborador.zonas=[];
     this.colaborador.idEstadoCivil=null;
     this.colaborador.idTez=null;
     this.colaborador.sgmm=null;
@@ -254,12 +264,16 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.tipoVisa=null;
     this.colaborador.expiracionVisa=null;
     this.colaborador.visaImagen=null;
+    this.colaborador.visaNombre=null;
     this.colaborador.pasaporte=false;
     this.colaborador.pasaporteNumero=null;
     this.colaborador.expiracionPasaporte=null;
     this.colaborador.pasaporteImagen=null;
+    this.colaborador.pasaporteNombre = null;
     this.colaborador.ine1=null;
+    this.colaborador.ine1Nombre=null;
     this.colaborador.ine2=null;
+    this.colaborador.ine2Nombre=null;
     this.colaborador.idEstatus=null;
     this.colaborador.calle1=null;
     this.colaborador.calle2=null;
@@ -268,6 +282,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.idEstadoNacimiento=null;
     this.colaborador.idCiudadNacimiento=null;
     this.colaborador.comprobanteDomicilio= null;
+    this.colaborador.comprobanteNombre =null;
     this.colaborador.idPais=null;
     this.colaborador.idEstado=null;
     this.colaborador.idCiudad=null;
@@ -301,13 +316,14 @@ export class ColaboradorComponent implements OnInit {
       fechaFin:null,
       estatus:null,
       cedula:null,
+      cedulaNombre:null,
       comentarios:null
     };
     this.experiencias=[];
     this.experiencia = {
       idExperiencia:null,
       empresa:null,
-      actividades:null,
+      comentario:null,
       fechaInicio:null,
       fechaFin:null,
       referencia:null,
@@ -315,7 +331,12 @@ export class ColaboradorComponent implements OnInit {
       especialidades:[],
       habilidades:[]
     };
-    
+    this.especialidadesSelected=[];
+    this.habilidadesSelected=[];
+    this.zonasSelected=[];
+    this.experienciaSource.data=[];
+    this.pagoSource.data=[];
+    this.estudioSource.data=[];
   }
 
   enableSeguros(){
@@ -431,10 +452,10 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.idPais=1;
     this.colaborador.idPaisNacimiento=1;
     this.colaborador.idEstatus=1;
-    this.colaborador.idZonaLaboral=1;
+    this.colaborador.zonas=this.zonasSelected;
     this.colaborador.cuentasColaborador = this.pagoSource.data;
     this.colaborador.estudios = this.estudioSource.data;
-    this.colaborador.experiencias= this.experiencias;
+    this.colaborador.experiencias= this.experienciaSource.data;
     console.log(this.colaborador);
 
     if(ngForm.valid){
@@ -446,6 +467,25 @@ export class ColaboradorComponent implements OnInit {
       this.showSuccess(NgbToastType.Danger,"Debe llenar todos los campos obligatorios");
     }
     
+  }
+
+  zonasCheck(zona:any){
+    if(this.zonasSelected.length ==0 ){
+      this.zonasSelected.push(zona)
+    } else{
+      if(this.zonasSelected.find(obj => {
+        return obj.idZonaLaboral == zona.idZonaLaboral
+      })){
+        
+        this.zonasSelected = this.zonasSelected.filter((value,key)=>{
+          return value.idZonaLaboral != zona.idZonaLaboral;
+        });
+
+      } else{
+        this.zonasSelected.push(zona);
+      }
+    }
+    console.log(this.zonasSelected);
   }
 
   showSuccess(type:any,message:string): void {
@@ -468,10 +508,13 @@ export class ColaboradorComponent implements OnInit {
   public ineFrontal(files: FileList) {
     let me = this;
     let file = files[0];
+    let currentDate=new Date();
+    let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.colaborador.ine1=reader.result;
+      me.colaborador.ine1Nombre=currentDate.getTime() +"."+extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -482,10 +525,13 @@ export class ColaboradorComponent implements OnInit {
   public ineReverso(files: FileList) {
     let me = this;
     let file = files[0];
+    let currentDate=new Date();
+    let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.colaborador.ine2=reader.result;
+      me.colaborador.ine2Nombre=currentDate.getTime() +"."+extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -493,13 +539,17 @@ export class ColaboradorComponent implements OnInit {
 
   }
 
-  public fotoPersonal(files: FileList) {
+  public cargaFotoPersonal(files: FileList) {
     let me = this;
     let file = files[0];
+    let currentDate=new Date();
+    let extension = file.type.split("/");
+    console.log(extension);
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.colaborador.foto=reader.result;
+      me.colaborador.fotoNombre=currentDate.getTime() +"."+extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -510,10 +560,13 @@ export class ColaboradorComponent implements OnInit {
   public comprobanteDomicilio(files: FileList) {
     let me = this;
     let file = files[0];
+    let currentDate=new Date();
+    let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.colaborador.comprobanteDomicilio=reader.result;
+      me.colaborador.comprobanteNombre=currentDate.getTime() +"."+extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -524,10 +577,13 @@ export class ColaboradorComponent implements OnInit {
   public onVisa(files: FileList) {
     let me = this;
     let file = files[0];
+    let currentDate=new Date();
+    let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.colaborador.visaImagen=reader.result;
+      me.colaborador.visaNombre=currentDate.getTime() +"."+extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -538,10 +594,13 @@ export class ColaboradorComponent implements OnInit {
   public onPasaporte(files: FileList) {
     let me = this;
     let file = files[0];
+    let currentDate=new Date();
+    let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.colaborador.pasaporteImagen=reader.result;
+      me.colaborador.pasaporteNombre=currentDate.getTime() +"."+extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -553,10 +612,13 @@ export class ColaboradorComponent implements OnInit {
   public onCedulaFileSelected(files: FileList) {
     let me = this;
     let file = files[0];
+    let currentDate=new Date();
+    let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.estudio.cedula=reader.result;
+      me.estudio.cedulaNombre=currentDate.getTime() +"."+extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -564,19 +626,6 @@ export class ColaboradorComponent implements OnInit {
 
   }
 
-  public cargaFotoPersonal(files: FileList) {
-    let me = this;
-    let file = files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      me.colaborador.foto=reader.result;
-    };
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
-
-  }
 
   displayToConsole(datatableElement: DataTableDirective): void {
     datatableElement.dtInstance.then((dtInstance: DataTables.Api) => console.log(dtInstance));
@@ -606,6 +655,7 @@ export class ColaboradorComponent implements OnInit {
       fechaFin:null,
       estatus:null,
       cedula:null,
+      cedulaNombre:null,
       comentarios:null
     };
     this.estatusSelected = "";
@@ -641,7 +691,6 @@ export class ColaboradorComponent implements OnInit {
       }
       this.pago.idPago=this.idPago;
     }
-    console.log(this.pago);
     this.PAGO_DATA.push(this.pago);
     this.pagoSource= new MatTableDataSource(this.PAGO_DATA);
 
@@ -655,22 +704,60 @@ export class ColaboradorComponent implements OnInit {
       
   }
 
+  especialidadCheck(especialidad:any){
+    if(this.especialidadesSelected.length ==0 ){
+      this.especialidadesSelected.push(especialidad)
+    } else{
+      if(this.especialidadesSelected.find(obj => {
+        return obj.idEspecialidad == especialidad.idEspecialidad
+      })){
+        
+        this.especialidadesSelected = this.especialidadesSelected.filter((value,key)=>{
+          return value.idEspecialidad != especialidad.idEspecialidad;
+        });
+
+      } else{
+        this.especialidadesSelected.push(especialidad);
+      }
+    }
+  }
+
+  habilidadCheck(habilidad:any){
+    if(this.habilidadesSelected.length ==0 ){
+      this.habilidadesSelected.push(habilidad)
+    } else{
+      if(this.habilidadesSelected.find(obj => {
+        return obj.idEspecialidad == habilidad.idHabilidad
+      })){
+        
+        this.habilidadesSelected = this.habilidadesSelected.filter((value,key)=>{
+          return value.idEspecialidad != habilidad.idHabilidad;
+        });
+
+      } else{
+        this.habilidadesSelected.push(habilidad);
+      }
+    }
+  }
+
   agregarExperiencia(){
     if(this.experiencia.idExperiencia == null)    {
-      if(this.experiencias.length==0){
-        this.idExperiencia= Math.random();
+      if(this.experienciaSource.data.length==0){
+        this.idExperiencia= this.experienciaSource.data.length+1;
       } else{
         this.idExperiencia++;
       }
-      
       this.experiencia.idExperiencia=this.idExperiencia;
     }
-
-    this.experiencias.push(this.experiencia);
+    this.experiencia.especialidades= this.especialidadesSelected;
+    this.experiencia.habilidades = this.habilidadesSelected;
+    this.EXPERIENCIA_DATA.push(this.experiencia);
+    this.experienciaSource= new MatTableDataSource(this.EXPERIENCIA_DATA);
+    
     this.experiencia ={
       idExperiencia:null,
       empresa:null,
-      actividades:null,
+      comentario:null,
       fechaInicio:null,
       fechaFin:null,
       referencia:null,
@@ -693,23 +780,22 @@ export class ColaboradorComponent implements OnInit {
   }
 
   borraPago(pagoTmp){
-    this.pagos.forEach((element,index)=>{
-      if(element.idPago==pagoTmp.idPago)
-      {
-        this.pagos.splice(index,1);
-      } 
-   });
-  // this.rerender();
+    this.PAGO_DATA = this.PAGO_DATA.filter((value,key)=>{
+      return value.idPago != pagoTmp.idPago;
+    });
+    this.pagoSource.data = this.pagoSource.data.filter((value,key)=>{
+      return value.idPago != pagoTmp.idPago;
+    });
   }
 
   borraExperiencia(experienciaTmp){
-    this.experiencias.forEach((element,index)=>{
-      if(element.idExperiencia==experienciaTmp.idExperiencia)
-      {
-        this.experiencias.splice(index,1);
-      } 
-   });
-  // this.rerender();
+    this.EXPERIENCIA_DATA = this.EXPERIENCIA_DATA.filter((value,key)=>{
+      return value.idExperiencia != experienciaTmp.idExperiencia;
+    });
+    this.experienciaSource.data = this.experienciaSource.data.filter((value,key)=>{
+      return value.idExperiencia != experienciaTmp.idExperiencia;
+    });
+
   }
 
   limpiarEstudio(){
@@ -721,6 +807,7 @@ export class ColaboradorComponent implements OnInit {
       fechaFin:null,
       estatus:null,
       cedula:null,
+      cedulaNombre:null,
       comentarios:null
     };
   }
@@ -737,7 +824,7 @@ export class ColaboradorComponent implements OnInit {
     this.experiencia ={
       idExperiencia:null,
       empresa:null,
-      actividades:null,
+      comentario:null,
       fechaInicio:null,
       fechaFin:null,
       referencia:null,
