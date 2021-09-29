@@ -6,8 +6,8 @@ export class Experiencia {
     public fechaFin:any;
     public referencia:string;
     public telefono:string;
-    public especialidad:any[];
-    public experiencia:any[];
+    public especialidades:any[];
+    public habilidades:any[];
     constructor() {
     }
 }
