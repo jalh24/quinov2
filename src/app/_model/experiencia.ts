@@ -1,9 +1,9 @@
 export class Experiencia {
     public idExperiencia:number;
-    public lugar:string;
+    public empresa:string;
     public actividades:string;
-    public inicio:any;
-    public fin:any;
+    public fechaInicio:any;
+    public fechaFin:any;
     public referencia:string;
     public telefono:string;
     public especialidad:string;

@@ -91,17 +91,6 @@
             <input class="form-control-file" type="file" id="foto" accept=".png, .jpg, .jpeg"
             (change)="cargaFotoPersonal($event.target.files)">
           </div>
-          <!-- <div class="col-md-2">
-                        <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="calificacion">
-                          <option selected>Selecionar</option>
-                          <option value="1">1-Muy Malo</option>
-                          <option value="2">2-Malo</option>
-                          <option value="3">3-Promedio</option>
-                          <option value="4">4-Bueno</option>
-                          <option value="5">5-Muy Bueno</option>
-                        </select>
-                      </div> -->
           <div class="col-md-2">
             <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
             <select class="form-control" name="calificacion" (change)="onCalificacion($event.target.value)"
@@ -146,23 +135,14 @@
                   La fecha de nacimiento es obligatoria.
                 </div>
               </div>
-            <!-- <div class="invalid-feedback">
-              *Campo Requerido!
-            </div> -->
+
           </div>
-          <!-- <div class="col">
-                        <label for="paisNac" class="form-label">Pais<span class="text-danger"> *</span></label>
-                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnpais" placeholder="" value="">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div> -->
           <div class="col">
             <label for="paisNac" class="form-label">País<span class="text-danger"> *</span></label>
             <select class="form-control" name="paisNac" ngModel
-            #paisNac="ngModel" required>
+            #paisNac="ngModel" [(ngModel)]="colaborador.idPaisNacimiento" required>
             <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let pais of paises" [value]="pais.id">
+              <option *ngFor="let pais of paises" [value]="pais.idPais">
                 {{pais.nombre}}
               </option>
             </select>
@@ -172,24 +152,10 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col">
-                        <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnestado" placeholder="" value="" ngModel #ldnestado="ngModel">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div> -->
-          <!-- <div class="col">
-                          <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-                          <select class="form-control" name="estadoNac">
-                            <option *ngFor="let estado of estados" [value]="estado.id">
-                              {{estado.nombre}}
-                            </option>
-                          </select>
-                        </div> -->
           <div class="col">
             <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-            <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" [(ngModel)]="colaborador.idEstadoNacimiento"
+            <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" 
+            [(ngModel)]="colaborador.idEstadoNacimiento"
               (change)="comboCiudades($event.target.value)" required>
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let estado of estados" [value]="estado.idEstado">
@@ -202,16 +168,9 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col">
-                        <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                        <input maxlength="11" size="11" type="text" class="form-control" name="ldnciudad" placeholder="" value="" ngModel #ldnciudad="ngModel">
-                        <div class="invalid-feedback">
-                            *Campo Requerido!
-                        </div>
-                        </div> -->
           <div class="col">
             <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-            <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel" [ngModel]="colaborador.ciudadNac" ngModel required>
+            <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel"  ngModel required>
             <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
                 {{ciudad.nombre}}
@@ -269,14 +228,6 @@
             <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel" [(ngModel)]="colaborador.noInt">
           </div>
 
-          <!-- <div class="col-md-2">
-                      <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control" name="codigopostal" placeholder="" value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div> -->
-
           <div class="col-md-2">
             <label for="codigopostal" class="form-label">Código Postal<span class="text-danger"> *</span></label>
             <input type="text" class="form-control" maxlength="5" name="codigopostal"
@@ -290,20 +241,9 @@
                   El codigo postal son solo numeros.
               </div>
               </div>
-            <!-- <div class="invalid-feedback">
-              *Campo Requerido!
-            </div> -->
           </div>
 
 
-
-          <!-- <div class="col">
-                      <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control" name="colonia" placeholder="" value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div> -->
           <div class="col">
             <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
             <select class="form-control" name="colonia" ngModel
@@ -348,13 +288,6 @@
             </select>
           </div>
 
-          <!-- <div class="col-md-2">
-                      <label for="cp" class="form-label">Código Postal<span class="text-danger"> *</span></label>
-                      <input type="text" class="form-control" name="codigopostal" placeholder="" value="">
-                      <div class="invalid-feedback">
-                        *Campo Requerido!
-                      </div>
-                    </div> -->
         </div>
 
         <div class="row mt-4 pb-4">
@@ -376,22 +309,6 @@
       <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Información Personal</h4>
         <div class="row">
-          <!-- <div class="col-md-4">
-            <label class="pb-2">Genero<span class="text-danger"> *</span></label>
-            <br>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Masculino">
-              <label class="form-check-label" for="inlineRadio1">Masculino</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Femenino">
-              <label class="form-check-label" for="inlineRadio2">Femenino</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" name="sexo" value="Otro">
-              <label class="form-check-label" for="inlineRadio3">Otro</label>
-            </div>
-          </div> -->
           <div class="col-md-4">
             <label for="sexo" class="form-label">Genero<span class="text-danger"> *</span></label>
             <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)"
@@ -462,23 +379,8 @@
                   El telefono debe contener 10 digitos.
                 </div>
               </div>
-            <!-- <div class="invalid-feedback">
-              *Campo Requerido!
-            </div> -->
           </div>
 
-          <!-- <div class="col-md-2">
-                      <label for="tipoTel" class="form-label">Tipo de Teléfono 1</label>
-                      <select class="form-control" name="tipoTel">
-                        <option selected>Selecionar</option>
-                        <option value="Casa">Casa</option>
-                        <option value="Oficina">Oficina</option>
-                        <option value="Celular">Celular</option>
-                        <option value="Familiar">Familiar</option>
-                        <option value="Amigo">Amigo</option>
-                        <option value="Vecino">Vecino</option>
-                      </select>
-                    </div> -->
           <div class="col-md-2">
             <label for="tipoTel1" class="form-label">Tipo de Teléfono 1</label>
             <select class="form-control" name="tipoTel1" ngModel #tipoTel1="ngModel" [ngModel]="colaborador.tipoTelefono1" (change)="onTipoTel1($event.target.value)">
@@ -497,18 +399,6 @@
             </div>
           </div>
 
-          <!-- <div class="col-md-2">
-                      <label for="tipoTel1" class="form-label">Tipo de Teléfono 2</label>
-                      <select class="form-control" name="tipoTel1">
-                        <option selected>Selecionar</option>
-                        <option value="Casa">Casa</option>
-                        <option value="Oficina">Oficina</option>
-                        <option value="Celular">Celular</option>
-                        <option value="Familiar">Familiar</option>
-                        <option value="Amigo">Amigo</option>
-                        <option value="Vecino">Vecino</option>
-                      </select>
-                    </div> -->
           <div class="col-md-2">
             <label for="tipoTel2" class="form-label">Tipo de Teléfono 2</label>
             <select class="form-control" name="tipoTel2" ngModel #tipoTel2="ngModel" [ngModel]="colaborador.tipoTelefono2" (change)="onTipoTel2($event.target.value)">
@@ -598,10 +488,10 @@
 
                   <div class="col-md-3">
                     <label for="banco" class="form-label">Banco<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="banco" ngModel #banco="ngModel" [(ngModel)]="pago.banco"
+                    <select class="form-control" name="banco" ngModel #banco="ngModel" 
                     (change)="onBanco($event.target.value)">
                       <option value="" selected disabled hidden>Seleccionar</option>
-                      <option *ngFor="let banco of bancos" [value]="banco.nombre">
+                      <option *ngFor="let banco of bancos" [value]="banco.idBanco">
                         {{banco.nombre}}
                       </option>                     
                     </select>
@@ -645,7 +535,7 @@
               
                 <ng-container matColumnDef="banco">
                   <th mat-header-cell *matHeaderCellDef> Banco</th>
-                  <td mat-cell *matCellDef="let element"> {{element.banco}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.banco.nombre}} </td>
                 </ng-container>
               
                 <ng-container matColumnDef="tipoCuenta">
@@ -692,13 +582,13 @@
                 <div class="col-md-6">
                   <label for="inicioEst" class="form-label">Inicio<span class="text-danger"> *</span></label>
                   <input type="month" class="form-control datepicker" name="inicioEst" #inicioEst="ngModel"
-                    min="1900-01" [(ngModel)]="estudio.inicio"/>
+                    min="1900-01" [(ngModel)]="estudio.fechaInicio"/>
                 </div>
 
                 <div class="col-md-6">
                   <label for="terminacionEst" class="form-label">Terminación</label>
                   <input type="month" class="form-control datepicker" name="terminacionEst" #terminacionEst="ngModel"
-                    min="1900-02" [(ngModel)]="estudio.fin" disabled="disabled" [disabled]="textBoxDisabledCed">
+                    min="1900-02" [(ngModel)]="estudio.fechaFin" disabled="disabled" [disabled]="textBoxDisabledCed">
                 </div>
               </div>
               <div class="row">
@@ -771,17 +661,17 @@
             
               <ng-container matColumnDef="inicio">
                 <th mat-header-cell *matHeaderCellDef> Inicio </th>
-                <td mat-cell *matCellDef="let element"> {{element.inicio}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
               </ng-container>
             
               <ng-container matColumnDef="fin">
                 <th mat-header-cell *matHeaderCellDef> Fin </th>
-                <td mat-cell *matCellDef="let element"> {{element.fin}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.fechaFin}} </td>
               </ng-container>
               
               <ng-container matColumnDef="estatus">
                 <th mat-header-cell *matHeaderCellDef> Estatus </th>
-                <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                <td mat-cell *matCellDef="let element"> {{element?.estatus.nombre}} </td>
               </ng-container>
 
               <ng-container matColumnDef="deleteColaborador">
@@ -809,7 +699,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <label for="empresa" class="form-label">Empresa/Institución<span class="text-danger"> *</span></label>
-                  <input type="text" class="form-control" name="empresa"  [(ngModel)]="experiencia.lugar" ngModel #empresa="ngModel">
+                  <input type="text" class="form-control" name="empresa"  [(ngModel)]="experiencia.empresa" ngModel #empresa="ngModel">
                 </div>
               </div>
 
@@ -817,13 +707,13 @@
                 <div class="col-md-6">
                   <label for="inicioExp" class="form-label">Inicio<span class="text-danger"> *</span></label>
                   <input type="month" class="form-control datepicker" name="inicioExp"
-                    min="1900-01" [(ngModel)]="experiencia.inicio" ngModel #inicioExp="ngModel">
+                    min="1900-01" [(ngModel)]="experiencia.fechaInicio" ngModel #inicioExp="ngModel">
                 </div>
 
                 <div class="col-md-6">
                   <label for="terminacionExp" class="form-label">Terminación<span class="text-danger"> *</span></label>
                   <input type="month" class="form-control datepicker" name="terminacionExp"
-                    min="1900-02" [(ngModel)]="experiencia.fin" ngModel #terminacionExp="ngModel">
+                    min="1900-02" [(ngModel)]="experiencia.fechaFin" ngModel #terminacionExp="ngModel">
                 </div>
               </div>
               <div class="row">
@@ -1394,17 +1284,6 @@
                       </div>
                     </div>
                 </div>
-                <!-- <label class="mt-3 mb-1">Visa<span class="text-danger"> *</span></label>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visa" value="option1"
-                    (click)="enableTextBoxVis()">
-                  <label class="form-check-label" for="visaS">Sí</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="visaN" value="option2"
-                    (click)="disableTextBoxVis()">
-                  <label class="form-check-label" for="visaN">No</label>
-                </div> -->
               </div>
             </div>
             <div class="row">

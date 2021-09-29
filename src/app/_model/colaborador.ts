@@ -13,9 +13,6 @@ export class Colaborador {
     public rfc:string;
     public nss:string;
     public fecha_nacimiento:Date;
-    public paisNac:number;
-    public estadoNac:number;
-    public ciudadNac:number;
     public idSexo:number;
     public peso:number;
     public estatura:number;
@@ -46,6 +43,8 @@ export class Colaborador {
     public calle1:string;
     public calle2:string;
     public codigoPostal:number;
+    public idPaisNacimiento:number;
+    public idCiudadNacimiento:number;
     public idPais:number;
     public idEstado:number;
     public idCiudad:number;
@@ -56,7 +55,6 @@ export class Colaborador {
     public horario:any;
     public estudios:any[];
     public experiencias:any[];
-    public pagos:any[];
     public cuentasColaborador:any[];
     public contactosColaborador:any[];
     public idPermanencia:number;

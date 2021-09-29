@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { Experiencia } from '../_model/experiencia';
 import  {  NgbToastService, NgbToastType,NgbToast }  from  'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Estatus } from '../_model/estatus';
 
 
 @Component({
@@ -117,7 +118,7 @@ export class ColaboradorComponent implements OnInit {
   dtOptionsPago: any = {};
   dtOptionsEstudio: any = {};
   dtOptionsExperiencia: any = {};
-  estatusEstudios: string[] = ['Si', 'No', 'Trunco'];
+  estatusEstudios: Estatus[];
   estatusSelected:string;
 
   @ViewChild(DataTableDirective)
@@ -140,6 +141,7 @@ export class ColaboradorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.listaEstatus();
     this.comboEstados();
     this.comboPaises();
     this.comboCalificaciones();
@@ -262,6 +264,10 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.calle1=null;
     this.colaborador.calle2=null;
     this.colaborador.codigoPostal=null;
+    this.colaborador.idPaisNacimiento=null;
+    this.colaborador.idEstadoNacimiento=null;
+    this.colaborador.idCiudadNacimiento=null;
+    this.colaborador.comprobanteDomicilio= null;
     this.colaborador.idPais=null;
     this.colaborador.idEstado=null;
     this.colaborador.idCiudad=null;
@@ -291,8 +297,8 @@ export class ColaboradorComponent implements OnInit {
       idEstudio:null,
       idColaborador:null,
       institucion:null,
-      inicio:null,
-      fin:null,
+      fechaInicio:null,
+      fechaFin:null,
       estatus:null,
       cedula:null,
       comentarios:null
@@ -300,10 +306,10 @@ export class ColaboradorComponent implements OnInit {
     this.experiencias=[];
     this.experiencia = {
       idExperiencia:null,
-      lugar:null,
+      empresa:null,
       actividades:null,
-      inicio:null,
-      fin:null,
+      fechaInicio:null,
+      fechaFin:null,
       referencia:null,
       telefono:null,
       especialidad:null
@@ -326,14 +332,22 @@ export class ColaboradorComponent implements OnInit {
   enableOtraHab(){
     this.textBoxDisabledOtraHab = !this.textBoxDisabledOtraHab;
   }
+
   enableCed(event){
     this.textBoxDisabledCed = false;
-    this.estudio.estatus = event;
+    console.log(event);
+    this.estudio.estatus = this.estatusEstudios.find(estu=> { console.log(estu); return estu.nombre == event}); 
+    console.log(this.estudio);
+    //this.estudio.estatus = event;
   }
+  
   disableCed(event){
     this.textBoxDisabledCed = true;
-    this.estudio.estatus = event;
+    this.estudio.estatus = this.estatusEstudios.find(estu=> { return estu.nombre === event}); 
+    console.log(this.estudio);
+    //this.estudio.estatus = event;
   }
+  
   enableTextBoxVis(){
     this.textBoxDisabledVis = false;
   }
@@ -416,11 +430,11 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.horario = this.diasLaborales;
     // this.colaborador.codigoPostal = this.selectedCodigoPostal;
     this.colaborador.idPais=1;
-    this.colaborador.paisNac=1;
+    this.colaborador.idPaisNacimiento=1;
     this.colaborador.idEstatus=1;
     this.colaborador.idZonaLaboral=1;
-    this.colaborador.pagos = this.pagos;
-    this.colaborador.estudios = this.estudios;
+    this.colaborador.cuentasColaborador = this.pagoSource.data;
+    this.colaborador.estudios = this.estudioSource.data;
     this.colaborador.experiencias= this.experiencias;
     console.log(this.colaborador);
 
@@ -577,10 +591,11 @@ export class ColaboradorComponent implements OnInit {
         this.idEstudio++;
       }
       this.estudio.idEstudio=this.idEstudio;
+      console.log(this.estudio);
       this.ESTUDIO_DATA.push(this.estudio);
       this.estudioSource= new MatTableDataSource(this.ESTUDIO_DATA);
     }else{
-      this.estudio.estatus = this.estatusSelected;
+      this.estudio.estatus = this.estatusEstudios.find(estu=> { return estu.nombre === this.estatusSelected}); ;
       this.estudios.splice(this.estudio.idEstudio,1, this.estudio);
     }
     
@@ -588,8 +603,8 @@ export class ColaboradorComponent implements OnInit {
       idEstudio:null,
       idColaborador:null,
       institucion:null,
-      inicio:null,
-      fin:null,
+      fechaInicio:null,
+      fechaFin:null,
       estatus:null,
       cedula:null,
       comentarios:null
@@ -614,7 +629,8 @@ export class ColaboradorComponent implements OnInit {
   }
 
   onBanco(event){
-    console.log(event);
+    this.pago.banco = this.bancos.find(banco => { return banco.idBanco == event});
+    console.log(this.pago);
   }
 
   agregarPago(){
@@ -654,10 +670,10 @@ export class ColaboradorComponent implements OnInit {
     this.experiencias.push(this.experiencia);
     this.experiencia ={
       idExperiencia:null,
-      lugar:null,
+      empresa:null,
       actividades:null,
-      inicio:null,
-      fin:null,
+      fechaInicio:null,
+      fechaFin:null,
       referencia:null,
       telefono:null,
       especialidad:null
@@ -703,8 +719,8 @@ export class ColaboradorComponent implements OnInit {
       idEstudio:null,
       idColaborador:null,
       institucion:null,
-      inicio:null,
-      fin:null,
+      fechaInicio:null,
+      fechaFin:null,
       estatus:null,
       cedula:null,
       comentarios:null
@@ -722,96 +738,90 @@ export class ColaboradorComponent implements OnInit {
   limpiarExperiencia(){
     this.experiencia ={
       idExperiencia:null,
-      lugar:null,
+      empresa:null,
       actividades:null,
-      inicio:null,
-      fin:null,
+      fechaInicio:null,
+      fechaFin:null,
       referencia:null,
       telefono:null,
       especialidad:null
     };
   }
 
+  public listaEstatus(){
+    this.http.get<any>('/api/catalogo/estatus?tipo=ESTUDIO').subscribe(data => {
+        this.estatusEstudios= data.data;
+    });
+  }
+
   public comboCalificaciones(){
     this.http.get<any>('/api/catalogo/calificaciones').subscribe(data => {
-        console.log(data);
         this.calificaciones = data.data;
     });
   }
 
   public comboTiposColaboradores(){
     this.http.get<any>('/api/catalogo/tiposColaboradores').subscribe(data => {
-        console.log(data);
         this.tiposColaboradores = data.data;
     });
   }
 
   public comboTeces(){
     this.http.get<any>('/api/catalogo/teces').subscribe(data => {
-        console.log(data);
         this.teces = data.data;
     });
   }
 
   public comboBancos(){
     this.http.get<any>('/api/catalogo/bancos').subscribe(data => {
-        console.log(data);
         this.bancos = data.data;
     });
   }
 
   public comboEstadosCiviles(){
     this.http.get<any>('/api/catalogo/comboEstadosCiviles').subscribe(data => {
-        console.log(data);
         this.estadosCiviles = data.data;
     });
   }
 
   public comboTiposTelefono(){
     this.http.get<any>('/api/catalogo/tiposTelefono').subscribe(data => {
-        console.log(data);
         this.tiposTelefono = data.data;
     });
   }
 
   public comboPermanencias(){
     this.http.get<any>('/api/catalogo/permanencias').subscribe(data => {
-        console.log(data);
         this.permanencias = data.data;
     });
   }
 
   public comboZonasLaborales(){
     this.http.get<any>('/api/catalogo/zonasLaborales').subscribe(data => {
-        console.log(data);
         this.zonasLaborales = data.data;
     });
   }
 
   public comboEspecialidades(){
     this.http.get<any>('/api/catalogo/especialidades').subscribe(data => {
-        console.log(data);
         this.especialidades = data.data;
     });
   }
 
   public comboHabilidades(){
     this.http.get<any>('/api/catalogo/habilidades').subscribe(data => {
-        console.log(data);
         this.habilidades = data.data;
     });
   }
 
   public comboColonias(){
     this.http.get<any>('/api/catalogo/colonias').subscribe(data => {
-        console.log(data);
         this.colonias = data.data;
     });
   }
 
   public comboSexos(){
     this.http.get<any>('/api/catalogo/sexos').subscribe(data => {
-        console.log(data);
         this.sexos = data.data;
     });
   }
@@ -819,28 +829,24 @@ export class ColaboradorComponent implements OnInit {
   public comboCiudades(idEstadoNacimiento){
     this.colaborador.idEstadoNacimiento = idEstadoNacimiento;
     this.http.get<any>('/api/catalogo/ciudades?idEstado='+ idEstadoNacimiento).subscribe(data => {
-        console.log(data);
         this.ciudades = data.data;    
     });
   }
 
   public comboEstados(){
     this.http.get<any>('/api/catalogo/estados?idPais='+ this.selectedPais).subscribe(data => {
-        console.log(data);
         this.estados = data.data;
     });
   }
 
   public comboPaises(){
     this.http.get<any>('/api/catalogo/paises').subscribe(data => {
-        console.log(data);
         this.paises = data.data;
     });
   }
 
   public onCodigoPostal(selectedCodigoPostal){
     this.colaborador.codigoPostal = selectedCodigoPostal;
-    console.log(this.colaborador.codigoPostal);
     this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal='+ selectedCodigoPostal).subscribe(data => {
       this.colonias = data.data;
       this.colaborador.idCiudad = data.data[0].idCiudad;
@@ -855,7 +861,6 @@ export class ColaboradorComponent implements OnInit {
   }
 
   onColonia(value:any){
-    console.log(value);
     this.colaborador.idColonia = value;
   }
   
@@ -888,7 +893,7 @@ export class ColaboradorComponent implements OnInit {
   }
 
   onCiudadNacimiento(value:any){
-    this.colaborador.ciudadNac = value;
+    this.colaborador.idCiudadNacimiento = value;
   }
 
   onTipoTel1(value:any){
