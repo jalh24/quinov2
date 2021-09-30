@@ -20,6 +20,9 @@ export class ColaboradoresComponent implements OnInit {
   colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
   colaboradorColumns: string[] = ['nombre','a_paterno', 'a_materno', 'estatura', 'peso'];
   @ViewChild('colaboradoresTable',{static:true}) colaboradoresTable: MatTable<any>;
+  sexos: any;
+  permanencias: any;
+  zonasLaborales: any;
   
   constructor(
     private router:Router,
@@ -28,6 +31,9 @@ export class ColaboradoresComponent implements OnInit {
 
   ngOnInit(): void {
     this.getColaboradores();
+    this.comboSexos();
+    this.comboPermanencias();
+    this.comboZonasLaborales();
   }
  
   displayToConsole(datatableElement: DataTableDirective): void {
@@ -40,6 +46,24 @@ export class ColaboradoresComponent implements OnInit {
         this.colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
         //this.colaborador = data.data;
     });   
+  }
+  
+  public comboSexos(){
+    this.http.get<any>('/api/catalogo/sexos').subscribe(data => {
+        this.sexos = data.data;
+    });
+  }
+
+  public comboPermanencias(){
+    this.http.get<any>('/api/catalogo/permanencias').subscribe(data => {
+        this.permanencias = data.data;
+    });
+  }
+  
+  public comboZonasLaborales(){
+    this.http.get<any>('/api/catalogo/zonasLaborales').subscribe(data => {
+        this.zonasLaborales = data.data;
+    });
   }
 
   public agregarColaborador(){
