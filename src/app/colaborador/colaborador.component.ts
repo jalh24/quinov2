@@ -38,7 +38,7 @@ export class ColaboradorComponent implements OnInit {
   EXPERIENCIA_DATA: Experiencia[] = [];
   experienciaSource = new MatTableDataSource<Experiencia>(this.EXPERIENCIA_DATA);
 
-  experienciaColumns: string[] = ['institucion', 'comentario', 'fechaInicio', 'fechaFin','telefono','especialidades', 'deleteExperiencia'];
+  experienciaColumns: string[] = ['institucion', 'comentario', 'fechaInicio', 'fechaFin','telefono', 'deleteExperiencia'];
   @ViewChild('experiencasTable',{static:true}) experiencasTable: MatTable<any>;
 
   textBoxDisabledCed = true;
@@ -294,6 +294,8 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.experiencias=[];
     this.colaborador.cuentasColaborador=[];
     this.colaborador.contactosColaborador=[];
+    this.colaborador.especialidades=[];
+    this.colaborador.habilidades=[];
 
     this.idEstudio = 0;
     this.idPago = 0;
@@ -327,9 +329,7 @@ export class ColaboradorComponent implements OnInit {
       fechaInicio:null,
       fechaFin:null,
       referencia:null,
-      telefono:null,
-      especialidades:[],
-      habilidades:[]
+      telefono:null
     };
     this.especialidadesSelected=[];
     this.habilidadesSelected=[];
@@ -456,6 +456,8 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.cuentasColaborador = this.pagoSource.data;
     this.colaborador.estudios = this.estudioSource.data;
     this.colaborador.experiencias= this.experienciaSource.data;
+    this.colaborador.especialidades=this.especialidadesSelected;
+    this.colaborador.habilidades=this.habilidadesSelected;
     console.log(this.colaborador);
 
     if(ngForm.valid){
@@ -749,8 +751,6 @@ export class ColaboradorComponent implements OnInit {
       }
       this.experiencia.idExperiencia=this.idExperiencia;
     }
-    this.experiencia.especialidades= this.especialidadesSelected;
-    this.experiencia.habilidades = this.habilidadesSelected;
     this.EXPERIENCIA_DATA.push(this.experiencia);
     this.experienciaSource= new MatTableDataSource(this.EXPERIENCIA_DATA);
     
@@ -761,9 +761,7 @@ export class ColaboradorComponent implements OnInit {
       fechaInicio:null,
       fechaFin:null,
       referencia:null,
-      telefono:null,
-      especialidades:[],
-      habilidades:[]
+      telefono:null
     };
     
   
@@ -828,9 +826,7 @@ export class ColaboradorComponent implements OnInit {
       fechaInicio:null,
       fechaFin:null,
       referencia:null,
-      telefono:null,
-      especialidades:[],
-      habilidades:[]
+      telefono:null
     };
   }
 

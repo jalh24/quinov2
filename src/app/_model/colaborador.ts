@@ -66,6 +66,8 @@ export class Colaborador {
     public idPermanencia:number;
     public referenciaDireccion:string;
     public observaciones:string;
+    public especialidades:any[];
+    public habilidades:any[];
     constructor() {
     }
 }            

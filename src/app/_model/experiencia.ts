@@ -6,8 +6,7 @@ export class Experiencia {
     public referencia:string;
     public comentario:string;
     public telefono:string;
-    public especialidades:any[];
-    public habilidades:any[];
+    
     constructor() {
     }
 }
