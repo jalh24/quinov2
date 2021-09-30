@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Colaborador } from '../_model/colaborador';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-colaboradores',
   templateUrl: './colaboradores.component.html',
@@ -12,51 +14,32 @@ export class ColaboradoresComponent implements OnInit {
   @ViewChild(DataTableDirective, {static: false})
   private datatableElement: DataTableDirective;
 
-  dtOptions: any = {};
   colaborador:any=null;
-
+  
+  COLABORADOR_DATA: Colaborador[] = [];
+  colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
+  colaboradorColumns: string[] = ['nombre','a_paterno', 'a_materno', 'estatura', 'peso'];
+  @ViewChild('colaboradoresTable',{static:true}) colaboradoresTable: MatTable<any>;
+  
   constructor(
-              private router:Router
-          ){  }
+    private router:Router,
+    private http: HttpClient
+  ){}
 
   ngOnInit(): void {
-    this.dtOptions = {
-      ajax: '/api/colaborador',
-      columns: [{
-        title: 'ID',
-        data: 'idColaborador'
-      }, {
-        title: 'Nombre',
-        data: 'nombre'
-      }, {
-        title: 'RFC',
-        data: 'rfc'
-      }],
-      select: true,
-      rowCallback: (row: Node, data: any | Object, index: number) => {
-        
-        const self = this;
-        
-        $('td', row).on('click', () => {
-          if(self.colaborador !== null){
-            if(self.colaborador.num_colaborador === data.num_colaborador){
-              this.colaborador= null;
-            } else{
-              self.colaborador=data;
-            }
-          } else{
-            self.colaborador=data;
-          }
-        });
-
-        return row;
-      }
-
-    };
+    this.getColaboradores();
   }
  
   displayToConsole(datatableElement: DataTableDirective): void {
     datatableElement.dtInstance.then((dtInstance: DataTables.Api) => console.log(dtInstance));
+  }
+
+  public getColaboradores(){
+    this.http.get<any>('/api/colaborador').subscribe(data => {
+        this.COLABORADOR_DATA = data.data;
+        this.colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
+        //this.colaborador = data.data;
+    });   
   }
 
   public agregarColaborador(){

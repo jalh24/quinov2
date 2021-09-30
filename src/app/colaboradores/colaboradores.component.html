@@ -1,7 +1,132 @@
 <div style="padding: 10px;">
     <button type="button" class="btn btn-primary" (click)="agregarColaborador()">Agregar</button> &nbsp;&nbsp;
-    <button type="button" class="btn btn-warning" *ngIf="colaborador != null" >Editar</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-warning" *ngIf="colaborador != null">Editar</button>&nbsp;&nbsp;
     <button type="button" class="btn btn-danger" *ngIf="colaborador">Eliminar</button>
+
+    <div class="row pt-3 pb-3">
+        <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Edad</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Si</option>
+              <option value="Numero de Tarjeta">No</option>                     
+            </select>
+          </div>
+        <div class="col-md-2">
+            <label for="telefono" class="form-label">Peso</label>
+            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono">
+        </div>
+        <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Sexo</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Masculino</option>
+              <option value="Numero de Tarjeta">Femenino</option>                     
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Atiende COVID</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Si</option>
+              <option value="Numero de Tarjeta">No</option>                     
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Estatura</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Si</option>
+              <option value="Numero de Tarjeta">No</option>                     
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Permanencia</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Si</option>
+              <option value="Numero de Tarjeta">No</option>                     
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Zonas Laborales</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Apodaca</option>
+              <option value="Numero de Tarjeta">Santa Catalina</option>                     
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Habilidades</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Apodaca</option>
+              <option value="Numero de Tarjeta">Santa Catalina</option>                     
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Auto Propio</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Si</option>
+              <option value="Numero de Tarjeta">No</option>                     
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Disp. para viajar</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Si</option>
+              <option value="Numero de Tarjeta">No</option>                     
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="tipocuenta" class="form-label">Dias de la semana que atiende</label>
+            <select class="form-control" name="tipocuenta" 
+            >
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="CLABE">Si</option>
+              <option value="Numero de Tarjeta">No</option>                     
+            </select>
+          </div>
+    </div>
 </div>
 
-<table datatable [dtOptions]="dtOptions" class="row-border hover"></table>
+
+
+<div class="container">
+    <table mat-table [dataSource]="colaboradorSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+        <ng-container matColumnDef="a_paterno">
+            <th mat-header-cell *matHeaderCellDef> Apellido Paterno </th>
+            <td mat-cell *matCellDef="let element"> {{element.a_paterno}} </td>
+        </ng-container>
+        <ng-container matColumnDef="a_materno">
+            <th mat-header-cell *matHeaderCellDef> Apellido Materno </th>
+            <td mat-cell *matCellDef="let element"> {{element.a_materno}} </td>
+        </ng-container>
+        <ng-container matColumnDef="peso">
+            <th mat-header-cell *matHeaderCellDef> Peso </th>
+            <td mat-cell *matCellDef="let element"> {{element.peso}} kg </td>
+        </ng-container>
+        <ng-container matColumnDef="estatura">
+            <th mat-header-cell *matHeaderCellDef> Estatura </th>
+            <td mat-cell *matCellDef="let element"> {{element.estatura}} cm </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="colaboradorColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: colaboradorColumns;"></tr>
+    </table>
+</div>
