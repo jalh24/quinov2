@@ -458,8 +458,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.experiencias= this.experienciaSource.data;
     this.colaborador.especialidades=this.especialidadesSelected;
     this.colaborador.habilidades=this.habilidadesSelected;
-    console.log(this.colaborador);
-
+    
     if(ngForm.valid){
       this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
         this.showSuccess(NgbToastType.Success,"Se creo el colaborador exitosamente");

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Colaborador } from '../_model/colaborador';
 import { HttpClient } from '@angular/common/http';
+import { ColaboradorFiltro } from '../_model/colaboradorFiltro';
 @Component({
   selector: 'app-colaboradores',
   templateUrl: './colaboradores.component.html',
@@ -23,7 +24,8 @@ export class ColaboradoresComponent implements OnInit {
   sexos: any;
   permanencias: any;
   zonasLaborales: any;
-  
+  colaboradorFiltro:ColaboradorFiltro;
+
   constructor(
     private router:Router,
     private http: HttpClient
@@ -34,6 +36,7 @@ export class ColaboradoresComponent implements OnInit {
     this.comboSexos();
     this.comboPermanencias();
     this.comboZonasLaborales();
+    this.colaboradorFiltro= new ColaboradorFiltro();
   }
  
   displayToConsole(datatableElement: DataTableDirective): void {
@@ -41,7 +44,8 @@ export class ColaboradoresComponent implements OnInit {
   }
 
   public getColaboradores(){
-    this.http.get<any>('/api/colaborador').subscribe(data => {
+    console.log(this.colaboradorFiltro);
+    this.http.post<any>('/api/colaborador',this.colaboradorFiltro).subscribe(data => {
         this.COLABORADOR_DATA = data.data;
         this.colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
         //this.colaborador = data.data;
