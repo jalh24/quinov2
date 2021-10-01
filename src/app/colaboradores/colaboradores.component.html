@@ -244,6 +244,7 @@
 
 <div class="container bg-white rounded-bottom shadow pb-4">
 <!-- <div class="container"> -->
+  <div class="mat-elevation-z8">
     <table mat-table [dataSource]="colaboradorSource" class="mat-elevation-z8">
         <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -269,4 +270,12 @@
         <tr mat-header-row *matHeaderRowDef="colaboradorColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: colaboradorColumns;"></tr>
     </table>
+    <mat-paginator [length]="length"
+                    [pageIndex]="pageIndex"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="[1, 5, 25, 100]"
+                    (page)="pageEvent = getColaboradores($event)"
+                 aria-label="Selecciona los elementos a mostrar">
+  </mat-paginator>
+  </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { Colaborador } from '../_model/colaborador';
 import { HttpClient } from '@angular/common/http';
 import { ColaboradorFiltro } from '../_model/colaboradorFiltro';
@@ -14,9 +15,12 @@ export class ColaboradoresComponent implements OnInit {
 
   @ViewChild(DataTableDirective, {static: false})
   private datatableElement: DataTableDirective;
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   colaborador:any=null;
-  
+  pageEvent: PageEvent;
+  pageIndex:number=0;
+  pageSize:number=5;
+  length:number;
   COLABORADOR_DATA: Colaborador[] = [];
   colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
   colaboradorColumns: string[] = ['nombre','a_paterno', 'a_materno', 'estatura', 'peso'];
@@ -40,17 +44,27 @@ export class ColaboradoresComponent implements OnInit {
     this.comboHabilidades();
   }
  
+  ngAfterViewInit() {
+    this.colaboradorSource.paginator = this.paginator;
+  }
+
   displayToConsole(datatableElement: DataTableDirective): void {
     datatableElement.dtInstance.then((dtInstance: DataTables.Api) => console.log(dtInstance));
   }
 
-  public getColaboradores(){
+  public getColaboradores(event?:PageEvent){
+    console.log(event);
+    this.colaboradorFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
+    this.colaboradorFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
+    console.log(event);
     console.log(this.colaboradorFiltro);
     this.http.post<any>('/api/colaborador',this.colaboradorFiltro).subscribe(data => {
         this.COLABORADOR_DATA = data.data;
         this.colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
         //this.colaborador = data.data;
+        this.length = data.count.total;
     });   
+    return event;
   }
   
   public comboSexos(){

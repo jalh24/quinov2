@@ -17,6 +17,8 @@ export class ColaboradorFiltro {
     public dispuestoViajar:boolean;
     public especialidades:any[];
     public habilidades:any[];
+    public limit:number;
+    public start:number;
     constructor() {
     }
 }            

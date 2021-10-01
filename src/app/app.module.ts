@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbToastModule } from  'ngb-toast';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatIconModule} from '@angular/material/icon';
     HttpClientModule,
     NgbToastModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
