@@ -1,7 +1,113 @@
-<div style="padding: 10px;">
+<!-- <div style="padding: 10px;"> -->
     
+  <div class="container mt-5 pt-4 bg-white rounded-top shadow">
+    <table class="table">
+      <!-- <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead> -->
+      <tbody>
+        <tr>
+          <th scope="row">Edad</th>
+          <td>
+            <input maxlength="2" size="2" type="text" class="form-control" id="edad" name="edadDesde" placeholder="Desde" [(ngModel)]="colaboradorFiltro.edad1">
+          </td>
+          <td>
+            <input maxlength="2" size="2" type="text" class="form-control" id="edad" name="edadHasta" placeholder="Hasta" [(ngModel)]="colaboradorFiltro.edad2">
+          </td>
+          <th scope="row">Genero</th>
+          <td>
+            <select class="form-control" name="sexoFiltro" [(ngModel)]="colaboradorFiltro.genero">
+              <option value="" selected disabled hidden>Seleccionar</option>
+                <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">
+                  {{sexo.nombre}}
+                </option>          
+              </select>
+          </td>
+          <th scope="row">Habilidades</th>
+          <td>
+            <select class="form-control" name="habilidadFiltro">
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option *ngFor="let habilidad of habilidades" [value]="habilidad.idHabilidad">
+                {{habilidad.nombre}}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Peso</th>
+          <td>
+            <input maxlength="2" size="2" type="text" class="form-control" id="peso" name="pesoDesde" placeholder="Desde" [(ngModel)]="colaboradorFiltro.peso1">
+          </td>
+          <td>
+            <input maxlength="2" size="2" type="text" class="form-control" id="peso" name="pesoHasta" placeholder="Hasta" [(ngModel)]="colaboradorFiltro.peso2">
+          </td>
+          <th scope="row">Permanencia</th>
+          <td>
+            <select class="form-control" name="permanenciaFiltro" [(ngModel)]="colaboradorFiltro.permanencia">
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option *ngFor="let permanencia of permanencias" [value]="permanencia.idPermanencia">
+                {{permanencia.nombre}}
+              </option>
+            </select>
+          </td>
+          <th scope="row">Dias Laborales</th>
+          <td>
+            <select class="form-control" name="horarioLaboralFiltro">
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="1">Lunes</option>
+              <option value="2">Martes</option>
+              <option value="3">Miercoles</option>
+              <option value="4">Jueves</option>
+              <option value="5">Viernes</option>
+              <option value="6">Sabado</option>
+              <option value="7">Domingo</option>
+              <option value="8">Todos los dias</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Estatura</th>
+          <td>
+            <input maxlength="3" size="3" type="text" class="form-control" id="estatura" name="estaturaDesde" placeholder="Desde" [(ngModel)]="colaboradorFiltro.estatura1">
+          </td>
+          <td>
+            <input maxlength="3" size="3" type="text" class="form-control" id="estatura" name="estaturaHasta" placeholder="Hasta" [(ngModel)]="colaboradorFiltro.estatura2">
+          </td>
+          <th scope="row">Zona Laboral</th>
+          <td>
+            <select class="form-control" name="zonasLaboralesFiltro">
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.idZonaLaboral">
+                {{zonaLaboral.nombre}}
+              </option>
+            </select>
+          </td>
+          <td colspan="2">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="covidFiltro" [(ngModel)]="colaboradorFiltro.atiendeCovid">
+              <label class="form-check-label" for="covidFiltro">Atiende COVID</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="autoFiltro" [(ngModel)]="colaboradorFiltro.autoPropio">
+              <label class="form-check-label" for="autoFiltro">Auto Propio</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="viajeFiltro" [(ngModel)]="colaboradorFiltro.dispuestoViajar">
+              <label class="form-check-label" for="viajeFiltro">Disp. para viajar</label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-    <div class="row pt-3 pb-3">
+
+
+    <!-- <div class="row pt-3 pb-3">
       <div class="col-md-1">
         <label for="edadDesde" class="form-label">Edad</label>
         <input maxlength="2" size="2" type="text" class="form-control" id="edad" name="edadDesde" 
@@ -23,10 +129,10 @@
             <input maxlength="2" size="2" type="text" class="form-control" id="peso" name="pesoHasta" placeholder="Hasta"
             [(ngModel)]="colaboradorFiltro.peso2">
           </div>
-        <!-- <div class="col-md-1">
+         <div class="col-md-1">
             <label for="telefono" class="form-label">Peso</label>
             <input maxlength="10" size="10" type="tel" class="form-control" name="telefono">
-        </div> -->
+        </div>
         <div class="col-md-1">
           <label for="sexoFiltro" class="form-label">Genero</label>
           <select class="form-control" name="sexoFiltro" [(ngModel)]="colaboradorFiltro.genero">
@@ -36,14 +142,14 @@
             </option>          
           </select>
         </div>
-        <!-- <div class="col-md-1">
+        <div class="col-md-1">
             <label for="tipocuenta" class="form-label">Sexo</label>
             <select class="form-control" name="tipocuenta">
               <option value="" selected disabled hidden>Seleccionar</option>
               <option value="CLABE">Masculino</option>
               <option value="Numero de Tarjeta">Femenino</option>                     
             </select>
-          </div> -->
+          </div>
           <div class="col-md-1">
             <label for="estaturaDesde" class="form-label">Estatura</label>
             <input maxlength="3" size="3" type="text" class="form-control" id="estatura" name="estaturaDesde" placeholder="Desde"
@@ -54,14 +160,14 @@
             <input maxlength="3" size="3" type="text" class="form-control" id="estatura" name="estaturaHasta" placeholder="Hasta"
             [(ngModel)]="colaboradorFiltro.estatura2">
           </div>
-          <!-- <div class="col-md-1">
+          <div class="col-md-1">
             <label for="tipocuenta" class="form-label">Estatura</label>
             <select class="form-control" name="tipocuenta">
               <option value="" selected disabled hidden>Seleccionar</option>
               <option value="CLABE">Si</option>
               <option value="Numero de Tarjeta">No</option>                     
             </select>
-          </div> -->
+          </div>
           <div class="col-md-1">
             <label for="permanenciaFiltro" class="form-label">Permanencia</label>
             <select class="form-control" name="permanenciaFiltro" [(ngModel)]="colaboradorFiltro.permanencia">
@@ -118,17 +224,26 @@
               <option value="Numero de Tarjeta">No</option>                     
             </select>
           </div>
+    </div> -->
+    <div class="row text-center pb-4">
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="getColaboradores()">Buscar</button> &nbsp;&nbsp;
+      <button type="button" class="btn btn-primary" (click)="agregarColaborador()">Agregar</button> &nbsp;&nbsp;
+      <button type="button" class="btn btn-warning" *ngIf="colaborador != null">Editar</button>&nbsp;&nbsp;
+      <button type="button" class="btn btn-danger" *ngIf="colaborador">Eliminar</button>
+      </div>
     </div>
-    <button type="button" class="btn btn-primary" (click)="getColaboradores()">Buscar</button> &nbsp;&nbsp;
+    <!-- <button type="button" class="btn btn-primary" (click)="getColaboradores()">Buscar</button> &nbsp;&nbsp;
 
     <button type="button" class="btn btn-primary" (click)="agregarColaborador()">Agregar</button> &nbsp;&nbsp;
     <button type="button" class="btn btn-warning" *ngIf="colaborador != null">Editar</button>&nbsp;&nbsp;
-    <button type="button" class="btn btn-danger" *ngIf="colaborador">Eliminar</button>
+    <button type="button" class="btn btn-danger" *ngIf="colaborador">Eliminar</button> -->
 </div>
+<!-- </div> -->
 
 
-
-<div class="container">
+<div class="container bg-white rounded-bottom shadow pb-4">
+<!-- <div class="container"> -->
     <table mat-table [dataSource]="colaboradorSource" class="mat-elevation-z8">
         <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef> Nombre </th>

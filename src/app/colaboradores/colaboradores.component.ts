@@ -25,18 +25,19 @@ export class ColaboradoresComponent implements OnInit {
   permanencias: any;
   zonasLaborales: any;
   colaboradorFiltro:ColaboradorFiltro;
+  habilidades: any;
 
   constructor(
     private router:Router,
     private http: HttpClient
-  ){}
+  ){ this.colaboradorFiltro= new ColaboradorFiltro();}
 
   ngOnInit(): void {
     this.getColaboradores();
     this.comboSexos();
     this.comboPermanencias();
     this.comboZonasLaborales();
-    this.colaboradorFiltro= new ColaboradorFiltro();
+    this.comboHabilidades();
   }
  
   displayToConsole(datatableElement: DataTableDirective): void {
@@ -67,6 +68,12 @@ export class ColaboradoresComponent implements OnInit {
   public comboZonasLaborales(){
     this.http.get<any>('/api/catalogo/zonasLaborales').subscribe(data => {
         this.zonasLaborales = data.data;
+    });
+  }
+
+  public comboHabilidades(){
+    this.http.get<any>('/api/catalogo/habilidades').subscribe(data => {
+        this.habilidades = data.data;
     });
   }
 

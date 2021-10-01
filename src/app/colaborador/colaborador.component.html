@@ -841,7 +841,7 @@
             <label>Habilidades<span class="text-danger"> *</span></label>
             <div class="form-group">
               <div class="col-sm-12">
-                <div class="form-check" *ngFor="let habilidad of habilidades" [value]="habilidad.id">
+                <div class="form-check" *ngFor="let habilidad of habilidades" [value]="habilidad.idHabilidad">
                   <input class="form-check-input" type="checkbox" id="{{habilidad.nombre}}"
                   (change)="habilidadCheck(habilidad)">
                   <label class="form-check-label" for="{{habilidad.nombre}}">
