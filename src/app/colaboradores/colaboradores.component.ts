@@ -10,7 +10,7 @@ import {NgForm,FormControl} from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
 export interface DialogData {
-  idModal: string;
+  data: any;
 }
 @Component({
   selector: 'app-colaboradores',
@@ -44,21 +44,23 @@ export class ColaboradoresComponent implements OnInit {
 
   constructor(
     private router:Router,
-    private http: HttpClient,public dialog: MatDialog
+    private http: HttpClient,private dialog: MatDialog
   ){ this.colaboradorFiltro= new ColaboradorFiltro();}
 
   openDialog(idCol): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {idModal: idCol}
-      
-    });
-    console.log(this.idModal);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      
-    });
+    this.http.post<any>('/api/colaborador/colaboradorId',{idColaborador:idCol}).subscribe(data => {
+      console.log(data.data[0]);
+      const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+        width: '1110px',
+        data: {data: data.data[0]}     
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');      
+      });  
+  });   
+    
   }
+
   ngOnInit(): void {
     this.getColaboradores();
     this.comboSexos();
@@ -152,7 +154,7 @@ export class ColaboradoresComponent implements OnInit {
   templateUrl: 'modal.html',
 })
 export class DialogOverviewExampleDialog {
-  colaborador: Colaborador;
+  colaborador: any;
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>, private router:Router,
     private http: HttpClient,
@@ -167,11 +169,13 @@ export class DialogOverviewExampleDialog {
   }
 
   public getColaboradores2(event?:PageEvent){
-    
-    this.http.post<any>('/api/colaborador',this.data.idModal).subscribe(data => {
-        this.colaborador = data.data;       
-    });   
+    console.log(this.data);
+    if (this.data) {
+      this.colaborador=this.data.data;
+    }
     return event;
   }
+
+
   
 }

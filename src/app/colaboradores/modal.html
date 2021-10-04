@@ -1,9 +1,47 @@
-<h1 mat-dialog-title>Hi ID: {{data.idModal}} </h1>
+<h1 mat-dialog-title>{{colaborador.nombre}} {{colaborador.a_paterno}} {{colaborador.a_materno}} </h1>
 <div mat-dialog-content>
-  <p>Welcome back</p>
+  <table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Información General</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">RFC</th>
+        <td>{{colaborador.rfc}}</td>
+        <th scope="row">NSS</th>
+        <td>{{colaborador.nss}}</td>
+
+      </tr>
+      <tr>
+        <th scope="row">Calificación</th>
+        <td></td>
+        <th scope="row">Tipo de Colaborador</th>
+        <td></td>
+      </tr>
+    </tbody>
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Lugar y Fecha de Nacimiento</th>
+        </tr>
+      </thead>
+      <tbody>    
+      <tr>
+        <th scope="row">Fecha</th>
+        <td>{{colaborador.fecha_nacimiento}}</td>
+        <th scope="row">País</th>
+        <td></td>
+        <th scope="row">Estado</th>
+        <td></td>
+        <th scope="row">Ciudad</th>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   
 </div>
 <div mat-dialog-actions>
-  <button class="btn btn-primary" (click)="onNoClick()">Close</button>
+  <button class="btn btn-primary" (click)="onNoClick()">Cerrar</button>
   
 </div>
