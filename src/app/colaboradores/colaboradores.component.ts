@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation  } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Inject  } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -8,7 +8,10 @@ import { HttpClient } from '@angular/common/http';
 import { ColaboradorFiltro } from '../_model/colaboradorFiltro';
 import {NgForm,FormControl} from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
+export interface DialogData {
+  idModal: string;
+}
 @Component({
   selector: 'app-colaboradores',
   templateUrl: './colaboradores.component.html',
@@ -16,7 +19,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradoresComponent implements OnInit {
-
+  idModal: string;
   @ViewChild(DataTableDirective, {static: false})
   private datatableElement: DataTableDirective;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -27,7 +30,7 @@ export class ColaboradoresComponent implements OnInit {
   length:number;
   COLABORADOR_DATA: Colaborador[] = [];
   colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
-  colaboradorColumns: string[] = ['nombre','a_paterno', 'a_materno', 'estatura', 'peso'];
+  colaboradorColumns: string[] = ['nombre','a_paterno', 'a_materno', 'estatura', 'peso', 'acciones'];
   @ViewChild('colaboradoresTable',{static:true}) colaboradoresTable: MatTable<any>;
   sexos: any;
   permanencias: any;
@@ -41,9 +44,21 @@ export class ColaboradoresComponent implements OnInit {
 
   constructor(
     private router:Router,
-    private http: HttpClient
+    private http: HttpClient,public dialog: MatDialog
   ){ this.colaboradorFiltro= new ColaboradorFiltro();}
 
+  openDialog(idCol): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {idModal: idCol}
+      
+    });
+    console.log(this.idModal);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
+  }
   ngOnInit(): void {
     this.getColaboradores();
     this.comboSexos();
@@ -130,4 +145,33 @@ export class ColaboradoresComponent implements OnInit {
     console.log(items);
   }
 
+}
+
+@Component({
+  selector: 'modal',
+  templateUrl: 'modal.html',
+})
+export class DialogOverviewExampleDialog {
+  colaborador: Colaborador;
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>, private router:Router,
+    private http: HttpClient,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  ngOnInit(): void {
+    this.getColaboradores2();
+    
+  }
+
+  public getColaboradores2(event?:PageEvent){
+    
+    this.http.post<any>('/api/colaborador',this.data.idModal).subscribe(data => {
+        this.colaborador = data.data;       
+    });   
+    return event;
+  }
+  
 }
