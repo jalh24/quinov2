@@ -20,10 +20,10 @@ export class Colaborador {
     public zonas:any[];
     public idEstadoCivil:number;
     public idTez:number;
-    public telefono1:number;
-    public tipoTelefono1:number;
-    public telefono2:number;
-    public tipoTelefono2:number;
+    public telefono:string;
+    public idTipoTelefono:number;
+    public telefono2:string;
+    public idTipoTelefono2:number;
     public sgmm:string;
     public atiendeCovid:boolean;
     public antecedentePenales:boolean;

@@ -377,7 +377,7 @@
         <div class="row mt-4">
           <div class="col-md-2">
             <label for="telefono1" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
-            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="colaborador.telefono1" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required>
+            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="colaborador.telefono" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required>
               <div *ngIf="telefono1.invalid && (telefono1.dirty || telefono1.touched)" class="alert">
                 <div *ngIf="telefono1.errors?.required">
                   El telefono es obligatorio.
@@ -393,7 +393,7 @@
 
           <div class="col-md-2">
             <label for="tipoTel1" class="form-label">Tipo de Teléfono 1</label>
-            <select class="form-control" name="tipoTel1" ngModel #tipoTel1="ngModel" [ngModel]="colaborador.tipoTelefono1" (change)="onTipoTel1($event.target.value)">
+            <select class="form-control" name="tipoTel1" ngModel #tipoTel1="ngModel" [ngModel]="colaborador.idTipoTelefono" (change)="onTipoTel1($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
                 {{tipoTelefono.nombre}}
@@ -416,7 +416,7 @@
 
           <div class="col-md-2">
             <label for="tipoTel2" class="form-label">Tipo de Teléfono 2</label>
-            <select class="form-control" name="tipoTel2" ngModel #tipoTel2="ngModel" [ngModel]="colaborador.tipoTelefono2" (change)="onTipoTel2($event.target.value)">
+            <select class="form-control" name="tipoTel2" ngModel #tipoTel2="ngModel" [ngModel]="colaborador.idTipoTelefono2" (change)="onTipoTel2($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
                 {{tipoTelefono.nombre}}

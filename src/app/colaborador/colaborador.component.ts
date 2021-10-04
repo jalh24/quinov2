@@ -462,6 +462,7 @@ export class ColaboradorComponent implements OnInit {
     if(ngForm.valid){
       this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
         this.showSuccess(NgbToastType.Success,"Se creo el colaborador exitosamente");
+        
         });
         this.inicializaObjetos();
     } else{
@@ -978,11 +979,11 @@ export class ColaboradorComponent implements OnInit {
   }
 
   onTipoTel1(value:any){
-    this.colaborador.tipoTelefono1 = value;
+    this.colaborador.idTipoTelefono = value;
   }
 
   onTipoTel2(value:any){
-    this.colaborador.tipoTelefono2 = value;
+    this.colaborador.idTipoTelefono2 = value;
   }
 
   onPermanencia(value:any){
