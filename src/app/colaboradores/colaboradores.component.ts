@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation  } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -6,10 +6,14 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { Colaborador } from '../_model/colaborador';
 import { HttpClient } from '@angular/common/http';
 import { ColaboradorFiltro } from '../_model/colaboradorFiltro';
+import {NgForm,FormControl} from '@angular/forms';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 @Component({
   selector: 'app-colaboradores',
   templateUrl: './colaboradores.component.html',
-  styleUrls: ['./colaboradores.component.scss']
+  styleUrls: ['./colaboradores.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ColaboradoresComponent implements OnInit {
 
@@ -30,6 +34,10 @@ export class ColaboradoresComponent implements OnInit {
   zonasLaborales: any;
   colaboradorFiltro:ColaboradorFiltro;
   habilidades: any;
+  habilidadesSelected =[];
+  selectedItems:any = [];
+  zonasSettings: IDropdownSettings = {};
+  habilidadesSettings: IDropdownSettings = {};
 
   constructor(
     private router:Router,
@@ -42,6 +50,26 @@ export class ColaboradoresComponent implements OnInit {
     this.comboPermanencias();
     this.comboZonasLaborales();
     this.comboHabilidades();
+    
+    this.zonasSettings = {
+      singleSelection: false,
+      idField: 'idZonaLaboral',
+      textField: 'nombre',
+      selectAllText: 'Seleccionar Todos',
+      unSelectAllText: 'Quitar Selecciones',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+
+    this.habilidadesSettings = {
+      singleSelection: false,
+      idField: 'idHabilidad',
+      textField: 'nombre',
+      selectAllText: 'Seleccionar Todos',
+      unSelectAllText: 'Quitar Selecciones',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   }
  
   ngAfterViewInit() {
@@ -53,11 +81,10 @@ export class ColaboradoresComponent implements OnInit {
   }
 
   public getColaboradores(event?:PageEvent){
-    console.log(event);
     this.colaboradorFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
     this.colaboradorFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
-    console.log(event);
-    console.log(this.colaboradorFiltro);
+    this.colaboradorFiltro.habilidades = this.habilidadesSelected;
+    this.colaboradorFiltro.zonasLaborales = this.selectedItems;
     this.http.post<any>('/api/colaborador',this.colaboradorFiltro).subscribe(data => {
         this.COLABORADOR_DATA = data.data;
         this.colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
@@ -94,4 +121,13 @@ export class ColaboradoresComponent implements OnInit {
   public agregarColaborador(){
     this.router.navigateByUrl("/colaborador");
   }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
 }

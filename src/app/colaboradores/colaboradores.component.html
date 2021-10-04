@@ -30,12 +30,15 @@
           </td>
           <th scope="row">Habilidades</th>
           <td>
-            <select class="form-control" name="habilidadFiltro">
-              <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let habilidad of habilidades" [value]="habilidad.idHabilidad">
-                {{habilidad.nombre}}
-              </option>
-            </select>
+            <ng-multiselect-dropdown
+                [placeholder]="'Seleccionar'"
+                [settings]="habilidadesSettings"
+                [data]="habilidades"
+                [(ngModel)]="habilidadesSelected"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+              >
+            </ng-multiselect-dropdown>
           </td>
         </tr>
         <tr>
@@ -80,12 +83,16 @@
           </td>
           <th scope="row">Zona Laboral</th>
           <td>
-            <select class="form-control" name="zonasLaboralesFiltro">
-              <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.idZonaLaboral">
-                {{zonaLaboral.nombre}}
-              </option>
-            </select>
+            <ng-multiselect-dropdown
+                [placeholder]="'Seleccionar'"
+                [settings]="zonasSettings"
+                [data]="zonasLaborales"
+                [(ngModel)]="selectedItems"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+              >
+            </ng-multiselect-dropdown>
+            
           </td>
           <td colspan="2">
             <div class="form-check">
@@ -106,125 +113,6 @@
     </table>
 
 
-
-    <!-- <div class="row pt-3 pb-3">
-      <div class="col-md-1">
-        <label for="edadDesde" class="form-label">Edad</label>
-        <input maxlength="2" size="2" type="text" class="form-control" id="edad" name="edadDesde" 
-        placeholder="Desde" [(ngModel)]="colaboradorFiltro.edad1">
-      </div>
-      <div class="col-md-1">
-        <label for="edadHasta" class="form-label"></label>
-        <input maxlength="2" size="2" type="text" class="form-control" id="edad" name="edadHasta" 
-        placeholder="Hasta" [(ngModel)]="colaboradorFiltro.edad2">
-      </div>
-
-          <div class="col-md-1">
-            <label for="pesoDesde" class="form-label">Peso</label>
-            <input maxlength="2" size="2" type="text" class="form-control" id="peso" name="pesoDesde" placeholder="Desde"
-            [(ngModel)]="colaboradorFiltro.peso1">
-          </div>
-          <div class="col-md-1">
-            <label for="pesoHasta" class="form-label"></label>
-            <input maxlength="2" size="2" type="text" class="form-control" id="peso" name="pesoHasta" placeholder="Hasta"
-            [(ngModel)]="colaboradorFiltro.peso2">
-          </div>
-         <div class="col-md-1">
-            <label for="telefono" class="form-label">Peso</label>
-            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono">
-        </div>
-        <div class="col-md-1">
-          <label for="sexoFiltro" class="form-label">Genero</label>
-          <select class="form-control" name="sexoFiltro" [(ngModel)]="colaboradorFiltro.genero">
-          <option value="" selected disabled hidden>Seleccionar</option>
-            <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">
-              {{sexo.nombre}}
-            </option>          
-          </select>
-        </div>
-        <div class="col-md-1">
-            <label for="tipocuenta" class="form-label">Sexo</label>
-            <select class="form-control" name="tipocuenta">
-              <option value="" selected disabled hidden>Seleccionar</option>
-              <option value="CLABE">Masculino</option>
-              <option value="Numero de Tarjeta">Femenino</option>                     
-            </select>
-          </div>
-          <div class="col-md-1">
-            <label for="estaturaDesde" class="form-label">Estatura</label>
-            <input maxlength="3" size="3" type="text" class="form-control" id="estatura" name="estaturaDesde" placeholder="Desde"
-            [(ngModel)]="colaboradorFiltro.estatura1">
-          </div>
-          <div class="col-md-1">
-            <label for="estaturaHasta" class="form-label"></label>
-            <input maxlength="3" size="3" type="text" class="form-control" id="estatura" name="estaturaHasta" placeholder="Hasta"
-            [(ngModel)]="colaboradorFiltro.estatura2">
-          </div>
-          <div class="col-md-1">
-            <label for="tipocuenta" class="form-label">Estatura</label>
-            <select class="form-control" name="tipocuenta">
-              <option value="" selected disabled hidden>Seleccionar</option>
-              <option value="CLABE">Si</option>
-              <option value="Numero de Tarjeta">No</option>                     
-            </select>
-          </div>
-          <div class="col-md-1">
-            <label for="permanenciaFiltro" class="form-label">Permanencia</label>
-            <select class="form-control" name="permanenciaFiltro" [(ngModel)]="colaboradorFiltro.permanencia">
-              <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let permanencia of permanencias" [value]="permanencia.idPermanencia">
-                {{permanencia.nombre}}
-              </option>
-            </select>
-          </div>
-          <div class="col-md-1">
-            <label for="zonasLaboralesFiltro" class="form-label">Zona Laboral</label>
-            <select class="form-control" name="zonasLaboralesFiltro">
-              <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.idZonaLaboral">
-                {{zonaLaboral.nombre}}
-              </option>
-            </select>
-          </div>
-        </div>
-
-          <div class="row pt-3 pb-3">
-            <div class="col-md-2">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="covidFiltro" [(ngModel)]="colaboradorFiltro.atiendeCovid">
-              <label class="form-check-label" for="covidFiltro">Atiende COVID</label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="autoFiltro" [(ngModel)]="colaboradorFiltro.autoPropio">
-              <label class="form-check-label" for="autoFiltro">Auto Propio</label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="viajeFiltro" [(ngModel)]="colaboradorFiltro.dispuestoViajar">
-              <label class="form-check-label" for="viajeFiltro">Disp. para viajar</label>
-            </div>
-          </div>
-            
-          <div class="col-md-2">
-            <label for="tipocuenta" class="form-label">Habilidades</label>
-            <select class="form-control" name="tipocuenta" 
-            >
-              <option value="" selected disabled hidden>Seleccionar</option>
-              <option value="CLABE">Apodaca</option>
-              <option value="Numero de Tarjeta">Santa Catalina</option>                     
-            </select>
-          </div>
-          
-          
-          <div class="col-md-2">
-            <label for="tipocuenta" class="form-label">Dias de la semana que atiende</label>
-            <select class="form-control" name="tipocuenta" 
-            >
-              <option value="" selected disabled hidden>Seleccionar</option>
-              <option value="CLABE">Si</option>
-              <option value="Numero de Tarjeta">No</option>                     
-            </select>
-          </div>
-    </div> -->
     <div class="row text-center pb-4">
       <div class="col">
         <button type="button" class="btn btn-primary" (click)="getColaboradores()">Buscar</button> &nbsp;&nbsp;
@@ -233,11 +121,6 @@
       <button type="button" class="btn btn-danger" *ngIf="colaborador">Eliminar</button>
       </div>
     </div>
-    <!-- <button type="button" class="btn btn-primary" (click)="getColaboradores()">Buscar</button> &nbsp;&nbsp;
-
-    <button type="button" class="btn btn-primary" (click)="agregarColaborador()">Agregar</button> &nbsp;&nbsp;
-    <button type="button" class="btn btn-warning" *ngIf="colaborador != null">Editar</button>&nbsp;&nbsp;
-    <button type="button" class="btn btn-danger" *ngIf="colaborador">Eliminar</button> -->
 </div>
 <!-- </div> -->
 

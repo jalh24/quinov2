@@ -10,12 +10,13 @@ import { DataTablesModule } from "angular-datatables";
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbToastModule } from  'ngb-toast';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     NgbToastModule,
     MatTableModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

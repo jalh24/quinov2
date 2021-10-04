@@ -10,7 +10,7 @@ export class ColaboradorFiltro {
     public estatura1:number;
     public estatura2:string;
     public permanencia:number;
-    public zonaLaboral:number;
+    public zonasLaborales:[];
     public atiendeCovid:boolean;
     public antecedentePenales:boolean;
     public autoPropio:boolean;
