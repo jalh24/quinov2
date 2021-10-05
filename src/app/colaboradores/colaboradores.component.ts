@@ -94,6 +94,7 @@ export class ColaboradoresComponent implements OnInit {
     this.colaboradorSource.paginator = this.paginator;
   }
 
+ 
   displayToConsole(datatableElement: DataTableDirective): void {
     datatableElement.dtInstance.then((dtInstance: DataTables.Api) => console.log(dtInstance));
   }

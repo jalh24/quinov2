@@ -10,7 +10,7 @@ import { Experiencia } from '../_model/experiencia';
 import  {  NgbToastService, NgbToastType,NgbToast }  from  'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Estatus } from '../_model/estatus';
-
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-colaborador',
@@ -22,7 +22,7 @@ export class ColaboradorComponent implements OnInit {
 
   show = false;
   autohide = true;
-
+  selected = new FormControl(0);
   ESTUDIO_DATA: Estudio[] = [];
   estudioSource = new MatTableDataSource<Estudio>(this.ESTUDIO_DATA);
 
@@ -794,6 +794,19 @@ export class ColaboradorComponent implements OnInit {
       return value.idExperiencia != experienciaTmp.idExperiencia;
     });
 
+  }
+
+  pagAtras(index){
+    if (this.selected.value > 0) {
+      this.selected.setValue(this.selected.value - index);
+    }
+
+  }
+  pagDelante(index){
+    if (this.selected.value < 7) {
+      this.selected.setValue(this.selected.value + index);
+    }
+    
   }
 
   limpiarEstudio(){

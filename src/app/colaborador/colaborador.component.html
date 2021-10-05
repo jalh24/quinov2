@@ -1,6 +1,7 @@
 <form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
   <ngb-toast-container></ngb-toast-container>
-  <mat-tab-group mat-align-tabs="center">
+  <mat-tab-group mat-align-tabs="center" [selectedIndex]="selected.value"
+  (selectedIndexChange)="selected.setValue($event)">
     <mat-tab label="General">
       <div class="container mt-5 bg-white rounded shadow">
         <h4 class="pt-4 pb-1">Información General</h4>
@@ -1318,14 +1319,22 @@
 
     </mat-tab>
   </mat-tab-group>
-<!-- <div class="container bg-white rounded-bottom shadow"> -->
-  <!-- <div class="row text-center pb-4"> -->
-    <!-- <div class="col"> -->
-      <!-- <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
-      <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
-      <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
-    <!-- </div> -->
-  <!-- </div> -->
-<!-- </div> -->
+  <div class="container bg-white rounded-bottom shadow">
+    <div class="row text-center pb-4">
+      
+      <div class="col">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagAtras(1)" > Atras </button>
+          <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagDelante(1)" > Siguiente </button>
+          
+        </div>
+        
+       
+        
+        <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
+        <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Enviar </button> -->
+      </div>
+    </div>
+  </div>
 
 </form>
