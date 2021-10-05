@@ -17,7 +17,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
+import { MatTableExporterModule } from 'mat-table-exporter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +33,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     BrowserAnimationsModule,
     MatRadioModule,
+    MatTableExporterModule,
     MatDialogModule,
     HttpClientModule,
     NgbToastModule,

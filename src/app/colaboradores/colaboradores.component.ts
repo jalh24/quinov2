@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { ColaboradorFiltro } from '../_model/colaboradorFiltro';
 import {NgForm,FormControl} from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatTableExporterModule } from 'mat-table-exporter';
 export interface DialogData {
   data: any;
 }
