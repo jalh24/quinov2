@@ -2,7 +2,7 @@
   <ngb-toast-container></ngb-toast-container>
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="General">
-      <div class="container mt-5 bg-white rounded-top shadow">
+      <div class="container mt-5 bg-white rounded shadow">
         <h4 class="pt-4 pb-1">Información General</h4>
         <div class="row">
           <div class="col">
@@ -188,10 +188,11 @@
           </div>
 
         </div>
+        <div class="row pb-4"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>
       </div>
     </mat-tab>
     <mat-tab label="Dirección">
-      <div class="container mt-5 bg-white rounded-top shadow">
+      <div class="container mt-5 bg-white rounded shadow">
         <h4 class="pt-4 pb-1">Dirección</h4>
         <div class="row">
           <div class="col">
@@ -307,10 +308,11 @@
               (change)="comprobanteDomicilio($event.target.files)" #domicilioUpload>
           </div>
         </div>
+        <div class="row pb-4"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>
       </div>
     </mat-tab>
     <mat-tab label="Información Personal">
-      <div class="container mt-5 bg-white rounded-top shadow">
+      <div class="container mt-5 bg-white rounded shadow">
         <h4 class="pt-4 pb-1">Información Personal</h4>
         <div class="row">
           <div class="col-md-4">
@@ -378,7 +380,7 @@
           </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-4 pb-4">
           <div class="col-md-2">
             <label for="telefono1" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
             <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="colaborador.telefono" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required>
@@ -444,8 +446,9 @@
             </div> -->
           </div>
         </div>
+        <div class="row pb-4"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>
 
-        <div class="row mt-4 pb-4">
+        <!-- <div class="row mt-4 pb-4">
           <div class="col-md-4">
             <div class="form-group">
               <label class="control-label">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
@@ -469,32 +472,19 @@
                   </div>
                 </div>
             </div>
-            <!-- <label class="pb-2">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
-            <br>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sgmm" value="option1"
-              (click)="enableSeguros()">
-              <label class="form-check-label" for="inlineRadio1">Sí</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
-              (click)="disableSeguros()">
-              <label class="form-check-label" for="inlineRadio2">No</label>
-            </div> -->
           </div>
-
           <div class="col">
             <label for="aseguradora" class="form-label">Aseguradora</label>
             <input type="text" class="form-control" name="aseguradora" ngModel #aseguradora="ngModel" [(ngModel)]="colaborador.sgmm" placeholder="Nombre" disabled="disabled" [disabled]="textBoxDisabledSeg">
           </div>
-        </div>
+        </div> -->
       </div>
     </mat-tab>
     <mat-tab label="Pago"> 
-      <div class="container mt-5 bg-white rounded-top shadow">
+      <div class="container mt-5 bg-white rounded shadow">
           <h4 class="pt-4 pb-1">Pago</h4>
           <div class="form-group dynamic-element1">
-            <div class="row">
+            <div class="row pb-4">
              
                 <div class="col-md-3">
                   <label for="nombreBenef" class="form-label">Nombre del Beneficiario<span class="text-danger"> *</span></label>
@@ -534,16 +524,18 @@
                       *Campo Requerido!
                   </div> -->
                   </div>        
-            </div>         
+            </div>
+            <div class="row"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>       
           </div>
           
   
-          <div class="row mt-5">
+          <div class="row mt-4">
             <div class="col-md-12 text-center">
-              <button class="btn btn-primary add-one" (click)="agregarPago()">Agregar</button>
+              <button class="btn btn-primary add-one" (click)="agregarPago()">Agregar Otro</button>
               <button class="btn btn-warning delete ml-3" (click)="limpiarPago()">Cancelar</button>
             </div>
           </div>
+          <hr class="mt-3 mb-3" />
           <div class="row mt-4 pb-4">
             <div class="col-md-12 text-center">
               <table mat-table [dataSource]="pagoSource" #pagosTable class="mat-elevation-z8">
@@ -584,7 +576,7 @@
       </div>    
   </mat-tab>
     <mat-tab label="Estudios">
-      <div class="container mt-5 bg-white rounded-top shadow">
+      <div class="container mt-5 bg-white rounded shadow">
         <h4 class="pt-4 pb-1">Estudios</h4>
         <h6 class="pb-1">Favor de capturar cada uno de los estudios, cursos y diplomados que haya tomado</h6>
         <div class="form-group dynamic-element">
@@ -637,13 +629,14 @@
 
                 </div>
               </div>
-              <div class="row mt-3">
+              <div class="row mt-3 pb-4">
                 <div class="col-md-12">
                   <label for="formFile" class="form-label">Imagen de la Cédula</label>
                   <input class="form-control-file" type="file" id="formFile" accept=".png, .jpg, .jpeg"
                     (change)="onCedulaFileSelected($event.target.files)" disabled="disabled" [disabled]="textBoxDisabledCed">
                 </div>
               </div>
+              <div class="row"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>
             </div>
 
             <div class="col-md-6">
@@ -652,7 +645,6 @@
                 [(ngModel)]="estudio.comentarios"></textarea>
             </div>
           </div>
-          <hr class="mt-3 mb-3" />
         </div>
         <div class="form-container">
           <div class="dynamic-stuff">
@@ -660,12 +652,13 @@
           </div>
         </div>
 
-        <div class="row mt-5">
+        <div class="row mt-4">
           <div class="col-md-12 text-center">
-            <button class="btn btn-primary add-one" (click)="agregarEstudio()">Agregar</button>
+            <button class="btn btn-primary add-one" (click)="agregarEstudio()">Agregar Otro</button>
             <button class="btn btn-warning delete ml-3" (click)="limpiarEstudio()">Cancelar</button>
           </div>
         </div>
+        <hr class="mt-3 mb-3" />
         <div class="row mt-4 pb-4">
           <div class="col-md-12 text-center">
             <table mat-table [dataSource]="estudioSource" #estudiosTable class="mat-elevation-z8">
@@ -711,7 +704,7 @@
       </div>
     </mat-tab>
     <mat-tab label="Experiencia Laboral">
-      <div class="container mt-5 bg-white rounded-top shadow">
+      <div class="container mt-5 bg-white rounded shadow">
         <h4 class="pt-4 pb-1">Experiencia Laboral</h4>
         <h6 class="pb-1">Favor de capturar cada una de las experiencias laborales que tenga</h6>
         <div class="form-group dynamic-element1">
@@ -737,7 +730,7 @@
                     min="1900-02" [(ngModel)]="experiencia.fechaFin" ngModel #terminacionExp="ngModel">
                 </div>
               </div>
-              <div class="row">
+              <div class="row pb-4">
                 <div class="col-md-6">
                   <label for="institucion" class="form-label">Nombre de Referencia</label>
                   <input type="text" class="form-control"  placeholder="" name="referencia"  [(ngModel)]="experiencia.referencia" >
@@ -748,6 +741,7 @@
                      >
                 </div>
               </div>
+              <div class="row"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>       
             </div>
             <div class="col-md-6">
               <label for="experienciaAct" class="form-label">Actividades Realizadas<span class="text-danger"> *</span></label>
@@ -762,9 +756,9 @@
           </div>
         </div>
         
-        <div class="row mt-5">
+        <div class="row mt-4">
           <div class="col-md-12 text-center">
-            <button class="btn btn-primary add-one" (click)="agregarExperiencia()">Agregar</button>
+            <button class="btn btn-primary add-one" (click)="agregarExperiencia()">Agregar Otra</button>
             <button class="btn btn-warning delete ml-3" (click)="limpiarEstudio()">Cancelar</button>
           </div>
         </div>
@@ -817,7 +811,7 @@
     </mat-tab>
 
     <mat-tab label="Competencias">
-      <div class="container mt-5 bg-white rounded-top shadow">
+      <div class="container mt-5 bg-white rounded shadow">
         <h4 class="pt-4 pb-1">Competencias</h4>
         <div class="row pb-4">
           <div class="col-md-6">
@@ -867,13 +861,14 @@
             </div>
           </div>      
         </div>
+        <div class="row pb-4"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>       
       </div>
     </mat-tab>
 
     <mat-tab label="Disponibilidad de trabajo">
-      <div class="container mt-5 bg-white rounded-top shadow">
+      <div class="container mt-5 bg-white rounded shadow">
         <h4 class="pt-4 pb-1">Disponibilidad de trabajo</h4>
-        <div class="row">
+        <div class="row pb-4">
           <hr class="mt-2 mb-3" />
           <div class="col-md-6">
             <h5 class="pb-1">Días y Horarios de Disponibilidad<span class="text-danger"> *</span></h5>
@@ -1309,17 +1304,28 @@
             <!-- </div> -->
           </div>
         </div>
+        <div class="row"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>       
+            <!-- <div class="container bg-white rounded-bottom shadow"> -->
+              <div class="row text-center pb-4">
+                <div class="col">
+                  <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button>
+                  <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
+                  <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
+                </div>
+              </div>
+            <!-- </div> -->
       </div>
+
     </mat-tab>
   </mat-tab-group>
-  <div class="container bg-white rounded-bottom shadow">
-    <div class="row text-center pb-4">
-      <div class="col">
-        <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Enviar </button>
-        <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
-        <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Enviar </button> -->
-      </div>
-    </div>
-  </div>
+<!-- <div class="container bg-white rounded-bottom shadow"> -->
+  <!-- <div class="row text-center pb-4"> -->
+    <!-- <div class="col"> -->
+      <!-- <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
+      <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
+      <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
+    <!-- </div> -->
+  <!-- </div> -->
+<!-- </div> -->
 
 </form>
