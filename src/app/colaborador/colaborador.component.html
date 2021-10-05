@@ -1,7 +1,7 @@
 <form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
   <ngb-toast-container></ngb-toast-container>
   <mat-tab-group mat-align-tabs="center" [selectedIndex]="selected.value"
-  (selectedIndexChange)="selected.setValue($event)">
+    (selectedIndexChange)="selected.setValue($event)">
     <mat-tab label="General">
       <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Información General</h4>
@@ -12,17 +12,14 @@
               [(ngModel)]="colaborador.nombre" pattern="[a-zA-Z ]*">
             <!-- <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel #nombre="ngModel"
               [(ngModel)]="colaborador.nombre" pattern="[a-zA-Z ]*" required> -->
-              <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
-                <!-- <div *ngIf="nombre.errors?.required">
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert">
+              <!-- <div *ngIf="nombre.errors?.required">
                   El nombre es obligatorio.
                 </div> -->
               <div *ngIf="nombre.errors?.pattern">
-                  El nombre solo debe de contener letras y/o espacios.
+                El nombre solo debe de contener letras y/o espacios.
               </div>
-              </div>
-            <!-- <div class="invalid-feedback">
-              *Campo Requerido!
-            </div> -->
+            </div>
           </div>
 
           <div class="col">
@@ -31,17 +28,14 @@
               [(ngModel)]="colaborador.a_paterno" pattern="[a-zA-Z ]*">
             <!-- <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno" ngModel #apaterno="ngModel"
               [(ngModel)]="colaborador.a_paterno" pattern="[a-zA-Z ]*" required> -->
-              <div *ngIf="apaterno.invalid && (apaterno.dirty || apaterno.touched)" class="alert">
-                <!-- <div *ngIf="apaterno.errors?.required">
+            <div *ngIf="apaterno.invalid && (apaterno.dirty || apaterno.touched)" class="alert">
+              <!-- <div *ngIf="apaterno.errors?.required">
                   El apellido es obligatorio.
                 </div> -->
               <div *ngIf="apaterno.errors?.pattern">
-                  El apellido solo debe de contener letras y/o espacios.
+                El apellido solo debe de contener letras y/o espacios.
               </div>
-              </div>
-            <!-- <div class="invalid-feedback">
-              *Campo Requerido!
-            </div> -->
+            </div>
           </div>
 
           <div class="col">
@@ -50,17 +44,14 @@
               [(ngModel)]="colaborador.a_materno" pattern="[a-zA-Z ]*">
             <!-- <input type="text" class="form-control" id="amaterno" name="amaterno" ngModel #amaterno="ngModel"
               [(ngModel)]="colaborador.a_materno" pattern="[a-zA-Z ]*" required> -->
-              <div *ngIf="amaterno.invalid && (amaterno.dirty || amaterno.touched)" class="alert">
-                <!-- <div *ngIf="amaterno.errors?.required">
+            <div *ngIf="amaterno.invalid && (amaterno.dirty || amaterno.touched)" class="alert">
+              <!-- <div *ngIf="amaterno.errors?.required">
                   El apellido es obligatorio.
                 </div> -->
               <div *ngIf="amaterno.errors?.pattern">
-                  El apellido solo debe de contener letras y/o espacios.
+                El apellido solo debe de contener letras y/o espacios.
               </div>
-              </div>
-            <!-- <div class="invalid-feedback">
-              *Campo Requerido!
-            </div> -->
+            </div>
           </div>
         </div>
 
@@ -93,13 +84,13 @@
           <div class="col-md-3">
             <label for="formFile" class="form-label">Foto Personal</label>
             <input class="form-control-file" type="file" id="foto" accept=".png, .jpg, .jpeg"
-            (change)="cargaFotoPersonal($event.target.files)">
+              (change)="cargaFotoPersonal($event.target.files)">
           </div>
           <div class="col-md-2">
             <label for="calificacion" class="form-label">Calificación<span class="text-danger"> *</span></label>
             <select class="form-control" name="calificacion" (change)="onCalificacion($event.target.value)"
-            #calificacion="ngModel" [ngModel]="colaborador.idCalificacion" ngModel>
-            <!-- <select class="form-control" name="calificacion" (change)="onCalificacion($event.target.value)"
+              #calificacion="ngModel" [ngModel]="colaborador.idCalificacion" ngModel>
+              <!-- <select class="form-control" name="calificacion" (change)="onCalificacion($event.target.value)"
             #calificacion="ngModel" [ngModel]="colaborador.idCalificacion" ngModel required> -->
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let calificacion of calificaciones" [value]="calificacion.idCalificacion">
@@ -114,13 +105,15 @@
           </div>
 
           <div class="col-md-2">
-            <label for="tipoColaborador" class="form-label">Tipo de Colaborador<span class="text-danger"> *</span></label>
-            <select class="form-control" name="tipoColaborador" (change)="onTipoColaborador($event.target.value)" #tipoColaborador="ngModel" [ngModel]="colaborador.idTipoColaborador" ngModel>
-            <!-- <select class="form-control" name="tipoColaborador" (change)="onTipoColaborador($event.target.value)" #tipoColaborador="ngModel" [ngModel]="colaborador.idTipoColaborador" ngModel required> -->
+            <label for="tipoColaborador" class="form-label">Tipo de Colaborador<span class="text-danger">
+                *</span></label>
+            <select class="form-control" name="tipoColaborador" (change)="onTipoColaborador($event.target.value)"
+              #tipoColaborador="ngModel" [ngModel]="colaborador.idTipoColaborador" ngModel>
+              <!-- <select class="form-control" name="tipoColaborador" (change)="onTipoColaborador($event.target.value)" #tipoColaborador="ngModel" [ngModel]="colaborador.idTipoColaborador" ngModel required> -->
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tipoColaborador of tiposColaboradores" [value]="tipoColaborador.idTipoColaborador">
                 {{tipoColaborador.nombre}}
-              </option>                         
+              </option>
             </select>
             <div *ngIf="tipoColaborador.invalid && (tipoColaborador.dirty || tipoColaborador.touched)" class="alert">
               <!-- <div *ngIf="tipoColaborador.errors?.required">
@@ -130,7 +123,8 @@
           </div>
           <div class="col-md-5">
             <label for="observaciones">Observaciones</label>
-            <textarea class="form-control" id="observaciones" name="observaciones" ngModel #observaciones="ngModel" [(ngModel)]="colaborador.observaciones" rows="3" maxlength = "255"></textarea>
+            <textarea class="form-control" id="observaciones" name="observaciones" ngModel #observaciones="ngModel"
+              [(ngModel)]="colaborador.observaciones" rows="3" maxlength="255"></textarea>
           </div>
         </div>
 
@@ -139,24 +133,24 @@
         <div class="row mt-4 pb-4">
           <div class="col">
             <label for="nacimiento" class="form-label">Fecha de Nacimiento<span class="text-danger"> *</span></label>
-            <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
-              #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento">
+            <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd"
+              ngModel #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento">
             <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
               #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
-              <div *ngIf="fechanacimiento.invalid && (fechanacimiento.dirty || fechanacimiento.touched)" class="alert">
-                <!-- <div *ngIf="fechanacimiento.errors?.required">
+            <div *ngIf="fechanacimiento.invalid && (fechanacimiento.dirty || fechanacimiento.touched)" class="alert">
+              <!-- <div *ngIf="fechanacimiento.errors?.required">
                   La fecha de nacimiento es obligatoria.
                 </div> -->
-              </div>
+            </div>
 
           </div>
           <div class="col">
             <label for="paisNac" class="form-label">País<span class="text-danger"> *</span></label>
-            <select class="form-control" name="paisNac" ngModel
-            #paisNac="ngModel" [(ngModel)]="colaborador.idPaisNacimiento">
-            <!-- <select class="form-control" name="paisNac" ngModel
+            <select class="form-control" name="paisNac" ngModel #paisNac="ngModel"
+              [(ngModel)]="colaborador.idPaisNacimiento">
+              <!-- <select class="form-control" name="paisNac" ngModel
             #paisNac="ngModel" [(ngModel)]="colaborador.idPaisNacimiento" required> -->
-            <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let pais of paises" [value]="pais.idPais">
                 {{pais.nombre}}
               </option>
@@ -169,10 +163,9 @@
           </div>
           <div class="col">
             <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-            <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" 
-            [(ngModel)]="colaborador.idEstadoNacimiento"
-              (change)="comboCiudades($event.target.value)">
-            <!-- <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" 
+            <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel"
+              [(ngModel)]="colaborador.idEstadoNacimiento" (change)="comboCiudades($event.target.value)">
+              <!-- <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" 
             [(ngModel)]="colaborador.idEstadoNacimiento"
               (change)="comboCiudades($event.target.value)" required> -->
               <option value="" selected disabled hidden>Seleccionar</option>
@@ -188,9 +181,10 @@
           </div>
           <div class="col">
             <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-            <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel"  ngModel>
-            <!-- <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel"  ngModel required> -->
-            <option value="" selected disabled hidden>Seleccionar</option>
+            <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)"
+              #ciudadNac="ngModel" ngModel>
+              <!-- <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel"  ngModel required> -->
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
                 {{ciudad.nombre}}
               </option>
@@ -203,7 +197,10 @@
           </div>
 
         </div>
-        <div class="row pb-4"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>
+        <div class="row pb-4">
+          <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+              class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
+        </div>
       </div>
     </mat-tab>
     <mat-tab label="Dirección">
@@ -212,7 +209,8 @@
         <div class="row">
           <div class="col">
             <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel" [(ngModel)]="colaborador.calle1">
+            <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel"
+              [(ngModel)]="colaborador.calle1">
             <!-- <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel" [(ngModel)]="colaborador.calle1" required> -->
             <div *ngIf="calle1.invalid && (calle1.dirty || calle1.touched)" class="alert">
               <!-- <div *ngIf="calle1.errors?.required">
@@ -223,14 +221,16 @@
 
           <div class="col">
             <label for="calle2" class="form-label">Calle 2</label>
-            <input type="text" class="form-control" id="calle1" name="calle2" ngModel #calle2="ngModel" [(ngModel)]="colaborador.calle2">
+            <input type="text" class="form-control" id="calle1" name="calle2" ngModel #calle2="ngModel"
+              [(ngModel)]="colaborador.calle2">
           </div>
         </div>
 
         <div class="row mt-4">
           <div class="col-md-2">
             <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel" [(ngModel)]="colaborador.noExt">
+            <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel"
+              [(ngModel)]="colaborador.noExt">
             <!-- <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel" [(ngModel)]="colaborador.noExt" required> -->
             <div *ngIf="numExterior.invalid && (numExterior.dirty || numExterior.touched)" class="alert">
               <!-- <div *ngIf="numExterior.errors?.required">
@@ -241,33 +241,33 @@
 
           <div class="col-md-2">
             <label for="numInterior" class="form-label">Número Interior</label>
-            <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel" [(ngModel)]="colaborador.noInt">
+            <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel"
+              [(ngModel)]="colaborador.noInt">
           </div>
 
           <div class="col-md-2">
             <label for="codigopostal" class="form-label">Código Postal<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" maxlength="5" name="codigopostal"
-              [ngModel]="selectedCodigoPostal" (change)="onCodigoPostal($event.target.value)" ngModel
-              #codigopostal="ngModel" pattern="[0-9]*">
+            <input type="text" class="form-control" maxlength="5" name="codigopostal" [ngModel]="selectedCodigoPostal"
+              (change)="onCodigoPostal($event.target.value)" ngModel #codigopostal="ngModel" pattern="[0-9]*">
             <!-- <input type="text" class="form-control" maxlength="5" name="codigopostal"
               [ngModel]="selectedCodigoPostal" (change)="onCodigoPostal($event.target.value)" ngModel
               #codigopostal="ngModel" pattern="[0-9]*" required> -->
-              <div *ngIf="codigopostal.invalid && (codigopostal.dirty || codigopostal.touched)" class="alert">
-                <!-- <div *ngIf="codigopostal.errors?.required">
+            <div *ngIf="codigopostal.invalid && (codigopostal.dirty || codigopostal.touched)" class="alert">
+              <!-- <div *ngIf="codigopostal.errors?.required">
                   El codigo postal es obligatorio.
                 </div> -->
-                <div *ngIf="nombre.errors?.pattern">
-                  El codigo postal son solo numeros.
+              <div *ngIf="nombre.errors?.pattern">
+                El codigo postal son solo numeros.
               </div>
-              </div>
+            </div>
           </div>
 
 
           <div class="col">
             <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-            <select class="form-control" name="colonia" ngModel
-            #colonia="ngModel" (change)="onColonia($event.target.value)">
-            <!-- <select class="form-control" name="colonia" ngModel
+            <select class="form-control" name="colonia" ngModel #colonia="ngModel"
+              (change)="onColonia($event.target.value)">
+              <!-- <select class="form-control" name="colonia" ngModel
             #colonia="ngModel"  required (change)="onColonia($event.target.value)"> -->
               <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
                 {{colonia.nombre}}
@@ -302,7 +302,7 @@
 
           <div class="col">
             <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
-            <select class="form-control" name="pais" >
+            <select class="form-control" name="pais">
               <option *ngFor="let pais of paises" [value]="pais.idPais">
                 {{pais.nombre}}
               </option>
@@ -314,7 +314,8 @@
         <div class="row mt-4 pb-4">
           <div class="col">
             <label for="referencia" class="form-label">Referencia</label>
-            <textarea name="referencia" class="form-control" ngModel #referencia="ngModel" [(ngModel)]="colaborador.referenciaDireccion" rows="3"></textarea>
+            <textarea name="referencia" class="form-control" ngModel #referencia="ngModel"
+              [(ngModel)]="colaborador.referenciaDireccion" rows="3"></textarea>
           </div>
 
           <div class="col">
@@ -324,7 +325,10 @@
               (change)="comprobanteDomicilio($event.target.files)" #domicilioUpload>
           </div>
         </div>
-        <div class="row pb-4"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>
+        <div class="row pb-4">
+          <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+              class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
+        </div>
       </div>
     </mat-tab>
     <mat-tab label="Información Personal">
@@ -333,15 +337,15 @@
         <div class="row">
           <div class="col-md-4">
             <label for="sexo" class="form-label">Genero<span class="text-danger"> *</span></label>
-            <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)"
-            #sexo="ngModel" [ngModel]="colaborador.idSexo">
-            <!-- <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)"
+            <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)" #sexo="ngModel"
+              [ngModel]="colaborador.idSexo">
+              <!-- <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)"
             #sexo="ngModel" [ngModel]="colaborador.idSexo" required > -->
-            <option value="" selected disabled hidden>Seleccionar</option>
+              <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">
                 {{sexo.nombre}}
               </option>
-              
+
             </select>
             <div *ngIf="sexo.invalid && (sexo.dirty || sexo.touched)" class="alert">
               <!-- <div *ngIf="sexo.errors?.required">
@@ -352,7 +356,8 @@
 
           <div class="col-md-1">
             <label for="peso" class="form-label">Peso (Kg)</label>
-            <input maxlength="3" size="3" type="text" class="form-control" name="peso" ngModel #peso="ngModel" [(ngModel)]="colaborador.peso" pattern="[0-9]*">
+            <input maxlength="3" size="3" type="text" class="form-control" name="peso" ngModel #peso="ngModel"
+              [(ngModel)]="colaborador.peso" pattern="[0-9]*">
             <div *ngIf="peso.invalid && (peso.dirty || peso.touched)" class="alert">
               <div *ngIf="peso.errors?.pattern">
                 El peso debe contener solamente numeros.
@@ -362,7 +367,8 @@
 
           <div class="col-md-1">
             <label for="estatura" class="form-label">Estatura(cm)</label>
-            <input maxlength="3" size="3" type="text" class="form-control" name="estatura" ngModel #estatura="ngModel" [(ngModel)]="colaborador.estatura" pattern="[0-9]*">
+            <input maxlength="3" size="3" type="text" class="form-control" name="estatura" ngModel #estatura="ngModel"
+              [(ngModel)]="colaborador.estatura" pattern="[0-9]*">
             <div *ngIf="estatura.invalid && (estatura.dirty || estatura.touched)" class="alert">
               <div *ngIf="estatura.errors?.pattern">
                 La estatura debe contener solamente numeros.
@@ -372,20 +378,20 @@
 
           <div class="col-md-2">
             <label for="tez" class="form-label">Tez</label>
-            <select class="form-control" name="tez"   ngModel
-            #tez="ngModel" [ngModel]="colaborador.idTez" (change)="onTez($event.target.value)">
+            <select class="form-control" name="tez" ngModel #tez="ngModel" [ngModel]="colaborador.idTez"
+              (change)="onTez($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tez of teces" [value]="tez.idTez">
                 {{tez.nombre}}
               </option>
-              
+
             </select>
           </div>
           <div class="col-md-2">
             <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger"> *</span></label>
-            <select class="form-control" name="estadoCivil" ngModel
-            #estadoCivil="ngModel" [ngModel]="colaborador.idEstadoCivil" (change)="onEstadoCivil($event.target.value)">
-            <!-- <select class="form-control" name="estadoCivil" ngModel
+            <select class="form-control" name="estadoCivil" ngModel #estadoCivil="ngModel"
+              [ngModel]="colaborador.idEstadoCivil" (change)="onEstadoCivil($event.target.value)">
+              <!-- <select class="form-control" name="estadoCivil" ngModel
             #estadoCivil="ngModel" [ngModel]="colaborador.idEstadoCivil" (change)="onEstadoCivil($event.target.value)" required> -->
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.idEstadoCivil">
@@ -403,24 +409,27 @@
         <div class="row mt-4 pb-4">
           <div class="col-md-2">
             <label for="telefono1" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
-            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="colaborador.telefono" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel
+              #telefono1="ngModel" [(ngModel)]="colaborador.telefono" placeholder="10 Dígitos" pattern="[0-9]*"
+              minlength="10">
             <!-- <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="colaborador.telefono" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required> -->
-              <div *ngIf="telefono1.invalid && (telefono1.dirty || telefono1.touched)" class="alert">
-                <!-- <div *ngIf="telefono1.errors?.required">
+            <div *ngIf="telefono1.invalid && (telefono1.dirty || telefono1.touched)" class="alert">
+              <!-- <div *ngIf="telefono1.errors?.required">
                   El telefono es obligatorio.
                 </div> -->
-                <div *ngIf="telefono1.errors?.pattern">
-                  El telefono debe contener solamente numeros.
-                </div>
-                <div *ngIf="telefono1.errors?.minlength">
-                  El telefono debe contener 10 digitos.
-                </div>
+              <div *ngIf="telefono1.errors?.pattern">
+                El telefono debe contener solamente numeros.
               </div>
+              <div *ngIf="telefono1.errors?.minlength">
+                El telefono debe contener 10 digitos.
+              </div>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="tipoTel1" class="form-label">Tipo de Teléfono 1</label>
-            <select class="form-control" name="tipoTel1" ngModel #tipoTel1="ngModel" [ngModel]="colaborador.idTipoTelefono" (change)="onTipoTel1($event.target.value)">
+            <select class="form-control" name="tipoTel1" ngModel #tipoTel1="ngModel"
+              [ngModel]="colaborador.idTipoTelefono" (change)="onTipoTel1($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
                 {{tipoTelefono.nombre}}
@@ -430,7 +439,9 @@
 
           <div class="col-md-2">
             <label for="telefono2" class="form-label">Teléfono 2</label>
-            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" ngModel #telefono2="ngModel" [(ngModel)]="colaborador.telefono2" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+            <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" ngModel
+              #telefono2="ngModel" [(ngModel)]="colaborador.telefono2" placeholder="10 Dígitos" pattern="[0-9]*"
+              minlength="10">
             <div *ngIf="telefono2.invalid && (telefono2.dirty || telefono2.touched)" class="alert">
               <div *ngIf="telefono2.errors?.pattern">
                 El telefono debe contener solamente numeros.
@@ -443,7 +454,8 @@
 
           <div class="col-md-2">
             <label for="tipoTel2" class="form-label">Tipo de Teléfono 2</label>
-            <select class="form-control" name="tipoTel2" ngModel #tipoTel2="ngModel" [ngModel]="colaborador.idTipoTelefono2" (change)="onTipoTel2($event.target.value)">
+            <select class="form-control" name="tipoTel2" ngModel #tipoTel2="ngModel"
+              [ngModel]="colaborador.idTipoTelefono2" (change)="onTipoTel2($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
                 {{tipoTelefono.nombre}}
@@ -452,10 +464,13 @@
           </div>
 
           <div class="col-md-4">
-            <label for="correoelectronico" class="form-label">Correo Electrónico<span class="text-danger"> *</span></label>
-            <input type="email" class="form-control" name="correoelectronico" ngModel #correoelectronico="ngModel" [(ngModel)]="colaborador.correoElectronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <label for="correoelectronico" class="form-label">Correo Electrónico<span class="text-danger">
+                *</span></label>
+            <input type="email" class="form-control" name="correoelectronico" ngModel #correoelectronico="ngModel"
+              [(ngModel)]="colaborador.correoElectronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
             <!-- <input type="email" class="form-control" name="correoelectronico" ngModel #correoelectronico="ngModel" [(ngModel)]="colaborador.correoElectronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required> -->
-            <div *ngIf="correoelectronico.invalid && (correoelectronico.dirty || correoelectronico.touched)" class="alert">
+            <div *ngIf="correoelectronico.invalid && (correoelectronico.dirty || correoelectronico.touched)"
+              class="alert">
               <!-- <div *ngIf="correoelectronico.errors?.required">
                 El correo es obligatorio.
               </div> -->
@@ -465,7 +480,10 @@
             </div>
           </div>
         </div>
-        <div class="row pb-4"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>
+        <div class="row pb-4">
+          <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+              class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
+        </div>
 
         <!-- <div class="row mt-4 pb-4">
           <div class="col-md-4">
@@ -499,101 +517,99 @@
         </div> -->
       </div>
     </mat-tab>
-    <mat-tab label="Pago"> 
+    <mat-tab label="Pago">
       <div class="container mt-5 bg-white rounded-top shadow">
-          <h4 class="pt-4 pb-1">Pago</h4>
-          <div class="form-group dynamic-element1">
-            <div class="row pb-4">
-             
-                <div class="col-md-3">
-                  <label for="nombreBenef" class="form-label">Nombre del Beneficiario<span class="text-danger"> *</span></label>
-                  <input type="text" class="form-control valGlobal" name="nombreBenef"                
-                [(ngModel)]="pago.nombre" ngModel #nombreBenef="ngModel">
-                  <!-- <div class="invalid-feedback">
-                      *Campo Requerido!
-                  </div> -->
-                  </div>
+        <h4 class="pt-4 pb-1">Pago</h4>
+        <div class="form-group dynamic-element1">
+          <div class="row pb-4">
 
-                  <div class="col-md-3">
-                    <label for="banco" class="form-label">Banco<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="banco" ngModel #banco="ngModel" 
-                    (change)="onBanco($event.target.value)">
-                      <option value="" selected disabled hidden>Seleccionar</option>
-                      <option *ngFor="let banco of bancos" [value]="banco.idBanco">
-                        {{banco.nombre}}
-                      </option>                     
-                    </select>
-                  </div>
+            <div class="col-md-3">
+              <label for="nombreBenef" class="form-label">Nombre del Beneficiario<span class="text-danger">
+                  *</span></label>
+              <input type="text" class="form-control valGlobal" name="nombreBenef" [(ngModel)]="pago.nombre" ngModel
+                #nombreBenef="ngModel">
+            </div>
 
-                  <div class="col-md-3">
-                    <label for="tipocuenta" class="form-label">Tipo de Cuenta<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="tipocuenta" ngModel #tipocuenta="ngModel" [(ngModel)]="pago.tipoCuenta"
-                    (change)="onTipoCuenta($event.target.value)">
-                      <option value="" selected disabled hidden>Seleccionar</option>
-                      <option value="CLABE">CLABE</option>
-                      <option value="Numero de Tarjeta">Numero de Tarjeta</option>                     
-                    </select>
-                  </div>
-      
-                  <div class="col-md-3">
-                  <label for="numerocuenta" class="form-label">Numero<span class="text-danger"> *</span></label>
-                  <input type="text" class="form-control" name="numerocuenta"  
-                  [(ngModel)]="pago.numero" ngModel #numerocuenta="ngModel">
-                  <!-- <div class="invalid-feedback">
-                      *Campo Requerido!
-                  </div> -->
-                  </div>        
+            <div class="col-md-3">
+              <label for="banco" class="form-label">Banco<span class="text-danger"> *</span></label>
+              <select class="form-control" name="banco" ngModel #banco="ngModel"
+                (change)="onBanco($event.target.value)">
+                <option value="" selected disabled hidden>Seleccionar</option>
+                <option *ngFor="let banco of bancos" [value]="banco.idBanco">
+                  {{banco.nombre}}
+                </option>
+              </select>
             </div>
-            <div class="row"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>       
-          </div>
-          
-  
-          <div class="row mt-4">
-            <div class="col-md-12 text-center">
-              <button class="btn btn-primary add-one" (click)="agregarPago()">Agregar Otro</button>
-              <button class="btn btn-warning delete ml-3" (click)="limpiarPago()">Cancelar</button>
+
+            <div class="col-md-3">
+              <label for="tipocuenta" class="form-label">Tipo de Cuenta<span class="text-danger"> *</span></label>
+              <select class="form-control" name="tipocuenta" ngModel #tipocuenta="ngModel" [(ngModel)]="pago.tipoCuenta"
+                (change)="onTipoCuenta($event.target.value)">
+                <option value="" selected disabled hidden>Seleccionar</option>
+                <option value="CLABE">CLABE</option>
+                <option value="Numero de Tarjeta">Numero de Tarjeta</option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="numerocuenta" class="form-label">Numero<span class="text-danger"> *</span></label>
+              <input type="text" class="form-control" name="numerocuenta" [(ngModel)]="pago.numero" ngModel
+                #numerocuenta="ngModel">
             </div>
           </div>
-          <hr class="mt-3 mb-3" />
-          <div class="row mt-4 pb-4">
-            <div class="col-md-12 text-center">
-              <table mat-table [dataSource]="pagoSource" #pagosTable class="mat-elevation-z8">
-                <ng-container matColumnDef="nombre">
-                  <th mat-header-cell *matHeaderCellDef> Propietario </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="banco">
-                  <th mat-header-cell *matHeaderCellDef> Banco</th>
-                  <td mat-cell *matCellDef="let element"> {{element.banco.nombre}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="tipoCuenta">
-                  <th mat-header-cell *matHeaderCellDef> Tipo Cuenta </th>
-                  <td mat-cell *matCellDef="let element"> {{element.tipoCuenta}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="numero">
-                  <th mat-header-cell *matHeaderCellDef> N&uacute;mero </th>
-                  <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
-                </ng-container>
-                
-                <ng-container matColumnDef="deletePago">
-                  <th mat-header-cell *matHeaderCellDef> Acci&oacute;n </th>
-                  <td mat-cell *matCellDef="let element">
-                     <button class="btn btn-danger" color="danger" (click)="borraPago(element)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </td>
-                </ng-container>
-  
-                <tr mat-header-row *matHeaderRowDef="pagoColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: pagoColumns;"></tr>
-              </table>
-            </div>
+          <div class="row">
+            <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
           </div>
-      </div>    
-  </mat-tab>
+        </div>
+
+
+        <div class="row mt-4">
+          <div class="col-md-12 text-center">
+            <button class="btn btn-primary add-one" (click)="agregarPago()">Agregar Otro</button>
+            <button class="btn btn-warning delete ml-3" (click)="limpiarPago()">Cancelar</button>
+          </div>
+        </div>
+        <hr class="mt-3 mb-3" />
+        <div class="row mt-4 pb-4">
+          <div class="col-md-12 text-center">
+            <table mat-table [dataSource]="pagoSource" #pagosTable class="mat-elevation-z8">
+              <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef> Propietario </th>
+                <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="banco">
+                <th mat-header-cell *matHeaderCellDef> Banco</th>
+                <td mat-cell *matCellDef="let element"> {{element.banco.nombre}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="tipoCuenta">
+                <th mat-header-cell *matHeaderCellDef> Tipo Cuenta </th>
+                <td mat-cell *matCellDef="let element"> {{element.tipoCuenta}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="numero">
+                <th mat-header-cell *matHeaderCellDef> N&uacute;mero </th>
+                <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="deletePago">
+                <th mat-header-cell *matHeaderCellDef> Acci&oacute;n </th>
+                <td mat-cell *matCellDef="let element">
+                  <button class="btn btn-danger" color="danger" (click)="borraPago(element)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="pagoColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: pagoColumns;"></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
     <mat-tab label="Estudios">
       <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Estudios</h4>
@@ -613,7 +629,7 @@
                 <div class="col-md-6">
                   <label for="inicioEst" class="form-label">Inicio<span class="text-danger"> *</span></label>
                   <input type="month" class="form-control datepicker" name="inicioEst" #inicioEst="ngModel"
-                    min="1900-01" [(ngModel)]="estudio.fechaInicio"/>
+                    min="1900-01" [(ngModel)]="estudio.fechaInicio" />
                 </div>
 
                 <div class="col-md-6">
@@ -628,21 +644,20 @@
                     <label class="control-label">¿Se terminaron los estudios?<span class="text-danger"> *</span></label>
                     <div class="form-control">
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstS"
-                          value="Si" (click)="enableCed($event.target.value)" ngModel
-                          #estudiosEst="ngModel">
+                        <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstS" value="Si"
+                          (click)="enableCed($event.target.value)" ngModel #estudiosEst="ngModel">
                         <label class="form-check-label" for="estudiosEstS">Sí</label>
                       </div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstN" value="No" (click)="disableCed($event.target.value)" ngModel
-                        #estudiosEst="ngModel">
+                        <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstN" value="No"
+                          (click)="disableCed($event.target.value)" ngModel #estudiosEst="ngModel">
                         <label class="form-check-label" for="estudiosEstN">No</label>
                       </div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstT" value="Trunco" (click)="disableCed($event.target.value)" ngModel
-                        #estudiosEst="ngModel">
+                        <input class="form-check-input" type="radio" name="estudiosEst" id="estudiosEstT" value="Trunco"
+                          (click)="disableCed($event.target.value)" ngModel #estudiosEst="ngModel">
                         <label class="form-check-label" for="estudiosEstT">Trunco</label>
-                      </div>                
+                      </div>
                     </div>
                   </div>
 
@@ -652,14 +667,19 @@
                 <div class="col-md-12">
                   <label for="formFile" class="form-label">Imagen de la Cédula</label>
                   <input class="form-control-file" type="file" id="formFile" accept=".png, .jpg, .jpeg"
-                    (change)="onCedulaFileSelected($event.target.files)" disabled="disabled" [disabled]="textBoxDisabledCed">
+                    (change)="onCedulaFileSelected($event.target.files)" disabled="disabled"
+                    [disabled]="textBoxDisabledCed">
                 </div>
               </div>
-              <div class="row"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>
+              <div class="row">
+                <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                    class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
+              </div>
             </div>
 
             <div class="col-md-6">
-              <label for="comentarioEstudio" class="form-label">Estudio / Carrera / Curso<span class="text-danger"> *</span></label>
+              <label for="comentarioEstudio" class="form-label">Estudio / Carrera / Curso<span class="text-danger">
+                  *</span></label>
               <textarea name="comentarioEstudio" class="form-control" rows="5" #comentarioEstudio="ngModel"
                 [(ngModel)]="estudio.comentarios"></textarea>
             </div>
@@ -685,22 +705,22 @@
                 <th mat-header-cell *matHeaderCellDef> Instituci&oacute;n </th>
                 <td mat-cell *matCellDef="let element"> {{element.institucion}} </td>
               </ng-container>
-            
+
               <ng-container matColumnDef="comentarios">
                 <th mat-header-cell *matHeaderCellDef> Estudio</th>
                 <td mat-cell *matCellDef="let element"> {{element.comentarios}} </td>
               </ng-container>
-            
+
               <ng-container matColumnDef="inicio">
                 <th mat-header-cell *matHeaderCellDef> Inicio </th>
                 <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
               </ng-container>
-            
+
               <ng-container matColumnDef="fin">
                 <th mat-header-cell *matHeaderCellDef> Fin </th>
                 <td mat-cell *matCellDef="let element"> {{element.fechaFin}} </td>
               </ng-container>
-              
+
               <ng-container matColumnDef="estatus">
                 <th mat-header-cell *matHeaderCellDef> Estatus </th>
                 <td mat-cell *matCellDef="let element"> {{element?.estatus.nombre}} </td>
@@ -709,7 +729,7 @@
               <ng-container matColumnDef="deleteColaborador">
                 <th mat-header-cell *matHeaderCellDef> Acci&oacute;n </th>
                 <td mat-cell *matCellDef="let element">
-                   <button class="btn btn-danger" (click)="borraEstudio(element)">
+                  <button class="btn btn-danger" (click)="borraEstudio(element)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>
@@ -732,39 +752,46 @@
               <div class="row">
                 <div class="col-md-12">
                   <label for="empresa" class="form-label">Empresa/Institución<span class="text-danger"> *</span></label>
-                  <input type="text" class="form-control" name="empresa"  [(ngModel)]="experiencia.empresa" ngModel #empresa="ngModel">
+                  <input type="text" class="form-control" name="empresa" [(ngModel)]="experiencia.empresa" ngModel
+                    #empresa="ngModel">
                 </div>
               </div>
 
               <div class="row pt-3 pb-3">
                 <div class="col-md-6">
                   <label for="inicioExp" class="form-label">Inicio<span class="text-danger"> *</span></label>
-                  <input type="month" class="form-control datepicker" name="inicioExp"
-                    min="1900-01" [(ngModel)]="experiencia.fechaInicio" ngModel #inicioExp="ngModel">
+                  <input type="month" class="form-control datepicker" name="inicioExp" min="1900-01"
+                    [(ngModel)]="experiencia.fechaInicio" ngModel #inicioExp="ngModel">
                 </div>
 
                 <div class="col-md-6">
                   <label for="terminacionExp" class="form-label">Terminación<span class="text-danger"> *</span></label>
-                  <input type="month" class="form-control datepicker" name="terminacionExp"
-                    min="1900-02" [(ngModel)]="experiencia.fechaFin" ngModel #terminacionExp="ngModel">
+                  <input type="month" class="form-control datepicker" name="terminacionExp" min="1900-02"
+                    [(ngModel)]="experiencia.fechaFin" ngModel #terminacionExp="ngModel">
                 </div>
               </div>
               <div class="row pb-4">
                 <div class="col-md-6">
                   <label for="institucion" class="form-label">Nombre de Referencia</label>
-                  <input type="text" class="form-control"  placeholder="" name="referencia"  [(ngModel)]="experiencia.referencia" >
+                  <input type="text" class="form-control" placeholder="" name="referencia"
+                    [(ngModel)]="experiencia.referencia">
                 </div>
                 <div class="col-md-4">
                   <label for="telefono" class="form-label">Teléfono de Referencia</label>
-                  <input maxlength="10" size="10" type="tel" class="form-control" name="telefono"  [(ngModel)]="experiencia.telefono" placeholder="10 Dígitos"
-                     >
+                  <input maxlength="10" size="10" type="tel" class="form-control" name="telefono"
+                    [(ngModel)]="experiencia.telefono" placeholder="10 Dígitos">
                 </div>
               </div>
-              <div class="row"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>       
+              <div class="row">
+                <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                    class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
+              </div>
             </div>
             <div class="col-md-6">
-              <label for="experienciaAct" class="form-label">Actividades Realizadas<span class="text-danger"> *</span></label>
-              <textarea name="experienciaAct" class="form-control" rows="3" ngModel #experienciaAct="ngModel" [(ngModel)]="experiencia.comentario"></textarea>
+              <label for="experienciaAct" class="form-label">Actividades Realizadas<span class="text-danger">
+                  *</span></label>
+              <textarea name="experienciaAct" class="form-control" rows="3" ngModel #experienciaAct="ngModel"
+                [(ngModel)]="experiencia.comentario"></textarea>
             </div>
           </div>
           <!-- <hr class="mt-3 mb-3" /> -->
@@ -774,7 +801,7 @@
             <!-- Dynamic element will be cloned here -->
           </div>
         </div>
-        
+
         <div class="row mt-4">
           <div class="col-md-12 text-center">
             <button class="btn btn-primary add-one" (click)="agregarExperiencia()">Agregar Otra</button>
@@ -789,22 +816,22 @@
                 <th mat-header-cell *matHeaderCellDef> Empresa/Instituci&oacute;n </th>
                 <td mat-cell *matCellDef="let element"> {{element.empresa}} </td>
               </ng-container>
-            
+
               <ng-container matColumnDef="comentario">
                 <th mat-header-cell *matHeaderCellDef> Actividades</th>
                 <td mat-cell *matCellDef="let element"> {{element.comentario}} </td>
               </ng-container>
-            
+
               <ng-container matColumnDef="fechaInicio">
                 <th mat-header-cell *matHeaderCellDef> Inicio </th>
                 <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
               </ng-container>
-            
+
               <ng-container matColumnDef="fechaFin">
                 <th mat-header-cell *matHeaderCellDef> Fin </th>
                 <td mat-cell *matCellDef="let element"> {{element.fechaFin}} </td>
               </ng-container>
-              
+
               <ng-container matColumnDef="telefono">
                 <th mat-header-cell *matHeaderCellDef> Tel&eacute;fono </th>
                 <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
@@ -813,7 +840,7 @@
               <ng-container matColumnDef="deleteExperiencia">
                 <th mat-header-cell *matHeaderCellDef> Acci&oacute;n </th>
                 <td mat-cell *matCellDef="let element">
-                   <button class="btn btn-danger" (click)="borraExperiencia(element)">
+                  <button class="btn btn-danger" (click)="borraExperiencia(element)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>
@@ -823,7 +850,7 @@
               <tr mat-row *matRowDef="let row; columns: experienciaColumns;"></tr>
             </table>
 
-            
+
           </div>
         </div>
       </div>
@@ -838,8 +865,8 @@
             <div class="form-group">
               <div class="col-sm-12">
                 <div class="form-check" *ngFor="let especialidad of especialidades" [value]="especialidad.id">
-                  <input class="form-check-input" type="checkbox" id="{{especialidad.nombre}}" 
-                  (change)="especialidadCheck(especialidad)">
+                  <input class="form-check-input" type="checkbox" id="{{especialidad.nombre}}"
+                    (change)="especialidadCheck(especialidad)">
                   <label class="form-check-label" for="{{especialidad.nombre}}">
                     {{especialidad.nombre}}
                   </label>
@@ -851,7 +878,8 @@
                   </label>
                 </div>
                 <div class="col-md-12">
-                  <input type="text" class="form-control" id="especialidadOtra" placeholder="" value="" disabled [disabled]="textBoxDisabledOtraEsp">
+                  <input type="text" class="form-control" id="especialidadOtra" placeholder="" value="" disabled
+                    [disabled]="textBoxDisabledOtraEsp">
                 </div>
               </div>
             </div>
@@ -862,7 +890,7 @@
               <div class="col-sm-12">
                 <div class="form-check" *ngFor="let habilidad of habilidades" [value]="habilidad.idHabilidad">
                   <input class="form-check-input" type="checkbox" id="{{habilidad.nombre}}"
-                  (change)="habilidadCheck(habilidad)">
+                    (change)="habilidadCheck(habilidad)">
                   <label class="form-check-label" for="{{habilidad.nombre}}">
                     {{habilidad.nombre}}
                   </label>
@@ -874,13 +902,17 @@
                   </label>
                 </div>
                 <div class="col-md-12">
-                  <input type="text" class="form-control" id="habilidadOtra" placeholder="" value="" disabled [disabled]="textBoxDisabledOtraHab">
+                  <input type="text" class="form-control" id="habilidadOtra" placeholder="" value="" disabled
+                    [disabled]="textBoxDisabledOtraHab">
                 </div>
               </div>
             </div>
-          </div>      
+          </div>
         </div>
-        <div class="row pb-4"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>       
+        <div class="row pb-4">
+          <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+              class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
+        </div>
       </div>
     </mat-tab>
 
@@ -892,8 +924,8 @@
           <div class="col-md-6">
             <h5 class="pb-1">Días y Horarios de Disponibilidad<span class="text-danger"> *</span></h5>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="" id="todos" name="todosDias" ngModel #todosDias="ngModel"
-              [(ngModel)]="diasLaborales.todosDias" (click)="disableTextBoxDateofWorkT()">
+              <input class="form-check-input" type="checkbox" value="" id="todos" name="todosDias" ngModel
+                #todosDias="ngModel" [(ngModel)]="diasLaborales.todosDias" (click)="disableTextBoxDateofWorkT()">
               <label class="form-check-label" for="todos">
                 <p class="font-weight-bold">Todos los Dias
                 </p>
@@ -902,15 +934,15 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="desdeT" class="form-label">Desde</label>
-                <input type="time" class="form-control input-sm" id="desdeT" placeholder="" value="" name="todosDiasDesde"
-                ngModel #todosDiasDesde="ngModel" [(ngModel)]="diasLaborales.todosDiasDesde" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkT">
+                <input type="time" class="form-control input-sm" id="desdeT" placeholder="" value=""
+                  name="todosDiasDesde" ngModel #todosDiasDesde="ngModel" [(ngModel)]="diasLaborales.todosDiasDesde"
+                  disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
               </div>
               <div class="col-md-6">
                 <label for="hastaT" class="form-label">Hasta</label>
-                <input type="time" class="form-control input-sm" id="hastaT" placeholder="" value="" name="todosDiasHasta"
-                ngModel #todosDiasHasta="ngModel" [(ngModel)]="diasLaborales.todosDiasHasta" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkT">
+                <input type="time" class="form-control input-sm" id="hastaT" placeholder="" value=""
+                  name="todosDiasHasta" ngModel #todosDiasHasta="ngModel" [(ngModel)]="diasLaborales.todosDiasHasta"
+                  disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
               </div>
             </div>
             <div class="form-check form-check-inline">
@@ -1080,8 +1112,9 @@
             <div class="row">
               <div class="col-md-4">
                 <label for="permanencia" class="form-label">Permanencia<span class="text-danger"> *</span></label>
-                <select class="form-control" name="permanencia" ngModel #permanencia="ngModel" [ngModel]="colaborador.idPermanencia" (change)="onPermanencia($event.target.value)">
-                <!-- <select class="form-control" name="permanencia" ngModel #permanencia="ngModel" [ngModel]="colaborador.idPermanencia" (change)="onPermanencia($event.target.value)"   required> -->
+                <select class="form-control" name="permanencia" ngModel #permanencia="ngModel"
+                  [ngModel]="colaborador.idPermanencia" (change)="onPermanencia($event.target.value)">
+                  <!-- <select class="form-control" name="permanencia" ngModel #permanencia="ngModel" [ngModel]="colaborador.idPermanencia" (change)="onPermanencia($event.target.value)"   required> -->
                   <option value="" selected disabled hidden>Seleccionar</option>
                   <option *ngFor="let permanencia of permanencias" [value]="permanencia.idPermanencia">
                     {{permanencia.nombre}}
@@ -1093,15 +1126,16 @@
                   </div> -->
                 </div>
               </div>
-              
+
               <div class="col-md-6">
-                
+
                 <label>Zonas Laborales</label>
                 <div class="form-group row pt-1">
                   <div class="col-sm-10">
-                    <div class="form-check" *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.idZonaLaboral">
-                      <input class="form-check-input" type="checkbox" id={{zonaLaboral.nombre}} 
-                      (change)="zonasCheck(zonaLaboral)">
+                    <div class="form-check" *ngFor="let zonaLaboral of zonasLaborales"
+                      [value]="zonaLaboral.idZonaLaboral">
+                      <input class="form-check-input" type="checkbox" id={{zonaLaboral.nombre}}
+                        (change)="zonasCheck(zonaLaboral)">
                       <!-- <input class="form-check-input" type="checkbox" id={{zonaLaboral.nombre}} 
                       (change)="zonasCheck(zonaLaboral)" required> -->
                       <label class="form-check-label" for={{zonaLaboral.nombre}}>
@@ -1110,7 +1144,7 @@
                     </div>
                   </div>
                 </div>
-              </div>             
+              </div>
             </div>
 
             <div class="row">
@@ -1119,28 +1153,27 @@
                   <label class="control-label">¿Atiende COVID?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovid"
-                        value="option1" ngModel
-                        #atiendecovid="ngModel">
+                      <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovid" value="option1"
+                        ngModel #atiendecovid="ngModel">
                       <!-- <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovid"
                         value="option1" ngModel
                         #atiendecovid="ngModel" required> -->
                       <label class="form-check-label" for="covids">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="atiendecovid" id="covidn" value="option2" ngModel
-                      #atiendecovid="ngModel">
+                      <input class="form-check-input" type="radio" name="atiendecovid" id="covidn" value="option2"
+                        ngModel #atiendecovid="ngModel">
                       <!-- <input class="form-check-input" type="radio" name="atiendecovid" id="covidn" value="option2" ngModel
                       #atiendecovid="ngModel" required> -->
                       <label class="form-check-label" for="covidn">No</label>
                     </div>
-                    
+
                   </div>
                   <div *ngIf="atiendecovid.invalid && (atiendecovid.dirty || atiendecovid.touched)" class="alert">
-                      <!-- <div *ngIf="atiendecovid.errors?.required">
+                    <!-- <div *ngIf="atiendecovid.errors?.required">
                         El campo es obligatorio.
                       </div> -->
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1152,27 +1185,26 @@
                   <div class="form-control">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1" ngModel
-                  #apenales="ngModel">
-                  <!-- <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1" ngModel
+                        #apenales="ngModel">
+                      <!-- <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1" ngModel
                   #apenales="ngModel" required> -->
-                  <label class="form-check-label" for="antecedentesS">Sí</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="apenales" id="antecedentesN"
-                    value="option2" ngModel
-                    #apenales="ngModel">
-                  <!-- <input class="form-check-input" type="radio" name="apenales" id="antecedentesN"
+                      <label class="form-check-label" for="antecedentesS">Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="apenales" id="antecedentesN" value="option2"
+                        ngModel #apenales="ngModel">
+                      <!-- <input class="form-check-input" type="radio" name="apenales" id="antecedentesN"
                     value="option2" ngModel
                     #apenales="ngModel" required> -->
-                  <label class="form-check-label" for="antecedentesN">No</label>
-                </div>
-                    
+                      <label class="form-check-label" for="antecedentesN">No</label>
+                    </div>
+
                   </div>
                   <div *ngIf="apenales.invalid && (apenales.dirty || apenales.touched)" class="alert">
-                      <!-- <div *ngIf="apenales.errors?.required">
+                    <!-- <div *ngIf="apenales.errors?.required">
                         El campo es obligatorio.
                       </div> -->
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1183,8 +1215,7 @@
                   <label class="control-label">¿Tiene auto propio?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="autopropio" id="autopropioS"
-                        value="1" ngModel
+                      <input class="form-check-input" type="radio" name="autopropio" id="autopropioS" value="1" ngModel
                         #autopropio="ngModel" [(ngModel)]="colaborador.autoPropio">
                       <!-- <input class="form-check-input" type="radio" name="autopropio" id="autopropioS"
                         value="1" ngModel
@@ -1192,20 +1223,19 @@
                       <label class="form-check-label" for="autopropioS">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="autopropio" id="autopropioN"
-                        value="0" ngModel
+                      <input class="form-check-input" type="radio" name="autopropio" id="autopropioN" value="0" ngModel
                         #autopropio="ngModel" [(ngModel)]="colaborador.autoPropio">
                       <!-- <input class="form-check-input" type="radio" name="autopropio" id="autopropioN"
                         value="0" ngModel
                         #autopropio="ngModel" [(ngModel)]="colaborador.autoPropio" required> -->
                       <label class="form-check-label" for="autopropioN">No</label>
-                    </div>                    
+                    </div>
                   </div>
                   <div *ngIf="autopropio.invalid && (autopropio.dirty || autopropio.touched)" class="alert">
-                      <!-- <div *ngIf="autopropio.errors?.required">
+                    <!-- <div *ngIf="autopropio.errors?.required">
                         El campo es obligatorio.
                       </div> -->
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1213,32 +1243,31 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="control-label">¿Tiene disponibilidad para viajar?<span class="text-danger"> *</span></label>
+                  <label class="control-label">¿Tiene disponibilidad para viajar?<span class="text-danger">
+                      *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadS"
-                        value="1" ngModel
-                        #disponibilidad="ngModel" [(ngModel)]="colaborador.dispuestoViajar">
+                      <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadS" value="1"
+                        ngModel #disponibilidad="ngModel" [(ngModel)]="colaborador.dispuestoViajar">
                       <!-- <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadS"
                         value="1" ngModel
                         #disponibilidad="ngModel" [(ngModel)]="colaborador.dispuestoViajar" required> -->
                       <label class="form-check-label" for="disponibilidadS">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadN"
-                        value="0" ngModel
-                        #disponibilidad="ngModel" [(ngModel)]="colaborador.dispuestoViajar">
+                      <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadN" value="0"
+                        ngModel #disponibilidad="ngModel" [(ngModel)]="colaborador.dispuestoViajar">
                       <!-- <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadN"
                         value="0" ngModel
                         #disponibilidad="ngModel" [(ngModel)]="colaborador.dispuestoViajar" required> -->
                       <label class="form-check-label" for="disponibilidadN">No</label>
-                    </div>                  
+                    </div>
                   </div>
                   <div *ngIf="disponibilidad.invalid && (disponibilidad.dirty || disponibilidad.touched)" class="alert">
-                      <!-- <div *ngIf="disponibilidad.errors?.required">
+                    <!-- <div *ngIf="disponibilidad.errors?.required">
                         El campo es obligatorio.
                       </div> -->
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1249,10 +1278,9 @@
                   <label class="control-label">¿Tiene Visa Americana?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" 
-                      name="visa" id="visa" value="option1"
-                        (click)="enableTextBoxVis()" ngModel
-                        #visa="ngModel" [(ngModel)]="colaborador.visa">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" name="visa" id="visa"
+                        value="option1" (click)="enableTextBoxVis()" ngModel #visa="ngModel"
+                        [(ngModel)]="colaborador.visa">
                       <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" 
                       name="visa" id="visa" value="option1"
                         (click)="enableTextBoxVis()" ngModel
@@ -1260,56 +1288,56 @@
                       <label class="form-check-label" for="visaS">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" name="visa" 
-                      id="visaN" value="0"
-                        (click)="disableTextBoxVis()" ngModel
-                        #visa="ngModel" [(ngModel)]="colaborador.visa">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" name="visa" id="visaN"
+                        value="0" (click)="disableTextBoxVis()" ngModel #visa="ngModel" [(ngModel)]="colaborador.visa">
                       <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" name="visa" 
                       id="visaN" value="0"
                         (click)="disableTextBoxVis()" ngModel
                         #visa="ngModel" [(ngModel)]="colaborador.visa" required> -->
                       <label class="form-check-label" for="visaN">No</label>
-                    </div>                 
+                    </div>
                   </div>
                   <div *ngIf="visa.invalid && (visa.dirty || visa.touched)" class="alert">
-                      <!-- <div *ngIf="visa.errors?.required">
+                    <!-- <div *ngIf="visa.errors?.required">
                         El campo es obligatorio.
                       </div> -->
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4">
                 <label for="visaNum" class="form-label">Número de Visa</label>
-                <input type="text" class="form-control" id="numvisa" name="numvisa" ngModel #numvisa="ngModel" [(ngModel)]="colaborador.visaNumero" disabled="disabled" [disabled]="textBoxDisabledVis">
+                <input type="text" class="form-control" id="numvisa" name="numvisa" ngModel #numvisa="ngModel"
+                  [(ngModel)]="colaborador.visaNumero" disabled="disabled" [disabled]="textBoxDisabledVis">
               </div>
               <div class="col-md-4">
                 <label for="tipoVisa" class="form-label">Tipo de Visa</label>
-            <select class="form-control" name="tipoVisa" (change)="onTipoVisa($event.target.value)" #tipoVisa="ngModel" [ngModel]="colaborador.idTipoVisa" ngModel disabled="disabled" [disabled]="textBoxDisabledVis">
-              <option value="" selected disabled hidden>Seleccionar</option>
-              <option *ngFor="let tipoVisa of tipoVisas" [value]="tipoVisa.idTipoVisa">
-                {{tipoVisa.nombre}}
-              </option>
-            </select>
+                <select class="form-control" name="tipoVisa" (change)="onTipoVisa($event.target.value)"
+                  #tipoVisa="ngModel" [ngModel]="colaborador.idTipoVisa" ngModel disabled="disabled"
+                  [disabled]="textBoxDisabledVis">
+                  <option value="" selected disabled hidden>Seleccionar</option>
+                  <option *ngFor="let tipoVisa of tipoVisas" [value]="tipoVisa.idTipoVisa">
+                    {{tipoVisa.nombre}}
+                  </option>
+                </select>
                 <!-- <label for="tipNum" class="form-label">Tipo de Visa</label>
                 <input type="text" class="form-control" id="tipovisa" name="tipovisa" ngModel #tipovisa="ngModel" [(ngModel)]="colaborador.tipoVisa" disabled="disabled" [disabled]="textBoxDisabledVis"> -->
               </div>
               <div class="col-md-4">
                 <label for="visaExp" class="form-label">Expiración</label>
-                <input type="date" class="form-control" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy" ngModel #visaExp="ngModel" [(ngModel)]="colaborador.expiracionVisa" disabled="disabled" [disabled]="textBoxDisabledVis">
-                <div class="invalid-feedback">
-                  *Campo Requerido!
-                </div>
+                <input type="date" class="form-control" id="fechaexpvisa" name="visaExp" value="dd-MM-yyyy" ngModel
+                  #visaExp="ngModel" [(ngModel)]="colaborador.expiracionVisa" disabled="disabled"
+                  [disabled]="textBoxDisabledVis">
               </div>
             </div>
             <div class="row">
               <div class="col-md-12 mt-3">
                 <label for="visaImg" class="form-label">Imagen de la Visa</label>
-                <input class="form-control-file" type="file" id="visaImg" name="visaImg" 
-                accept=".png, .jpg, .jpeg" (change)="onVisa($event.target.files)" #visaUpload disabled="disabled"
-                [disabled]="textBoxDisabledVis">
-                
+                <input class="form-control-file" type="file" id="visaImg" name="visaImg" accept=".png, .jpg, .jpeg"
+                  (change)="onVisa($event.target.files)" #visaUpload disabled="disabled"
+                  [disabled]="textBoxDisabledVis">
+
               </div>
             </div>
 
@@ -1319,79 +1347,87 @@
                   <label class="control-label">¿Tiene pasaporte?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="pasaporte" id="pasaporte" 
-                      value="1"  (click)="enableTextBoxPas()" ngModel
-                        #pasaporte="ngModel" [(ngModel)]="colaborador.pasaporte">
+                      <input class="form-check-input" type="radio" name="pasaporte" id="pasaporte" value="1"
+                        (click)="enableTextBoxPas()" ngModel #pasaporte="ngModel" [(ngModel)]="colaborador.pasaporte">
                       <!-- <input class="form-check-input" type="radio" name="pasaporte" id="pasaporte" 
                       value="1"  (click)="enableTextBoxPas()" ngModel
                         #pasaporte="ngModel" [(ngModel)]="colaborador.pasaporte" required> -->
                       <label class="form-check-label" for="pasaporteS">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="pasaporte" id="pasaporteN"
-                        value="0" (click)="disableTextBoxPas()" ngModel
-                        #pasaporte="ngModel" [(ngModel)]="colaborador.pasaporte">
+                      <input class="form-check-input" type="radio" name="pasaporte" id="pasaporteN" value="0"
+                        (click)="disableTextBoxPas()" ngModel #pasaporte="ngModel" [(ngModel)]="colaborador.pasaporte">
                       <!-- <input class="form-check-input" type="radio" name="pasaporte" id="pasaporteN"
                         value="0" (click)="disableTextBoxPas()" ngModel
                         #pasaporte="ngModel" [(ngModel)]="colaborador.pasaporte" required > -->
                       <label class="form-check-label" for="pasaporteN">No</label>
-                    </div>               
+                    </div>
                   </div>
                   <div *ngIf="pasaporte.invalid && (pasaporte.dirty || pasaporte.touched)" class="alert">
-                      <!-- <div *ngIf="pasaporte.errors?.required">
+                    <!-- <div *ngIf="pasaporte.errors?.required">
                         El campo es obligatorio.
                       </div> -->
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4">
                 <label for="pasaporteNum" class="form-label">Número de Pasaporte</label>
-                <input type="text" class="form-control" id="pasaporteNum" name="pasaporteNum" ngModel #pasaporteNum="ngModel" [(ngModel)]="colaborador.pasaporteNumero" disabled="disabled" [disabled]="textBoxDisabledPas">
+                <input type="text" class="form-control" id="pasaporteNum" name="pasaporteNum" ngModel
+                  #pasaporteNum="ngModel" [(ngModel)]="colaborador.pasaporteNumero" disabled="disabled"
+                  [disabled]="textBoxDisabledPas">
               </div>
               <div class="col-md-4">
                 <label for="pasaporteExp" class="form-label">Expiración</label>
-                <input type="date" class="form-control" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy" ngModel #pasaporteExp="ngModel" [(ngModel)]="colaborador.expiracionPasaporte" disabled="disabled" [disabled]="textBoxDisabledPas">
+                <input type="date" class="form-control" id="fechaexppasaporte" name="pasaporteExp" value="dd-MM-yyyy"
+                  ngModel #pasaporteExp="ngModel" [(ngModel)]="colaborador.expiracionPasaporte" disabled="disabled"
+                  [disabled]="textBoxDisabledPas">
               </div>
             </div>
             <div class="row">
               <div class="col-md-12 mt-3">
                 <label for="pasaporteImg" class="form-label">Imagen del Pasaporte</label>
-                <input class="form-control-file" type="file" id="pasaporteImg" name="pasaporteImg" accept=".png, .jpg, .jpeg" (change)="onPasaporte($event.target.files)" #pasaporteUpload disabled="disabled" [disabled]="textBoxDisabledPas">
-                
+                <input class="form-control-file" type="file" id="pasaporteImg" name="pasaporteImg"
+                  accept=".png, .jpg, .jpeg" (change)="onPasaporte($event.target.files)" #pasaporteUpload
+                  disabled="disabled" [disabled]="textBoxDisabledPas">
+
               </div>
             </div>
             <!-- <div class="row"> -->
-              
+
             <!-- </div> -->
           </div>
         </div>
-        <div class="row"><div class="col-md-12"><span class="font-italic">Los campos con </span><span class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div></div>       
-            <!-- <div class="container bg-white rounded-bottom shadow"> -->
-              <div class="row text-center pb-4">
-                <div class="col">
-                  <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button>
-                  <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
-                  <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
-                </div>
-              </div>
-            <!-- </div> -->
+        <div class="row">
+          <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+              class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
+        </div>
+        <!-- <div class="container bg-white rounded-bottom shadow"> -->
+        <div class="row text-center pb-4">
+          <div class="col">
+            <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador
+            </button>
+            <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
+            <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
+          </div>
+        </div>
+        <!-- </div> -->
       </div>
 
     </mat-tab>
   </mat-tab-group>
   <div class="container bg-white rounded-bottom shadow">
     <div class="row text-center pb-4">
-      
+
       <div class="col">
         <div class="btn-toolbar" role="toolbar" style="justify-content: center; display: flex;">
           <div class="btn-group mr-2">
-            <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagAtras(1)" >&lt;</button>
+            <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagAtras(1)">&lt;</button>
           </div>
           <div class="btn-group mr-2">
-            <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagDelante(1)" >&gt;</button>
-          </div>       
+            <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagDelante(1)">&gt;</button>
+          </div>
         </div>
       </div>
     </div>
