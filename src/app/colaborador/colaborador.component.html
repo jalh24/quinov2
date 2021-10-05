@@ -121,6 +121,10 @@
               </div>
             </div>
           </div>
+          <div class="col-md-5">
+            <label for="observaciones">Observaciones</label>
+            <textarea class="form-control" id="observaciones" name="observaciones" ngModel #observaciones="ngModel" [(ngModel)]="colaborador.observaciones" rows="5" maxlength = "255"></textarea>
+          </div>
         </div>
 
         <hr class="py-1" />
@@ -566,7 +570,7 @@
                 <ng-container matColumnDef="deletePago">
                   <th mat-header-cell *matHeaderCellDef> Acci&oacute;n </th>
                   <td mat-cell *matCellDef="let element">
-                     <button mat-icon-button color="danger" (click)="borraPago(element)">
+                     <button class="btn btn-danger" color="danger" (click)="borraPago(element)">
                       <mat-icon>delete</mat-icon>
                     </button>
                   </td>
@@ -582,6 +586,7 @@
     <mat-tab label="Estudios">
       <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Estudios</h4>
+        <h6 class="pb-1">Favor de capturar cada uno de los estudios, cursos y diplomados que haya tomado</h6>
         <div class="form-group dynamic-element">
           <div class="row">
             <div class="col-md-6">
@@ -692,7 +697,7 @@
               <ng-container matColumnDef="deleteColaborador">
                 <th mat-header-cell *matHeaderCellDef> Acci&oacute;n </th>
                 <td mat-cell *matCellDef="let element">
-                   <button mat-icon-button color="danger" (click)="borraEstudio(element)">
+                   <button class="btn btn-danger" (click)="borraEstudio(element)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>
@@ -705,9 +710,10 @@
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Experiencia">
+    <mat-tab label="Experiencia Laboral">
       <div class="container mt-5 bg-white rounded-top shadow">
-        <h4 class="pt-4 pb-1">Experiencia</h4>
+        <h4 class="pt-4 pb-1">Experiencia Laboral</h4>
+        <h6 class="pb-1">Favor de capturar cada una de las experiencias laborales que tenga</h6>
         <div class="form-group dynamic-element1">
           <div class="row">
             <div class="col-md-6">
@@ -794,7 +800,7 @@
               <ng-container matColumnDef="deleteExperiencia">
                 <th mat-header-cell *matHeaderCellDef> Acci&oacute;n </th>
                 <td mat-cell *matCellDef="let element">
-                   <button mat-icon-button color="danger" (click)="borraExperiencia(element)">
+                   <button class="btn btn-danger" (click)="borraExperiencia(element)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>
@@ -864,9 +870,9 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="Adicional">
+    <mat-tab label="Disponibilidad de trabajo">
       <div class="container mt-5 bg-white rounded-top shadow">
-        <h4 class="pt-4 pb-1">Información Adicional</h4>
+        <h4 class="pt-4 pb-1">Disponibilidad de trabajo</h4>
         <div class="row">
           <hr class="mt-2 mb-3" />
           <div class="col-md-6">
@@ -1119,7 +1125,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="control-label">Antecedentes Penales<span class="text-danger"> *</span></label>
+                  <label class="control-label">¿Tiene antecedentes penales?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1" ngModel
@@ -1146,7 +1152,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="control-label">Auto Propio<span class="text-danger"> *</span></label>
+                  <label class="control-label">¿Tiene auto propio?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="autopropio" id="autopropioS"
@@ -1173,7 +1179,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="control-label">Disponibilidad para viajar<span class="text-danger"> *</span></label>
+                  <label class="control-label">¿Tiene disponibilidad para viajar?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="disponibilidad" id="disponibilidadS"
@@ -1200,7 +1206,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="control-label">Visa<span class="text-danger"> *</span></label>
+                  <label class="control-label">¿Tiene Visa Americana?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="inlineRadioOptions" 
@@ -1255,7 +1261,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="control-label">Pasaporte<span class="text-danger"> *</span></label>
+                  <label class="control-label">¿Tiene pasaporte?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="pasaporte" id="pasaporte" 
@@ -1299,10 +1305,7 @@
               </div>
             </div>
             <!-- <div class="row"> -->
-              <div class="form-group pt-3">
-                <label for="observaciones">Observaciones</label>
-                <textarea class="form-control" id="observaciones" name="observaciones" ngModel #observaciones="ngModel" [(ngModel)]="colaborador.observaciones" rows="5" maxlength = "255"></textarea>
-              </div>
+              
             <!-- </div> -->
           </div>
         </div>
