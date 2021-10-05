@@ -108,6 +108,7 @@ export class ColaboradorComponent implements OnInit {
   calificaciones:any[];
   tiposColaboradores:any[];
   teces:any[];
+  tipoVisas: any[];
   bancos:any[];
   estadosCiviles:any[];
   tiposTelefono:any[];
@@ -156,6 +157,7 @@ export class ColaboradorComponent implements OnInit {
     this.comboCalificaciones();
     this.comboTiposColaboradores();
     this.comboTeces();
+    this.comboTipoVisas();
     this.comboBancos();
     this.comboSexos();
     this.comboEstadosCiviles();
@@ -384,24 +386,52 @@ export class ColaboradorComponent implements OnInit {
   }
   disableTextBoxDateofWorkL(){
     this.textBoxDisabledDateofWorkL = !this.textBoxDisabledDateofWorkL;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkM(){
     this.textBoxDisabledDateofWorkM = !this.textBoxDisabledDateofWorkM;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkMi(){
     this.textBoxDisabledDateofWorkMi = !this.textBoxDisabledDateofWorkMi;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkJ(){
     this.textBoxDisabledDateofWorkJ = !this.textBoxDisabledDateofWorkJ;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkV(){
     this.textBoxDisabledDateofWorkV = !this.textBoxDisabledDateofWorkV;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkS(){
     this.textBoxDisabledDateofWorkS = !this.textBoxDisabledDateofWorkS;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkD(){
     this.textBoxDisabledDateofWorkD = !this.textBoxDisabledDateofWorkD;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkT(){
     this.textBoxDisabledDateofWorkT = !this.textBoxDisabledDateofWorkT;
@@ -867,6 +897,12 @@ export class ColaboradorComponent implements OnInit {
     });
   }
 
+  public comboTipoVisas(){
+    this.http.get<any>('/api/catalogo/tipoVisas').subscribe(data => {
+        this.tipoVisas = data.data;
+    });
+  }
+
   public comboBancos(){
     this.http.get<any>('/api/catalogo/bancos').subscribe(data => {
         this.bancos = data.data;
@@ -981,6 +1017,10 @@ export class ColaboradorComponent implements OnInit {
 
   onCalificacion(value:any){
     this.colaborador.idCalificacion = value;
+  }
+
+  onTipoVisa(value:any){
+    this.colaborador.idTipoVisa = value;
   }
 
   onTipoColaborador(value:any){

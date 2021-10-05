@@ -6,6 +6,7 @@ export class Colaborador {
     public a_paterno:string;
     public a_materno:string;
     public idCalificacion:number;
+    public idTipoVisa:number;
     public idTipoColaborador:number;
     public idEstadoNacimiento:number;
     public correoElectronico:string;

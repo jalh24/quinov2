@@ -3,7 +3,7 @@
   <mat-tab-group mat-align-tabs="center" [selectedIndex]="selected.value"
   (selectedIndexChange)="selected.setValue($event)">
     <mat-tab label="General">
-      <div class="container mt-5 bg-white rounded shadow">
+      <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Información General</h4>
         <div class="row">
           <div class="col">
@@ -193,7 +193,7 @@
       </div>
     </mat-tab>
     <mat-tab label="Dirección">
-      <div class="container mt-5 bg-white rounded shadow">
+      <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Dirección</h4>
         <div class="row">
           <div class="col">
@@ -313,7 +313,7 @@
       </div>
     </mat-tab>
     <mat-tab label="Información Personal">
-      <div class="container mt-5 bg-white rounded shadow">
+      <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Información Personal</h4>
         <div class="row">
           <div class="col-md-4">
@@ -482,7 +482,7 @@
       </div>
     </mat-tab>
     <mat-tab label="Pago"> 
-      <div class="container mt-5 bg-white rounded shadow">
+      <div class="container mt-5 bg-white rounded-top shadow">
           <h4 class="pt-4 pb-1">Pago</h4>
           <div class="form-group dynamic-element1">
             <div class="row pb-4">
@@ -577,7 +577,7 @@
       </div>    
   </mat-tab>
     <mat-tab label="Estudios">
-      <div class="container mt-5 bg-white rounded shadow">
+      <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Estudios</h4>
         <h6 class="pb-1">Favor de capturar cada uno de los estudios, cursos y diplomados que haya tomado</h6>
         <div class="form-group dynamic-element">
@@ -705,7 +705,7 @@
       </div>
     </mat-tab>
     <mat-tab label="Experiencia Laboral">
-      <div class="container mt-5 bg-white rounded shadow">
+      <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Experiencia Laboral</h4>
         <h6 class="pb-1">Favor de capturar cada una de las experiencias laborales que tenga</h6>
         <div class="form-group dynamic-element1">
@@ -812,7 +812,7 @@
     </mat-tab>
 
     <mat-tab label="Competencias">
-      <div class="container mt-5 bg-white rounded shadow">
+      <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Competencias</h4>
         <div class="row pb-4">
           <div class="col-md-6">
@@ -867,14 +867,15 @@
     </mat-tab>
 
     <mat-tab label="Disponibilidad de trabajo">
-      <div class="container mt-5 bg-white rounded shadow">
+      <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Disponibilidad de trabajo</h4>
         <div class="row pb-4">
           <hr class="mt-2 mb-3" />
           <div class="col-md-6">
             <h5 class="pb-1">Días y Horarios de Disponibilidad<span class="text-danger"> *</span></h5>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="" id="todos" (click)="disableTextBoxDateofWorkT()">
+              <input class="form-check-input" type="checkbox" value="" id="todos" name="todosDias" ngModel #todosDias="ngModel"
+              [(ngModel)]="diasLaborales.todosDias" (click)="disableTextBoxDateofWorkT()">
               <label class="form-check-label" for="todos">
                 <p class="font-weight-bold">Todos los Dias
                 </p>
@@ -1233,8 +1234,15 @@
                 <input type="text" class="form-control" id="numvisa" name="numvisa" ngModel #numvisa="ngModel" [(ngModel)]="colaborador.visaNumero" disabled="disabled" [disabled]="textBoxDisabledVis">
               </div>
               <div class="col-md-4">
-                <label for="tipNum" class="form-label">Tipo de Visa</label>
-                <input type="text" class="form-control" id="tipovisa" name="tipovisa" ngModel #tipovisa="ngModel" [(ngModel)]="colaborador.tipoVisa" disabled="disabled" [disabled]="textBoxDisabledVis">
+                <label for="tipoVisa" class="form-label">Tipo de Visa</label>
+            <select class="form-control" name="tipoVisa" (change)="onTipoVisa($event.target.value)" #tipoVisa="ngModel" [ngModel]="colaborador.idTipoVisa" ngModel disabled="disabled" [disabled]="textBoxDisabledVis">
+              <option value="" selected disabled hidden>Seleccionar</option>
+              <option *ngFor="let tipoVisa of tipoVisas" [value]="tipoVisa.idTipoVisa">
+                {{tipoVisa.nombre}}
+              </option>
+            </select>
+                <!-- <label for="tipNum" class="form-label">Tipo de Visa</label>
+                <input type="text" class="form-control" id="tipovisa" name="tipovisa" ngModel #tipovisa="ngModel" [(ngModel)]="colaborador.tipoVisa" disabled="disabled" [disabled]="textBoxDisabledVis"> -->
               </div>
               <div class="col-md-4">
                 <label for="visaExp" class="form-label">Expiración</label>
@@ -1323,16 +1331,14 @@
     <div class="row text-center pb-4">
       
       <div class="col">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagAtras(1)" > Atras </button>
-          <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagDelante(1)" > Siguiente </button>
-          
+        <div class="btn-toolbar" role="toolbar" style="justify-content: center; display: flex;">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagAtras(1)" >&lt;</button>
+          </div>
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-primary" [formControl]="selected" (click)="pagDelante(1)" >&gt;</button>
+          </div>       
         </div>
-        
-       
-        
-        <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
-        <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Enviar </button> -->
       </div>
     </div>
   </div>
