@@ -8,8 +8,10 @@ import { HttpClient } from '@angular/common/http';
 import { ColaboradorFiltro } from '../_model/colaboradorFiltro';
 import { NgForm, FormControl } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { MatTab } from '@angular/material/tabs';
 export interface DialogData {
   data: any;
 }
@@ -20,6 +22,7 @@ export interface DialogData {
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradoresComponent implements OnInit {
+  
   idModal: string;
   @ViewChild(DataTableDirective, { static: false })
   private datatableElement: DataTableDirective;
@@ -153,14 +156,15 @@ export class ColaboradoresComponent implements OnInit {
 
 @Component({
   selector: 'modal',
-  templateUrl: 'modal.html',
+  templateUrl: './modal.html',
+
+  styleUrls: ['./colaboradores.component.scss'],
 })
 export class DialogOverviewExampleDialog {
   colaborador: any;
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>, private router: Router,
-    private http: HttpClient,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>, private router:Router,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {
     this.dialogRef.close();
