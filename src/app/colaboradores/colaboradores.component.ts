@@ -37,12 +37,23 @@ export class ColaboradoresComponent implements OnInit {
   colaboradorColumns: string[] = ['nombre', 'a_paterno', 'a_materno', 'telefono', 'correoElectronico', 'acciones'];
   @ViewChild('colaboradoresTable', { static: true }) colaboradoresTable: MatTable<any>;
   sexos: any;
+  diasLaborales: any = [] = [
+    {id: 1, nombre: 'Lunes'},
+    {id: 2, nombre: 'Martes'},
+    {id: 3, nombre: 'Miercoles'},
+    {id: 4, nombre: 'Jueves'},
+    {id: 5, nombre: 'Viernes'},
+    {id: 6, nombre: 'Sabado'},
+    {id: 7, nombre: 'Domingo'},
+  ];
   permanencias: any;
   zonasLaborales: any;
   colaboradorFiltro: ColaboradorFiltro;
   habilidades: any;
   habilidadesSelected = [];
+  diasLaboralesSelected=[];
   selectedItems: any = [];
+  diasLaboralesSettings: IDropdownSettings = {};
   zonasSettings: IDropdownSettings = {};
   habilidadesSettings: IDropdownSettings = {};
 
@@ -77,6 +88,16 @@ export class ColaboradoresComponent implements OnInit {
       idField: 'idZonaLaboral',
       textField: 'nombre',
       selectAllText: 'Seleccionar Todos',
+      unSelectAllText: 'Quitar Selecciones',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+
+    this.diasLaboralesSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'nombre',
+      selectAllText: 'Todos los dias',
       unSelectAllText: 'Quitar Selecciones',
       itemsShowLimit: 3,
       allowSearchFilter: true
@@ -127,7 +148,7 @@ export class ColaboradoresComponent implements OnInit {
       this.permanencias = data.data;
     });
   }
-
+  
   public comboZonasLaborales() {
     this.http.get<any>('/api/catalogo/zonasLaborales').subscribe(data => {
       this.zonasLaborales = data.data;

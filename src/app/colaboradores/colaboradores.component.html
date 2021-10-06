@@ -56,7 +56,13 @@
             </option>
           </select>
         </td>
-        <th scope="row">Dias Laborales</th>
+        <th scope="row">Dias laborales</th>
+        <td>
+          <ng-multiselect-dropdown [placeholder]="'Seleccionar'" [settings]="diasLaboralesSettings" [data]="diasLaborales"
+            [(ngModel)]="diasLaboralesSelected" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
+        </td>
+        <!-- <th scope="row">Dias Laborales</th>
         <td>
           <select class="form-control" name="horarioLaboralFiltro">
             <option value="" selected disabled hidden>Seleccionar</option>
@@ -69,7 +75,7 @@
             <option value="7">Domingo</option>
             <option value="8">Todos los dias</option>
           </select>
-        </td>
+        </td> -->
       </tr>
       <tr>
         <th scope="row">Estatura</th>
