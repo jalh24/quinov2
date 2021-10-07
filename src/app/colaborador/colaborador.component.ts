@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Colaborador } from '../_model/colaborador';
-import {Pago} from '../_model/pago';
+import { Pago } from '../_model/pago';
 import { DataTableDirective } from 'angular-datatables';
 import { Estudio } from '../_model/estudio';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Experiencia } from '../_model/experiencia';
-import  {  NgbToastService, NgbToastType,NgbToast }  from  'ngb-toast';
+import { NgbToastService, NgbToastType, NgbToast } from 'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Estatus } from '../_model/estatus';
-
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-colaborador',
@@ -22,24 +22,24 @@ export class ColaboradorComponent implements OnInit {
 
   show = false;
   autohide = true;
-
+  selected = new FormControl(0);
   ESTUDIO_DATA: Estudio[] = [];
   estudioSource = new MatTableDataSource<Estudio>(this.ESTUDIO_DATA);
 
-  estudioColumns: string[] = ['institucion', 'comentarios', 'inicio', 'fin','estatus', 'deleteColaborador'];
-  @ViewChild('estudiosTable',{static:true}) estudiosTable: MatTable<any>;
-  
+  estudioColumns: string[] = ['institucion', 'comentarios', 'inicio', 'fin', 'estatus', 'deleteColaborador'];
+  @ViewChild('estudiosTable', { static: true }) estudiosTable: MatTable<any>;
+
   PAGO_DATA: Pago[] = [];
   pagoSource = new MatTableDataSource<Pago>(this.PAGO_DATA);
 
   pagoColumns: string[] = ['nombre', 'banco', 'tipoCuenta', 'numero', 'deletePago'];
-  @ViewChild('pagosTable',{static:true}) pagosTable: MatTable<any>;
+  @ViewChild('pagosTable', { static: true }) pagosTable: MatTable<any>;
 
   EXPERIENCIA_DATA: Experiencia[] = [];
   experienciaSource = new MatTableDataSource<Experiencia>(this.EXPERIENCIA_DATA);
 
-  experienciaColumns: string[] = ['institucion', 'comentario', 'fechaInicio', 'fechaFin','telefono', 'deleteExperiencia'];
-  @ViewChild('experiencasTable',{static:true}) experiencasTable: MatTable<any>;
+  experienciaColumns: string[] = ['institucion', 'comentario', 'fechaInicio', 'fechaFin', 'telefono', 'deleteExperiencia'];
+  @ViewChild('experiencasTable', { static: true }) experiencasTable: MatTable<any>;
 
   textBoxDisabledCed = true;
   textBoxDisabledSeg = true;
@@ -59,76 +59,77 @@ export class ColaboradorComponent implements OnInit {
 
   selectedPais = 1;
   selectedEstado = null;
-  selectedCodigoPostal=null;
+  selectedCodigoPostal = null;
 
-  tabVisible:any = 1;
+  tabVisible: any = 1;
   @ViewChild('myForm') ngForm: NgForm;
-  
+
   dtTriggerEstudio = new Subject();
   dtTriggerPago = new Subject();
   dtTriggerExperiencia = new Subject();
 
-  idPago:number;
-  idEstudio:number;
-  idExperiencia:number;
-  public colaborador:Colaborador;
-  diasLaborales:any = {
-    todosDias:false,
-    todosDiasDesde:null,
-    todosDiasHasta:null,
-    lunes:false,
-    lunesDesde:null,
-    lunesHasta:null,
-    martes:false,
-    martesDesde:null,
-    martesHasta:null,
-    miercoles:false,
-    miercolesDesde:null,
-    miercolesHasta:null,
-    jueves:false,
-    juevesDesde:null,
-    juevesHasta:null,
-    viernes:false,
-    viernesDesde:null,
-    viernesHasta:null,
-    sabado:false,
-    sabadoDesde:null,
-    sabadoHasta:null,
-    domingo:false,
-    domingoDesde:null,
-    domingoHasta:null
+  idPago: number;
+  idEstudio: number;
+  idExperiencia: number;
+  public colaborador: Colaborador;
+  diasLaborales: any = {
+    todosDias: false,
+    todosDiasDesde: null,
+    todosDiasHasta: null,
+    lunes: false,
+    lunesDesde: null,
+    lunesHasta: null,
+    martes: false,
+    martesDesde: null,
+    martesHasta: null,
+    miercoles: false,
+    miercolesDesde: null,
+    miercolesHasta: null,
+    jueves: false,
+    juevesDesde: null,
+    juevesHasta: null,
+    viernes: false,
+    viernesDesde: null,
+    viernesHasta: null,
+    sabado: false,
+    sabadoDesde: null,
+    sabadoHasta: null,
+    domingo: false,
+    domingoDesde: null,
+    domingoHasta: null
   };
-  sexos:any[];
-  colonias:any[];
-  ciudades:any[];
-  ciudadesDir:any[];
-  estadosDir:any[];
-  estados:any[];
-  paises:any[];
-  calificaciones:any[];
-  tiposColaboradores:any[];
-  teces:any[];
-  bancos:any[];
-  estadosCiviles:any[];
-  tiposTelefono:any[];
-  permanencias:any[];
-  zonasLaborales:any[];
-  especialidades:any[];
-  especialidadesSelected:any[];
-  habilidades:any[];
-  habilidadesSelected:any[];
-  zonasSelected:any[];
-  pagos:Pago[];
-  pago:Pago;
-  estudios:Estudio[];
-  estudio:Estudio;
-  experiencias:Experiencia[];
-  experiencia:Experiencia;
+  sexos: any[];
+  colonias: any[];
+  ciudades: any[];
+  ciudadesDir: any[];
+  estadosDir: any[];
+  estados: any[];
+  paises: any[];
+  calificaciones: any[];
+  tiposColaboradores: any[];
+  teces: any[];
+  tipoVisas: any[];
+  bancos: any[];
+  estadosCiviles: any[];
+  tiposTelefono: any[];
+  permanencias: any[];
+  zonasLaborales: any[];
+  especialidades: any[];
+  especialidadesSelected: any[];
+  habilidades: any[];
+  habilidadesSelected: any[];
+  zonasSelected: any[];
+  pagos: Pago[];
+  pago: Pago;
+  estudios: Estudio[];
+  estudio: Estudio;
+  experiencias: Experiencia[];
+  experiencia: Experiencia;
   dtOptionsPago: any = {};
   dtOptionsEstudio: any = {};
   dtOptionsExperiencia: any = {};
   estatusEstudios: Estatus[];
-  estatusSelected:string;
+  estatusSelected: string;
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
@@ -145,7 +146,7 @@ export class ColaboradorComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private  toastService:  NgbToastService,
+    private toastService: NgbToastService,
     private changeDetectorRefs: ChangeDetectorRef
   ) { }
 
@@ -156,6 +157,7 @@ export class ColaboradorComponent implements OnInit {
     this.comboCalificaciones();
     this.comboTiposColaboradores();
     this.comboTeces();
+    this.comboTipoVisas();
     this.comboBancos();
     this.comboSexos();
     this.comboEstadosCiviles();
@@ -165,23 +167,23 @@ export class ColaboradorComponent implements OnInit {
     this.comboEspecialidades();
     this.comboHabilidades();
     this.inicializaObjetos();
-    
+
 
     this.dtOptionsPago = {
       select: true,
       rowCallback: (row: Node, data: any | Object, index: number) => {
-      console.log(data);     
+        console.log(data);
         const self = this;
-        
+
         $('td', row).on('click', () => {
-          if(self.pago !== null){
-            if(self.pago.idPago === data.idPago){
-              this.pago= null;
-            } else{
-              self.pago=data;
+          if (self.pago !== null) {
+            if (self.pago.idPago === data.idPago) {
+              this.pago = null;
+            } else {
+              self.pago = data;
             }
-          } else{
-            self.colaborador=data;
+          } else {
+            self.colaborador = data;
           }
         });
 
@@ -193,18 +195,18 @@ export class ColaboradorComponent implements OnInit {
     this.dtOptionsEstudio = {
       select: true,
       rowCallback: (row: Node, data: any | Object, index: number) => {
-      console.log(data);     
+        console.log(data);
         const self = this;
-        
+
         $('td', row).on('click', () => {
-          if(self.estudio !== null){
-            if(self.estudio.idEstudio === data.idEstudio){
-              this.estudio= null;
-            } else{
-              self.estudio=data;
+          if (self.estudio !== null) {
+            if (self.estudio.idEstudio === data.idEstudio) {
+              this.estudio = null;
+            } else {
+              self.estudio = data;
             }
-          } else{
-            self.colaborador=data;
+          } else {
+            self.colaborador = data;
           }
         });
 
@@ -215,18 +217,18 @@ export class ColaboradorComponent implements OnInit {
     this.dtOptionsExperiencia = {
       select: true,
       rowCallback: (row: Node, data: any | Object, index: number) => {
-      console.log(data);     
+        console.log(data);
         const self = this;
-        
+
         $('td', row).on('click', () => {
-          if(self.experiencia !== null){
-            if(self.experiencia.idExperiencia === data.idExperiencia){
-              this.experiencia= null;
-            } else{
-              self.experiencia=data;
+          if (self.experiencia !== null) {
+            if (self.experiencia.idExperiencia === data.idExperiencia) {
+              this.experiencia = null;
+            } else {
+              self.experiencia = data;
             }
-          } else{
-            self.colaborador=data;
+          } else {
+            self.colaborador = data;
           }
         });
 
@@ -236,174 +238,202 @@ export class ColaboradorComponent implements OnInit {
     };
   }
 
-  inicializaObjetos(){
+  inicializaObjetos() {
     this.colaborador = new Colaborador();
-    this.colaborador.idColaborador=null;
-    this.colaborador.nombre=null;
-    this.colaborador.a_paterno=null;
-    this.colaborador.a_materno=null;
-    this.colaborador.correoElectronico=null;
-    this.colaborador.foto=null;
-    this.colaborador.fotoNombre=null;
-    this.colaborador.rfc=null;
-    this.colaborador.nss=null;
-    this.colaborador.fecha_nacimiento=null;
-    this.colaborador.idSexo=null;
-    this.colaborador.peso=null;
-    this.colaborador.estatura=null;
-    this.colaborador.zonas=[];
-    this.colaborador.idEstadoCivil=null;
-    this.colaborador.idTez=null;
-    this.colaborador.sgmm=null;
-    this.colaborador.atiendeCovid=null;
-    this.colaborador.antecedentePenales=null;
-    this.colaborador.autoPropio=false;
-    this.colaborador.dispuestoViajar=false;
-    this.colaborador.visa=false;
-    this.colaborador.visaNumero=null;
-    this.colaborador.tipoVisa=null;
-    this.colaborador.expiracionVisa=null;
-    this.colaborador.visaImagen=null;
-    this.colaborador.visaNombre=null;
-    this.colaborador.pasaporte=false;
-    this.colaborador.pasaporteNumero=null;
-    this.colaborador.expiracionPasaporte=null;
-    this.colaborador.pasaporteImagen=null;
+    this.colaborador.idColaborador = null;
+    this.colaborador.nombre = null;
+    this.colaborador.a_paterno = null;
+    this.colaborador.a_materno = null;
+    this.colaborador.correoElectronico = null;
+    this.colaborador.foto = null;
+    this.colaborador.fotoNombre = null;
+    this.colaborador.rfc = null;
+    this.colaborador.nss = null;
+    this.colaborador.fecha_nacimiento = null;
+    this.colaborador.idSexo = null;
+    this.colaborador.peso = null;
+    this.colaborador.estatura = null;
+    this.colaborador.zonas = [];
+    this.colaborador.idEstadoCivil = null;
+    this.colaborador.idTez = null;
+    this.colaborador.sgmm = null;
+    this.colaborador.atiendeCovid = null;
+    this.colaborador.antecedentePenales = null;
+    this.colaborador.autoPropio = false;
+    this.colaborador.dispuestoViajar = false;
+    this.colaborador.visa = false;
+    this.colaborador.visaNumero = null;
+    this.colaborador.tipoVisa = null;
+    this.colaborador.expiracionVisa = null;
+    this.colaborador.visaImagen = null;
+    this.colaborador.visaNombre = null;
+    this.colaborador.pasaporte = false;
+    this.colaborador.pasaporteNumero = null;
+    this.colaborador.expiracionPasaporte = null;
+    this.colaborador.pasaporteImagen = null;
     this.colaborador.pasaporteNombre = null;
-    this.colaborador.ine1=null;
-    this.colaborador.ine1Nombre=null;
-    this.colaborador.ine2=null;
-    this.colaborador.ine2Nombre=null;
-    this.colaborador.idEstatus=null;
-    this.colaborador.calle1=null;
-    this.colaborador.calle2=null;
-    this.colaborador.codigoPostal=null;
-    this.colaborador.idPaisNacimiento=null;
-    this.colaborador.idEstadoNacimiento=null;
-    this.colaborador.idCiudadNacimiento=null;
-    this.colaborador.comprobanteDomicilio= null;
-    this.colaborador.comprobanteNombre =null;
-    this.colaborador.idPais=null;
-    this.colaborador.idEstado=null;
-    this.colaborador.idCiudad=null;
-    this.colaborador.idColonia=null;
-    this.colaborador.noExt=null;
-    this.colaborador.noInt=null;
-    this.colaborador.horario=null;
-    this.colaborador.estudios=[];
-    this.colaborador.experiencias=[];
-    this.colaborador.cuentasColaborador=[];
-    this.colaborador.contactosColaborador=[];
-    this.colaborador.especialidades=[];
-    this.colaborador.habilidades=[];
+    this.colaborador.ine1 = null;
+    this.colaborador.ine1Nombre = null;
+    this.colaborador.ine2 = null;
+    this.colaborador.ine2Nombre = null;
+    this.colaborador.idEstatus = null;
+    this.colaborador.calle1 = null;
+    this.colaborador.calle2 = null;
+    this.colaborador.codigoPostal = null;
+    this.colaborador.idPaisNacimiento = null;
+    this.colaborador.idEstadoNacimiento = null;
+    this.colaborador.idCiudadNacimiento = null;
+    this.colaborador.comprobanteDomicilio = null;
+    this.colaborador.comprobanteNombre = null;
+    this.colaborador.idPais = null;
+    this.colaborador.idEstado = null;
+    this.colaborador.idCiudad = null;
+    this.colaborador.idColonia = null;
+    this.colaborador.noExt = null;
+    this.colaborador.noInt = null;
+    this.colaborador.horario = null;
+    this.colaborador.estudios = [];
+    this.colaborador.experiencias = [];
+    this.colaborador.cuentasColaborador = [];
+    this.colaborador.contactosColaborador = [];
+    this.colaborador.especialidades = [];
+    this.colaborador.habilidades = [];
 
     this.idEstudio = 0;
     this.idPago = 0;
     this.idExperiencia = 0;
-    
-    this.pagos=[];
+
+    this.pagos = [];
     this.pago = {
-      idPago:null,
-      nombre:null,
-      banco:null,
-      tipoCuenta:null,
-      numero:null
+      idPago: null,
+      nombre: null,
+      banco: null,
+      tipoCuenta: null,
+      numero: null
     };
-    this.estudios=[];
+    this.estudios = [];
     this.estudio = {
-      idEstudio:null,
-      idColaborador:null,
-      institucion:null,
-      fechaInicio:null,
-      fechaFin:null,
-      estatus:null,
-      cedula:null,
-      cedulaNombre:null,
-      comentarios:null
+      idEstudio: null,
+      idColaborador: null,
+      institucion: null,
+      fechaInicio: null,
+      fechaFin: null,
+      estatus: null,
+      cedula: null,
+      cedulaNombre: null,
+      comentarios: null
     };
-    this.experiencias=[];
+    this.experiencias = [];
     this.experiencia = {
-      idExperiencia:null,
-      empresa:null,
-      comentario:null,
-      fechaInicio:null,
-      fechaFin:null,
-      referencia:null,
-      telefono:null
+      idExperiencia: null,
+      empresa: null,
+      comentario: null,
+      fechaInicio: null,
+      fechaFin: null,
+      referencia: null,
+      telefono: null
     };
-    this.especialidadesSelected=[];
-    this.habilidadesSelected=[];
-    this.zonasSelected=[];
-    this.experienciaSource.data=[];
-    this.pagoSource.data=[];
-    this.estudioSource.data=[];
+    this.especialidadesSelected = [];
+    this.habilidadesSelected = [];
+    this.zonasSelected = [];
+    this.experienciaSource.data = [];
+    this.pagoSource.data = [];
+    this.estudioSource.data = [];
   }
 
-  enableSeguros(){
+  enableSeguros() {
     this.textBoxDisabledSeg = false;
   }
-  disableSeguros(){
+  disableSeguros() {
     this.textBoxDisabledSeg = true;
   }
-  enableOtraEsp(){
+  enableOtraEsp() {
     this.textBoxDisabledOtraEsp = !this.textBoxDisabledOtraEsp;
   }
-  enableOtraZon(){
+  enableOtraZon() {
     this.textBoxDisabledOtraZon = !this.textBoxDisabledOtraZon;
   }
-  enableOtraHab(){
+  enableOtraHab() {
     this.textBoxDisabledOtraHab = !this.textBoxDisabledOtraHab;
   }
 
-  enableCed(event){
+  enableCed(event) {
     this.textBoxDisabledCed = false;
     console.log(event);
-    this.estudio.estatus = this.estatusEstudios.find(estu=> { console.log(estu); return estu.nombre == event}); 
+    this.estudio.estatus = this.estatusEstudios.find(estu => { console.log(estu); return estu.nombre == event });
     console.log(this.estudio);
     //this.estudio.estatus = event;
   }
-  
-  disableCed(event){
+
+  disableCed(event) {
     this.textBoxDisabledCed = true;
-    this.estudio.estatus = this.estatusEstudios.find(estu=> { return estu.nombre === event}); 
+    this.estudio.estatus = this.estatusEstudios.find(estu => { return estu.nombre === event });
     console.log(this.estudio);
     //this.estudio.estatus = event;
   }
-  
-  enableTextBoxVis(){
+
+  enableTextBoxVis() {
     this.textBoxDisabledVis = false;
   }
-  disableTextBoxVis(){
+  disableTextBoxVis() {
     this.textBoxDisabledVis = true;
   }
-  enableTextBoxPas(){
+  enableTextBoxPas() {
     this.textBoxDisabledPas = false;
   }
-  disableTextBoxPas(){
+  disableTextBoxPas() {
     this.textBoxDisabledPas = true;
   }
-  disableTextBoxDateofWorkL(){
+  disableTextBoxDateofWorkL() {
     this.textBoxDisabledDateofWorkL = !this.textBoxDisabledDateofWorkL;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
-  disableTextBoxDateofWorkM(){
+  disableTextBoxDateofWorkM() {
     this.textBoxDisabledDateofWorkM = !this.textBoxDisabledDateofWorkM;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
-  disableTextBoxDateofWorkMi(){
+  disableTextBoxDateofWorkMi() {
     this.textBoxDisabledDateofWorkMi = !this.textBoxDisabledDateofWorkMi;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
-  disableTextBoxDateofWorkJ(){
+  disableTextBoxDateofWorkJ() {
     this.textBoxDisabledDateofWorkJ = !this.textBoxDisabledDateofWorkJ;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
-  disableTextBoxDateofWorkV(){
+  disableTextBoxDateofWorkV() {
     this.textBoxDisabledDateofWorkV = !this.textBoxDisabledDateofWorkV;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
-  disableTextBoxDateofWorkS(){
+  disableTextBoxDateofWorkS() {
     this.textBoxDisabledDateofWorkS = !this.textBoxDisabledDateofWorkS;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
-  disableTextBoxDateofWorkD(){
+  disableTextBoxDateofWorkD() {
     this.textBoxDisabledDateofWorkD = !this.textBoxDisabledDateofWorkD;
+    this.textBoxDisabledDateofWorkT = true;
+    this.diasLaborales.todosDias = false;
+    this.diasLaborales.todosDiasDesde = null;
+    this.diasLaborales.todosDiasHasta = null;
   }
-  disableTextBoxDateofWorkT(){
+  disableTextBoxDateofWorkT() {
     this.textBoxDisabledDateofWorkT = !this.textBoxDisabledDateofWorkT;
     this.textBoxDisabledDateofWorkL = true;
     this.textBoxDisabledDateofWorkM = true;
@@ -416,106 +446,107 @@ export class ColaboradorComponent implements OnInit {
     this.diasLaborales.lunes = false;
     this.diasLaborales.lunesDesde = null;
     this.diasLaborales.lunesHasta = null;
-    this.diasLaborales.martes=false;
-    this.diasLaborales.martesDesde=null;
-    this.diasLaborales.martesHasta=null;
-    this.diasLaborales.miercoles=false;
-    this.diasLaborales.miercolesDesde=null;
-    this.diasLaborales.miercolesHasta=null;
-    this.diasLaborales.jueves=false;
-    this.diasLaborales.juevesDesde=null;
-    this.diasLaborales.juevesHasta=null;
-    this.diasLaborales.viernes=false;
-    this.diasLaborales.viernesDesde=null;
-    this.diasLaborales.viernesHasta=null;
-    this.diasLaborales.sabado=false;
-    this.diasLaborales.sabadoDesde=null;
-    this.diasLaborales.sabadoHasta=null;
-    this.diasLaborales.domingo=false;
-    this.diasLaborales.domingoDesde=null;
-    this.diasLaborales.domingoHasta=null;
+    this.diasLaborales.martes = false;
+    this.diasLaborales.martesDesde = null;
+    this.diasLaborales.martesHasta = null;
+    this.diasLaborales.miercoles = false;
+    this.diasLaborales.miercolesDesde = null;
+    this.diasLaborales.miercolesHasta = null;
+    this.diasLaborales.jueves = false;
+    this.diasLaborales.juevesDesde = null;
+    this.diasLaborales.juevesHasta = null;
+    this.diasLaborales.viernes = false;
+    this.diasLaborales.viernesDesde = null;
+    this.diasLaborales.viernesHasta = null;
+    this.diasLaborales.sabado = false;
+    this.diasLaborales.sabadoDesde = null;
+    this.diasLaborales.sabadoHasta = null;
+    this.diasLaborales.domingo = false;
+    this.diasLaborales.domingoDesde = null;
+    this.diasLaborales.domingoHasta = null;
   }
-  
+
 
   ngAfterViewInit(): void {
     this.dtTriggerEstudio.next();
   }
-  
 
-  public mostrarTab(tab:any){
-    this.tabVisible=tab;
+
+  public mostrarTab(tab: any) {
+    this.tabVisible = tab;
     console.log(tab);
   }
 
-  public guardarColaborador(ngForm: NgForm){
+  public guardarColaborador(ngForm: NgForm) {
     this.colaborador.horario = this.diasLaborales;
-    this.colaborador.idPais=1;
-    this.colaborador.idPaisNacimiento=1;
-    this.colaborador.idEstatus=1;
-    this.colaborador.zonas=this.zonasSelected;
+    this.colaborador.idPais = 1;
+    this.colaborador.idPaisNacimiento = 1;
+    this.colaborador.idEstatus = 1;
+    this.colaborador.zonas = this.zonasSelected;
     this.colaborador.cuentasColaborador = this.pagoSource.data;
     this.colaborador.estudios = this.estudioSource.data;
-    this.colaborador.experiencias= this.experienciaSource.data;
-    this.colaborador.especialidades=this.especialidadesSelected;
-    this.colaborador.habilidades=this.habilidadesSelected;
-    
-    if(ngForm.valid){
-      this.http.post<any>('/api/colaborador/create',this.colaborador).subscribe(data => {
-        this.showSuccess(NgbToastType.Success,"Se creo el colaborador exitosamente");
-        });
-        this.inicializaObjetos();
-    } else{
-      this.showSuccess(NgbToastType.Danger,"Debe llenar todos los campos obligatorios");
+    this.colaborador.experiencias = this.experienciaSource.data;
+    this.colaborador.especialidades = this.especialidadesSelected;
+    this.colaborador.habilidades = this.habilidadesSelected;
+
+    if (ngForm.valid) {
+      this.http.post<any>('/api/colaborador/create', this.colaborador).subscribe(data => {
+        this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");
+
+      });
+      this.inicializaObjetos();
+    } else {
+      this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
     }
-    
+
   }
 
-  zonasCheck(zona:any){
-    if(this.zonasSelected.length ==0 ){
+  zonasCheck(zona: any) {
+    if (this.zonasSelected.length == 0) {
       this.zonasSelected.push(zona)
-    } else{
-      if(this.zonasSelected.find(obj => {
+    } else {
+      if (this.zonasSelected.find(obj => {
         return obj.idZonaLaboral == zona.idZonaLaboral
-      })){
-        
-        this.zonasSelected = this.zonasSelected.filter((value,key)=>{
+      })) {
+
+        this.zonasSelected = this.zonasSelected.filter((value, key) => {
           return value.idZonaLaboral != zona.idZonaLaboral;
         });
 
-      } else{
+      } else {
         this.zonasSelected.push(zona);
       }
     }
     console.log(this.zonasSelected);
   }
 
-  showSuccess(type:any,message:string): void {
-		const toast: NgbToast = {
-			toastType:  type,
-			text:  message,
-			dismissible:  true,
-      timeInSeconds:5,
-			onDismiss: () => {
-				console.log("Toast dismissed!!");
-			}
-		}
-		this.toastService.show(toast);
-	}
-	
-	removeToast(toast: NgbToast): void {
-		this.toastService.remove(toast);
-	}
-  
+  showSuccess(type: any, message: string): void {
+    const toast: NgbToast = {
+      toastType: type,
+      text: message,
+      dismissible: true,
+      timeInSeconds: 5,
+      onDismiss: () => {
+        console.log("Toast dismissed!!");
+      }
+    }
+    this.toastService.show(toast);
+  }
+
+  removeToast(toast: NgbToast): void {
+    this.toastService.remove(toast);
+  }
+
   public ineFrontal(files: FileList) {
     let me = this;
     let file = files[0];
-    let currentDate=new Date();
+    let currentDate = new Date();
     let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      me.colaborador.ine1=reader.result;
-      me.colaborador.ine1Nombre=currentDate.getTime() +"."+extension[1];
+      me.colaborador.ine1 = reader.result;
+      me.colaborador.ine1Nombre = currentDate.getTime() + "." + extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -526,13 +557,13 @@ export class ColaboradorComponent implements OnInit {
   public ineReverso(files: FileList) {
     let me = this;
     let file = files[0];
-    let currentDate=new Date();
+    let currentDate = new Date();
     let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      me.colaborador.ine2=reader.result;
-      me.colaborador.ine2Nombre=currentDate.getTime() +"."+extension[1];
+      me.colaborador.ine2 = reader.result;
+      me.colaborador.ine2Nombre = currentDate.getTime() + "." + extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -543,14 +574,14 @@ export class ColaboradorComponent implements OnInit {
   public cargaFotoPersonal(files: FileList) {
     let me = this;
     let file = files[0];
-    let currentDate=new Date();
+    let currentDate = new Date();
     let extension = file.type.split("/");
     console.log(extension);
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      me.colaborador.foto=reader.result;
-      me.colaborador.fotoNombre=currentDate.getTime() +"."+extension[1];
+      me.colaborador.foto = reader.result;
+      me.colaborador.fotoNombre = currentDate.getTime() + "." + extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -561,13 +592,13 @@ export class ColaboradorComponent implements OnInit {
   public comprobanteDomicilio(files: FileList) {
     let me = this;
     let file = files[0];
-    let currentDate=new Date();
+    let currentDate = new Date();
     let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      me.colaborador.comprobanteDomicilio=reader.result;
-      me.colaborador.comprobanteNombre=currentDate.getTime() +"."+extension[1];
+      me.colaborador.comprobanteDomicilio = reader.result;
+      me.colaborador.comprobanteNombre = currentDate.getTime() + "." + extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -578,13 +609,13 @@ export class ColaboradorComponent implements OnInit {
   public onVisa(files: FileList) {
     let me = this;
     let file = files[0];
-    let currentDate=new Date();
+    let currentDate = new Date();
     let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      me.colaborador.visaImagen=reader.result;
-      me.colaborador.visaNombre=currentDate.getTime() +"."+extension[1];
+      me.colaborador.visaImagen = reader.result;
+      me.colaborador.visaNombre = currentDate.getTime() + "." + extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -595,13 +626,13 @@ export class ColaboradorComponent implements OnInit {
   public onPasaporte(files: FileList) {
     let me = this;
     let file = files[0];
-    let currentDate=new Date();
+    let currentDate = new Date();
     let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      me.colaborador.pasaporteImagen=reader.result;
-      me.colaborador.pasaporteNombre=currentDate.getTime() +"."+extension[1];
+      me.colaborador.pasaporteImagen = reader.result;
+      me.colaborador.pasaporteNombre = currentDate.getTime() + "." + extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -613,13 +644,13 @@ export class ColaboradorComponent implements OnInit {
   public onCedulaFileSelected(files: FileList) {
     let me = this;
     let file = files[0];
-    let currentDate=new Date();
+    let currentDate = new Date();
     let extension = file.type.split("/");
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      me.estudio.cedula=reader.result;
-      me.estudio.cedulaNombre=currentDate.getTime() +"."+extension[1];
+      me.estudio.cedula = reader.result;
+      me.estudio.cedulaNombre = currentDate.getTime() + "." + extension[1];
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
@@ -632,360 +663,383 @@ export class ColaboradorComponent implements OnInit {
     datatableElement.dtInstance.then((dtInstance: DataTables.Api) => console.log(dtInstance));
   }
 
-  agregarEstudio(){
-    if(this.estudio.idEstudio == null)    {
-      if(this.estudios.length==0){
-        this.idEstudio= this.estudioSource.data.length + 1;
-      } else{
+  agregarEstudio() {
+    if (this.estudio.idEstudio == null) {
+      if (this.estudios.length == 0) {
+        this.idEstudio = this.estudioSource.data.length + 1;
+      } else {
         this.idEstudio++;
       }
-      this.estudio.idEstudio=this.idEstudio;
+      this.estudio.idEstudio = this.idEstudio;
       console.log(this.estudio);
       this.ESTUDIO_DATA.push(this.estudio);
-      this.estudioSource= new MatTableDataSource(this.ESTUDIO_DATA);
-    }else{
-      this.estudio.estatus = this.estatusEstudios.find(estu=> { return estu.nombre === this.estatusSelected}); ;
-      this.estudios.splice(this.estudio.idEstudio,1, this.estudio);
+      this.estudioSource = new MatTableDataSource(this.ESTUDIO_DATA);
+    } else {
+      this.estudio.estatus = this.estatusEstudios.find(estu => { return estu.nombre === this.estatusSelected });;
+      this.estudios.splice(this.estudio.idEstudio, 1, this.estudio);
     }
-    
-    this.estudio ={
-      idEstudio:null,
-      idColaborador:null,
-      institucion:null,
-      fechaInicio:null,
-      fechaFin:null,
-      estatus:null,
-      cedula:null,
-      cedulaNombre:null,
-      comentarios:null
+
+    this.estudio = {
+      idEstudio: null,
+      idColaborador: null,
+      institucion: null,
+      fechaInicio: null,
+      fechaFin: null,
+      estatus: null,
+      cedula: null,
+      cedulaNombre: null,
+      comentarios: null
     };
     this.estatusSelected = "";
     this.changeDetectorRefs.detectChanges();
     this.estudiosTable.renderRows();
   }
 
-  borraEstudio(estudioTmp){
-    this.ESTUDIO_DATA = this.ESTUDIO_DATA.filter((value,key)=>{
+  borraEstudio(estudioTmp) {
+    this.ESTUDIO_DATA = this.ESTUDIO_DATA.filter((value, key) => {
       return value.idEstudio != estudioTmp.idEstudio;
     });
-    this.estudioSource.data = this.estudioSource.data.filter((value,key)=>{
+    this.estudioSource.data = this.estudioSource.data.filter((value, key) => {
       return value.idEstudio != estudioTmp.idEstudio;
     });
   }
 
-  onTipoCuenta(event){
-    this.pago.tipoCuenta=event;
+  onTipoCuenta(event) {
+    this.pago.tipoCuenta = event;
     console.log(event);
   }
 
-  onBanco(event){
-    this.pago.banco = this.bancos.find(banco => { return banco.idBanco == event});
+  onBanco(event) {
+    this.pago.banco = this.bancos.find(banco => { return banco.idBanco == event });
     console.log(this.pago);
   }
 
-  agregarPago(){
-    if(this.pago.idPago == null)    {
-      if(this.pagoSource.data.length==0){
-        this.idPago= this.pagoSource.data.length + 1;
-      } else{
+  agregarPago() {
+    if (this.pago.idPago == null) {
+      if (this.pagoSource.data.length == 0) {
+        this.idPago = this.pagoSource.data.length + 1;
+      } else {
         this.idPago++;
       }
-      this.pago.idPago=this.idPago;
+      this.pago.idPago = this.idPago;
     }
     this.PAGO_DATA.push(this.pago);
-    this.pagoSource= new MatTableDataSource(this.PAGO_DATA);
+    this.pagoSource = new MatTableDataSource(this.PAGO_DATA);
 
-    this.pago ={
-      idPago:null,
-      nombre:null,
-      banco:null,
-      tipoCuenta:null,
-      numero:null,
+    this.pago = {
+      idPago: null,
+      nombre: null,
+      banco: null,
+      tipoCuenta: null,
+      numero: null,
     };
-      
+
   }
 
-  especialidadCheck(especialidad:any){
-    if(this.especialidadesSelected.length ==0 ){
+  especialidadCheck(especialidad: any) {
+    if (this.especialidadesSelected.length == 0) {
       this.especialidadesSelected.push(especialidad)
-    } else{
-      if(this.especialidadesSelected.find(obj => {
+    } else {
+      if (this.especialidadesSelected.find(obj => {
         return obj.idEspecialidad == especialidad.idEspecialidad
-      })){
-        
-        this.especialidadesSelected = this.especialidadesSelected.filter((value,key)=>{
+      })) {
+
+        this.especialidadesSelected = this.especialidadesSelected.filter((value, key) => {
           return value.idEspecialidad != especialidad.idEspecialidad;
         });
 
-      } else{
+      } else {
         this.especialidadesSelected.push(especialidad);
       }
     }
   }
 
-  habilidadCheck(habilidad:any){
-    if(this.habilidadesSelected.length ==0 ){
+  habilidadCheck(habilidad: any) {
+    if (this.habilidadesSelected.length == 0) {
       this.habilidadesSelected.push(habilidad)
-    } else{
-      if(this.habilidadesSelected.find(obj => {
+    } else {
+      if (this.habilidadesSelected.find(obj => {
         return obj.idEspecialidad == habilidad.idHabilidad
-      })){
-        
-        this.habilidadesSelected = this.habilidadesSelected.filter((value,key)=>{
+      })) {
+
+        this.habilidadesSelected = this.habilidadesSelected.filter((value, key) => {
           return value.idEspecialidad != habilidad.idHabilidad;
         });
 
-      } else{
+      } else {
         this.habilidadesSelected.push(habilidad);
       }
     }
   }
 
-  agregarExperiencia(){
-    if(this.experiencia.idExperiencia == null)    {
-      if(this.experienciaSource.data.length==0){
-        this.idExperiencia= this.experienciaSource.data.length+1;
-      } else{
+  agregarExperiencia() {
+    if (this.experiencia.idExperiencia == null) {
+      if (this.experienciaSource.data.length == 0) {
+        this.idExperiencia = this.experienciaSource.data.length + 1;
+      } else {
         this.idExperiencia++;
       }
-      this.experiencia.idExperiencia=this.idExperiencia;
+      this.experiencia.idExperiencia = this.idExperiencia;
     }
     this.EXPERIENCIA_DATA.push(this.experiencia);
-    this.experienciaSource= new MatTableDataSource(this.EXPERIENCIA_DATA);
-    
-    this.experiencia ={
-      idExperiencia:null,
-      empresa:null,
-      comentario:null,
-      fechaInicio:null,
-      fechaFin:null,
-      referencia:null,
-      telefono:null
+    this.experienciaSource = new MatTableDataSource(this.EXPERIENCIA_DATA);
+
+    this.experiencia = {
+      idExperiencia: null,
+      empresa: null,
+      comentario: null,
+      fechaInicio: null,
+      fechaFin: null,
+      referencia: null,
+      telefono: null
     };
-    
-  
+
+
   }
 
-  editaEstudio(estudioTmp:any){
+  editaEstudio(estudioTmp: any) {
     this.estudio = estudioTmp;
   }
-  editaPago(pagoTmp:any){
+  editaPago(pagoTmp: any) {
     this.pago = pagoTmp;
   }
-  editaExperiencia(experienciaTmp:any){
+  editaExperiencia(experienciaTmp: any) {
     this.experiencia = experienciaTmp;
   }
 
-  borraPago(pagoTmp){
-    this.PAGO_DATA = this.PAGO_DATA.filter((value,key)=>{
+  borraPago(pagoTmp) {
+    this.PAGO_DATA = this.PAGO_DATA.filter((value, key) => {
       return value.idPago != pagoTmp.idPago;
     });
-    this.pagoSource.data = this.pagoSource.data.filter((value,key)=>{
+    this.pagoSource.data = this.pagoSource.data.filter((value, key) => {
       return value.idPago != pagoTmp.idPago;
     });
   }
 
-  borraExperiencia(experienciaTmp){
-    this.EXPERIENCIA_DATA = this.EXPERIENCIA_DATA.filter((value,key)=>{
+  borraExperiencia(experienciaTmp) {
+    this.EXPERIENCIA_DATA = this.EXPERIENCIA_DATA.filter((value, key) => {
       return value.idExperiencia != experienciaTmp.idExperiencia;
     });
-    this.experienciaSource.data = this.experienciaSource.data.filter((value,key)=>{
+    this.experienciaSource.data = this.experienciaSource.data.filter((value, key) => {
       return value.idExperiencia != experienciaTmp.idExperiencia;
     });
 
   }
 
-  limpiarEstudio(){
-    this.estudio ={
-      idEstudio:null,
-      idColaborador:null,
-      institucion:null,
-      fechaInicio:null,
-      fechaFin:null,
-      estatus:null,
-      cedula:null,
-      cedulaNombre:null,
-      comentarios:null
+  pagAtras(index) {
+    if (this.selected.value > 0) {
+      this.selected.setValue(this.selected.value - index);
+    }
+
+  }
+  pagDelante(index) {
+    if (this.selected.value < 7) {
+      this.selected.setValue(this.selected.value + index);
+    }
+
+  }
+
+  limpiarEstudio() {
+    this.estudio = {
+      idEstudio: null,
+      idColaborador: null,
+      institucion: null,
+      fechaInicio: null,
+      fechaFin: null,
+      estatus: null,
+      cedula: null,
+      cedulaNombre: null,
+      comentarios: null
     };
   }
-  limpiarPago(){
-    this.pago ={
-      idPago:null,
-      nombre:null,
-      banco:null,
-      tipoCuenta:null,
-      numero:null,
+  limpiarPago() {
+    this.pago = {
+      idPago: null,
+      nombre: null,
+      banco: null,
+      tipoCuenta: null,
+      numero: null,
     };
   }
-  limpiarExperiencia(){
-    this.experiencia ={
-      idExperiencia:null,
-      empresa:null,
-      comentario:null,
-      fechaInicio:null,
-      fechaFin:null,
-      referencia:null,
-      telefono:null
+  limpiarExperiencia() {
+    this.experiencia = {
+      idExperiencia: null,
+      empresa: null,
+      comentario: null,
+      fechaInicio: null,
+      fechaFin: null,
+      referencia: null,
+      telefono: null
     };
   }
 
-  public listaEstatus(){
+  public listaEstatus() {
     this.http.get<any>('/api/catalogo/estatus?tipo=ESTUDIO').subscribe(data => {
-        this.estatusEstudios= data.data;
+      this.estatusEstudios = data.data;
     });
   }
 
-  public comboCalificaciones(){
+  public comboCalificaciones() {
     this.http.get<any>('/api/catalogo/calificaciones').subscribe(data => {
-        this.calificaciones = data.data;
+      this.calificaciones = data.data;
     });
   }
 
-  public comboTiposColaboradores(){
+  public comboTiposColaboradores() {
     this.http.get<any>('/api/catalogo/tiposColaboradores').subscribe(data => {
-        this.tiposColaboradores = data.data;
+      this.tiposColaboradores = data.data;
     });
   }
 
-  public comboTeces(){
+  public comboTeces() {
     this.http.get<any>('/api/catalogo/teces').subscribe(data => {
-        this.teces = data.data;
+      this.teces = data.data;
     });
   }
 
-  public comboBancos(){
+  public comboTipoVisas() {
+    this.http.get<any>('/api/catalogo/tipoVisas').subscribe(data => {
+      this.tipoVisas = data.data;
+    });
+  }
+
+  public comboBancos() {
     this.http.get<any>('/api/catalogo/bancos').subscribe(data => {
-        this.bancos = data.data;
+      this.bancos = data.data;
     });
   }
 
-  public comboEstadosCiviles(){
+  public comboEstadosCiviles() {
     this.http.get<any>('/api/catalogo/comboEstadosCiviles').subscribe(data => {
-        this.estadosCiviles = data.data;
+      this.estadosCiviles = data.data;
     });
   }
 
-  public comboTiposTelefono(){
+  public comboTiposTelefono() {
     this.http.get<any>('/api/catalogo/tiposTelefono').subscribe(data => {
-        this.tiposTelefono = data.data;
+      this.tiposTelefono = data.data;
     });
   }
 
-  public comboPermanencias(){
+  public comboPermanencias() {
     this.http.get<any>('/api/catalogo/permanencias').subscribe(data => {
-        this.permanencias = data.data;
+      this.permanencias = data.data;
     });
   }
 
-  public comboZonasLaborales(){
+  public comboZonasLaborales() {
     this.http.get<any>('/api/catalogo/zonasLaborales').subscribe(data => {
-        this.zonasLaborales = data.data;
+      this.zonasLaborales = data.data;
     });
   }
 
-  public comboEspecialidades(){
+  public comboEspecialidades() {
     this.http.get<any>('/api/catalogo/especialidades').subscribe(data => {
-        this.especialidades = data.data;
+      this.especialidades = data.data;
     });
   }
 
-  public comboHabilidades(){
+  public comboHabilidades() {
     this.http.get<any>('/api/catalogo/habilidades').subscribe(data => {
-        this.habilidades = data.data;
+      this.habilidades = data.data;
     });
   }
 
-  public comboColonias(){
+  public comboColonias() {
     this.http.get<any>('/api/catalogo/colonias').subscribe(data => {
-        this.colonias = data.data;
+      this.colonias = data.data;
     });
   }
 
-  public comboSexos(){
+  public comboSexos() {
     this.http.get<any>('/api/catalogo/sexos').subscribe(data => {
-        this.sexos = data.data;
+      this.sexos = data.data;
     });
   }
 
-  public comboCiudades(idEstadoNacimiento){
+  public comboCiudades(idEstadoNacimiento) {
     this.colaborador.idEstadoNacimiento = idEstadoNacimiento;
-    this.http.get<any>('/api/catalogo/ciudades?idEstado='+ idEstadoNacimiento).subscribe(data => {
-        this.ciudades = data.data;    
+    this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento).subscribe(data => {
+      this.ciudades = data.data;
     });
   }
 
-  public comboEstados(){
-    this.http.get<any>('/api/catalogo/estados?idPais='+ this.selectedPais).subscribe(data => {
-        this.estados = data.data;
+  public comboEstados() {
+    this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais).subscribe(data => {
+      this.estados = data.data;
     });
   }
 
-  public comboPaises(){
+  public comboPaises() {
     this.http.get<any>('/api/catalogo/paises').subscribe(data => {
-        this.paises = data.data;
+      this.paises = data.data;
     });
   }
 
-  public onCodigoPostal(selectedCodigoPostal){
+  public onCodigoPostal(selectedCodigoPostal) {
     this.colaborador.codigoPostal = selectedCodigoPostal;
-    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal='+ selectedCodigoPostal).subscribe(data => {
+    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal).subscribe(data => {
       this.colonias = data.data;
       this.colaborador.idCiudad = data.data[0].idCiudad;
-      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad='+ data.data[0].idCiudad).subscribe(dataCiudad => {
+      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad).subscribe(dataCiudad => {
         this.ciudadesDir = dataCiudad.data;
         this.colaborador.idEstado = dataCiudad.data[0].idEstado;
-        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado='+ dataCiudad.data[0].idEstado).subscribe(data => {
+        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado).subscribe(data => {
           this.estadosDir = data.data;
+        });
       });
     });
-  }); 
   }
 
-  onColonia(value:any){
+  onColonia(value: any) {
     this.colaborador.idColonia = value;
   }
-  
-  onCiudad(value:any){
+
+  onCiudad(value: any) {
     this.colaborador.idCiudad = value;
   }
 
-  onEstado(value:any){
+  onEstado(value: any) {
     this.colaborador.idEstado = value;
   }
 
-  onEstadoCivil(value:any){
+  onEstadoCivil(value: any) {
     this.colaborador.idEstadoCivil = value;
   }
 
-  onTez(value:any){
+  onTez(value: any) {
     this.colaborador.idTez = value;
   }
 
-  onSexo(value:any){
+  onSexo(value: any) {
     this.colaborador.idSexo = value;
   }
 
-  onCalificacion(value:any){
+  onCalificacion(value: any) {
     this.colaborador.idCalificacion = value;
   }
 
-  onTipoColaborador(value:any){
+  onTipoVisa(value: any) {
+    this.colaborador.idTipoVisa = value;
+  }
+
+  onTipoColaborador(value: any) {
     this.colaborador.idTipoColaborador = value;
   }
 
-  onCiudadNacimiento(value:any){
+  onCiudadNacimiento(value: any) {
     this.colaborador.idCiudadNacimiento = value;
   }
 
-  onTipoTel1(value:any){
-    this.colaborador.tipoTelefono1 = value;
+  onTipoTel1(value: any) {
+    this.colaborador.idTipoTelefono = value;
   }
 
-  onTipoTel2(value:any){
-    this.colaborador.tipoTelefono2 = value;
+  onTipoTel2(value: any) {
+    this.colaborador.idTipoTelefono2 = value;
   }
 
-  onPermanencia(value:any){
+  onPermanencia(value: any) {
     this.colaborador.idPermanencia = value;
   }
 }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ColaboradorComponent } from './colaborador/colaborador.component';
@@ -17,7 +17,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
+import { MatTableExporterModule } from 'mat-table-exporter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +33,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     BrowserAnimationsModule,
     MatRadioModule,
+    MatTableExporterModule,
+    MatDialogModule,
     HttpClientModule,
     NgbToastModule,
     MatTableModule,
