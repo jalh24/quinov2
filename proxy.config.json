@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+        "target": "http://back.comercioincoterms.com",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {"^/api" : ""}
+    }
+}
