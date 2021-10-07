@@ -144,9 +144,81 @@
       </table>
     </div>
 
-    <div class="tab-pane fade" id="pago" role="tabpanel" aria-labelledby="pago-tab">Pago</div>
-    <div class="tab-pane fade" id="estudios" role="tabpanel" aria-labelledby="estudios-tab">Estudios</div>
-    <div class="tab-pane fade" id="experienciaLaboral" role="tabpanel" aria-labelledby="experienciaLaboral-tab">Experiencia Laboral</div>
+    <div class="tab-pane fade" id="pago" role="tabpanel" aria-labelledby="pago-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="4">Pago</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">Beneficiario</th>
+            <th scope="col">Banco</th>
+            <th scope="col">Tipo de Cuenta</th>
+            <th scope="col">Numero</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="estudios" role="tabpanel" aria-labelledby="estudios-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="5">Estudios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">Institución</th>
+            <th scope="col">Estudio/Carrera/Curso</th>
+            <th scope="col">Estatus de Terminación</th>
+            <th scope="col">Inicio</th>
+            <th scope="col">Terminación</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="experienciaLaboral" role="tabpanel" aria-labelledby="experienciaLaboral-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="6">Experiencia Laboral</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">Empresa/Institución</th>
+            <th scope="col">Inicio</th>
+            <th scope="col">Terminación</th>
+            <th scope="col">Referencia</th>
+            <th scope="col">Telefono Referencia</th>
+            <th scope="col">Actividades</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="tab-pane fade" id="competencias" role="tabpanel" aria-labelledby="competencias-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
@@ -225,7 +297,7 @@
         <tbody>
           <tr>
             <th scope="row">Permanencia</th>
-            <td></td>
+            <td>{{colaborador.permanenciaColab}}</td>
             <th scope="row">¿Atiende COVID?</th>
             <td></td>
             <th scope="row">Antecedentes penales</th>
@@ -241,19 +313,19 @@
             <th scope="row">Visa Americana</th>
             <td></td>
             <th scope="row">Número de Visa</th>
-            <td></td>
+            <td>{{colaborador.visaNumero}}</td>
             <th scope="row">Tipo de Visa</th>
-            <td></td>
+            <td>{{colaborador.tipoVisa}}</td>
             <th scope="row">Expiración</th>
-            <td></td>
+            <td>{{colaborador.expiracionVisa}}</td>
           </tr>
           <tr>
             <th scope="row">Pasaporte</th>
             <td></td>
             <th scope="row">Número de Pasaporte</th>
-            <td></td>
+            <td>{{colaborador.pasaporteNumero}}</td>
             <th scope="row">Expiración</th>
-            <td colspan="3"></td>
+            <td colspan="3">{{colaborador.expiracionPasaporte}}</td>
           </tr>
         </tbody>
       </table>
