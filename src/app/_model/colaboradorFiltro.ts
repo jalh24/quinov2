@@ -9,6 +9,8 @@ export class ColaboradorFiltro {
     public genero:number;
     public estatura1:number;
     public estatura2:string;
+    public calificacion1:number;
+    public calificacion2:number;
     public permanencia:number;
     public zonasLaborales:[];
     public atiendeCovid:boolean;

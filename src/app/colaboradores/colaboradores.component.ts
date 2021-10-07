@@ -34,7 +34,7 @@ export class ColaboradoresComponent implements OnInit {
   length: number;
   COLABORADOR_DATA: Colaborador[] = [];
   colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
-  colaboradorColumns: string[] = ['nombre', 'a_paterno', 'a_materno', 'telefono', 'correoElectronico', 'acciones'];
+  colaboradorColumns: string[] = ['nombre', 'a_paterno', 'a_materno', 'telefono', 'correoElectronico','idCalificacion', 'acciones'];
   @ViewChild('colaboradoresTable', { static: true }) colaboradoresTable: MatTable<any>;
   sexos: any;
   diasLaborales: any = [] = [
