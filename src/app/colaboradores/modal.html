@@ -1,8 +1,62 @@
-
 <h1 mat-dialog-title>{{colaborador.nombre}} {{colaborador.a_paterno}} {{colaborador.a_materno}} </h1>
 <div mat-dialog-content>
-  
-  <table class="table table-bordered">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item waves-effect waves-light">
+      <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+      <a class="nav-link" id="dirección-tab" data-toggle="tab" href="#dirección" role="tab" aria-controls="dirección" aria-selected="false">Dirección</a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+      <a class="nav-link" id="informacionPersonal-tab" data-toggle="tab" href="#informacionPersonal" role="tab" aria-controls="informacionPersonal" aria-selected="false">Información Personal</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Información General</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">RFC</th>
+            <td>{{colaborador.rfc}}</td>
+            <th scope="row">NSS</th>
+            <td>{{colaborador.nss}}</td>
+    
+          </tr>
+          <tr>
+            <th scope="row">Calificación</th>
+            <td></td>
+            <th scope="row">Tipo de Colaborador</th>
+            <td></td>
+          </tr>
+        </tbody>
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Lugar y Fecha de Nacimiento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Fecha</th>
+            <td>{{colaborador.fecha_nacimiento}}</td>
+            <th scope="row">País</th>
+            <td>{{colaborador.paisNacimiento}}</td>
+            <th scope="row">Estado</th>
+            <td></td>
+            <th scope="row">Ciudad</th>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="dirección" role="tabpanel" aria-labelledby="dirección-tab">Tab</div>
+    <div class="tab-pane fade" id="informacionPersonal" role="tabpanel" aria-labelledby="informacionPersonal-tab">Tab</div>
+  </div>
+  <!-- <table class="table table-bordered">
     <thead class="thead-light">
       <tr>
         <th scope="col">Información General</th>
@@ -40,7 +94,7 @@
         <td></td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
 
 </div>
 <div mat-dialog-actions>
