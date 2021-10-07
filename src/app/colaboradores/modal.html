@@ -10,13 +10,31 @@
     <li class="nav-item waves-effect waves-light">
       <a class="nav-link" id="informacionPersonal-tab" data-toggle="tab" href="#informacionPersonal" role="tab" aria-controls="informacionPersonal" aria-selected="false">Información Personal</a>
     </li>
+    <li class="nav-item waves-effect waves-light">
+      <a class="nav-link" id="pago-tab" data-toggle="tab" href="#pago" role="tab" aria-controls="pago" aria-selected="false">Pago</a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+      <a class="nav-link" id="estudios-tab" data-toggle="tab" href="#estudios" role="tab" aria-controls="estudios" aria-selected="false">Estudios</a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+      <a class="nav-link" id="experienciaLaboral-tab" data-toggle="tab" href="#experienciaLaboral" role="tab" aria-controls="experienciaLaboral" aria-selected="false">Experiencia Laboral</a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+      <a class="nav-link" id="competencias-tab" data-toggle="tab" href="#competencias" role="tab" aria-controls="competencias" aria-selected="false">Competencias</a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+      <a class="nav-link" id="disponibilidadTrabajo-tab" data-toggle="tab" href="#disponibilidadTrabajo" role="tab" aria-controls="disponibilidadTrabajo" aria-selected="false">Disponibilidad de Trabajo</a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+      <a class="nav-link" id="otros-tab" data-toggle="tab" href="#otros" role="tab" aria-controls="otros" aria-selected="false">Otros</a>
+    </li>
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
-            <th scope="col">Información General</th>
+            <th scope="col" colspan="4">Información General</th>
           </tr>
         </thead>
         <tbody>
@@ -31,12 +49,12 @@
             <th scope="row">Calificación</th>
             <td></td>
             <th scope="row">Tipo de Colaborador</th>
-            <td></td>
+            <td>{{colaborador.tipoColaboradorConId}}</td>
           </tr>
         </tbody>
         <thead class="thead-light">
           <tr>
-            <th scope="col">Lugar y Fecha de Nacimiento</th>
+            <th scope="col" colspan="8">Lugar y Fecha de Nacimiento</th>
           </tr>
         </thead>
         <tbody>
@@ -46,15 +64,200 @@
             <th scope="row">País</th>
             <td>{{colaborador.paisNacimiento}}</td>
             <th scope="row">Estado</th>
-            <td></td>
+            <td>{{colaborador.estadoNacimiento}}</td>
             <th scope="row">Ciudad</th>
+            <td>{{colaborador.ciudadNacimiento}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="dirección" role="tabpanel" aria-labelledby="dirección-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="8">Dirección</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Calle</th>
+            <td colspan="3">{{colaborador.calle1}}</td>
+            <th scope="row">Calle 2</th>
+            <td colspan="3">{{colaborador.calle2}}</td>   
+          </tr>
+          <tr>
+            <th scope="row">Número Exterior</th>
+            <td>{{colaborador.noExt}}</td>
+            <th scope="row">Número Interior</th>
+            <td>{{colaborador.noInt}}</td>
+            <th scope="row">Código Postal</th>
+            <td>{{colaborador.codigoPostal}}</td>
+            <th scope="row">Colonia</th>
+            <td>{{colaborador.coloniaDir}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Ciudad</th>
+            <td>{{colaborador.ciudadDir}}</td>
+            <th scope="row">Estado</th>
+            <td>{{colaborador.estadoDir}}</td>
+            <th scope="row">País</th>
+            <td colspan="3">{{colaborador.paisDir}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="informacionPersonal" role="tabpanel" aria-labelledby="informacionPersonal-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="10">Información Personal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Genero</th>
+            <td>{{colaborador.genero}}</td>
+            <th scope="row">Peso (Kg)</th>
+            <td>{{colaborador.peso}}</td>
+            <th scope="row">Estatura (cm)</th>
+            <td>{{colaborador.estatura}}</td>
+            <th scope="row">Tez</th>
+            <td>{{colaborador.tez}}</td>
+            <th scope="row">Estado Civil</th>
+            <td>{{colaborador.estadoCivil}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Teléfono 1</th>
+            <td>{{colaborador.telefono}}</td>
+            <th scope="row">Tipo Teléfono 1</th>
+            <td>{{colaborador.tipoTelefono1}}</td>
+            <th scope="row">Teléfono 2</th>
+            <td>{{colaborador.telefono2}}</td>
+            <th scope="row">Tipo Teléfono 2</th>
+            <td colspan="3">{{colaborador.tipoTelefono2}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Correo Electrónico</th>
+            <td colspan="9">{{colaborador.correoElectronico}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-pane fade" id="pago" role="tabpanel" aria-labelledby="pago-tab">Pago</div>
+    <div class="tab-pane fade" id="estudios" role="tabpanel" aria-labelledby="estudios-tab">Estudios</div>
+    <div class="tab-pane fade" id="experienciaLaboral" role="tabpanel" aria-labelledby="experienciaLaboral-tab">Experiencia Laboral</div>
+    <div class="tab-pane fade" id="competencias" role="tabpanel" aria-labelledby="competencias-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="4">Competencias</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Especialidades</th>
+            <td></td>
+            <th scope="row">Habilidades</th>
             <td></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="tab-pane fade" id="dirección" role="tabpanel" aria-labelledby="dirección-tab">Tab</div>
-    <div class="tab-pane fade" id="informacionPersonal" role="tabpanel" aria-labelledby="informacionPersonal-tab">Tab</div>
+    <div class="tab-pane fade" id="disponibilidadTrabajo" role="tabpanel" aria-labelledby="disponibilidadTrabajo-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="3">Días y Horarios de Disponibilidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Todos los Días</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Lunes</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Martes</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Miércoles</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Jueves</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Viernes</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Sábado</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Domingo</th>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="otros" role="tabpanel" aria-labelledby="otros-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="8">Otros</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Permanencia</th>
+            <td></td>
+            <th scope="row">¿Atiende COVID?</th>
+            <td></td>
+            <th scope="row">Antecedentes penales</th>
+            <td></td>
+            <th scope="row">Auto propio</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Disponibilidad para viajar</th>
+            <td colspan="7"></td>
+          </tr>
+          <tr>
+            <th scope="row">Visa Americana</th>
+            <td></td>
+            <th scope="row">Número de Visa</th>
+            <td></td>
+            <th scope="row">Tipo de Visa</th>
+            <td></td>
+            <th scope="row">Expiración</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Pasaporte</th>
+            <td></td>
+            <th scope="row">Número de Pasaporte</th>
+            <td></td>
+            <th scope="row">Expiración</th>
+            <td colspan="3"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <!-- <table class="table table-bordered">
     <thead class="thead-light">
