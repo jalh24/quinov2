@@ -26,6 +26,7 @@ export class ModalColaboradorComponent implements OnInit {
     if (this.data) {
       this.colaborador = this.data.data;
       this.colaborador.cuentasColaborador= this.data.data.cuentasColaborador;
+      console.log(this.colaborador);
     }
     return event;
   }

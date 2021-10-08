@@ -68,6 +68,7 @@ export class ColaboradoresComponent implements OnInit {
       let envio = data.data[0];
       envio.cuentasColaborador=data.data.cuentas;
       envio.estudios = data.data.estudios;
+      envio.experiencia = data.data.experiencia;
       const dialogRef = this.dialog.open(ModalColaboradorComponent, {
         width: '1110px',
         data: { data: envio }

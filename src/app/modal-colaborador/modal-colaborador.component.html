@@ -208,13 +208,13 @@
             <th scope="col">Telefono Referencia</th>
             <th scope="col">Actividades</th>
           </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr *ngFor="let experiencias of colaborador.experiencia">
+            <td>{{experiencias.empresa}}</td>
+            <td>{{experiencias.fechaInicio}}</td>
+            <td>{{experiencias.fechaFin}}</td>
+            <td>{{experiencias.referencia}}</td>
+            <td>{{experiencias.telefono}}</td>
+            <td>{{experiencias.comentario}}</td>
           </tr>
         </tbody>
       </table>
