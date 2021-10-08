@@ -6,6 +6,7 @@ export class Colaborador {
     public a_paterno: string;
     public a_materno: string;
     public idCalificacion: number;
+    public idGradoEstudios: number;
     public idTipoVisa: number;
     public idTipoColaborador: number;
     public idEstadoNacimiento: number;
@@ -69,6 +70,7 @@ export class Colaborador {
     public observaciones: string;
     public especialidades: any[];
     public habilidades: any[];
+    public idGradoEstudio: number;
     constructor() {
     }
 }

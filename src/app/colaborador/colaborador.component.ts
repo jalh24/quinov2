@@ -130,6 +130,7 @@ export class ColaboradorComponent implements OnInit {
   dtOptionsExperiencia: any = {};
   estatusEstudios: Estatus[];
   estatusSelected: string;
+  gradoEstudios: any[];
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
@@ -155,6 +156,7 @@ export class ColaboradorComponent implements OnInit {
     this.comboEstados();
     this.comboPaises();
     this.comboCalificaciones();
+    this.comboGradoEstudios();
     this.comboTiposColaboradores();
     this.comboTeces();
     this.comboTipoVisas();
@@ -885,6 +887,12 @@ export class ColaboradorComponent implements OnInit {
     });
   }
 
+  public comboGradoEstudios() {
+    this.http.get<any>('/api/catalogo/gradoEstudios').subscribe(data => {
+      this.gradoEstudios = data.data;
+    });
+  }
+
   public comboTiposColaboradores() {
     this.http.get<any>('/api/catalogo/tiposColaboradores').subscribe(data => {
       this.tiposColaboradores = data.data;
@@ -1017,6 +1025,10 @@ export class ColaboradorComponent implements OnInit {
 
   onCalificacion(value: any) {
     this.colaborador.idCalificacion = value;
+  }
+
+  onGradoEstudio(value: any) {
+    this.colaborador.idGradoEstudio = value;
   }
 
   onTipoVisa(value: any) {

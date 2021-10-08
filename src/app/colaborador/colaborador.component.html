@@ -613,6 +613,17 @@
     <mat-tab label="Estudios">
       <div class="container mt-5 bg-white rounded-top shadow">
         <h4 class="pt-4 pb-1">Estudios</h4>
+        <div class="col-md-3">
+          <label for="gradoEstudio" class="form-label">Último grado de estudios<span class="text-danger"> *</span></label>
+          <select class="form-control" name="gradoEstudio" (change)="onGradoEstudio($event.target.value)"
+            #gradoEstudio="ngModel" [ngModel]="colaborador.idGradoEstudios" ngModel>
+            <option value="" selected disabled hidden>Seleccionar</option>
+            <option *ngFor="let gradoEstudio of gradoEstudios" [value]="gradoEstudio.idGrado">
+              {{gradoEstudio.nombre}}
+            </option>
+          </select>
+        </div>
+        <hr class="mt-3 mb-3" />
         <h6 class="pb-1">Favor de capturar cada uno de los estudios, cursos y diplomados que haya tomado</h6>
         <div class="form-group dynamic-element">
           <div class="row">
