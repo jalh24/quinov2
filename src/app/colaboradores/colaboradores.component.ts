@@ -12,6 +12,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTab } from '@angular/material/tabs';
+import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
 export interface DialogData {
   data: any;
 }
@@ -64,10 +65,12 @@ export class ColaboradoresComponent implements OnInit {
 
   openDialog(idCol): void {
     this.http.post<any>('/api/colaborador/colaboradorId', { idColaborador: idCol }).subscribe(data => {
-      console.log(data.data[0]);
-      const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      let envio = data.data[0];
+      envio.cuentasColaborador=data.data.cuentas;
+      envio.estudios = data.data.estudios;
+      const dialogRef = this.dialog.open(ModalColaboradorComponent, {
         width: '1110px',
-        data: { data: data.data[0] }
+        data: { data: envio }
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
@@ -172,37 +175,5 @@ export class ColaboradoresComponent implements OnInit {
   onSelectAll(items: any) {
     console.log(items);
   }
-
-}
-
-@Component({
-  selector: 'modal',
-  templateUrl: './modal.html',
-
-  styleUrls: ['./colaboradores.component.scss'],
-})
-export class DialogOverviewExampleDialog {
-  colaborador: any;
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>, private router:Router,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-  ngOnInit(): void {
-    this.getColaboradores2();
-
-  }
-
-  public getColaboradores2(event?: PageEvent) {
-    console.log(this.data);
-    if (this.data) {
-      this.colaborador = this.data.data;
-    }
-    return event;
-  }
-
-
 
 }

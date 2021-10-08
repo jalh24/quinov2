@@ -18,13 +18,18 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { CommonModule } from "@angular/common";
+import { ModalColaboradorComponent } from './modal-colaborador/modal-colaborador.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ColaboradorComponent,
-    ColaboradoresComponent
+    ColaboradoresComponent,
+    ModalColaboradorComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,

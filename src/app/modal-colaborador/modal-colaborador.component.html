@@ -182,12 +182,12 @@
             <th scope="col">Inicio</th>
             <th scope="col">Terminación</th>
           </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr *ngFor="let estudio of colaborador.estudios">
+            <td>{{estudio.institucion}}</td>
+            <td>{{estudio.comentarios}}</td>
+            <td>{{estudio.estatusNombre}}</td>
+            <td>{{estudio.fechaInicio}}</td>
+            <td>{{estudio.fechaFin}}</td>
           </tr>
         </tbody>
       </table>
