@@ -1,6 +1,7 @@
 <!-- <div style="padding: 10px;"> -->
 
 <div class="container mt-5 pt-4 bg-white rounded-top shadow">
+  <button type="button" class="btn btn-success mb-4" (click)="agregarColaborador()">Agregar Nuevo Colaborador</button> &nbsp;&nbsp;
   <table class="table">
     <!-- <thead>
         <tr>
@@ -130,7 +131,7 @@
   <div class="row text-center pb-4">
     <div class="col">
       <button type="button" class="btn btn-primary" (click)="getColaboradores()">Buscar</button> &nbsp;&nbsp;
-      <button type="button" class="btn btn-primary" (click)="agregarColaborador()">Agregar</button> &nbsp;&nbsp;
+      <!-- <button type="button" class="btn btn-primary" (click)="agregarColaborador()">Agregar</button> &nbsp;&nbsp; -->
       <button type="button" class="btn btn-warning" *ngIf="colaborador != null">Editar</button>&nbsp;&nbsp;
       <button type="button" class="btn btn-danger" *ngIf="colaborador">Eliminar</button>
     </div>
