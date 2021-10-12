@@ -1,0 +1,562 @@
+<form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
+    <ngb-toast-container></ngb-toast-container>
+    <mat-tab-group mat-align-tabs="center" [selectedIndex]="selected.value"
+        (selectedIndexChange)="selected.setValue($event)">
+        <mat-tab label="General">
+            <div class="container mt-5 bg-white rounded-top shadow">
+                <h4 class="pt-4 pb-1">Información General</h4>
+                <div class="row">
+                    <div class="col">
+                        <label for="nombre" class="form-label">Nombre(s)<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                            pattern="[a-zA-Z ]*">
+                        <!-- <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel #nombre="ngModel"
+                [(ngModel)]="colaborador.nombre" pattern="[a-zA-Z ]*" required> -->
+
+                    </div>
+
+                    <div class="col">
+                        <label for="paterno" class="form-label">Apellido Paterno<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno"
+                            pattern="[a-zA-Z ]*">
+                        <!-- <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno" ngModel #apaterno="ngModel"
+                [(ngModel)]="colaborador.a_paterno" pattern="[a-zA-Z ]*" required> -->
+
+                    </div>
+
+                    <div class="col">
+                        <label for="materno" class="form-label">Apellido Materno<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control" id="amaterno" name="amaterno" pattern="[a-zA-Z ]*">
+                        <!-- <input type="text" class="form-control" id="amaterno" name="amaterno" ngModel #amaterno="ngModel"
+                [(ngModel)]="colaborador.a_materno" pattern="[a-zA-Z ]*" required> -->
+
+                    </div>
+                </div>
+
+
+                <hr class="py-1" />
+                <h4 class="pb-1">Lugar y Fecha de Nacimiento</h4>
+                <div class="row mt-4 pb-4">
+                    <div class="col">
+                        <label for="nacimiento" class="form-label">Fecha de Nacimiento<span class="text-danger">
+                                *</span></label>
+                        <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento"
+                            value="yyyy-MM-dd">
+                        <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
+                #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
+
+
+                    </div>
+                    <div class="col">
+                        <label for="paisNac" class="form-label">País<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="paisNac">
+                            <!-- <select class="form-control" name="paisNac" ngModel
+              #paisNac="ngModel" [(ngModel)]="colaborador.idPaisNacimiento" required> -->
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+                        </select>
+
+                    </div>
+                    <div class="col">
+                        <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="estadoNac" id="estadoNac">
+                            <!-- <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" 
+              [(ngModel)]="colaborador.idEstadoNacimiento"
+                (change)="comboCiudades($event.target.value)" required> -->
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+                        </select>
+
+                    </div>
+                    <div class="col">
+                        <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="ciudadNac">
+                            <!-- <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel"  ngModel required> -->
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+                <div class="row pb-4">
+                    <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                            class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Dirección">
+            <div class="container mt-5 bg-white rounded-top shadow">
+                <h4 class="pt-4 pb-1">Dirección</h4>
+                <div class="row">
+                    <div class="col">
+                        <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control" id="calle1" name="calle1">
+                        <!-- <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel" [(ngModel)]="colaborador.calle1" required> -->
+
+                    </div>
+
+                    <div class="col">
+                        <label for="calle2" class="form-label">Calle 2</label>
+                        <input type="text" class="form-control" id="calle1" name="calle2">
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-2">
+                        <label for="numExterior" class="form-label">Número Exterior<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control" name="numExterior">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="numInterior" class="form-label">Número Interior</label>
+                        <input type="text" class="form-control" name="numInterior">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="codigopostal" class="form-label">Código Postal<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control" maxlength="5" name="codigopostal" pattern="[0-9]*">
+
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
+                    <select class="form-control" name="colonia">
+                        <option>
+                            --
+                        </option>
+                    </select>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="ciudad">
+                            <option>
+                                --
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="estado">
+                            <option>
+                                --
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="pais">
+                            <option>
+                                --
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4 pb-4">
+                    <div class="col">
+                        <label for="referencia" class="form-label">Referencia</label>
+                        <textarea name="referencia" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="col">
+                        <label for="comprobante" class="form-label">Comprobante de Domicilio</label>
+                        <!-- <input class="form-control-file" type="file" name="comprobante"> -->
+                        <input class="form-control-file" type="file" name="comprobante" accept=".png, .jpg, .jpeg">
+                    </div>
+                </div>
+                <div class="row pb-4">
+                    <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                            class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Información Personal">
+            <div class="container mt-5 bg-white rounded-top shadow">
+                <h4 class="pt-4 pb-1">Información Personal</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="sexo" class="form-label">Genero<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="sexo">
+                            <!-- <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)"
+              #sexo="ngModel" [ngModel]="colaborador.idSexo" required > -->
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-1">
+                        <label for="peso" class="form-label">Peso (Kg)</label>
+                        <input maxlength="3" size="3" type="text" class="form-control" name="peso" pattern="[0-9]*">
+
+                    </div>
+
+                    <div class="col-md-1">
+                        <label for="estatura" class="form-label">Estatura(cm)</label>
+                        <input maxlength="3" size="3" type="text" class="form-control" name="estatura" pattern="[0-9]*">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="tez" class="form-label">Complexion</label>
+                        <select class="form-control" name="tez">
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger">
+                                *</span></label>
+                        <select class="form-control" name="estadoCivil">
+                            <!-- <select class="form-control" name="estadoCivil" ngModel
+              #estadoCivil="ngModel" [ngModel]="colaborador.idEstadoCivil" (change)="onEstadoCivil($event.target.value)" required> -->
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="imss" class="form-label">IMSS</label>
+                        <input maxlength="3" size="3" type="text" class="form-control" name="imss" pattern="[0-9]*">
+                    </div>
+                </div>
+
+                <div class="row mt-4 pb-4">
+                    <div class="col-md-2">
+                        <label for="telefono1" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1"
+                            placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+                        <!-- <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="colaborador.telefono" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required> -->
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="tipoTel1" class="form-label">Tipo de Teléfono 1</label>
+                        <select class="form-control" name="tipoTel1">
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="telefono2" class="form-label">Teléfono 2</label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2"
+                            placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="tipoTel2" class="form-label">Tipo de Teléfono 2</label>
+                        <select class="form-control" name="tipoTel2">
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="correoelectronico" class="form-label">Correo Electrónico<span class="text-danger">
+                                *</span></label>
+                        <input type="email" class="form-control" name="correoelectronico"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                        <!-- <input type="email" class="form-control" name="correoelectronico" ngModel #correoelectronico="ngModel" [(ngModel)]="colaborador.correoElectronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required> -->
+                    </div>
+                </div>
+
+
+                <div class="row mt-4 pb-4">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Seguro de Gastos Medicos Mayores<span class="text-danger">
+                                    *</span></label>
+                            <div class="form-control">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sgmm" id="sgmm" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Sí</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sgmm" id="inlineRadio2"
+                                        value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">No</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="aseguradora" class="form-label">Aseguradora</label>
+                        <input type="text" class="form-control" name="aseguradora" placeholder="Nombre"
+                            disabled="disabled">
+                    </div>
+                </div>
+                <hr class="py-1" />
+                <h4 class="pb-1">Contactos</h4>
+                <div class="row mt-4 pb-4">
+                    <div class="col">
+                        <label for="nacimiento" class="form-label">Nombre<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                            pattern="[a-zA-Z ]*">
+                        <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
+                #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
+
+
+                    </div>
+                    <div class="col">
+                        <label for="paisNac" class="form-label">Parentesco<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="paisNac">
+                            <!-- <select class="form-control" name="paisNac" ngModel
+              #paisNac="ngModel" [(ngModel)]="colaborador.idPaisNacimiento" required> -->
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+                        </select>
+
+                    </div>
+                    <div class="col">
+                        <label for="estadoNac" class="form-label">Telefono<span class="text-danger"> *</span></label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1"
+                            placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+                    </div>
+                    <div class="col">
+                        <label for="ciudadNac" class="form-label">Correo Electrónico<span class="text-danger">
+                                *</span></label>
+                        <input type="email" class="form-control" name="correoelectronico"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+                    </div>
+
+                </div>
+                <div class="row mt-4 pb-4">
+                    <div class="col">
+                        <label for="nacimiento" class="form-label">Nombre<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                            pattern="[a-zA-Z ]*">
+                        <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
+                #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
+
+
+                    </div>
+                    <div class="col">
+                        <label for="paisNac" class="form-label">Parentesco<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="paisNac">
+                            <!-- <select class="form-control" name="paisNac" ngModel
+              #paisNac="ngModel" [(ngModel)]="colaborador.idPaisNacimiento" required> -->
+                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option>
+                                --
+                            </option>
+                        </select>
+
+                    </div>
+                    <div class="col">
+                        <label for="estadoNac" class="form-label">Telefono<span class="text-danger"> *</span></label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1"
+                            placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+                    </div>
+                    <div class="col">
+                        <label for="ciudadNac" class="form-label">Correo Electrónico<span class="text-danger">
+                                *</span></label>
+                        <input type="email" class="form-control" name="correoelectronico"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+                    </div>
+
+                </div>
+                <div class="row pb-4">
+                    <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                            class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Medico">
+            <div class="container mt-5 bg-white rounded-top shadow">
+                <h4 class="pt-4 pb-1">Medico</h4>
+                <h6 class="pb-1">Favor de capturar los datos del Medico encargado del paciente
+                </h6>
+                <div class="row mt-4 pb-4">
+                    <div class="col">
+                        <label for="nacimiento" class="form-label">Nombre completo<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                            pattern="[a-zA-Z ]*">
+                        <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
+                #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
+
+
+                    </div>
+                    <div class="col">
+                        <label for="paisNac" class="form-label">Especialidad<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                            pattern="[a-zA-Z ]*">
+
+
+                    </div>
+                    <div class="col">
+                        <label for="estadoNac" class="form-label">Telefono<span class="text-danger"> *</span></label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1"
+                            placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+                    </div>
+                    <div class="col">
+                        <label for="ciudadNac" class="form-label">Correo Electrónico<span class="text-danger">
+                                *</span></label>
+                        <input type="email" class="form-control" name="correoelectronico"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="row pb-4">
+                    <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                            class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Enfermedades">
+            <div class="container mt-5 bg-white rounded-top shadow">
+                <h4 class="pt-4 pb-1">Enfermedades</h4>
+                <h6 class="pb-1">Favor de capturar cada uno de las enfermedades del paciente en los campos adecuados
+                </h6>
+                <div class="form-group dynamic-element">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="comentarioEstudio" class="form-label">Enfermedades Actuales<span
+                                    class="text-danger">
+                                    *</span></label>
+                            <textarea name="comentarioEstudio" class="form-control" rows="5"></textarea>
+                            <div class="form-group">
+                                <label class="control-label">¿El paciente padece de Alzheimer?<span class="text-danger">
+                                        *</span></label>
+                                <div class="form-control">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="estudiosEst"
+                                            id="estudiosEstS" value="Si">
+                                        <label class="form-check-label" for="estudiosEstS">Sí</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="estudiosEst"
+                                            id="estudiosEstN" value="No">
+                                        <label class="form-check-label" for="estudiosEstN">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="comentarioEstudio" class="form-label">Enfermedades recientes<span
+                                    class="text-danger">
+                                    *</span></label>
+                            <textarea name="comentarioEstudio" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-container">
+
+                    <div class="dynamic-stuff">
+                        <!-- Dynamic element will be cloned here -->
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                            class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span>
+                    </div>
+                </div>
+
+            </div>
+        </mat-tab>
+        <mat-tab label="Cirugias y Accidentes">
+            <div class="container mt-5 bg-white rounded-top shadow">
+                <h4 class="pt-4 pb-1">Cirugias y Accidentes</h4>
+                <h6 class="pb-1">Favor de capturar cada una de las cirugias y accidentes del paciente en los campos
+                    adecuados</h6>
+                <div class="form-group dynamic-element">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="comentarioEstudio" class="form-label">Cirugias recientes<span
+                                    class="text-danger">
+                                    *</span></label>
+                            <textarea name="comentarioEstudio" class="form-control" rows="5"></textarea>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="comentarioEstudio" class="form-label">Accidentes recientes<span
+                                    class="text-danger">
+                                    *</span></label>
+                            <textarea name="comentarioEstudio" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <div class="dynamic-stuff">
+                        <!-- Dynamic element will be cloned here -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                            class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span>
+                    </div>
+                </div>
+                <div class="row text-center pb-4">
+                    <div class="col">
+                      <button type="button" class="btn btn-primary"> Enviar Datos
+                      </button>
+                      <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
+                      <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
+                    </div>
+                  </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div class="container bg-white rounded-bottom shadow">
+        <div class="row text-center pb-4">
+
+            <div class="col">
+                <div class="btn-toolbar" role="toolbar" style="justify-content: center; display: flex;">
+                    <div class="btn-group mr-2">
+                        <button type="button" class="btn btn-primary" ngDefaultControl [formControl]="selected"
+                            (click)="pagAtras(1)">&lt;</button>
+                    </div>
+                    <div class="btn-group mr-2">
+                        <button type="button" class="btn btn-primary" ngDefaultControl [formControl]="selected"
+                            (click)="pagDelante(1)">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
