@@ -74,29 +74,37 @@ export class ColaboradorComponent implements OnInit {
   public colaborador: Colaborador;
   diasLaborales: any = {
     todosDias: false,
-    todosDiasDesde: null,
-    todosDiasHasta: null,
+    todosDiasTurno: null,
+    // todosDiasDesde: null,
+    // todosDiasHasta: null,
     lunes: false,
-    lunesDesde: null,
-    lunesHasta: null,
+    lunesTurno: null,
+    // lunesDesde: null,
+    // lunesHasta: null,
     martes: false,
-    martesDesde: null,
-    martesHasta: null,
+    martesTurno: null,
+    // martesDesde: null,
+    // martesHasta: null,
     miercoles: false,
-    miercolesDesde: null,
-    miercolesHasta: null,
+    miercolesTurno: null,
+    // miercolesDesde: null,
+    // miercolesHasta: null,
     jueves: false,
-    juevesDesde: null,
-    juevesHasta: null,
+    juevesTurno: null,
+    // juevesDesde: null,
+    // juevesHasta: null,
     viernes: false,
-    viernesDesde: null,
-    viernesHasta: null,
+    viernesTurno: null,
+    // viernesDesde: null,
+    // viernesHasta: null,
     sabado: false,
-    sabadoDesde: null,
-    sabadoHasta: null,
+    sabadoTurno: null,
+    // sabadoDesde: null,
+    // sabadoHasta: null,
     domingo: false,
-    domingoDesde: null,
-    domingoHasta: null
+    domingoTurno: null
+    // domingoDesde: null,
+    // domingoHasta: null
   };
   sexos: any[];
   colonias: any[];
@@ -300,6 +308,14 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.contactosColaborador = [];
     this.colaborador.especialidades = [];
     this.colaborador.habilidades = [];
+    this.colaborador.telefono = null;
+    this.colaborador.idTipoTelefono = null;
+    this.colaborador.telefono2 = null;
+    this.colaborador.idTipoTelefono2 = null;
+    this.colaborador.idCalificacion = null;
+    this.colaborador.idTipoColaborador = null;
+    this.colaborador.observaciones = null;
+    this.colaborador.idPermanencia = null;
 
     this.idEstudio = 0;
     this.idPago = 0;
@@ -390,50 +406,78 @@ export class ColaboradorComponent implements OnInit {
     this.textBoxDisabledDateofWorkL = !this.textBoxDisabledDateofWorkL;
     this.textBoxDisabledDateofWorkT = true;
     this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasDesde = null;
-    this.diasLaborales.todosDiasHasta = null;
+    this.diasLaborales.todosDiasTurno = null;
+    if(this.textBoxDisabledDateofWorkL == true){
+      this.diasLaborales.lunesTurno = null;
+    }
+    // this.diasLaborales.todosDiasDesde = null;
+    // this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkM() {
     this.textBoxDisabledDateofWorkM = !this.textBoxDisabledDateofWorkM;
     this.textBoxDisabledDateofWorkT = true;
     this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasDesde = null;
-    this.diasLaborales.todosDiasHasta = null;
+    this.diasLaborales.todosDiasTurno = null;
+    if(this.textBoxDisabledDateofWorkM == true){
+      this.diasLaborales.martesTurno = null;
+    }
+    // this.diasLaborales.todosDiasDesde = null;
+    // this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkMi() {
     this.textBoxDisabledDateofWorkMi = !this.textBoxDisabledDateofWorkMi;
     this.textBoxDisabledDateofWorkT = true;
     this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasDesde = null;
-    this.diasLaborales.todosDiasHasta = null;
+    this.diasLaborales.todosDiasTurno = null;
+    if(this.textBoxDisabledDateofWorkMi == true){
+      this.diasLaborales.miercolesTurno = null;
+    }
+    // this.diasLaborales.todosDiasDesde = null;
+    // this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkJ() {
     this.textBoxDisabledDateofWorkJ = !this.textBoxDisabledDateofWorkJ;
     this.textBoxDisabledDateofWorkT = true;
     this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasDesde = null;
-    this.diasLaborales.todosDiasHasta = null;
+    this.diasLaborales.todosDiasTurno = null;
+    if(this.textBoxDisabledDateofWorkJ == true){
+      this.diasLaborales.juevesTurno = null;
+    }
+    // this.diasLaborales.todosDiasDesde = null;
+    // this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkV() {
     this.textBoxDisabledDateofWorkV = !this.textBoxDisabledDateofWorkV;
     this.textBoxDisabledDateofWorkT = true;
     this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasDesde = null;
-    this.diasLaborales.todosDiasHasta = null;
+    this.diasLaborales.todosDiasTurno = null;
+    if(this.textBoxDisabledDateofWorkV == true){
+      this.diasLaborales.viernesTurno = null;
+    }
+    // this.diasLaborales.todosDiasDesde = null;
+    // this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkS() {
     this.textBoxDisabledDateofWorkS = !this.textBoxDisabledDateofWorkS;
     this.textBoxDisabledDateofWorkT = true;
     this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasDesde = null;
-    this.diasLaborales.todosDiasHasta = null;
+    this.diasLaborales.todosDiasTurno = null;
+    if(this.textBoxDisabledDateofWorkS == true){
+      this.diasLaborales.sabadoTurno = null;
+    }
+    // this.diasLaborales.todosDiasDesde = null;
+    // this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkD() {
     this.textBoxDisabledDateofWorkD = !this.textBoxDisabledDateofWorkD;
     this.textBoxDisabledDateofWorkT = true;
     this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasDesde = null;
-    this.diasLaborales.todosDiasHasta = null;
+    this.diasLaborales.todosDiasTurno = null;
+    if(this.textBoxDisabledDateofWorkD == true){
+      this.diasLaborales.domingoTurno = null;
+    }
+    // this.diasLaborales.todosDiasDesde = null;
+    // this.diasLaborales.todosDiasHasta = null;
   }
   disableTextBoxDateofWorkT() {
     this.textBoxDisabledDateofWorkT = !this.textBoxDisabledDateofWorkT;
@@ -446,26 +490,33 @@ export class ColaboradorComponent implements OnInit {
     this.textBoxDisabledDateofWorkD = true;
     this.diasLaborales.todosDias = !this.diasLaborales.todosDias;
     this.diasLaborales.lunes = false;
-    this.diasLaborales.lunesDesde = null;
-    this.diasLaborales.lunesHasta = null;
+    this.diasLaborales.lunesTurno = null;
+    // this.diasLaborales.lunesDesde = null;
+    // this.diasLaborales.lunesHasta = null;
     this.diasLaborales.martes = false;
-    this.diasLaborales.martesDesde = null;
-    this.diasLaborales.martesHasta = null;
+    this.diasLaborales.martesTurno = null;
+    // this.diasLaborales.martesDesde = null;
+    // this.diasLaborales.martesHasta = null;
     this.diasLaborales.miercoles = false;
-    this.diasLaborales.miercolesDesde = null;
-    this.diasLaborales.miercolesHasta = null;
+    this.diasLaborales.miercolesTurno = null;
+    // this.diasLaborales.miercolesDesde = null;
+    // this.diasLaborales.miercolesHasta = null;
     this.diasLaborales.jueves = false;
-    this.diasLaborales.juevesDesde = null;
-    this.diasLaborales.juevesHasta = null;
+    this.diasLaborales.juevesTurno = null;
+    // this.diasLaborales.juevesDesde = null;
+    // this.diasLaborales.juevesHasta = null;
     this.diasLaborales.viernes = false;
-    this.diasLaborales.viernesDesde = null;
-    this.diasLaborales.viernesHasta = null;
+    this.diasLaborales.viernesTurno = null;
+    // this.diasLaborales.viernesDesde = null;
+    // this.diasLaborales.viernesHasta = null;
     this.diasLaborales.sabado = false;
-    this.diasLaborales.sabadoDesde = null;
-    this.diasLaborales.sabadoHasta = null;
+    this.diasLaborales.sabadoTurno = null;
+    // this.diasLaborales.sabadoDesde = null;
+    // this.diasLaborales.sabadoHasta = null;
     this.diasLaborales.domingo = false;
-    this.diasLaborales.domingoDesde = null;
-    this.diasLaborales.domingoHasta = null;
+    this.diasLaborales.domingoTurno = null;
+    // this.diasLaborales.domingoDesde = null;
+    // this.diasLaborales.domingoHasta = null;
   }
 
 
@@ -480,6 +531,7 @@ export class ColaboradorComponent implements OnInit {
   }
 
   public guardarColaborador(ngForm: NgForm) {
+    console.log(this.diasLaborales);
     this.colaborador.horario = this.diasLaborales;
     this.colaborador.idPais = 1;
     this.colaborador.idPaisNacimiento = 1;
@@ -490,7 +542,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.experiencias = this.experienciaSource.data;
     this.colaborador.especialidades = this.especialidadesSelected;
     this.colaborador.habilidades = this.habilidadesSelected;
-
+console.log(this.colaborador);
     if (ngForm.valid) {
       this.http.post<any>('/api/colaborador/create', this.colaborador).subscribe(data => {
         this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");

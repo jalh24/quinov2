@@ -20,13 +20,16 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { CommonModule } from "@angular/common";
 import { ModalColaboradorComponent } from './modal-colaborador/modal-colaborador.component';
+import { IndexComponent } from './index/index.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
     AppComponent,
     ColaboradorComponent,
     ColaboradoresComponent,
-    ModalColaboradorComponent
+    ModalColaboradorComponent,
+    IndexComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,8 @@ import { ModalColaboradorComponent } from './modal-colaborador/modal-colaborador
     MatIconModule,
     MatPaginatorModule,
     NgMultiSelectDropDownModule.forRoot(),
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

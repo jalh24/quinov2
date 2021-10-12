@@ -557,6 +557,13 @@
                 #numerocuenta="ngModel">
             </div>
           </div>
+          <div class="row pb-4">
+            <div class="col-md-3">
+              <label for="imagenTarjeta" class="form-label">Imagen Tarjeta/Estado de Cuenta</label>
+            <input class="form-control-file" type="file" name="imagenTarjeta" accept=".png, .jpg, .jpeg"
+              (change)="imagenTarjeta($event.target.files)" #imagenTarjetaUpload>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-12"><span class="font-italic">Los campos con </span><span
                 class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
@@ -944,6 +951,15 @@
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
+                <label for="turnoT">Turno</label>
+                <select class="form-control" id="turnoT" name="todosDiasTurno" ngModel #todosDiasTurno="ngModel" [(ngModel)]="diasLaborales.todosDiasTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
+                  
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Nocturno">Nocturno</option>
+                </select>
+              </div>
+              <!-- <div class="col-md-6">
                 <label for="desdeT" class="form-label">Desde</label>
                 <input type="time" class="form-control input-sm" id="desdeT" placeholder="" value=""
                   name="todosDiasDesde" ngModel #todosDiasDesde="ngModel" [(ngModel)]="diasLaborales.todosDiasDesde"
@@ -954,7 +970,7 @@
                 <input type="time" class="form-control input-sm" id="hastaT" placeholder="" value=""
                   name="todosDiasHasta" ngModel #todosDiasHasta="ngModel" [(ngModel)]="diasLaborales.todosDiasHasta"
                   disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
-              </div>
+              </div> -->
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" value="" id="lunes" name="lunes" ngModel #lunes="ngModel"
@@ -965,6 +981,15 @@
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
+                <label for="turnoL">Turno</label>
+                <select class="form-control" id="turnoL" name="lunesTurno" ngModel #lunesTurno="ngModel" [(ngModel)]="diasLaborales.lunesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkL">
+                  
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Nocturno">Nocturno</option>
+                </select>
+              </div>
+              <!-- <div class="col-md-6">
                 <label for="desdeL" class="form-label">Desde</label>
                 <input type="time" class="form-control input-sm" id="desdeL" placeholder="" value="" name="lunesDesde"
                   ngModel #lunesDesde="ngModel" [(ngModel)]="diasLaborales.lunesDesde" disabled="disabled"
@@ -975,7 +1000,7 @@
                 <input type="time" class="form-control input-sm" id="hastaL" placeholder="" value="" name="lunesHasta"
                   ngModel #lunesHasta="ngModel" [(ngModel)]="diasLaborales.lunesHasta" disabled="disabled"
                   [disabled]="textBoxDisabledDateofWorkL">
-              </div>
+              </div> -->
             </div>
             <!-- </div> -->
 
@@ -989,6 +1014,15 @@
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
+                <label for="turnoM">Turno</label>
+                <select class="form-control" id="turnoM" name="martesTurno" ngModel #martesTurno="ngModel" [(ngModel)]="diasLaborales.martesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
+                  
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Nocturno">Nocturno</option>
+                </select>
+              </div>
+              <!-- <div class="col-md-6">
                 <label for="desdeM" class="form-label">Desde</label>
                 <input type="time" class="form-control input-sm" id="desdeM" placeholder="" value="" name="martesDesde"
                   ngModel #martesDesde="ngModel" [(ngModel)]="diasLaborales.martesDesde" disabled="disabled"
@@ -999,7 +1033,7 @@
                 <input type="time" class="form-control input-sm" id="hastaM" placeholder="" value="" name="martesHasta"
                   ngModel #martesHasta="ngModel" [(ngModel)]="diasLaborales.martesHasta" disabled="disabled"
                   [disabled]="textBoxDisabledDateofWorkM">
-              </div>
+              </div> -->
             </div>
             <!-- </div> -->
             <div class="form-check form-check-inline">
@@ -1011,6 +1045,15 @@
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
+                <label for="turnoMi">Turno</label>
+                <select class="form-control" id="turnoMi" name="miercolesTurno" ngModel #miercolesTurno="ngModel" [(ngModel)]="diasLaborales.miercolesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
+                  
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Nocturno">Nocturno</option>
+                </select>
+              </div>
+              <!-- <div class="col-md-6">
                 <label for="desdeMi" class="form-label">Desde</label>
                 <input type="time" class="form-control input-sm" id="desdeMi" placeholder="" value=""
                   name="miercolesDesde" ngModel #miercolesDesde="ngModel" [(ngModel)]="diasLaborales.miercolesDesde"
@@ -1021,7 +1064,7 @@
                 <input type="time" class="form-control input-sm" id="hastaMi" placeholder="" value=""
                   name="miercolesHasta" ngModel #miercolesHasta="ngModel" [(ngModel)]="diasLaborales.miercolesHasta"
                   disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
-              </div>
+              </div> -->
             </div>
             <!-- </div> -->
             <div class="form-check form-check-inline">
@@ -1034,6 +1077,15 @@
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
+                <label for="turnoJ">Turno</label>
+                <select class="form-control" id="turnoJ" name="juevesTurno" ngModel #juevesTurno="ngModel" [(ngModel)]="diasLaborales.juevesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
+                  
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Nocturno">Nocturno</option>
+                </select>
+              </div>
+              <!-- <div class="col-md-6">
                 <label for="desdeJ" class="form-label">Desde</label>
                 <input type="time" class="form-control input-sm" id="desdeJ" placeholder="" value="" name="juevesDesde"
                   ngModel #juevesDesde="ngModel" [(ngModel)]="diasLaborales.juevesDesde" disabled="disabled"
@@ -1044,7 +1096,7 @@
                 <input type="time" class="form-control input-sm" id="hastaJ" placeholder="" value="" name="juevesHasta"
                   ngModel #juevesHasta="ngModel" [(ngModel)]="diasLaborales.juevesHasta" disabled="disabled"
                   [disabled]="textBoxDisabledDateofWorkJ">
-              </div>
+              </div> -->
             </div>
             <!-- </div> -->
             <div class="form-check form-check-inline">
@@ -1057,6 +1109,15 @@
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
+                <label for="turnoV">Turno</label>
+                <select class="form-control" id="turnoV" name="viernesTurno" ngModel #viernesTurno="ngModel" [(ngModel)]="diasLaborales.viernesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
+                  
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Nocturno">Nocturno</option>
+                </select>
+              </div>
+              <!-- <div class="col-md-6">
                 <label for="desdeV" class="form-label">Desde</label>
                 <input type="time" class="form-control input-sm" id="desdeV" placeholder="" value="" name="viernesDesde"
                   ngModel #viernesDesde="ngModel" [(ngModel)]="diasLaborales.viernesDesde" disabled="disabled"
@@ -1067,7 +1128,7 @@
                 <input type="time" class="form-control input-sm" id="hastaV" placeholder="" value="" name="viernesHasta"
                   ngModel #viernesHasta="ngModel" [(ngModel)]="diasLaborales.viernesHasta" disabled="disabled"
                   [disabled]="textBoxDisabledDateofWorkV">
-              </div>
+              </div> -->
             </div>
             <!-- </div> -->
             <div class="form-check form-check-inline">
@@ -1080,6 +1141,15 @@
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
+                <label for="turnoS">Turno</label>
+                <select class="form-control" id="turnoS" name="sabadoTurno" ngModel #sabadoTurno="ngModel" [(ngModel)]="diasLaborales.sabadoTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
+                  
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Nocturno">Nocturno</option>
+                </select>
+              </div>
+              <!-- <div class="col-md-6">
                 <label for="desdeS" class="form-label">Desde</label>
                 <input type="time" class="form-control input-sm" id="desdeS" placeholder="" value="" name="sabadoDesde"
                   ngModel #sabadoDesde="ngModel" [(ngModel)]="diasLaborales.sabadoDesde" disabled="disabled"
@@ -1090,7 +1160,7 @@
                 <input type="time" class="form-control input-sm" id="hastaS" placeholder="" value="" name="sabadoHasta"
                   ngModel #sabadoHasta="ngModel" [(ngModel)]="diasLaborales.sabadoHasta" disabled="disabled"
                   [disabled]="textBoxDisabledDateofWorkS">
-              </div>
+              </div> -->
             </div>
             <!-- </div> -->
             <div class="form-check form-check-inline">
@@ -1103,6 +1173,15 @@
             </div>
             <div class="row pb-3">
               <div class="col-md-6">
+                <label for="turnoD">Turno</label>
+                <select class="form-control" id="turnoD" name="domingoTurno" ngModel #domingoTurno="ngModel" [(ngModel)]="diasLaborales.domingoTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
+                  
+                  <option value="Matutino">Matutino</option>
+                  <option value="Vespertino">Vespertino</option>
+                  <option value="Nocturno">Nocturno</option>
+                </select>
+              </div>
+              <!-- <div class="col-md-6">
                 <label for="desdeD" class="form-label">Desde</label>
                 <input type="time" class="form-control input-sm" id="desdeD" placeholder="" value="" name="domingoDesde"
                   ngModel #domingoDesde="ngModel" [(ngModel)]="diasLaborales.domingoDesde" disabled="disabled"
@@ -1113,7 +1192,7 @@
                 <input type="time" class="form-control input-sm" id="hastaD" placeholder="" value="" name="domingoHasta"
                   ngModel #domingoHasta="ngModel" [(ngModel)]="diasLaborales.domingoHasta" disabled="disabled"
                   [disabled]="textBoxDisabledDateofWorkD">
-              </div>
+              </div> -->
             </div>
             <!-- </div> -->
           </div>
