@@ -54,7 +54,7 @@ export class ColaboradoresComponent implements OnInit {
   colaboradorFiltro: ColaboradorFiltro;
   habilidades: any;
   habilidadesSelected = [];
-  diasLaboralesSelected=[];
+  diasLaboralesSelected = [];
   selectedItems: any = [];
   diasLaboralesSettings: IDropdownSettings = {};
   zonasSettings: IDropdownSettings = {};
@@ -134,6 +134,8 @@ export class ColaboradoresComponent implements OnInit {
     this.colaboradorFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
     this.colaboradorFiltro.habilidades = this.habilidadesSelected;
     this.colaboradorFiltro.zonasLaborales = this.selectedItems;
+    this.colaboradorFiltro.diasLaborales = this.diasLaboralesSelected;
+    console.log(this.colaboradorFiltro.diasLaborales);
     this.http.post<any>('/api/colaborador', this.colaboradorFiltro).subscribe(data => {
       this.COLABORADOR_DATA = data.data;
       this.colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);

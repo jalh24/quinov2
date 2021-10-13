@@ -13,6 +13,7 @@ export class ColaboradorFiltro {
     public calificacion2:number;
     public permanencia:number;
     public zonasLaborales:[];
+    public diasLaborales:any[];
     public atiendeCovid:boolean;
     public antecedentePenales:boolean;
     public autoPropio:boolean;
