@@ -13,7 +13,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
-import { faUserNurse } from '@fortawesome/free-solid-svg-icons';
+import { faUserNurse, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export interface DialogData {
   data: any;
@@ -26,6 +26,7 @@ export interface DialogData {
 })
 export class ColaboradoresComponent implements OnInit {
   faUserNurse = faUserNurse;
+  faTimes = faTimes;
   idModal: string;
   @ViewChild(DataTableDirective, { static: false })
   private datatableElement: DataTableDirective;
@@ -143,6 +144,43 @@ export class ColaboradoresComponent implements OnInit {
       this.length = data.count.total;
     });
     return event;
+  }
+  
+  public resetFieldGenero() {
+    this.colaboradorFiltro.genero = null;
+  }
+
+  public resetFieldPermanencia() {
+    this.colaboradorFiltro.permanencia = null;
+  }
+
+  public resetFieldTurnoLaboral() {
+    this.colaboradorFiltro.turnoHorario = null;
+  }
+
+  public resetFields() {
+    this.colaboradorFiltro.edad1 = null;
+    this.colaboradorFiltro.edad2 = null;
+    this.colaboradorFiltro.peso1 = null;
+    this.colaboradorFiltro.peso2 = null;
+    this.colaboradorFiltro.genero = null;
+    this.colaboradorFiltro.estatura1 = null;
+    this.colaboradorFiltro.estatura2 = null;
+    this.colaboradorFiltro.calificacion1 = null;
+    this.colaboradorFiltro.calificacion2 = null;
+    this.colaboradorFiltro.permanencia = null;
+    this.colaboradorFiltro.zonasLaborales = null;
+    this.colaboradorFiltro.diasLaborales = null;
+    this.colaboradorFiltro.turnoHorario = null;
+    this.colaboradorFiltro.atiendeCovid = null;
+    this.colaboradorFiltro.antecedentePenales = null;
+    this.colaboradorFiltro.autoPropio = null;
+    this.colaboradorFiltro.dispuestoViajar = null;
+    this.colaboradorFiltro.especialidades = null;
+    this.colaboradorFiltro.habilidades = null;
+    this.habilidadesSelected = null;
+    this.selectedItems = null;
+    this.diasLaboralesSelected = null;
   }
 
   public comboSexos() {

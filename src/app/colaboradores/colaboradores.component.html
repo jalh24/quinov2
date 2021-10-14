@@ -24,12 +24,15 @@
         </td>
         <th scope="row">Genero</th>
         <td>
+          <div class="input-group">
           <select class="form-control" name="sexoFiltro" [(ngModel)]="colaboradorFiltro.genero">
             <option value="" selected disabled hidden>Seleccionar</option>
             <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">
               {{sexo.nombre}}
             </option>
           </select>
+          <button type="button" class="btn btn-secondary" (click)="resetFieldGenero()"><fa-icon [icon]="faTimes"></fa-icon></button>
+        </div>
         </td>
         <th scope="row">Habilidades</th>
         <td>
@@ -50,12 +53,15 @@
         </td>
         <th scope="row">Permanencia</th>
         <td>
+          <div class="input-group">
           <select class="form-control" name="permanenciaFiltro" [(ngModel)]="colaboradorFiltro.permanencia">
             <option value="" selected disabled hidden>Seleccionar</option>
             <option *ngFor="let permanencia of permanencias" [value]="permanencia.idPermanencia">
               {{permanencia.nombre}}
             </option>
           </select>
+          <button type="button" class="btn btn-secondary" (click)="resetFieldPermanencia()"><fa-icon [icon]="faTimes"></fa-icon></button>
+          </div>
         </td>
         <th scope="row">Dias laborales</th>
         <td>
@@ -93,9 +99,31 @@
           <ng-multiselect-dropdown [placeholder]="'Seleccionar'" [settings]="zonasSettings" [data]="zonasLaborales"
             [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
-
         </td>
-        <td colspan="2">
+        <th scope="row">Turno Laboral</th>
+        <td>
+          <div class="input-group">
+          <select class="form-control" name="turnoHorarioFiltro" [(ngModel)]="colaboradorFiltro.turnoHorario">
+            <option value="" selected disabled hidden>Seleccionar</option>
+            <option value="Matutino">Matutino</option>
+            <option value="Vespertino">Vespertino</option>
+            <option value="Nocturno">Nocturno</option>
+          </select>
+          <button type="button" class="btn btn-secondary" (click)="resetFieldTurnoLaboral()"><fa-icon [icon]="faTimes"></fa-icon></button>
+        </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Calificación</th>
+        <td>
+          <input maxlength="1" size="1" type="text" class="form-control" id="idCalificacion"  [(ngModel)]="colaboradorFiltro.calificacion1" name="calificacionDesde"
+            placeholder="Desde">
+        </td>
+        <td>
+          <input maxlength="1" size="1" type="text" class="form-control" id="idCalificacion" [(ngModel)]="colaboradorFiltro.calificacion2" name="calificacionHasta"
+            placeholder="Hasta">
+        </td>
+        <td colspan="3">
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="covidFiltro"
               [(ngModel)]="colaboradorFiltro.atiendeCovid">
@@ -111,18 +139,9 @@
             <label class="form-check-label" for="viajeFiltro">Disp. para viajar</label>
           </div>
         </td>
-      </tr>
-      <tr>
-        <th scope="row">Calificación</th>
         <td>
-          <input maxlength="1" size="1" type="text" class="form-control" id="idCalificacion"  [(ngModel)]="colaboradorFiltro.calificacion1" name="calificacionDesde"
-            placeholder="Desde">
+          <button type="button" class="btn btn-danger" (click)="resetFields()">Limpiar Filtro</button>
         </td>
-        <td>
-          <input maxlength="1" size="1" type="text" class="form-control" id="idCalificacion" [(ngModel)]="colaboradorFiltro.calificacion2" name="calificacionHasta"
-            placeholder="Hasta">
-        </td>
-        <td colspan="4"></td>
       </tr>
     </tbody>
   </table>

@@ -14,6 +14,7 @@ export class ColaboradorFiltro {
     public permanencia:number;
     public zonasLaborales:[];
     public diasLaborales:any[];
+    public turnoHorario:string;
     public atiendeCovid:boolean;
     public antecedentePenales:boolean;
     public autoPropio:boolean;
