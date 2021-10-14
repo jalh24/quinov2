@@ -22,8 +22,9 @@ import { CommonModule } from "@angular/common";
 import { ModalColaboradorComponent } from './modal-colaborador/modal-colaborador.component';
 import { IndexComponent } from './index/index.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ClienteComponent } from './cliente/cliente.component';
+import { ClienteFisicoComponent } from './cliente-fisico/cliente-fisico.component';
 import { ClienteMoralComponent } from './cliente-moral/cliente-moral.component';
+import { ClientesComponent } from './clientes/clientes.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,9 @@ import { ClienteMoralComponent } from './cliente-moral/cliente-moral.component';
     ColaboradoresComponent,
     ModalColaboradorComponent,
     IndexComponent,
-    ClienteComponent,
-    ClienteMoralComponent
+    ClienteFisicoComponent,
+    ClienteMoralComponent,
+    ClientesComponent
   ],
   imports: [
     CommonModule,

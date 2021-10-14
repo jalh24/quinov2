@@ -4,99 +4,71 @@ import { HttpClient } from '@angular/common/http';
 import { NgbToastService, NgbToastType, NgbToast } from 'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
-import { Contacto } from '../_model/contacto';
 import { Cliente } from '../_model/cliente';
-import { DataTableDirective } from 'angular-datatables';
-import { Subject } from 'rxjs';
-import { textChangeRangeIsUnchanged } from 'typescript';
+
 
 @Component({
-  selector: 'app-cliente-moral',
-  templateUrl: './cliente-moral.component.html',
-  styleUrls: ['./cliente-moral.component.scss']
+  selector: 'app-cliente-fisico',
+  templateUrl: './cliente-fisico.component.html',
+  styleUrls: ['./cliente-fisico.component.scss']
 })
-export class ClienteMoralComponent implements OnInit {
-  CONTACTO_DATA: Contacto[] = [];
-  contactoSource = new MatTableDataSource<Contacto>(this.CONTACTO_DATA);
-  contacto: Contacto;
-  contactos: Contacto[];
+export class ClienteFisicoComponent implements OnInit {
+
   selectedPais = 1;
-  idContacto: number;
   selectedEstado = null;
   selectedCodigoPostal = null;
+
   public cliente: Cliente;
-  dtTriggerContacto = new Subject();
+  
+  sexos: any[];
+  complexiones: any[];
+  parentescos: any[];
   colonias: any[];
   ciudades: any[];
   ciudadesDir: any[];
   estadosDir: any[];
   estados: any[];
-  parentescos: any[];
   paises: any[];
+  estadosCiviles: any[];
   tiposTelefono: any[];
-  dtOptionsContacto: any = {};
-  contactosColumns: string[] = ['nombre', 'parentesco', 'telefono', 'tipoTelefono', 'correoElectronico', 'deleteContacto'];
-  @ViewChild('contactosTable', { static: true }) contactosTable: MatTable<any>;
   selected = new FormControl(0);
-  @ViewChild(DataTableDirective)
-  dtElement: DataTableDirective;
   @ViewChild('myForm') ngForm: NgForm;
-
-  rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.destroy();     
-      this.dtTriggerContacto.next();    
-      //console.log(this.dtTriggerContacto);
-    });
-  }
-
   constructor(
     private http: HttpClient,
     private toastService: NgbToastService
+    
   ) { }
-
-
 
   ngOnInit(): void {
     this.inicializaObjetos();
     this.comboEstados();
-    this.comboPaises(); 
-    this.comboTiposTelefono();
+    this.comboPaises();   
+    this.comboComplexiones();
     this.comboParentescos();
-    this.dtOptionsContacto = {
-      select: true,
-      rowCallback: (row: Node, data: any | Object, index: number) => {
-        console.log(data);
-        const self = this;
-
-        $('td', row).on('click', () => {
-          if (self.contacto !== null) {
-            if (self.contacto.idContacto === data.idContacto) {
-              this.contacto = null;
-            } else {
-              self.contacto = data;
-            }
-          } else {
-            self.cliente = data;
-          }
-        });
-
-        return row;
-      }
-
-    };
+    this.comboSexos();
+    this.comboEstadosCiviles();
+    this.comboTiposTelefono();
   }
-
   inicializaObjetos() {
     this.cliente = new Cliente();
     this.cliente.idCliente = null;
-    this.cliente.nombre = null;  
+    this.cliente.nombre = null;
+    this.cliente.a_paterno = null;
+    this.cliente.a_materno = null;
     this.cliente.correoElectronico = null;
-    this.cliente.rfc = null;
+    this.cliente.fecha_nacimiento = null;
+    this.cliente.idSexo = null;
+    this.cliente.peso = null;
+    this.cliente.estatura = null;
+    this.cliente.idEstadoCivil = null;
+    this.cliente.idComplexion = null;
     this.cliente.sgmm = null;
     this.cliente.calle1 = null;
     this.cliente.calle2 = null;
     this.cliente.codigoPostal = null;
+    this.cliente.idPaisNacimiento = null;
+    this.cliente.idEstadoNacimiento = null;
+    this.cliente.idCiudadNacimiento = null;
     this.cliente.idPais = null;
     this.cliente.idEstado = null;
     this.cliente.idCiudad = null;
@@ -106,31 +78,35 @@ export class ClienteMoralComponent implements OnInit {
     this.cliente.telefono = null;
     this.cliente.idTipoTelefono = null;
     this.cliente.telefono2 = null;
-    this.cliente.idTipoTelefono2 = null;  
+    this.cliente.idTipoTelefono2 = null;
+    this.cliente.nombreContacto = null;
+    this.cliente.idParentescoContacto = null;
+    this.cliente.telefonoContacto = null;
+    this.cliente.correoContacto = null;
+    this.cliente.nombreContacto2 = null;
+    this.cliente.idParentescoContacto2 = null;
+    this.cliente.telefonoContacto2 = null;
+    this.cliente.correoContacto2 = null;
+    this.cliente.nombreMedico = null;
+    this.cliente.especialidadesMedico = null;
+    this.cliente.telefonoMedico = null;
+    this.cliente.correoMedico = null;
+    this.cliente.cirugiasRecientes = null;
+    this.cliente.accidentesRecientes = null;
+    this.cliente.enfermedadesRecientes = null;
+    this.cliente.enfermedadesActuales = null;
     this.cliente.referencia = null;
+    this.cliente.alzheimer = null;
     this.cliente.idTipoCliente = null;
-    this.cliente.contactosCliente == [];
-    this.idContacto = 0;
-
-    this.contactos = [];
-    this.contacto = {
-      idContacto: null,
-      nombre: null,
-      parentesco: null,
-      telefono: null,
-      tipoTelefono: null,
-      correoElectronico: null
-    };
-    this.contactoSource.data = [];
   }
 
   public guardarCliente(ngForm: NgForm) {
     
-    this.cliente.idPais = 1;   
-    this.cliente.idTipoCliente = true;
-    this.cliente.contactosCliente = this.contactoSource.data;
-   
-    console.log(this.cliente);
+    this.cliente.idPais = 1;
+    this.cliente.idPaisNacimiento = 1;
+    this.cliente.idTipoCliente = false;
+
+   console.log(this.cliente);
     if (ngForm.valid) {
       this.http.post<any>('/api/cliente/create', this.cliente).subscribe(data => {
         this.showSuccess(NgbToastType.Success, "Se registro el cliente exitosamente");
@@ -143,39 +119,6 @@ export class ClienteMoralComponent implements OnInit {
 
   }
 
-  on
-  agregarContacto() {
-    if (this.contacto.idContacto == null) {
-      if (this.contactoSource.data.length == 0) {
-        this.idContacto = this.contactoSource.data.length + 1;
-      } else {
-        this.idContacto++;
-      }
-      this.contacto.idContacto = this.idContacto;
-    }
-    this.CONTACTO_DATA.push(this.contacto);
-    this.contactoSource = new MatTableDataSource(this.CONTACTO_DATA);
-console.log(this.CONTACTO_DATA);
-    this.contacto = {
-      idContacto: null,
-      nombre: null,
-      parentesco: null,
-      telefono: null,
-      tipoTelefono: null,
-      correoElectronico: null,
-    };
-
-  }
-
-  borraContacto(contactoTmp) {
-    this.CONTACTO_DATA = this.CONTACTO_DATA.filter((value, key) => {
-      return value.idContacto != contactoTmp.idContacto;
-    });
-    this.contactoSource.data = this.contactoSource.data.filter((value, key) => {
-      return value.idContacto != contactoTmp.idContacto;
-    });
-  }
-
   pagAtras(index) {
     if (this.selected.value > 0) {
       this.selected.setValue(this.selected.value - index);
@@ -183,7 +126,7 @@ console.log(this.CONTACTO_DATA);
 
   }
   pagDelante(index) {
-    if (this.selected.value < 1) {
+    if (this.selected.value < 5) {
       this.selected.setValue(this.selected.value + index);
     }
 
@@ -206,6 +149,13 @@ console.log(this.CONTACTO_DATA);
     this.toastService.remove(toast);
   }
 
+  
+  public comboEstadosCiviles() {
+    this.http.get<any>('/api/catalogo/comboEstadosCiviles').subscribe(data => {
+      this.estadosCiviles = data.data;
+    });
+  }
+
   public comboTiposTelefono() {
     this.http.get<any>('/api/catalogo/tiposTelefono').subscribe(data => {
       this.tiposTelefono = data.data;
@@ -217,12 +167,26 @@ console.log(this.CONTACTO_DATA);
       this.colonias = data.data;
     });
   }
+
+  public comboSexos() {
+    this.http.get<any>('/api/catalogo/sexos').subscribe(data => {
+      this.sexos = data.data;
+    });
+  }
+
   public comboCiudades(idEstadoNacimiento) {
     this.cliente.idEstadoNacimiento = idEstadoNacimiento;
     this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento).subscribe(data => {
       this.ciudades = data.data;
     });
   }
+
+  public comboComplexiones() {
+    this.http.get<any>('/api/catalogo/complexiones').subscribe(data => {
+      this.complexiones = data.data;
+    });
+  }
+
   public comboEstados() {
     this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais).subscribe(data => {
       this.estados = data.data;
@@ -234,6 +198,7 @@ console.log(this.CONTACTO_DATA);
       this.parentescos = data.data;
     });
   }
+
   public comboPaises() {
     this.http.get<any>('/api/catalogo/paises').subscribe(data => {
       this.paises = data.data;
@@ -267,22 +232,34 @@ console.log(this.CONTACTO_DATA);
     this.cliente.idEstado = value;
   }
 
+  onEstadoCivil(value: any) {
+    this.cliente.idEstadoCivil = value;
+  }
+
+  
+  onComplexion(value: any) {
+    this.cliente.idComplexion = value;
+  }
+
+  onSexo(value: any) {
+    this.cliente.idSexo = value;
+  }
+
+  onCiudadNacimiento(value: any) {
+    this.cliente.idCiudadNacimiento = value;
+  }
   onTipoTel1(value: any) {
     this.cliente.idTipoTelefono = value;
   }
-
   onTipoTel2(value: any) {
     this.cliente.idTipoTelefono2 = value;
   }
-
-  onParentescoContacto(event){
-    
-    this.contacto.parentesco = this.parentescos.find(parentesco => { return parentesco.idParentesco == event });
-    
+  onParentesco1(value: any) {
+    this.cliente.idParentescoContacto = value;
   }
-
-  onTipoTelContacto(event){
-    this.contacto.tipoTelefono = this.tiposTelefono.find(tipoTelefono => { return tipoTelefono.idTipoTel == event });
-    
+  onParentesco2(value: any) {
+    this.cliente.idParentescoContacto2 = value;
   }
+ 
+
 }

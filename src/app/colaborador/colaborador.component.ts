@@ -779,7 +779,7 @@ console.log(this.colaborador);
     }
     this.PAGO_DATA.push(this.pago);
     this.pagoSource = new MatTableDataSource(this.PAGO_DATA);
-
+console.log(this.pagoSource);
     this.pago = {
       idPago: null,
       nombre: null,

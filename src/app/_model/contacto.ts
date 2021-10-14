@@ -1,9 +1,9 @@
 export class Contacto {
     public idContacto: number;
     public nombre: string;
-    public parentesco: string;
+    public parentesco: number;
     public telefono: number;
-    public tipoTelefono: string;
+    public tipoTelefono: number;
     public correoElectronico: string;
     
     constructor() {

@@ -10,7 +10,8 @@
                 <div class="row">
                     <div class="col">
                         <label for="nombre" class="form-label">Nombre de la empresa<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel
+                        #nombre="ngModel" [(ngModel)]="cliente.nombre"
                             pattern="[a-zA-Z ]*">
                         <!-- <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel #nombre="ngModel"
                 [(ngModel)]="colaborador.nombre" pattern="[a-zA-Z ]*" required> -->
@@ -18,16 +19,18 @@
                     </div>
 
                     <div class="col">
-                        <label for="paterno" class="form-label">RFC<span class="text-danger">
+                        <label for="rfc" class="form-label">RFC<span class="text-danger">
                                 *</span></label>
-                        <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno"
-                            pattern="[a-zA-Z ]*">
+                        <input type="text" class="form-control valGlobal" id="rfc" name="rfc" ngModel
+                        #rfc="ngModel" [(ngModel)]="cliente.rfc"
+                            >
                         <!-- <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno" ngModel #apaterno="ngModel"
                 [(ngModel)]="colaborador.a_paterno" pattern="[a-zA-Z ]*" required> -->
 
                     </div>
 
                     
+
                 </div>
 
 
@@ -36,14 +39,16 @@
                 <div class="row">
                     <div class="col">
                         <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control" id="calle1" name="calle1">
+                        <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel"
+                        [(ngModel)]="cliente.calle1">
                         <!-- <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel" [(ngModel)]="colaborador.calle1" required> -->
 
                     </div>
 
                     <div class="col">
                         <label for="calle2" class="form-label">Calle 2</label>
-                        <input type="text" class="form-control" id="calle1" name="calle2">
+                        <input type="text" class="form-control" id="calle1" name="calle2" ngModel #calle2="ngModel"
+                        [(ngModel)]="cliente.calle2">
                     </div>
                 </div>
 
@@ -51,18 +56,21 @@
                     <div class="col-md-2">
                         <label for="numExterior" class="form-label">Número Exterior<span class="text-danger">
                                 *</span></label>
-                        <input type="text" class="form-control" name="numExterior">
+                        <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel"
+                        [(ngModel)]="cliente.noExt">
                     </div>
 
                     <div class="col-md-2">
                         <label for="numInterior" class="form-label">Número Interior</label>
-                        <input type="text" class="form-control" name="numInterior">
+                        <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel"
+                        [(ngModel)]="cliente.noInt">
                     </div>
 
                     <div class="col-md-2">
                         <label for="codigopostal" class="form-label">Código Postal<span class="text-danger">
                                 *</span></label>
-                        <input type="text" class="form-control" maxlength="5" name="codigopostal" pattern="[0-9]*">
+                        <input type="text" class="form-control" maxlength="5" name="codigopostal" [ngModel]="selectedCodigoPostal"
+                        (change)="onCodigoPostal($event.target.value)" ngModel #codigopostal="ngModel" pattern="[0-9]*">
 
                     </div>
                 </div>
@@ -70,9 +78,10 @@
 
                 <div class="col">
                     <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="colonia">
-                        <option>
-                            --
+                    <select class="form-control" name="colonia" ngModel #colonia="ngModel"
+                    (change)="onColonia($event.target.value)">
+                        <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
+                            {{colonia.nombre}}
                         </option>
                     </select>
                 </div>
@@ -80,18 +89,18 @@
                 <div class="row mt-4">
                     <div class="col">
                         <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="ciudad">
-                            <option>
-                                --
+                        <select class="form-control" name="ciudad" (change)="onCiudad($event.target.value)">
+                            <option *ngFor="let ciudad of ciudadesDir" [value]="ciudad.idCiudad">
+                                {{ciudad.nombre}}
                             </option>
                         </select>
                     </div>
 
                     <div class="col">
                         <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="estado">
-                            <option>
-                                --
+                        <select class="form-control" name="estado" (change)="onEstado($event.target.value)">
+                            <option *ngFor="let estado of estadosDir" [value]="estado.idEstado">
+                                {{estado.nombre}}
                             </option>
                         </select>
                     </div>
@@ -99,8 +108,8 @@
                     <div class="col">
                         <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
                         <select class="form-control" name="pais">
-                            <option>
-                                --
+                            <option *ngFor="let pais of paises" [value]="pais.idPais">
+                                {{pais.nombre}}
                             </option>
                         </select>
                     </div>
@@ -110,7 +119,8 @@
                 <div class="row mt-4 pb-4">
                     <div class="col">
                         <label for="referencia" class="form-label">Referencia</label>
-                        <textarea name="referencia" class="form-control" rows="3"></textarea>
+                        <textarea name="referencia" class="form-control" ngModel #referencia="ngModel"
+                        [(ngModel)]="cliente.referencia" rows="3"></textarea>
                     </div>
 
                     
@@ -132,7 +142,8 @@
                     <div class="col">
                         <label for="nacimiento" class="form-label">Nombre completo<span class="text-danger">
                                 *</span></label>
-                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                        <input type="text" class="form-control valGlobal" id="nombreContacto" name="nombreContacto" [(ngModel)]="contacto.nombre" ngModel
+                        #nombreContacto="ngModel"
                             pattern="[a-zA-Z ]*">
                         <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
                 #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
@@ -140,32 +151,36 @@
 
                     </div>
                     <div class="col-md-2">
-                        <label for="tipoTel2" class="form-label">Parentesco</label>
-                        <select class="form-control" name="tipoTel2">
+                        <label for="parentescoContact" class="form-label">Parentesco</label>
+                        <select class="form-control" name="parentescoContact" ngModel #idParentescoContact="ngModel" [(ngModel)]="contacto.parentesco"
+                         (change)="onParentescoContacto($event.target.value)">
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let parentesco of parentescos" [value]="parentesco.idParentesco">
+                                {{parentesco.nombre}}
                             </option>
                         </select>
                     </div>
                     <div class="col">
-                        <label for="estadoNac" class="form-label">Telefono<span class="text-danger"> *</span></label>
-                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1"
-                            placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+                        <label for="telefonoContacto" class="form-label">Telefono<span class="text-danger"> *</span></label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefonoContacto"
+                            placeholder="10 Dígitos" [(ngModel)]="contacto.telefono" ngModel
+                            #telefonoContacto="ngModel" pattern="[0-9]*" minlength="10">
                     </div>
                     <div class="col-md-2">
-                        <label for="tipoTel" class="form-label">Tipo de Teléfono</label>
-                        <select class="form-control" name="tipoTel">
+                        <label for="tipoTelContact" class="form-label">Tipo de Teléfono</label>
+                        <select class="form-control" name="tipoTelContact" ngModel #tipoTelContacto="ngModel" [(ngModel)]="contacto.tipoTelefono"
+                        (change)="onTipoTelContacto($event.target.value)">
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
-                            </option>
+                            <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
+                                {{tipoTelefono.nombre}}
+                              </option>
                         </select>
                     </div>
                     <div class="col">
-                        <label for="ciudadNac" class="form-label">Correo Electrónico<span class="text-danger">
+                        <label for="correoElectronicoContacto" class="form-label">Correo Electrónico<span class="text-danger">
                                 *</span></label>
-                        <input type="email" class="form-control" name="correoelectronico"
+                        <input type="email" class="form-control" name="correoElectronicoContacto" [(ngModel)]="contacto.correoElectronico" ngModel
+                        #correoElectronicoContacto="ngModel"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
 
                     </div>
@@ -173,43 +188,43 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12 text-center">
-                      <button class="btn btn-primary add-one" >Agregar Otro</button>
+                      <button class="btn btn-primary add-one" (click)="agregarContacto()">Agregar Otro</button>
                       <button class="btn btn-warning delete ml-3" >Cancelar</button>
                     </div>
                   </div>
                   <hr class="mt-3 mb-3" />
                   <div class="row mt-4 pb-4">
                     <div class="col-md-12 text-center">
-                      <table mat-table  class="mat-elevation-z8">
+                      <table mat-table [dataSource]="contactoSource" #contactosTable  class="mat-elevation-z8">
                         <ng-container matColumnDef="nombre">
                           <th mat-header-cell *matHeaderCellDef> Nombre completo </th>
-                          <td mat-cell *matCellDef="let element">-- </td>
+                          <td mat-cell *matCellDef="let element">{{element.nombre}}</td>
                         </ng-container>
           
                         <ng-container matColumnDef="parentesco">
                           <th mat-header-cell *matHeaderCellDef> Parentesco</th>
-                          <td mat-cell *matCellDef="let element"> -- </td>
+                          <td mat-cell *matCellDef="let element"> {{element.parentesco.nombre}} </td>
                         </ng-container>
           
                         <ng-container matColumnDef="telefono">
                           <th mat-header-cell *matHeaderCellDef> Telefono </th>
-                          <td mat-cell *matCellDef="let element"> -- </td>
+                          <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
                         </ng-container>
           
                         <ng-container matColumnDef="tipoTelefono">
                           <th mat-header-cell *matHeaderCellDef> Tipo de telefono </th>
-                          <td mat-cell *matCellDef="let element"> -- </td>
+                          <td mat-cell *matCellDef="let element"> {{element.tipoTelefono.nombre}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="correoElectronico">
                             <th mat-header-cell *matHeaderCellDef> Correo electronico </th>
-                            <td mat-cell *matCellDef="let element"> -- </td>
+                            <td mat-cell *matCellDef="let element"> {{element.correoElectronico}} </td>
                           </ng-container>
           
                         <ng-container matColumnDef="deleteContacto">
                           <th mat-header-cell *matHeaderCellDef> Accion </th>
                           <td mat-cell *matCellDef="let element">
-                            <button class="btn btn-danger" color="danger" (>
+                            <button class="btn btn-danger" color="danger" (click)="borraContacto(element)">
                               <mat-icon>delete</mat-icon>
                             </button>
                           </td>
@@ -228,7 +243,7 @@
                 </div>
                 <div class="row text-center pb-4">
                     <div class="col">
-                      <button type="button" class="btn btn-primary"> Enviar Datos
+                      <button type="button" class="btn btn-primary" (click)="guardarCliente(myForm)"> Enviar Datos
                       </button>
                       <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
                       <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->

@@ -8,29 +8,32 @@
                 <div class="row">
                     <div class="col">
                         <label for="nombre" class="form-label">Nombre(s)<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
-                            pattern="[a-zA-Z ]*">
+                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel
+                            #nombre="ngModel" [(ngModel)]="cliente.nombre" pattern="[a-zA-Z ]*">
                         <!-- <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel #nombre="ngModel"
-                [(ngModel)]="colaborador.nombre" pattern="[a-zA-Z ]*" required> -->
+                [(ngModel)]="cliente.nombre" pattern="[a-zA-Z ]*" required> -->
 
+                
                     </div>
 
                     <div class="col">
                         <label for="paterno" class="form-label">Apellido Paterno<span class="text-danger">
                                 *</span></label>
                         <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno"
-                            pattern="[a-zA-Z ]*">
+                        #apaterno="ngModel"
+                        [(ngModel)]="cliente.a_paterno" pattern="[a-zA-Z ]*">
                         <!-- <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno" ngModel #apaterno="ngModel"
-                [(ngModel)]="colaborador.a_paterno" pattern="[a-zA-Z ]*" required> -->
+                [(ngModel)]="cliente.a_paterno" pattern="[a-zA-Z ]*" required> -->
 
                     </div>
 
                     <div class="col">
                         <label for="materno" class="form-label">Apellido Materno<span class="text-danger">
                                 *</span></label>
-                        <input type="text" class="form-control" id="amaterno" name="amaterno" pattern="[a-zA-Z ]*">
+                        <input type="text" class="form-control" id="amaterno" name="amaterno" ngModel #amaterno="ngModel"
+                        [(ngModel)]="cliente.a_materno" pattern="[a-zA-Z ]*">
                         <!-- <input type="text" class="form-control" id="amaterno" name="amaterno" ngModel #amaterno="ngModel"
-                [(ngModel)]="colaborador.a_materno" pattern="[a-zA-Z ]*" required> -->
+                [(ngModel)]="cliente.a_materno" pattern="[a-zA-Z ]*" required> -->
 
                     </div>
                 </div>
@@ -43,44 +46,47 @@
                         <label for="nacimiento" class="form-label">Fecha de Nacimiento<span class="text-danger">
                                 *</span></label>
                         <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento"
-                            value="yyyy-MM-dd">
+                        ngModel #fechanacimiento="ngModel" [(ngModel)]="cliente.fecha_nacimiento" value="yyyy-MM-dd">
                         <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
-                #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
+                #fechanacimiento="ngModel" [(ngModel)]="cliente.fecha_nacimiento" required> -->
 
 
                     </div>
                     <div class="col">
                         <label for="paisNac" class="form-label">País<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="paisNac">
+                        <select class="form-control" name="paisNac" ngModel #paisNac="ngModel"
+                        [(ngModel)]="cliente.idPaisNacimiento">
                             <!-- <select class="form-control" name="paisNac" ngModel
-              #paisNac="ngModel" [(ngModel)]="colaborador.idPaisNacimiento" required> -->
+              #paisNac="ngModel" [(ngModel)]="cliente.idPaisNacimiento" required> -->
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let pais of paises" [value]="pais.idPais">
+                                {{pais.nombre}}
                             </option>
                         </select>
 
                     </div>
                     <div class="col">
                         <label for="estadoNac" class="form-label">Estado<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="estadoNac" id="estadoNac">
+                        <select class="form-control" name="estadoNac" id="estadoNac"  ngModel #estadoNac="ngModel"
+                        [(ngModel)]="cliente.idEstadoNacimiento" (change)="comboCiudades($event.target.value)">
                             <!-- <select class="form-control" name="estadoNac" id="estadoNac" ngModel #estadoNac="ngModel" 
-              [(ngModel)]="colaborador.idEstadoNacimiento"
+              [(ngModel)]="cliente.idEstadoNacimiento"
                 (change)="comboCiudades($event.target.value)" required> -->
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let estado of estados" [value]="estado.idEstado">
+                                {{estado.nombre}}
                             </option>
                         </select>
 
                     </div>
                     <div class="col">
                         <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="ciudadNac">
+                        <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)"
+                        #ciudadNac="ngModel" ngModel>
                             <!-- <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel"  ngModel required> -->
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option  *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
+                                {{ciudad.nombre}}
                             </option>
                         </select>
 
@@ -100,14 +106,16 @@
                 <div class="row">
                     <div class="col">
                         <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control" id="calle1" name="calle1">
-                        <!-- <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel" [(ngModel)]="colaborador.calle1" required> -->
+                        <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel"
+                        [(ngModel)]="cliente.calle1">
+                        <!-- <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel" [(ngModel)]="cliente.calle1" required> -->
 
                     </div>
 
                     <div class="col">
                         <label for="calle2" class="form-label">Calle 2</label>
-                        <input type="text" class="form-control" id="calle1" name="calle2">
+                        <input type="text" class="form-control" id="calle1" name="calle2" ngModel #calle2="ngModel"
+                        [(ngModel)]="cliente.calle2">
                     </div>
                 </div>
 
@@ -115,18 +123,21 @@
                     <div class="col-md-2">
                         <label for="numExterior" class="form-label">Número Exterior<span class="text-danger">
                                 *</span></label>
-                        <input type="text" class="form-control" name="numExterior">
+                        <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel"
+                        [(ngModel)]="cliente.noExt">
                     </div>
 
                     <div class="col-md-2">
                         <label for="numInterior" class="form-label">Número Interior</label>
-                        <input type="text" class="form-control" name="numInterior">
+                        <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel"
+                        [(ngModel)]="cliente.noInt">
                     </div>
 
                     <div class="col-md-2">
                         <label for="codigopostal" class="form-label">Código Postal<span class="text-danger">
                                 *</span></label>
-                        <input type="text" class="form-control" maxlength="5" name="codigopostal" pattern="[0-9]*">
+                        <input type="text" class="form-control" maxlength="5" name="codigopostal" [ngModel]="selectedCodigoPostal"
+                        (change)="onCodigoPostal($event.target.value)" ngModel #codigopostal="ngModel" pattern="[0-9]*">
 
                     </div>
                 </div>
@@ -134,9 +145,10 @@
 
                 <div class="col">
                     <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="colonia">
-                        <option>
-                            --
+                    <select class="form-control" name="colonia" ngModel #colonia="ngModel"
+                    (change)="onColonia($event.target.value)">
+                        <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
+                            {{colonia.nombre}}
                         </option>
                     </select>
                 </div>
@@ -144,18 +156,18 @@
                 <div class="row mt-4">
                     <div class="col">
                         <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="ciudad">
-                            <option>
-                                --
+                        <select class="form-control" name="ciudad" (change)="onCiudad($event.target.value)">
+                            <option *ngFor="let ciudad of ciudadesDir" [value]="ciudad.idCiudad">
+                                {{ciudad.nombre}}
                             </option>
                         </select>
                     </div>
 
                     <div class="col">
                         <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="estado">
-                            <option>
-                                --
+                        <select class="form-control" name="estado" (change)="onEstado($event.target.value)">
+                            <option *ngFor="let estado of estadosDir" [value]="estado.idEstado">
+                                {{estado.nombre}}
                             </option>
                         </select>
                     </div>
@@ -163,8 +175,8 @@
                     <div class="col">
                         <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
                         <select class="form-control" name="pais">
-                            <option>
-                                --
+                            <option *ngFor="let pais of paises" [value]="pais.idPais">
+                                {{pais.nombre}}
                             </option>
                         </select>
                     </div>
@@ -174,14 +186,10 @@
                 <div class="row mt-4 pb-4">
                     <div class="col">
                         <label for="referencia" class="form-label">Referencia</label>
-                        <textarea name="referencia" class="form-control" rows="3"></textarea>
+                        <textarea name="referencia" class="form-control" ngModel #referencia="ngModel"
+                        [(ngModel)]="cliente.referencia" rows="3"></textarea>
                     </div>
 
-                    <div class="col">
-                        <label for="comprobante" class="form-label">Comprobante de Domicilio</label>
-                        <!-- <input class="form-control-file" type="file" name="comprobante"> -->
-                        <input class="form-control-file" type="file" name="comprobante" accept=".png, .jpg, .jpeg">
-                    </div>
                 </div>
                 <div class="row pb-4">
                     <div class="col-md-12"><span class="font-italic">Los campos con </span><span
@@ -196,12 +204,13 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label for="sexo" class="form-label">Genero<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="sexo">
+                        <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)" #sexo="ngModel"
+                        [ngModel]="cliente.idSexo">
                             <!-- <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)"
-              #sexo="ngModel" [ngModel]="colaborador.idSexo" required > -->
+              #sexo="ngModel" [ngModel]="cliente.idSexo" required > -->
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">
+                                {{sexo.nombre}}
                             </option>
 
                         </select>
@@ -210,21 +219,24 @@
 
                     <div class="col-md-1">
                         <label for="peso" class="form-label">Peso (Kg)</label>
-                        <input maxlength="3" size="3" type="text" class="form-control" name="peso" pattern="[0-9]*">
+                        <input maxlength="3" size="3" type="text" class="form-control" name="peso" ngModel #peso="ngModel"
+                        [(ngModel)]="cliente.peso" pattern="[0-9]*">
 
                     </div>
 
                     <div class="col-md-1">
                         <label for="estatura" class="form-label">Estatura(cm)</label>
-                        <input maxlength="3" size="3" type="text" class="form-control" name="estatura" pattern="[0-9]*">
+                        <input maxlength="3" size="3" type="text" class="form-control" name="estatura" ngModel #estatura="ngModel"
+                        [(ngModel)]="cliente.estatura" pattern="[0-9]*">
                     </div>
 
                     <div class="col-md-2">
-                        <label for="tez" class="form-label">Complexion</label>
-                        <select class="form-control" name="tez">
+                        <label for="complexion" class="form-label">Complexion</label>
+                        <select class="form-control" name="complexion" ngModel #complexion="ngModel" [ngModel]="cliente.idComplexion"
+                        (change)="onComplexion($event.target.value)">
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let complexion of complexiones" [value]="complexion.idComplexion">
+                                {{complexion.nombre}}
                             </option>
 
                         </select>
@@ -232,51 +244,57 @@
                     <div class="col-md-2">
                         <label for="estadocivil" class="form-label">Estado Civil<span class="text-danger">
                                 *</span></label>
-                        <select class="form-control" name="estadoCivil">
+                        <select class="form-control" name="estadoCivil" ngModel #estadoCivil="ngModel"
+                        [ngModel]="cliente.idEstadoCivil" (change)="onEstadoCivil($event.target.value)">
                             <!-- <select class="form-control" name="estadoCivil" ngModel
-              #estadoCivil="ngModel" [ngModel]="colaborador.idEstadoCivil" (change)="onEstadoCivil($event.target.value)" required> -->
+              #estadoCivil="ngModel" [ngModel]="cliente.idEstadoCivil" (change)="onEstadoCivil($event.target.value)" required> -->
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.idEstadoCivil">
+                                {{estadoCivil.nombre}}
                             </option>
                         </select>
                     </div>
                     <div class="col-md-2">
                         <label for="imss" class="form-label">IMSS</label>
-                        <input maxlength="3" size="3" type="text" class="form-control" name="imss" pattern="[0-9]*">
+                        <input maxlength="3" size="3" type="text" class="form-control" name="imss" ngModel #imss="ngModel"
+                        [(ngModel)]="cliente.imss" pattern="[0-9]*">
                     </div>
                 </div>
 
                 <div class="row mt-4 pb-4">
                     <div class="col-md-2">
                         <label for="telefono1" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
-                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1"
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel
+                        #telefono1="ngModel" [(ngModel)]="cliente.telefono" 
                             placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
-                        <!-- <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="colaborador.telefono" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required> -->
+                        <!-- <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="cliente.telefono" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required> -->
                     </div>
 
                     <div class="col-md-2">
                         <label for="tipoTel1" class="form-label">Tipo de Teléfono 1</label>
-                        <select class="form-control" name="tipoTel1">
+                        <select class="form-control" name="tipoTel1" ngModel #tipoTel1="ngModel"
+                        [ngModel]="cliente.idTipoTelefono" (change)="onTipoTel1($event.target.value)">
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
+                                {{tipoTelefono.nombre}}
                             </option>
                         </select>
                     </div>
 
                     <div class="col-md-2">
                         <label for="telefono2" class="form-label">Teléfono 2</label>
-                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2"
-                            placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" 
+                            placeholder="10 Dígitos" ngModel
+                            #telefono2="ngModel" [(ngModel)]="cliente.telefono2" pattern="[0-9]*" minlength="10">
                     </div>
 
                     <div class="col-md-2">
                         <label for="tipoTel2" class="form-label">Tipo de Teléfono 2</label>
-                        <select class="form-control" name="tipoTel2">
+                        <select class="form-control" name="tipoTel2" ngModel #tipoTel2="ngModel"
+                        [ngModel]="cliente.idTipoTelefono2" (change)="onTipoTel2($event.target.value)">
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
+                                {{tipoTelefono.nombre}}
                             </option>
                         </select>
                     </div>
@@ -284,9 +302,10 @@
                     <div class="col-md-4">
                         <label for="correoelectronico" class="form-label">Correo Electrónico<span class="text-danger">
                                 *</span></label>
-                        <input type="email" class="form-control" name="correoelectronico"
+                        <input type="email" class="form-control" name="correoelectronico" ngModel #correoelectronico="ngModel"
+                        [(ngModel)]="cliente.correoElectronico"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                        <!-- <input type="email" class="form-control" name="correoelectronico" ngModel #correoelectronico="ngModel" [(ngModel)]="colaborador.correoElectronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required> -->
+                        <!-- <input type="email" class="form-control" name="correoelectronico" ngModel #correoelectronico="ngModel" [(ngModel)]="cliente.correoElectronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required> -->
                     </div>
                 </div>
 
@@ -312,43 +331,44 @@
                     </div>
                     <div class="col">
                         <label for="aseguradora" class="form-label">Aseguradora</label>
-                        <input type="text" class="form-control" name="aseguradora" placeholder="Nombre"
-                            disabled="disabled">
+                        <input type="text" class="form-control" name="aseguradora" ngModel #aseguradora="ngModel" [(ngModel)]="cliente.sgmm" placeholder="Nombre"
+                            >
                     </div>
                 </div>
                 <hr class="py-1" />
                 <h4 class="pb-1">Contactos</h4>
                 <div class="row mt-4 pb-4">
                     <div class="col">
-                        <label for="nacimiento" class="form-label">Nombre<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                        <label for="nombreContacto" class="form-label">Nombre<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control valGlobal" id="nombreContacto" name="nombreContacto" ngModel #nombreContacto="ngModel" [(ngModel)]="cliente.nombreContacto"
                             pattern="[a-zA-Z ]*">
                         <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
-                #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
+                #fechanacimiento="ngModel" [(ngModel)]="cliente.fecha_nacimiento" required> -->
 
 
                     </div>
                     <div class="col">
-                        <label for="paisNac" class="form-label">Parentesco<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="paisNac">
+                        <label for="idParentescoContacto" class="form-label">Parentesco<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="idParentescoContacto" ngModel #idParentescoContacto="ngModel"
+                        [ngModel]="cliente.idParentescoContacto" (change)="onParentesco1($event.target.value)">
                             <!-- <select class="form-control" name="paisNac" ngModel
-              #paisNac="ngModel" [(ngModel)]="colaborador.idPaisNacimiento" required> -->
+              #paisNac="ngModel" [(ngModel)]="cliente.idPaisNacimiento" required> -->
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let parentesco of parentescos" [value]="parentescos.idParentesco">
+                                {{parentesco.nombre}}
                             </option>
                         </select>
 
                     </div>
                     <div class="col">
-                        <label for="estadoNac" class="form-label">Telefono<span class="text-danger"> *</span></label>
-                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1"
-                            placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+                        <label for="telefonoContacto" class="form-label">Telefono<span class="text-danger"> *</span></label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefonoContacto"
+                            placeholder="10 Dígitos" ngModel #telefonoContacto="ngModel" [(ngModel)]="cliente.telefonoContacto" pattern="[0-9]*" minlength="10">
                     </div>
                     <div class="col">
-                        <label for="ciudadNac" class="form-label">Correo Electrónico<span class="text-danger">
+                        <label for="correoContacto" class="form-label">Correo Electrónico<span class="text-danger">
                                 *</span></label>
-                        <input type="email" class="form-control" name="correoelectronico"
+                        <input type="email" class="form-control" name="correoContacto" ngModel #correoContacto="ngModel" [(ngModel)]="cliente.correoContacto"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
 
                     </div>
@@ -356,35 +376,36 @@
                 </div>
                 <div class="row mt-4 pb-4">
                     <div class="col">
-                        <label for="nacimiento" class="form-label">Nombre<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                        <label for="nombreContacto2" class="form-label">Nombre<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control valGlobal" id="nombreContacto2" name="nombreContacto2" ngModel #nombreContacto2="ngModel" [(ngModel)]="cliente.nombreContacto2"
                             pattern="[a-zA-Z ]*">
                         <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
-                #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
+                #fechanacimiento="ngModel" [(ngModel)]="cliente.fecha_nacimiento" required> -->
 
 
                     </div>
                     <div class="col">
-                        <label for="paisNac" class="form-label">Parentesco<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="paisNac">
+                        <label for="idParentescoContacto2" class="form-label">Parentesco<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="idParentescoContacto2"  #idParentescoContacto2="ngModel"
+                        [ngModel]="cliente.idParentescoContacto2" (change)="onParentesco2($event.target.value)">
                             <!-- <select class="form-control" name="paisNac" ngModel
-              #paisNac="ngModel" [(ngModel)]="colaborador.idPaisNacimiento" required> -->
+              #paisNac="ngModel" [(ngModel)]="cliente.idPaisNacimiento" required> -->
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option>
-                                --
+                            <option *ngFor="let parentesco of parentescos" [value]="parentescos.idParentesco">
+                                {{parentesco.nombre}}
                             </option>
                         </select>
 
                     </div>
                     <div class="col">
-                        <label for="estadoNac" class="form-label">Telefono<span class="text-danger"> *</span></label>
-                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1"
-                            placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
+                        <label for="telefonoContacto2" class="form-label">Telefono<span class="text-danger"> *</span></label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefonoContacto2"
+                            placeholder="10 Dígitos" ngModel #telefonoContacto2="ngModel" [(ngModel)]="cliente.telefonoContacto2" pattern="[0-9]*" minlength="10">
                     </div>
                     <div class="col">
-                        <label for="ciudadNac" class="form-label">Correo Electrónico<span class="text-danger">
+                        <label for="correoContacto2" class="form-label">Correo Electrónico<span class="text-danger">
                                 *</span></label>
-                        <input type="email" class="form-control" name="correoelectronico"
+                        <input type="email" class="form-control" name="correoContacto2" ngModel #correoContacto2="ngModel" [(ngModel)]="cliente.correoContacto2"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
 
                     </div>
@@ -404,31 +425,31 @@
                 </h6>
                 <div class="row mt-4 pb-4">
                     <div class="col">
-                        <label for="nacimiento" class="form-label">Nombre completo<span class="text-danger">
+                        <label for="nombreMedico" class="form-label">Nombre completo<span class="text-danger">
                                 *</span></label>
-                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                        <input type="text" class="form-control valGlobal" id="nombreMedico" name="nombreMedico" ngModel #nombreMedico="ngModel" [(ngModel)]="cliente.nombreMedico"
                             pattern="[a-zA-Z ]*">
                         <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
-                #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
+                #fechanacimiento="ngModel" [(ngModel)]="cliente.fecha_nacimiento" required> -->
 
 
                     </div>
                     <div class="col">
-                        <label for="paisNac" class="form-label">Especialidad<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre"
+                        <label for="especialidadesMedico" class="form-label">Especialidad<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control valGlobal" id="especialidadesMedico" name="especialidadMedico" ngModel #especialidadesMedico="ngModel" [(ngModel)]="cliente.especialidadesMedico"
                             pattern="[a-zA-Z ]*">
 
 
                     </div>
                     <div class="col">
-                        <label for="estadoNac" class="form-label">Telefono<span class="text-danger"> *</span></label>
-                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1"
+                        <label for="telefonoMedico" class="form-label">Telefono<span class="text-danger"> *</span></label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefonoMedico" ngModel #telefonoMedico="ngModel" [(ngModel)]="cliente.telefonoMedico"
                             placeholder="10 Dígitos" pattern="[0-9]*" minlength="10">
                     </div>
                     <div class="col">
-                        <label for="ciudadNac" class="form-label">Correo Electrónico<span class="text-danger">
+                        <label for="correoMedico" class="form-label">Correo Electrónico<span class="text-danger">
                                 *</span></label>
-                        <input type="email" class="form-control" name="correoelectronico"
+                        <input type="email" class="form-control" name="correoMedico" ngModel #correoMedico="ngModel" [(ngModel)]="cliente.correoMedico"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
 
                     </div>
@@ -452,33 +473,35 @@
                 <div class="form-group dynamic-element">
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="comentarioEstudio" class="form-label">Enfermedades Actuales<span
+                            <label for="enfermedadesActuales" class="form-label">Enfermedades Actuales<span
                                     class="text-danger">
                                     *</span></label>
-                            <textarea name="comentarioEstudio" class="form-control" rows="5"></textarea>
+                            <textarea name="enfermedadesActuales" class="form-control" ngModel #enfermedadesActuales="ngModel" [(ngModel)]="cliente.enfermedadesActuales" rows="5"></textarea>
                             <div class="form-group">
                                 <label class="control-label">¿El paciente padece de Alzheimer?<span class="text-danger">
                                         *</span></label>
                                 <div class="form-control">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="estudiosEst"
-                                            id="estudiosEstS" value="Si">
-                                        <label class="form-check-label" for="estudiosEstS">Sí</label>
+                                        <input class="form-check-input" type="radio" name="alzheimerS"
+                                            id="alzheimerS" value="1" ngModel
+                                            #alzheimer="ngModel" [(ngModel)]="cliente.alzheimer">
+                                        <label class="form-check-label" for="alzheimerS">Sí</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="estudiosEst"
-                                            id="estudiosEstN" value="No">
-                                        <label class="form-check-label" for="estudiosEstN">No</label>
+                                        <input class="form-check-input" type="radio" name="alzheimerN"
+                                            id="alzheimerN" value="0" ngModel
+                                            #alzheimer="ngModel" [(ngModel)]="cliente.alzheimer">
+                                        <label class="form-check-label" for="alzheimerN">No</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <label for="comentarioEstudio" class="form-label">Enfermedades recientes<span
+                            <label for="enfermedadesRecientes" class="form-label">Enfermedades recientes<span
                                     class="text-danger">
                                     *</span></label>
-                            <textarea name="comentarioEstudio" class="form-control" rows="5"></textarea>
+                            <textarea name="enfermedadesRecientes" class="form-control" ngModel #enfermedadesRecientes="ngModel" [(ngModel)]="cliente.enfermedadesRecientes" rows="5"></textarea>
                         </div>
                     </div>
                 </div>
@@ -505,18 +528,18 @@
                 <div class="form-group dynamic-element">
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="comentarioEstudio" class="form-label">Cirugias recientes<span
+                            <label for="cirugiasRecientes" class="form-label">Cirugias recientes<span
                                     class="text-danger">
                                     *</span></label>
-                            <textarea name="comentarioEstudio" class="form-control" rows="5"></textarea>
+                            <textarea name="cirugiasRecientes" class="form-control" ngModel #cirugiasRecientes="ngModel" [(ngModel)]="cliente.cirugiasRecientes" rows="5"></textarea>
 
                         </div>
 
                         <div class="col-md-6">
-                            <label for="comentarioEstudio" class="form-label">Accidentes recientes<span
+                            <label for="accidentesRecientes" class="form-label">Accidentes recientes<span
                                     class="text-danger">
                                     *</span></label>
-                            <textarea name="comentarioEstudio" class="form-control" rows="5"></textarea>
+                            <textarea name="accidentesRecientes" class="form-control" ngModel #accidentesRecientes="ngModel" [(ngModel)]="cliente.accidentesRecientes" rows="5"></textarea>
                         </div>
                     </div>
                 </div>
@@ -533,12 +556,12 @@
                 </div>
                 <div class="row text-center pb-4">
                     <div class="col">
-                      <button type="button" class="btn btn-primary"> Enviar Datos
-                      </button>
-                      <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
-                      <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
+                        <button type="button" class="btn btn-primary" (click)="guardarCliente(myForm)"> Enviar Datos
+                        </button>
+                        <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
+                        <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
                     </div>
-                  </div>
+                </div>
             </div>
         </mat-tab>
     </mat-tab-group>
