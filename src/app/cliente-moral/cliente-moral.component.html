@@ -10,32 +10,23 @@
                 <div class="row">
                     <div class="col">
                         <label for="nombre" class="form-label">Nombre de la empresa<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel
-                        #nombre="ngModel" [(ngModel)]="cliente.nombre"
-                            pattern="[a-zA-Z ]*">
+                        <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel #nombre="ngModel" [(ngModel)]="cliente.nombre" pattern="[a-zA-Z ]*">
                         <!-- <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel #nombre="ngModel"
                 [(ngModel)]="colaborador.nombre" pattern="[a-zA-Z ]*" required> -->
-
                     </div>
 
                     <div class="col">
-                        <label for="rfc" class="form-label">RFC<span class="text-danger">
-                                *</span></label>
+                        <label for="rfc" class="form-label">RFC<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control valGlobal" id="rfc" name="rfc" ngModel
-                        #rfc="ngModel" [(ngModel)]="cliente.rfc"
-                            >
+                        #rfc="ngModel" [(ngModel)]="cliente.rfc">
                         <!-- <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno" ngModel #apaterno="ngModel"
                 [(ngModel)]="colaborador.a_paterno" pattern="[a-zA-Z ]*" required> -->
-
                     </div>
-
-                    
-
                 </div>
 
-
+                <hr class="py-1" />
                 
-                <h4 class="pt-4 pb-1">Dirección</h4>
+                <h4 class="pb-1">Dirección</h4>
                 <div class="row">
                     <div class="col">
                         <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
@@ -71,19 +62,16 @@
                                 *</span></label>
                         <input type="text" class="form-control" maxlength="5" name="codigopostal" [ngModel]="selectedCodigoPostal"
                         (change)="onCodigoPostal($event.target.value)" ngModel #codigopostal="ngModel" pattern="[0-9]*">
-
                     </div>
-                </div>
-
-
-                <div class="col">
-                    <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="colonia" ngModel #colonia="ngModel"
-                    (change)="onColonia($event.target.value)">
-                        <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
-                            {{colonia.nombre}}
-                        </option>
-                    </select>
+                    <div class="col">
+                        <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="colonia" ngModel #colonia="ngModel"
+                        (change)="onColonia($event.target.value)">
+                            <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
+                                {{colonia.nombre}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="row mt-4">

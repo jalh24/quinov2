@@ -121,8 +121,7 @@
 
                 <div class="row mt-4">
                     <div class="col-md-2">
-                        <label for="numExterior" class="form-label">Número Exterior<span class="text-danger">
-                                *</span></label>
+                        <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel"
                         [(ngModel)]="cliente.noExt">
                     </div>
@@ -134,16 +133,24 @@
                     </div>
 
                     <div class="col-md-2">
-                        <label for="codigopostal" class="form-label">Código Postal<span class="text-danger">
-                                *</span></label>
+                        <label for="codigopostal" class="form-label">Código Postal<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" maxlength="5" name="codigopostal" [ngModel]="selectedCodigoPostal"
                         (change)="onCodigoPostal($event.target.value)" ngModel #codigopostal="ngModel" pattern="[0-9]*">
 
                     </div>
+                    <div class="col">
+                        <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="colonia" ngModel #colonia="ngModel"
+                        (change)="onColonia($event.target.value)">
+                            <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
+                                {{colonia.nombre}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
 
 
-                <div class="col">
+                <!-- <div class="col">
                     <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
                     <select class="form-control" name="colonia" ngModel #colonia="ngModel"
                     (change)="onColonia($event.target.value)">
@@ -151,7 +158,7 @@
                             {{colonia.nombre}}
                         </option>
                     </select>
-                </div>
+                </div> -->
 
                 <div class="row mt-4">
                     <div class="col">
@@ -313,16 +320,14 @@
                 <div class="row mt-4 pb-4">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="control-label">Seguro de Gastos Medicos Mayores<span class="text-danger">
-                                    *</span></label>
+                            <label class="control-label">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
                             <div class="form-control">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="sgmm" id="sgmm" value="option1">
                                     <label class="form-check-label" for="inlineRadio1">Sí</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sgmm" id="inlineRadio2"
-                                        value="option2">
+                                    <input class="form-check-input" type="radio" name="sgmm" id="inlineRadio2" value="option2">
                                     <label class="form-check-label" for="inlineRadio2">No</label>
                                 </div>
                             </div>
@@ -331,8 +336,7 @@
                     </div>
                     <div class="col">
                         <label for="aseguradora" class="form-label">Aseguradora</label>
-                        <input type="text" class="form-control" name="aseguradora" ngModel #aseguradora="ngModel" [(ngModel)]="cliente.sgmm" placeholder="Nombre"
-                            >
+                        <input type="text" class="form-control" name="aseguradora" ngModel #aseguradora="ngModel" [(ngModel)]="cliente.sgmm" placeholder="Nombre">
                     </div>
                 </div>
                 <hr class="py-1" />
@@ -478,8 +482,7 @@
                                     *</span></label>
                             <textarea name="enfermedadesActuales" class="form-control" ngModel #enfermedadesActuales="ngModel" [(ngModel)]="cliente.enfermedadesActuales" rows="5"></textarea>
                             <div class="form-group">
-                                <label class="control-label">¿El paciente padece de Alzheimer?<span class="text-danger">
-                                        *</span></label>
+                                <label class="control-label">¿El paciente padece de Alzheimer?<span class="text-danger"> *</span></label>
                                 <div class="form-control">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="alzheimerS"
