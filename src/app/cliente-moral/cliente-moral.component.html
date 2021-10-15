@@ -12,15 +12,19 @@
                         <label for="nombre" class="form-label">Nombre de la empresa<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel #nombre="ngModel" [(ngModel)]="cliente.nombre" pattern="[a-zA-Z ]*">
                         <!-- <input type="text" class="form-control valGlobal" id="nombre" name="nombre" ngModel #nombre="ngModel"
-                [(ngModel)]="colaborador.nombre" pattern="[a-zA-Z ]*" required> -->
+                [(ngModel)]="cliente.nombre" pattern="[a-zA-Z ]*" required> -->
+
                     </div>
 
                     <div class="col">
-                        <label for="rfc" class="form-label">RFC<span class="text-danger"> *</span></label>
-                        <input type="text" class="form-control valGlobal" id="rfc" name="rfc" ngModel
-                        #rfc="ngModel" [(ngModel)]="cliente.rfc">
+                        <label for="rfc" class="form-label">RFC<span class="text-danger">
+                                *</span></label>
+                        <input type="text" maxlength="11" class="form-control valGlobal" id="rfc" name="rfc" ngModel
+                        #rfc="ngModel" [(ngModel)]="cliente.rfc"
+                            >
                         <!-- <input type="text" class="form-control valGlobal" id="apaterno" name="apaterno" ngModel #apaterno="ngModel"
-                [(ngModel)]="colaborador.a_paterno" pattern="[a-zA-Z ]*" required> -->
+                [(ngModel)]="cliente.a_paterno" pattern="[a-zA-Z ]*" required> -->
+
                     </div>
                 </div>
 
@@ -32,7 +36,7 @@
                         <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel"
                         [(ngModel)]="cliente.calle1">
-                        <!-- <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel" [(ngModel)]="colaborador.calle1" required> -->
+                        <!-- <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel" [(ngModel)]="cliente.calle1" required> -->
 
                     </div>
 
@@ -42,38 +46,97 @@
                         [(ngModel)]="cliente.calle2">
                     </div>
                 </div>
-
                 <div class="row mt-4">
-                    <div class="col-md-2">
-                        <label for="numExterior" class="form-label">Número Exterior<span class="text-danger">
-                                *</span></label>
-                        <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel"
-                        [(ngModel)]="cliente.noExt">
+                <div class="col-md-2">
+                    <label for="telefono1" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
+                    <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel
+                      #telefono1="ngModel" [(ngModel)]="cliente.telefono" placeholder="10 Dígitos" pattern="[0-9]*"
+                      minlength="10">
+                    <!-- <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="cliente.telefono" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required> -->
+                    <div *ngIf="telefono1.invalid && (telefono1.dirty || telefono1.touched)" class="alert">
+                      <!-- <div *ngIf="telefono1.errors?.required">
+                          El telefono es obligatorio.
+                        </div> -->
+                      <div *ngIf="telefono1.errors?.pattern">
+                        El telefono debe contener solamente numeros.
+                      </div>
+                      <div *ngIf="telefono1.errors?.minlength">
+                        El telefono debe contener 10 digitos.
+                      </div>
                     </div>
-
-                    <div class="col-md-2">
-                        <label for="numInterior" class="form-label">Número Interior</label>
-                        <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel"
-                        [(ngModel)]="cliente.noInt">
+                  </div>
+        
+                  <div class="col-md-2">
+                    <label for="tipoTel1" class="form-label">Tipo de Teléfono 1</label>
+                    <select class="form-control" name="tipoTel1" ngModel #tipoTel1="ngModel"
+                      [ngModel]="cliente.idTipoTelefono" (change)="onTipoTel1($event.target.value)">
+                      <option value="" selected disabled hidden>Seleccionar</option>
+                      <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
+                        {{tipoTelefono.nombre}}
+                      </option>
+                    </select>
+                  </div>
+        
+                  <div class="col-md-2">
+                    <label for="telefono2" class="form-label">Teléfono 2</label>
+                    <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" ngModel
+                      #telefono2="ngModel" [(ngModel)]="cliente.telefono2" placeholder="10 Dígitos" pattern="[0-9]*"
+                      minlength="10">
+                    <div *ngIf="telefono2.invalid && (telefono2.dirty || telefono2.touched)" class="alert">
+                      <div *ngIf="telefono2.errors?.pattern">
+                        El telefono debe contener solamente numeros.
+                      </div>
+                      <div *ngIf="telefono2.errors?.minlength">
+                        El telefono debe contener 10 digitos.
+                      </div>
                     </div>
-
-                    <div class="col-md-2">
-                        <label for="codigopostal" class="form-label">Código Postal<span class="text-danger">
-                                *</span></label>
-                        <input type="text" class="form-control" maxlength="5" name="codigopostal" [ngModel]="selectedCodigoPostal"
-                        (change)="onCodigoPostal($event.target.value)" ngModel #codigopostal="ngModel" pattern="[0-9]*">
-                    </div>
-                    <div class="col">
-                        <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="colonia" ngModel #colonia="ngModel"
-                        (change)="onColonia($event.target.value)">
-                            <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
-                                {{colonia.nombre}}
-                            </option>
-                        </select>
-                    </div>
+                  </div>
+        
+                  <div class="col-md-2">
+                    <label for="tipoTel2" class="form-label">Tipo de Teléfono 2</label>
+                    <select class="form-control" name="tipoTel2" ngModel #tipoTel2="ngModel"
+                      [ngModel]="cliente.idTipoTelefono2" (change)="onTipoTel2($event.target.value)">
+                      <option value="" selected disabled hidden>Seleccionar</option>
+                      <option *ngFor="let tipoTelefono of tiposTelefono" [value]="tipoTelefono.idTipoTel">
+                        {{tipoTelefono.nombre}}
+                      </option>
+                    </select>
+                  </div>
+        
+                  <div class="col-md-2">
+                    <label for="numExterior" class="form-label">Número Exterior<span class="text-danger">
+                            *</span></label>
+                    <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel"
+                    [(ngModel)]="cliente.noExt">
                 </div>
 
+                <div class="col-md-2">
+                    <label for="numInterior" class="form-label">Número Interior</label>
+                    <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel"
+                    [(ngModel)]="cliente.noInt">
+                </div>
+                    
+                </div>
+                <div class="row mt-4">
+                
+
+                <div class="col-md-2">
+                    <label for="codigopostal" class="form-label">Código Postal<span class="text-danger">
+                            *</span></label>
+                    <input type="text" class="form-control" maxlength="5" name="codigopostal" [ngModel]="selectedCodigoPostal"
+                    (change)="onCodigoPostal($event.target.value)" ngModel #codigopostal="ngModel" pattern="[0-9]*">
+
+                </div>
+                <div class="col">
+                    <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
+                    <select class="form-control" name="colonia" ngModel #colonia="ngModel"
+                    (change)="onColonia($event.target.value)">
+                        <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
+                            {{colonia.nombre}}
+                        </option>
+                    </select>
+                </div>
+            </div>
                 <div class="row mt-4">
                     <div class="col">
                         <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
@@ -134,7 +197,7 @@
                         #nombreContacto="ngModel"
                             pattern="[a-zA-Z ]*">
                         <!-- <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="yyyy-MM-dd" ngModel
-                #fechanacimiento="ngModel" [(ngModel)]="colaborador.fecha_nacimiento" required> -->
+                #fechanacimiento="ngModel" [(ngModel)]="cliente.fecha_nacimiento" required> -->
 
 
                     </div>
@@ -234,7 +297,7 @@
                       <button type="button" class="btn btn-primary" (click)="guardarCliente(myForm)"> Enviar Datos
                       </button>
                       <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
-                      <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
+                      <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarCliente(myForm)"> Grabar Cliente </button> -->
                     </div>
                   </div>
             </div>

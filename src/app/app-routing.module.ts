@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'colaboradores', component: ColaboradoresComponent },
   { path: 'clientemoral', pathMatch: 'full', component: ClienteMoralComponent},
   { path: 'clientefisico', component: ClienteFisicoComponent },
-  { path: 'clientes', component: ClientesComponent },
+  { path: 'clientes', pathMatch: 'full', component: ClientesComponent },
 
 ];
 

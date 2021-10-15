@@ -155,7 +155,7 @@ export class ClienteMoralComponent implements OnInit {
     }
     this.CONTACTO_DATA.push(this.contacto);
     this.contactoSource = new MatTableDataSource(this.CONTACTO_DATA);
-console.log(this.CONTACTO_DATA);
+    
     this.contacto = {
       idContacto: null,
       nombre: null,
