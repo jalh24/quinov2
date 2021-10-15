@@ -105,9 +105,9 @@
           <div class="input-group">
           <select class="form-control" name="turnoHorarioFiltro" [(ngModel)]="colaboradorFiltro.turnoHorario">
             <option value="" selected disabled hidden>Seleccionar</option>
-            <option value="Matutino">Matutino</option>
-            <option value="Vespertino">Vespertino</option>
-            <option value="Nocturno">Nocturno</option>
+            <option value="Dia">Dia</option>
+            <option value="Noche">Noche</option>
+            <option value="TodoElDia">Todo el Dia</option>
           </select>
           <button type="button" class="btn btn-secondary" (click)="resetFieldTurnoLaboral()"><fa-icon [icon]="faTimes"></fa-icon></button>
         </div>
@@ -177,7 +177,7 @@
         <td mat-cell *matCellDef="let element"> {{element.a_materno}} </td>
       </ng-container>
       <ng-container matColumnDef="telefono">
-        <th mat-header-cell *matHeaderCellDef> Telefono </th>
+        <th mat-header-cell *matHeaderCellDef> Telefono Princ. </th>
         <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
       </ng-container>
       <ng-container matColumnDef="correoElectronico">

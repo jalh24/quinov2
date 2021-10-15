@@ -240,49 +240,44 @@
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
-            <th scope="col" colspan="3">Días y Horarios de Disponibilidad</th>
+            <th scope="col" colspan="2">Días y Horarios de Disponibilidad</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">Todos los Días</th>
-            <td></td>
-            <td></td>
+            <!-- <td>{{colaborador.horario}}</td> -->
+            <!-- <td>{{colaborador.horario[colaborador.horario.indexOf("todosDiasTurno")+16]}}</td> -->
+            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("todosDiasTurno")+17,colaborador.horario.indexOf('"',colaborador.horario.indexOf("todosDiasTurno")+18))}}</td>
           </tr>
           <tr>
             <th scope="row">Lunes</th>
-            <td></td>
-            <td></td>
+            <!-- <td></td> -->
+            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("lunesTurno")+13,colaborador.horario.indexOf('"',colaborador.horario.indexOf("lunesTurno")+14))}}</td>
           </tr>
           <tr>
             <th scope="row">Martes</th>
-            <td></td>
-            <td></td>
+            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("martesTurno")+14,colaborador.horario.indexOf('"',colaborador.horario.indexOf("martesTurno")+15))}}</td>
           </tr>
           <tr>
             <th scope="row">Miércoles</th>
-            <td></td>
-            <td></td>
+            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("miercolesTurno")+17,colaborador.horario.indexOf('"',colaborador.horario.indexOf("miercolesTurno")+18))}}</td>
           </tr>
           <tr>
             <th scope="row">Jueves</th>
-            <td></td>
-            <td></td>
+            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("juevesTurno")+14,colaborador.horario.indexOf('"',colaborador.horario.indexOf("juevesTurno")+15))}}</td>
           </tr>
           <tr>
             <th scope="row">Viernes</th>
-            <td></td>
-            <td></td>
+            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("viernesTurno")+15,colaborador.horario.indexOf('"',colaborador.horario.indexOf("viernesTurno")+16))}}</td>
           </tr>
           <tr>
             <th scope="row">Sábado</th>
-            <td></td>
-            <td></td>
+            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("sabadoTurno")+14,colaborador.horario.indexOf('"',colaborador.horario.indexOf("sabadoTurno")+15))}}</td>
           </tr>
           <tr>
             <th scope="row">Domingo</th>
-            <td></td>
-            <td></td>
+            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("domingoTurno")+15,colaborador.horario.length)}}</td>
           </tr>
         </tbody>
       </table>

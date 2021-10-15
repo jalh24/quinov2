@@ -154,6 +154,18 @@ export class ColaboradoresComponent implements OnInit {
     this.colaboradorFiltro.permanencia = null;
   }
 
+  public resetFieldZonaLaboral() {
+    this.colaboradorFiltro.permanencia = null;
+  }
+
+  public resetFieldHabilidades() {
+    this.colaboradorFiltro.permanencia = null;
+  }
+
+  public resetFieldDiasLaborales() {
+    this.colaboradorFiltro.permanencia = null;
+  }
+
   public resetFieldTurnoLaboral() {
     this.colaboradorFiltro.turnoHorario = null;
   }

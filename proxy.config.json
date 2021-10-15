@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "https://otconsultingback.comercioincoterms.com/",
+        "target": "http://localhost/public",
         "secure": false,
         "changeOrigin": true,
         "pathRewrite": {"^/api" : ""}

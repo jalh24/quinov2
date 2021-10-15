@@ -316,6 +316,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.idTipoColaborador = null;
     this.colaborador.observaciones = null;
     this.colaborador.idPermanencia = null;
+    this.colaborador.idGradoEstudio = null;
 
     this.idEstudio = 0;
     this.idPago = 0;

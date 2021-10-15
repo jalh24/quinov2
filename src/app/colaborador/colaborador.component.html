@@ -407,8 +407,8 @@
         </div>
 
         <div class="row mt-4 pb-4">
-          <div class="col-md-2">
-            <label for="telefono1" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
+          <div class="col-md-3">
+            <label for="telefono1" class="form-label">Teléfono Principal<span class="text-danger"> *</span></label>
             <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel
               #telefono1="ngModel" [(ngModel)]="colaborador.telefono" placeholder="10 Dígitos" pattern="[0-9]*"
               minlength="10">
@@ -426,8 +426,8 @@
             </div>
           </div>
 
-          <div class="col-md-2">
-            <label for="tipoTel1" class="form-label">Tipo de Teléfono 1</label>
+          <div class="col-md-3">
+            <label for="tipoTel1" class="form-label">Tipo de Teléfono Principal</label>
             <select class="form-control" name="tipoTel1" ngModel #tipoTel1="ngModel"
               [ngModel]="colaborador.idTipoTelefono" (change)="onTipoTel1($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
@@ -437,8 +437,8 @@
             </select>
           </div>
 
-          <div class="col-md-2">
-            <label for="telefono2" class="form-label">Teléfono 2</label>
+          <div class="col-md-3">
+            <label for="telefono2" class="form-label">Teléfono Adicional</label>
             <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2" ngModel
               #telefono2="ngModel" [(ngModel)]="colaborador.telefono2" placeholder="10 Dígitos" pattern="[0-9]*"
               minlength="10">
@@ -452,8 +452,8 @@
             </div>
           </div>
 
-          <div class="col-md-2">
-            <label for="tipoTel2" class="form-label">Tipo de Teléfono 2</label>
+          <div class="col-md-3">
+            <label for="tipoTel2" class="form-label">Tipo de Teléfono Adicional</label>
             <select class="form-control" name="tipoTel2" ngModel #tipoTel2="ngModel"
               [ngModel]="colaborador.idTipoTelefono2" (change)="onTipoTel2($event.target.value)">
               <option value="" selected disabled hidden>Seleccionar</option>
@@ -463,7 +463,10 @@
             </select>
           </div>
 
-          <div class="col-md-4">
+          
+        </div>
+        <div class="row pb-4">
+          <div class="col-md-3">
             <label for="correoelectronico" class="form-label">Correo Electrónico<span class="text-danger">
                 *</span></label>
             <input type="email" class="form-control" name="correoelectronico" ngModel #correoelectronico="ngModel"
@@ -954,9 +957,9 @@
                 <label for="turnoT">Turno</label>
                 <select class="form-control" id="turnoT" name="todosDiasTurno" ngModel #todosDiasTurno="ngModel" [(ngModel)]="diasLaborales.todosDiasTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
                   
-                  <option value="Matutino">Matutino</option>
-                  <option value="Vespertino">Vespertino</option>
-                  <option value="Nocturno">Nocturno</option>
+                  <option value="Dia">Dia</option>
+                  <option value="Noche">Noche</option>
+                  <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
               <!-- <div class="col-md-6">
@@ -984,9 +987,9 @@
                 <label for="turnoL">Turno</label>
                 <select class="form-control" id="turnoL" name="lunesTurno" ngModel #lunesTurno="ngModel" [(ngModel)]="diasLaborales.lunesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkL">
                   
-                  <option value="Matutino">Matutino</option>
-                  <option value="Vespertino">Vespertino</option>
-                  <option value="Nocturno">Nocturno</option>
+                  <option value="Dia">Dia</option>
+                  <option value="Noche">Noche</option>
+                  <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
               <!-- <div class="col-md-6">
@@ -1017,9 +1020,9 @@
                 <label for="turnoM">Turno</label>
                 <select class="form-control" id="turnoM" name="martesTurno" ngModel #martesTurno="ngModel" [(ngModel)]="diasLaborales.martesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
                   
-                  <option value="Matutino">Matutino</option>
-                  <option value="Vespertino">Vespertino</option>
-                  <option value="Nocturno">Nocturno</option>
+                  <option value="Dia">Dia</option>
+                  <option value="Noche">Noche</option>
+                  <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
               <!-- <div class="col-md-6">
@@ -1048,9 +1051,9 @@
                 <label for="turnoMi">Turno</label>
                 <select class="form-control" id="turnoMi" name="miercolesTurno" ngModel #miercolesTurno="ngModel" [(ngModel)]="diasLaborales.miercolesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
                   
-                  <option value="Matutino">Matutino</option>
-                  <option value="Vespertino">Vespertino</option>
-                  <option value="Nocturno">Nocturno</option>
+                  <option value="Dia">Dia</option>
+                  <option value="Noche">Noche</option>
+                  <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
               <!-- <div class="col-md-6">
@@ -1080,9 +1083,9 @@
                 <label for="turnoJ">Turno</label>
                 <select class="form-control" id="turnoJ" name="juevesTurno" ngModel #juevesTurno="ngModel" [(ngModel)]="diasLaborales.juevesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
                   
-                  <option value="Matutino">Matutino</option>
-                  <option value="Vespertino">Vespertino</option>
-                  <option value="Nocturno">Nocturno</option>
+                  <option value="Dia">Dia</option>
+                  <option value="Noche">Noche</option>
+                  <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
               <!-- <div class="col-md-6">
@@ -1112,9 +1115,9 @@
                 <label for="turnoV">Turno</label>
                 <select class="form-control" id="turnoV" name="viernesTurno" ngModel #viernesTurno="ngModel" [(ngModel)]="diasLaborales.viernesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
                   
-                  <option value="Matutino">Matutino</option>
-                  <option value="Vespertino">Vespertino</option>
-                  <option value="Nocturno">Nocturno</option>
+                  <option value="Dia">Dia</option>
+                  <option value="Noche">Noche</option>
+                  <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
               <!-- <div class="col-md-6">
@@ -1144,9 +1147,9 @@
                 <label for="turnoS">Turno</label>
                 <select class="form-control" id="turnoS" name="sabadoTurno" ngModel #sabadoTurno="ngModel" [(ngModel)]="diasLaborales.sabadoTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
                   
-                  <option value="Matutino">Matutino</option>
-                  <option value="Vespertino">Vespertino</option>
-                  <option value="Nocturno">Nocturno</option>
+                  <option value="Dia">Dia</option>
+                  <option value="Noche">Noche</option>
+                  <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
               <!-- <div class="col-md-6">
@@ -1176,9 +1179,9 @@
                 <label for="turnoD">Turno</label>
                 <select class="form-control" id="turnoD" name="domingoTurno" ngModel #domingoTurno="ngModel" [(ngModel)]="diasLaborales.domingoTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
                   
-                  <option value="Matutino">Matutino</option>
-                  <option value="Vespertino">Vespertino</option>
-                  <option value="Nocturno">Nocturno</option>
+                  <option value="Dia">Dia</option>
+                  <option value="Noche">Noche</option>
+                  <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
               <!-- <div class="col-md-6">
