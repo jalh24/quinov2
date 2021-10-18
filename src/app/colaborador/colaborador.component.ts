@@ -267,8 +267,8 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.idEstadoCivil = null;
     this.colaborador.idTez = null;
     this.colaborador.sgmm = null;
-    this.colaborador.atiendeCovid = null;
-    this.colaborador.antecedentePenales = null;
+    this.colaborador.atiendeCovid = false;
+    this.colaborador.antecedentePenales = false;
     this.colaborador.autoPropio = false;
     this.colaborador.dispuestoViajar = false;
     this.colaborador.visa = false;
@@ -543,11 +543,13 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.experiencias = this.experienciaSource.data;
     this.colaborador.especialidades = this.especialidadesSelected;
     this.colaborador.habilidades = this.habilidadesSelected;
-console.log(this.colaborador);
+    console.log(this.colaborador);
     if (ngForm.valid) {
       this.http.post<any>('/api/colaborador/create', this.colaborador).subscribe(data => {
         this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");
-
+        window.history.back();
+        alert("Se creo el colaborador exitosamente");
+        
       });
       this.inicializaObjetos();
     } else {

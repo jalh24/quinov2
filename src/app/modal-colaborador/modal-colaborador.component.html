@@ -47,7 +47,7 @@
           </tr>
           <tr>
             <th scope="row">Calificación</th>
-            <td></td>
+            <td>{{colaborador.calificacionConId}}</td>
             <th scope="row">Tipo de Colaborador</th>
             <td>{{colaborador.tipoColaboradorConId}}</td>
           </tr>
@@ -208,13 +208,13 @@
             <th scope="col">Telefono Referencia</th>
             <th scope="col">Actividades</th>
           </tr>
-          <tr *ngFor="let experiencias of colaborador.experiencia">
-            <td>{{experiencias.empresa}}</td>
-            <td>{{experiencias.fechaInicio}}</td>
-            <td>{{experiencias.fechaFin}}</td>
-            <td>{{experiencias.referencia}}</td>
-            <td>{{experiencias.telefono}}</td>
-            <td>{{experiencias.comentario}}</td>
+          <tr *ngFor="let experiencia of colaborador.experiencia">
+            <td>{{experiencia.empresa}}</td>
+            <td>{{experiencia.fechaInicio}}</td>
+            <td>{{experiencia.fechaFin}}</td>
+            <td>{{experiencia.referencia}}</td>
+            <td>{{experiencia.telefono}}</td>
+            <td>{{experiencia.comentario}}</td>
           </tr>
         </tbody>
       </table>
@@ -228,10 +228,23 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Especialidades</th>
-            <td></td>
-            <th scope="row">Habilidades</th>
-            <td></td>
+            <!-- <th scope="row">Especialidades</th> -->
+            <td><table>
+              <tr>
+                <th scope="row">Especialidades</th>
+              </tr>
+              <tr *ngFor="let especialidad of colaborador.especialidades">
+                <td>{{especialidad.nombre}}</td>
+              </tr>
+            </table></td>
+            <td><table>
+              <tr>
+                <th scope="row">Habilidades</th>
+              </tr>
+              <tr *ngFor="let habilidad of colaborador.habilidades">
+                <td>{{habilidad.nombre}}</td>
+              </tr>
+            </table></td>
           </tr>
         </tbody>
       </table>

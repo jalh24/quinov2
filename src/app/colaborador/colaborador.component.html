@@ -1246,16 +1246,16 @@
                   <label class="control-label">¿Atiende COVID?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovid" value="option1"
-                        ngModel #atiendecovid="ngModel">
+                      <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovidS" value="1" ngModel
+                      #atiendecovid="ngModel" [(ngModel)]="colaborador.atiendeCovid">
                       <!-- <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovid"
                         value="option1" ngModel
                         #atiendecovid="ngModel" required> -->
                       <label class="form-check-label" for="covids">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="atiendecovid" id="covidn" value="option2"
-                        ngModel #atiendecovid="ngModel">
+                      <input class="form-check-input" type="radio" name="atiendecovid" id="atiendecovidN" value="0" ngModel
+                      #atiendecovid="ngModel" [(ngModel)]="colaborador.atiendeCovid">
                       <!-- <input class="form-check-input" type="radio" name="atiendecovid" id="covidn" value="option2" ngModel
                       #atiendecovid="ngModel" required> -->
                       <label class="form-check-label" for="covidn">No</label>
@@ -1277,15 +1277,15 @@
                   <label class="control-label">¿Tiene antecedentes penales?<span class="text-danger"> *</span></label>
                   <div class="form-control">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1" ngModel
-                        #apenales="ngModel">
+                      <input class="form-check-input" type="radio" name="apenales" id="apenalesS" value="1" ngModel
+                        #apenales="ngModel" [(ngModel)]="colaborador.antecedentePenales">
                       <!-- <input class="form-check-input" type="radio" name="apenales" id="apenales" value="option1" ngModel
                   #apenales="ngModel" required> -->
                       <label class="form-check-label" for="antecedentesS">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="apenales" id="antecedentesN" value="option2"
-                        ngModel #apenales="ngModel">
+                      <input class="form-check-input" type="radio" name="apenales" id="apenalesN" value="0" ngModel
+                      #apenales="ngModel" [(ngModel)]="colaborador.antecedentePenales">
                       <!-- <input class="form-check-input" type="radio" name="apenales" id="antecedentesN"
                     value="option2" ngModel
                     #apenales="ngModel" required> -->
@@ -1372,7 +1372,7 @@
                   <div class="form-control">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="inlineRadioOptions" name="visa" id="visa"
-                        value="option1" (click)="enableTextBoxVis()" ngModel #visa="ngModel"
+                        value="1" (click)="enableTextBoxVis()" ngModel #visa="ngModel"
                         [(ngModel)]="colaborador.visa">
                       <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" 
                       name="visa" id="visa" value="option1"

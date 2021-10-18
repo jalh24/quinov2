@@ -25,6 +25,8 @@ export class ModalColaboradorComponent implements OnInit {
   public getColaboradores2(event?: PageEvent) {
     if (this.data) {
       this.colaborador = this.data.data;
+      this.colaborador.habilidades = JSON.parse(this.colaborador.habilidades);
+      this.colaborador.especialidades = JSON.parse(this.colaborador.especialidades);
       this.colaborador.cuentasColaborador= this.data.data.cuentasColaborador;
       console.log(this.colaborador);
     }
