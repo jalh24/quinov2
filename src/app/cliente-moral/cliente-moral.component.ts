@@ -90,8 +90,6 @@ export class ClienteMoralComponent implements OnInit {
   inicializaObjetos() {
     this.cliente = new Cliente();
     this.cliente.idCliente = null;
-    this.cliente.nombre = null;  
-    this.cliente.correoElectronico = null;
     this.cliente.rfc = null;
     this.cliente.sgmm = null;
     this.cliente.calle1 = null;
@@ -109,6 +107,37 @@ export class ClienteMoralComponent implements OnInit {
     this.cliente.idTipoTelefono2 = null;  
     this.cliente.referencia = null;
     this.cliente.idTipoCliente = null;
+    this.cliente.nombre = null;
+    this.cliente.a_paterno = null;
+    this.cliente.a_materno = null;
+    this.cliente.correoElectronico = null;
+    this.cliente.fecha_nacimiento = null;
+    this.cliente.idSexo = null;
+    this.cliente.peso = null;
+    this.cliente.estatura = null;
+    this.cliente.idEstadoCivil = null;
+    this.cliente.idComplexion = null;
+    this.cliente.idPaisNacimiento = null;
+    this.cliente.idEstadoNacimiento = null;
+    this.cliente.idCiudadNacimiento = null;
+    this.cliente.nombreContacto = null;
+    this.cliente.idParentescoContacto = null;
+    this.cliente.telefonoContacto = null;
+    this.cliente.correoContacto = null;
+    this.cliente.nombreContacto2 = null;
+    this.cliente.idParentescoContacto2 = null;
+    this.cliente.telefonoContacto2 = null;
+    this.cliente.correoContacto2 = null;
+    this.cliente.nombreMedico = null;
+    this.cliente.especialidadesMedico = null;
+    this.cliente.telefonoMedico = null;
+    this.cliente.correoMedico = null;
+    this.cliente.cirugiasRecientes = null;
+    this.cliente.accidentesRecientes = null;
+    this.cliente.enfermedadesRecientes = null;
+    this.cliente.enfermedadesActuales = null;
+    this.cliente.alzheimer = null;
+    this.cliente.imss = null;
     this.cliente.contactosCliente == [];
     this.idContacto = 0;
 
@@ -143,7 +172,6 @@ export class ClienteMoralComponent implements OnInit {
 
   }
 
-  on
   agregarContacto() {
     if (this.contacto.idContacto == null) {
       if (this.contactoSource.data.length == 0) {
