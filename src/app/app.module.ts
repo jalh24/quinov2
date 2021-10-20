@@ -25,6 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ClienteFisicoComponent } from './cliente-fisico/cliente-fisico.component';
 import { ClienteMoralComponent } from './cliente-moral/cliente-moral.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { SigninComponent } from './signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ClientesComponent } from './clientes/clientes.component';
     IndexComponent,
     ClienteFisicoComponent,
     ClienteMoralComponent,
-    ClientesComponent
+    ClientesComponent,
+    SigninComponent
   ],
   imports: [
     CommonModule,
