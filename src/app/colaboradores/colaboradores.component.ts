@@ -13,7 +13,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
-import { faUserNurse, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faUserNurse, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 export interface DialogData {
   data: any;
@@ -27,6 +27,7 @@ export interface DialogData {
 export class ColaboradoresComponent implements OnInit {
   faUserNurse = faUserNurse;
   faTimes = faTimes;
+  faSignOutAlt = faSignOutAlt;
   idModal: string;
   @ViewChild(DataTableDirective, { static: false })
   private datatableElement: DataTableDirective;

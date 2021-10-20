@@ -11,6 +11,7 @@ import { NgbToastService, NgbToastType, NgbToast } from 'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Estatus } from '../_model/estatus';
 import { FormControl } from '@angular/forms';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-colaborador',
@@ -19,7 +20,7 @@ import { FormControl } from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradorComponent implements OnInit {
-
+  faSignOutAlt = faSignOutAlt;
   show = false;
   autohide = true;
   selected = new FormControl(0);

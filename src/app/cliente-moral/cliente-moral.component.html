@@ -1,3 +1,14 @@
+<nav class="navbar navbar-light bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="assets/images/logo.png" alt="" height="36">
+    </a>
+    <div class="nav-item">
+      <button type="button" class="btn btn-outline-danger ml-auto"><fa-icon [icon]="faSignOutAlt"></fa-icon> Cerrar Sesión</button>
+    </div>  
+  </div>
+</nav>
+
 <form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
     <ngb-toast-container></ngb-toast-container>
     <mat-tab-group mat-align-tabs="center" [selectedIndex]="selected.value"

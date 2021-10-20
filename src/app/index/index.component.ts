@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faUserNurse, faBookMedical, faUserInjured, faAddressBook, faBriefcaseMedical, faUserCog, faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faUserNurse, faBookMedical, faUserInjured, faAddressBook, faBriefcaseMedical, faUserCog, faBriefcase, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-index',
@@ -15,6 +15,7 @@ export class IndexComponent implements OnInit {
   faBriefcaseMedical = faBriefcaseMedical;
   faBriefcase = faBriefcase;
   faUserCog = faUserCog;
+  faSignOutAlt = faSignOutAlt;
 
   constructor(private router: Router) { }
 

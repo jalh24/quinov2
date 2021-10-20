@@ -5,3 +5,20 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.bg{
+    background-image: url(assets/images/ventajas.jpg);
+    background-size: cover;
+    background-position: center center;
+  }
+
+  :root {
+    --primary: #f8f8f8;
+    --light: #142D3C;
+    --grey: #efefef;
+    --white: rgba(255, 255, 255, 0.78);
+  }
+  .bg-primary { background-color: var(--primary) !important;}
+
+  .mat-tab-labels {
+    background: #6EC1E4;
+}

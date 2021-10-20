@@ -7,7 +7,7 @@ import { Cliente } from '../_model/cliente';
 import { HttpClient } from '@angular/common/http';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { faUserNurse } from '@fortawesome/free-solid-svg-icons';
+import { faUserNurse, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-clientes',
@@ -17,6 +17,7 @@ import { faUserNurse } from '@fortawesome/free-solid-svg-icons';
 })
 export class ClientesComponent implements OnInit {
   faUserNurse = faUserNurse;
+  faSignOutAlt = faSignOutAlt;
   @ViewChild(DataTableDirective, { static: false })
   pageEvent: PageEvent;
   pageIndex: number = 0;

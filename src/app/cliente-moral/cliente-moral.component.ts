@@ -9,6 +9,7 @@ import { Cliente } from '../_model/cliente';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { textChangeRangeIsUnchanged } from 'typescript';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cliente-moral',
@@ -16,6 +17,7 @@ import { textChangeRangeIsUnchanged } from 'typescript';
   styleUrls: ['./cliente-moral.component.scss']
 })
 export class ClienteMoralComponent implements OnInit {
+  faSignOutAlt = faSignOutAlt;
   CONTACTO_DATA: Contacto[] = [];
   contactoSource = new MatTableDataSource<Contacto>(this.CONTACTO_DATA);
   contacto: Contacto;
