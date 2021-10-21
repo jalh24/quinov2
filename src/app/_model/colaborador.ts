@@ -11,6 +11,8 @@ export class Colaborador {
     public idTipoColaborador: number;
     public idEstadoNacimiento: number;
     public correoElectronico: string;
+    public hijos: boolean;
+    hijosViven: boolean;
     public foto: any;
     public fotoNombre: string;
     public rfc: string;
@@ -30,6 +32,7 @@ export class Colaborador {
     public atiendeCovid: boolean;
     public antecedentePenales: boolean;
     public autoPropio: boolean;
+    public licenciaManejar: boolean;
     public dispuestoViajar: boolean;
     public visa: boolean;
     public visaNumero: string;
@@ -41,6 +44,11 @@ export class Colaborador {
     public pasaporteNumero: string;
     public expiracionPasaporte: Date;
     public pasaporteImagen: any;
+    public hacerComer: boolean;
+    public limpiarUtensiliosCocina: boolean;
+    public limpiarDormitorio: boolean;
+    public limpiarBano: boolean;
+    public ayudaPaciente: boolean;
     public pasaporteNombre: any;
     public ine1: any;
     public ine2: any;

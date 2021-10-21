@@ -492,6 +492,51 @@
               </div>
             </div>
           </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="control-label">¿Tiene hijos?<span class="text-danger"> *</span></label>
+              <div class="form-control">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="hijos" id="hijosS" value="1" ngModel
+                  #hijos="ngModel" [(ngModel)]="colaborador.hijos" (click)="enableHijosViven()">
+                  <label class="form-check-label" for="hijosS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="hijos" id="hijosN" value="0" ngModel
+                  #hijos="ngModel" [(ngModel)]="colaborador.hijos" (click)="disableHijosViven()">
+                  <label class="form-check-label" for="hijosN">No</label>
+                </div>
+
+              </div>
+              <div *ngIf="hijos.invalid && (hijos.dirty || hijos.touched)" class="alert">
+                <!-- <div *ngIf="hijos.errors?.required">
+                    El campo es obligatorio.
+                  </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="control-label">¿Viven con usted?<span class="text-danger"> *</span></label>
+              <div class="form-control">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="hijosViven" id="hijosVivenS" value="1" ngModel
+                  #hijosViven="ngModel" [(ngModel)]="colaborador.hijosViven" disabled="disabled" [disabled]="radioDisabledHijosViven">
+                  <label class="form-check-label" for="hijosVivenS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="hijosViven" id="hijosVivenN" value="0" ngModel
+                  #hijosViven="ngModel" [(ngModel)]="colaborador.hijosViven" disabled="disabled" [disabled]="radioDisabledHijosViven">
+                  <label class="form-check-label" for="hijosVivenN">No</label>
+                </div>
+              </div>
+              <div *ngIf="hijosViven.invalid && (hijosViven.dirty || hijosViven.touched)" class="alert">
+                <!-- <div *ngIf="hijosViven.errors?.required">
+                    El campo es obligatorio.
+                  </div> -->
+              </div>
+            </div>
+          </div>
         </div>
         <div class="row pb-4">
           <div class="col-md-12"><span class="font-italic">Los campos con </span><span
@@ -1341,6 +1386,29 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label">¿Tiene licencia vigente?<span class="text-danger"> *</span></label>
+                  <div class="form-control">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="licenciaManejar" id="licenciaManejarS" value="1" ngModel
+                      #licenciaManejar="ngModel" [(ngModel)]="colaborador.licenciaManejar">
+                      <label class="form-check-label" for="licenciaManejarS">Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="licenciaManejar" id="licenciaManejarN" value="0" ngModel
+                      #licenciaManejar="ngModel" [(ngModel)]="colaborador.licenciaManejar">
+                      <label class="form-check-label" for="licenciaManejarN">No</label>
+                    </div>
+    
+                  </div>
+                  <div *ngIf="licenciaManejar.invalid && (licenciaManejar.dirty || licenciaManejar.touched)" class="alert">
+                    <!-- <div *ngIf="licenciaManejar.errors?.required">
+                        El campo es obligatorio.
+                      </div> -->
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="row">
@@ -1500,6 +1568,141 @@
             <!-- <div class="row"> -->
 
             <!-- </div> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p>¿Está dispuesto(a) a hacerle de comer al paciente si así lo requiere?</p>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="form-control">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="hacerComer" id="hacerComerS" value="1" ngModel
+                  #hacerComer="ngModel" [(ngModel)]="colaborador.hacerComer">
+                  <label class="form-check-label" for="hacerComerS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="hacerComer" id="hacerComerN" value="0" ngModel
+                  #hacerComer="ngModel" [(ngModel)]="colaborador.hacerComer">
+                  <label class="form-check-label" for="hacerComerN">No</label>
+                </div>
+
+              </div>
+              <div *ngIf="hacerComer.invalid && (hacerComer.dirty || hacerComer.touched)" class="alert">
+                <!-- <div *ngIf="hacerComer.errors?.required">
+                    El campo es obligatorio.
+                  </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p>¿Está dispuesto(a) a limpiar lo utilizado en utensilios de cocina ocupados?</p>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="form-control">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="limpiarUtensiliosCocina" id="limpiarUtensiliosCocinaS" value="1" ngModel
+                  #limpiarUtensiliosCocina="ngModel" [(ngModel)]="colaborador.limpiarUtensiliosCocina">
+                  <label class="form-check-label" for="limpiarUtensiliosCocinaS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="limpiarUtensiliosCocina" id="limpiarUtensiliosCocinaN" value="0" ngModel
+                  #limpiarUtensiliosCocina="ngModel" [(ngModel)]="colaborador.limpiarUtensiliosCocina">
+                  <label class="form-check-label" for="limpiarUtensiliosCocinaN">No</label>
+                </div>
+
+              </div>
+              <div *ngIf="limpiarUtensiliosCocina.invalid && (limpiarUtensiliosCocina.dirty || limpiarUtensiliosCocina.touched)" class="alert">
+                <!-- <div *ngIf="limpiarUtensiliosCocina.errors?.required">
+                    El campo es obligatorio.
+                  </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p>¿Está dispuesto(a) a limpiar el dormitorio del paciente si así lo requiere?</p>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="form-control">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="limpiarDormitorio" id="limpiarDormitorioS" value="1" ngModel
+                  #limpiarDormitorio="ngModel" [(ngModel)]="colaborador.limpiarDormitorio">
+                  <label class="form-check-label" for="limpiarDormitorioS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="limpiarDormitorio" id="limpiarDormitorioN" value="0" ngModel
+                  #limpiarDormitorio="ngModel" [(ngModel)]="colaborador.limpiarDormitorio">
+                  <label class="form-check-label" for="limpiarDormitorioN">No</label>
+                </div>
+
+              </div>
+              <div *ngIf="limpiarDormitorio.invalid && (limpiarDormitorio.dirty || limpiarDormitorio.touched)" class="alert">
+                <!-- <div *ngIf="limpiarDormitorio.errors?.required">
+                    El campo es obligatorio.
+                  </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p>¿Está dispuesto(a) a limpiar el baño del paciente si así lo requiere?</p>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="form-control">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="limpiarBano" id="limpiarBanoS" value="1" ngModel
+                  #limpiarBano="ngModel" [(ngModel)]="colaborador.limpiarBano">
+                  <label class="form-check-label" for="limpiarBanoS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="limpiarBano" id="limpiarBanoN" value="0" ngModel
+                  #limpiarBano="ngModel" [(ngModel)]="colaborador.limpiarBano">
+                  <label class="form-check-label" for="limpiarBanoN">No</label>
+                </div>
+
+              </div>
+              <div *ngIf="limpiarBano.invalid && (limpiarBano.dirty || limpiarBano.touched)" class="alert">
+                <!-- <div *ngIf="limpiarBano.errors?.required">
+                    El campo es obligatorio.
+                  </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p>¿Está dispuesto(a) a ayudar al paciente en el baño, regadera, cama, y cambiar el pañal si así lo requiere?</p>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="form-control">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="ayudaPaciente" id="ayudaPacienteS" value="1" ngModel
+                  #ayudaPaciente="ngModel" [(ngModel)]="colaborador.ayudaPaciente">
+                  <label class="form-check-label" for="ayudaPacienteS">Sí</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="ayudaPaciente" id="ayudaPacienteN" value="0" ngModel
+                  #ayudaPaciente="ngModel" [(ngModel)]="colaborador.ayudaPaciente">
+                  <label class="form-check-label" for="ayudaPacienteN">No</label>
+                </div>
+
+              </div>
+              <div *ngIf="ayudaPaciente.invalid && (ayudaPaciente.dirty || ayudaPaciente.touched)" class="alert">
+                <!-- <div *ngIf="ayudaPaciente.errors?.required">
+                    El campo es obligatorio.
+                  </div> -->
+              </div>
+            </div>
           </div>
         </div>
         <div class="row">

@@ -48,6 +48,7 @@ export class ColaboradorComponent implements OnInit {
   textBoxDisabledOtraZon = true;
   textBoxDisabledOtraHab = true;
   textBoxDisabledVis = true;
+  radioDisabledHijosViven = true;
   textBoxDisabledPas = true;
   textBoxDisabledDateofWorkL = true;
   textBoxDisabledDateofWorkM = true;
@@ -143,6 +144,7 @@ export class ColaboradorComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
+  
 
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -256,6 +258,8 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.a_paterno = null;
     this.colaborador.a_materno = null;
     this.colaborador.correoElectronico = null;
+    this.colaborador.hijos = false;
+    this.colaborador.hijosViven = false;
     this.colaborador.foto = null;
     this.colaborador.fotoNombre = null;
     this.colaborador.rfc = null;
@@ -271,6 +275,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.atiendeCovid = false;
     this.colaborador.antecedentePenales = false;
     this.colaborador.autoPropio = false;
+    this.colaborador.licenciaManejar = false;
     this.colaborador.dispuestoViajar = false;
     this.colaborador.visa = false;
     this.colaborador.visaNumero = null;
@@ -282,6 +287,11 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.pasaporteNumero = null;
     this.colaborador.expiracionPasaporte = null;
     this.colaborador.pasaporteImagen = null;
+    this.colaborador.hacerComer = false;
+    this.colaborador.limpiarUtensiliosCocina = false;
+    this.colaborador.limpiarDormitorio = false;
+    this.colaborador.limpiarBano = false;
+    this.colaborador.ayudaPaciente = false;
     this.colaborador.pasaporteNombre = null;
     this.colaborador.ine1 = null;
     this.colaborador.ine1Nombre = null;
@@ -390,6 +400,13 @@ export class ColaboradorComponent implements OnInit {
     this.estudio.estatus = this.estatusEstudios.find(estu => { return estu.nombre === event });
     console.log(this.estudio);
     //this.estudio.estatus = event;
+  }
+
+  enableHijosViven() {
+    this.radioDisabledHijosViven = false;
+  }
+  disableHijosViven() {
+    this.radioDisabledHijosViven = true;
   }
 
   enableTextBoxVis() {
