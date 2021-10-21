@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { faUserNurse, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { ClienteFiltro } from '../_model/clienteFiltro';
 
 @Component({
   selector: 'app-clientes',
@@ -19,27 +20,34 @@ export class ClientesComponent implements OnInit {
   faUserNurse = faUserNurse;
   faSignOutAlt = faSignOutAlt;
   @ViewChild(DataTableDirective, { static: false })
+  clienteFiltro: ClienteFiltro;
+  public cliente: Cliente;
   pageEvent: PageEvent;
   pageIndex: number = 0;
   pageSize: number = 5;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+  tipoClientes: any;
   length: number;
   CLIENTE_DATA: Cliente[] = [];
   clienteSource = new MatTableDataSource<Cliente>(this.CLIENTE_DATA);
-  clienteColumns: string[] = ['nombre',  'telefono', 'correoElectronico'];
+  clienteColumns: string[] = ['nombre',  'telefono', 'correoElectronico','idTipoCliente'];
 
   @ViewChild('clientesTable', { static: true }) clientesTable: MatTable<any>;
   
   constructor(private router: Router,
-    private http: HttpClient) { }
+    private http: HttpClient) { 
+      this.clienteFiltro = new ClienteFiltro();
+    }
 
   ngOnInit(): void {
+    this.resetFields();
     this.getClientes();
+    this.comboTipoClientes();
+    
   }
 
   public getClientes() {
-    this.http.get<any>('/api/cliente').subscribe(data => {      
+    this.http.post<any>('/api/cliente',this.cliente).subscribe(data => {      
       this.CLIENTE_DATA = data.data;     
       this.clienteSource = new MatTableDataSource<Cliente>(this.CLIENTE_DATA);      
       //this.length = data.count.total;
@@ -50,5 +58,17 @@ export class ClientesComponent implements OnInit {
   }
   public agregarClienteMoral() {
     this.router.navigateByUrl("/clientemoral");
+  }
+
+  public resetFields() {
+    this.clienteFiltro = new ClienteFiltro();
+    this.clienteFiltro.idTipoCliente = null;   
+  }
+
+  public comboTipoClientes() {
+    this.http.get<any>('/api/catalogo/tipoClientes').subscribe(data => {
+     this.tipoClientes = data.data;
+     console.log(this.tipoClientes);
+    });
   }
 }
