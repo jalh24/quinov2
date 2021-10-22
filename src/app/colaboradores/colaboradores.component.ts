@@ -15,6 +15,7 @@ import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
 import { faUserNurse, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { NgxCheckboxComponent } from 'ngx-checkbox';
 
 
 export interface DialogData {
@@ -27,6 +28,19 @@ export interface DialogData {
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradoresComponent implements OnInit {
+  showMessage: boolean = false;
+  clicked = false;
+  @ViewChild('myCheckbox', {static: false}) myCB: NgxCheckboxComponent;
+  
+  onShowMessage(event) {
+    this.showMessage = !this.showMessage;
+  }
+
+  onSetCheckBox() {
+    // Set 'checked' or 'no-checked'
+       this.clicked = !this.clicked;
+  }
+
   faUserNurse = faUserNurse;
   faTimes = faTimes;
   faSignOutAlt = faSignOutAlt;
@@ -43,7 +57,7 @@ export class ColaboradoresComponent implements OnInit {
   length: number;
   COLABORADOR_DATA: Colaborador[] = [];
   colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
-  colaboradorColumns: string[] = ['nombre', 'a_paterno', 'a_materno', 'telefono', 'correoElectronico','idCalificacion', 'acciones'];
+  colaboradorColumns: string[] = ['nombre', 'a_paterno', 'a_materno', 'telefono', 'correoElectronico','idCalificacion', 'acciones', 'Seleccionar'];
   @ViewChild('colaboradoresTable', { static: true }) colaboradoresTable: MatTable<any>;
   sexos: any;
   diasLaborales: any = [] = [
