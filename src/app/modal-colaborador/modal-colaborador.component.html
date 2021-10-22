@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{colaborador.nombre}} {{colaborador.a_paterno}} {{colaborador.a_materno}} </h1>
+<h1 mat-dialog-title>{{colaborador?.nombre}} {{colaborador?.a_paterno}} {{colaborador?.a_materno}} </h1>
 <div mat-dialog-content>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item waves-effect waves-light">
@@ -40,16 +40,16 @@
         <tbody>
           <tr>
             <th scope="row">RFC</th>
-            <td>{{colaborador.rfc}}</td>
+            <td>{{colaborador?.rfc}}</td>
             <th scope="row">NSS</th>
-            <td>{{colaborador.nss}}</td>
+            <td>{{colaborador?.nss}}</td>
     
           </tr>
           <tr>
             <th scope="row">Calificación</th>
-            <td>{{colaborador.calificacionConId}}</td>
+            <td>{{colaborador?.calificacionConId}}</td>
             <th scope="row">Tipo de Colaborador</th>
-            <td>{{colaborador.tipoColaboradorConId}}</td>
+            <td>{{colaborador?.tipoColaboradorConId}}</td>
           </tr>
         </tbody>
         <thead class="thead-light">
@@ -60,13 +60,13 @@
         <tbody>
           <tr>
             <th scope="row">Fecha</th>
-            <td>{{colaborador.fecha_nacimiento}}</td>
+            <td>{{colaborador?.fecha_nacimiento}}</td>
             <th scope="row">País</th>
-            <td>{{colaborador.paisNacimiento}}</td>
+            <td>{{colaborador?.paisNacimiento}}</td>
             <th scope="row">Estado</th>
-            <td>{{colaborador.estadoNacimiento}}</td>
+            <td>{{colaborador?.estadoNacimiento}}</td>
             <th scope="row">Ciudad</th>
-            <td>{{colaborador.ciudadNacimiento}}</td>
+            <td>{{colaborador?.ciudadNacimiento}}</td>
           </tr>
         </tbody>
       </table>
@@ -81,27 +81,27 @@
         <tbody>
           <tr>
             <th scope="row">Calle</th>
-            <td colspan="3">{{colaborador.calle1}}</td>
+            <td colspan="3">{{colaborador?.calle1}}</td>
             <th scope="row">Calle 2</th>
-            <td colspan="3">{{colaborador.calle2}}</td>   
+            <td colspan="3">{{colaborador?.calle2}}</td>   
           </tr>
           <tr>
             <th scope="row">Número Exterior</th>
-            <td>{{colaborador.noExt}}</td>
+            <td>{{colaborador?.noExt}}</td>
             <th scope="row">Número Interior</th>
-            <td>{{colaborador.noInt}}</td>
+            <td>{{colaborador?.noInt}}</td>
             <th scope="row">Código Postal</th>
-            <td>{{colaborador.codigoPostal}}</td>
+            <td>{{colaborador?.codigoPostal}}</td>
             <th scope="row">Colonia</th>
-            <td>{{colaborador.coloniaDir}}</td>
+            <td>{{colaborador?.coloniaDir}}</td>
           </tr>
           <tr>
             <th scope="row">Ciudad</th>
-            <td>{{colaborador.ciudadDir}}</td>
+            <td>{{colaborador?.ciudadDir}}</td>
             <th scope="row">Estado</th>
-            <td>{{colaborador.estadoDir}}</td>
+            <td>{{colaborador?.estadoDir}}</td>
             <th scope="row">País</th>
-            <td colspan="3">{{colaborador.paisDir}}</td>
+            <td colspan="3">{{colaborador?.paisDir}}</td>
           </tr>
         </tbody>
       </table>
@@ -116,29 +116,29 @@
         <tbody>
           <tr>
             <th scope="row">Genero</th>
-            <td>{{colaborador.genero}}</td>
+            <td>{{colaborador?.genero}}</td>
             <th scope="row">Peso (Kg)</th>
-            <td>{{colaborador.peso}}</td>
+            <td>{{colaborador?.peso}}</td>
             <th scope="row">Estatura (cm)</th>
-            <td>{{colaborador.estatura}}</td>
+            <td>{{colaborador?.estatura}}</td>
             <th scope="row">Tez</th>
-            <td>{{colaborador.tez}}</td>
+            <td>{{colaborador?.tez}}</td>
             <th scope="row">Estado Civil</th>
-            <td>{{colaborador.estadoCivil}}</td>
+            <td>{{colaborador?.estadoCivil}}</td>
           </tr>
           <tr>
             <th scope="row">Teléfono 1</th>
-            <td>{{colaborador.telefono}}</td>
+            <td>{{colaborador?.telefono}}</td>
             <th scope="row">Tipo Teléfono 1</th>
-            <td>{{colaborador.tipoTelefono1}}</td>
+            <td>{{colaborador?.tipoTelefono1}}</td>
             <th scope="row">Teléfono 2</th>
-            <td>{{colaborador.telefono2}}</td>
+            <td>{{colaborador?.telefono2}}</td>
             <th scope="row">Tipo Teléfono 2</th>
-            <td colspan="3">{{colaborador.tipoTelefono2}}</td>
+            <td colspan="3">{{colaborador?.tipoTelefono2}}</td>
           </tr>
           <tr>
             <th scope="row">Correo Electrónico</th>
-            <td colspan="9">{{colaborador.correoElectronico}}</td>
+            <td colspan="9">{{colaborador?.correoElectronico}}</td>
           </tr>
         </tbody>
       </table>
@@ -158,11 +158,11 @@
             <th scope="col">Tipo de Cuenta</th>
             <th scope="col">Numero</th>
           </tr>
-          <tr *ngFor="let cuenta of colaborador.cuentasColaborador">
-            <td>{{cuenta.beneficiario}}</td>
-            <td>{{cuenta.bancoNombre}}</td>
-            <td>{{cuenta.tipoCuenta}}</td>
-            <td>{{cuenta.numero}}</td>
+          <tr *ngFor="let cuenta of colaborador?.cuentasColaborador">
+            <td>{{cuenta?.beneficiario}}</td>
+            <td>{{cuenta?.bancoNombre}}</td>
+            <td>{{cuenta?.tipoCuenta}}</td>
+            <td>{{cuenta?.numero}}</td>
           </tr>
         </tbody>
       </table>
@@ -182,12 +182,12 @@
             <th scope="col">Inicio</th>
             <th scope="col">Terminación</th>
           </tr>
-          <tr *ngFor="let estudio of colaborador.estudios">
-            <td>{{estudio.institucion}}</td>
-            <td>{{estudio.comentarios}}</td>
-            <td>{{estudio.estatusNombre}}</td>
-            <td>{{estudio.fechaInicio}}</td>
-            <td>{{estudio.fechaFin}}</td>
+          <tr *ngFor="let estudio of colaborador?.estudios">
+            <td>{{estudio?.institucion}}</td>
+            <td>{{estudio?.comentarios}}</td>
+            <td>{{estudio?.estatusNombre}}</td>
+            <td>{{estudio?.fechaInicio}}</td>
+            <td>{{estudio?.fechaFin}}</td>
           </tr>
         </tbody>
       </table>
@@ -208,13 +208,13 @@
             <th scope="col">Telefono Referencia</th>
             <th scope="col">Actividades</th>
           </tr>
-          <tr *ngFor="let experiencia of colaborador.experiencia">
-            <td>{{experiencia.empresa}}</td>
-            <td>{{experiencia.fechaInicio}}</td>
-            <td>{{experiencia.fechaFin}}</td>
-            <td>{{experiencia.referencia}}</td>
-            <td>{{experiencia.telefono}}</td>
-            <td>{{experiencia.comentario}}</td>
+          <tr *ngFor="let experiencia of colaborador?.experiencia">
+            <td>{{experiencia?.empresa}}</td>
+            <td>{{experiencia?.fechaInicio}}</td>
+            <td>{{experiencia?.fechaFin}}</td>
+            <td>{{experiencia?.referencia}}</td>
+            <td>{{experiencia?.telefono}}</td>
+            <td>{{experiencia?.comentario}}</td>
           </tr>
         </tbody>
       </table>
@@ -233,16 +233,16 @@
               <tr>
                 <th scope="row">Especialidades</th>
               </tr>
-              <tr *ngFor="let especialidad of colaborador.especialidades">
-                <td>{{especialidad.nombre}}</td>
+              <tr *ngFor="let especialidad of colaborador?.especialidades">
+                <td>{{especialidad?.nombre}}</td>
               </tr>
             </table></td>
             <td><table>
               <tr>
                 <th scope="row">Habilidades</th>
               </tr>
-              <tr *ngFor="let habilidad of colaborador.habilidades">
-                <td>{{habilidad.nombre}}</td>
+              <tr *ngFor="let habilidad of colaborador?.habilidades">
+                <td>{{habilidad?.nombre}}</td>
               </tr>
             </table></td>
           </tr>
@@ -261,36 +261,36 @@
             <th scope="row">Todos los Días</th>
             <!-- <td>{{colaborador.horario}}</td> -->
             <!-- <td>{{colaborador.horario[colaborador.horario.indexOf("todosDiasTurno")+16]}}</td> -->
-            <td>{{disponibilidad.todosDias}}</td>
+            <td>{{disponibilidad?.todosDias}}</td>
           </tr>
           <tr>
             <th scope="row">Lunes</th>
             <!-- <td></td> -->
-            <td>{{disponibilidad.lunes}}</td>
+            <td>{{disponibilidad?.lunes}}</td>
           </tr>
           <tr>
             <th scope="row">Martes</th>
-            <td>{{disponibilidad.martes}}</td>
+            <td>{{disponibilidad?.martes}}</td>
           </tr>
           <tr>
             <th scope="row">Miércoles</th>
-            <td>{{disponibilidad.miercoles}}</td>
+            <td>{{disponibilidad?.miercoles}}</td>
           </tr>
           <tr>
             <th scope="row">Jueves</th>
-            <td>{{disponibilidad.jueves}}</td>
+            <td>{{disponibilidad?.jueves}}</td>
           </tr>
           <tr>
             <th scope="row">Viernes</th>
-            <td>{{disponibilidad.viernes}}</td>
+            <td>{{disponibilidad?.viernes}}</td>
           </tr>
           <tr>
             <th scope="row">Sábado</th>
-            <td>{{disponibilidad.sabado}}</td>
+            <td>{{disponibilidad?.sabado}}</td>
           </tr>
           <tr>
             <th scope="row">Domingo</th>
-            <td>{{disponibilidad.domingo}}</td>
+            <td>{{disponibilidad?.domingo}}</td>
           </tr>
         </tbody>
       </table>
@@ -305,35 +305,35 @@
         <tbody>
           <tr>
             <th scope="row">Permanencia</th>
-            <td>{{colaborador.permanenciaColab}}</td>
+            <td>{{colaborador?.permanenciaColab}}</td>
             <th scope="row">¿Atiende COVID?</th>
-            <td>{{colaborador.atiendeCovid}}</td>
+            <td>{{colaborador?.atiendeCovid}}</td>
             <th scope="row">Antecedentes penales</th>
-            <td>{{colaborador.antecedentePenales}}</td>
+            <td>{{colaborador?.antecedentePenales}}</td>
             <th scope="row">Auto propio</th>
-            <td>{{colaborador.autoPropio}}</td>
+            <td>{{colaborador?.autoPropio}}</td>
           </tr>
           <tr>
             <th scope="row">Disponibilidad para viajar</th>
-            <td colspan="7">{{colaborador.dispuestoViajar}}</td>
+            <td colspan="7">{{colaborador?.dispuestoViajar}}</td>
           </tr>
           <tr>
             <th scope="row">Visa Americana</th>
-            <td>{{colaborador.visa}}</td>
+            <td>{{colaborador?.visa}}</td>
             <th scope="row">Número de Visa</th>
-            <td>{{colaborador.visaNumero}}</td>
+            <td>{{colaborador?.visaNumero}}</td>
             <th scope="row">Tipo de Visa</th>
-            <td>{{colaborador.tipoVisa}}</td>
+            <td>{{colaborador?.tipoVisa}}</td>
             <th scope="row">Expiración</th>
-            <td>{{colaborador.expiracionVisa}}</td>
+            <td>{{colaborador?.expiracionVisa}}</td>
           </tr>
           <tr>
             <th scope="row">Pasaporte</th>
-            <td>{{colaborador.pasaporte}}</td>
+            <td>{{colaborador?.pasaporte}}</td>
             <th scope="row">Número de Pasaporte</th>
-            <td>{{colaborador.pasaporteNumero}}</td>
+            <td>{{colaborador?.pasaporteNumero}}</td>
             <th scope="row">Expiración</th>
-            <td colspan="3">{{colaborador.expiracionPasaporte}}</td>
+            <td colspan="3">{{colaborador?.expiracionPasaporte}}</td>
           </tr>
         </tbody>
       </table>
