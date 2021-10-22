@@ -15,7 +15,6 @@ import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
 import { faUserNurse, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import { NgxCheckboxComponent } from 'ngx-checkbox';
 
 
 export interface DialogData {
@@ -28,19 +27,6 @@ export interface DialogData {
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradoresComponent implements OnInit {
-  showMessage: boolean = false;
-  clicked = false;
-  @ViewChild('myCheckbox', {static: false}) myCB: NgxCheckboxComponent;
-  
-  onShowMessage(event) {
-    this.showMessage = !this.showMessage;
-  }
-
-  onSetCheckBox() {
-    // Set 'checked' or 'no-checked'
-       this.clicked = !this.clicked;
-  }
-
   faUserNurse = faUserNurse;
   faTimes = faTimes;
   faSignOutAlt = faSignOutAlt;

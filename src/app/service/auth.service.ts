@@ -20,7 +20,6 @@ export class AuthService {
     const token = localStorage.getItem('token') !== null ? localStorage.getItem('token') :'ABC' ; // get token from local storage
     const payload = ''; // decode payload of token
     //const parsedPayload = JSON.parse(payload); // convert payload into an Object
-    console.log(token);
     return this.http.post<any>('/api/login/validToken', { token: token },this.httpOptions); // check if token is expired
   }
 
