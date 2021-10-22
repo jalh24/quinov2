@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Colaborador } from '../_model/colaborador';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ColaboradorFiltro } from '../_model/colaboradorFiltro';
 import { NgForm, FormControl } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -60,14 +60,19 @@ export class ColaboradoresComponent implements OnInit {
   diasLaboralesSettings: IDropdownSettings = {};
   zonasSettings: IDropdownSettings = {};
   habilidadesSettings: IDropdownSettings = {};
-
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Token: localStorage.getItem('token')
+    })
+  };
   constructor(
     private router: Router,
     private http: HttpClient, private dialog: MatDialog
   ) { this.colaboradorFiltro = new ColaboradorFiltro(); }
 
   openDialog(idCol): void {
-    this.http.post<any>('/api/colaborador/colaboradorId', { idColaborador: idCol }).subscribe(data => {
+    this.http.post<any>('/api/colaborador/colaboradorId', { idColaborador: idCol },this.httpOptions).subscribe(data => {
       let envio = data.data[0];
       envio.cuentasColaborador=data.data.cuentas;
       envio.estudios = data.data.estudios;
@@ -136,8 +141,7 @@ export class ColaboradoresComponent implements OnInit {
     this.colaboradorFiltro.habilidades = this.habilidadesSelected;
     this.colaboradorFiltro.zonasLaborales = this.selectedItems;
     this.colaboradorFiltro.diasLaborales = this.diasLaboralesSelected;
-    console.log(this.colaboradorFiltro.diasLaborales);
-    this.http.post<any>('/api/colaborador', this.colaboradorFiltro).subscribe(data => {
+    this.http.post<any>('/api/colaborador', this.colaboradorFiltro,this.httpOptions).subscribe(data => {
       this.COLABORADOR_DATA = data.data;
       this.colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
       //this.colaborador = data.data;
@@ -196,25 +200,25 @@ export class ColaboradoresComponent implements OnInit {
   }
 
   public comboSexos() {
-    this.http.get<any>('/api/catalogo/sexos').subscribe(data => {
+    this.http.get<any>('/api/catalogo/sexos',this.httpOptions).subscribe(data => {
       this.sexos = data.data;
     });
   }
 
   public comboPermanencias() {
-    this.http.get<any>('/api/catalogo/permanencias').subscribe(data => {
+    this.http.get<any>('/api/catalogo/permanencias',this.httpOptions).subscribe(data => {
       this.permanencias = data.data;
     });
   }
   
   public comboZonasLaborales() {
-    this.http.get<any>('/api/catalogo/zonasLaborales').subscribe(data => {
+    this.http.get<any>('/api/catalogo/zonasLaborales',this.httpOptions).subscribe(data => {
       this.zonasLaborales = data.data;
     });
   }
 
   public comboHabilidades() {
-    this.http.get<any>('/api/catalogo/habilidades').subscribe(data => {
+    this.http.get<any>('/api/catalogo/habilidades',this.httpOptions).subscribe(data => {
       this.habilidades = data.data;
     });
   }

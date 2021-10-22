@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Cliente } from '../_model/cliente';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { faUserNurse } from '@fortawesome/free-solid-svg-icons';
@@ -27,7 +27,12 @@ export class ClientesComponent implements OnInit {
   CLIENTE_DATA: Cliente[] = [];
   clienteSource = new MatTableDataSource<Cliente>(this.CLIENTE_DATA);
   clienteColumns: string[] = ['nombre',  'telefono', 'correoElectronico'];
-
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Token: localStorage.getItem('token')
+    })
+  };
   @ViewChild('clientesTable', { static: true }) clientesTable: MatTable<any>;
   
   constructor(private router: Router,
@@ -38,7 +43,7 @@ export class ClientesComponent implements OnInit {
   }
 
   public getClientes() {
-    this.http.get<any>('/api/cliente').subscribe(data => {      
+    this.http.get<any>('/api/cliente',this.httpOptions).subscribe(data => {      
       this.CLIENTE_DATA = data.data;     
       this.clienteSource = new MatTableDataSource<Cliente>(this.CLIENTE_DATA);      
       //this.length = data.count.total;

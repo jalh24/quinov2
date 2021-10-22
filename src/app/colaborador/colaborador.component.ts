@@ -5,7 +5,7 @@ import { Pago } from '../_model/pago';
 import { DataTableDirective } from 'angular-datatables';
 import { Estudio } from '../_model/estudio';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Experiencia } from '../_model/experiencia';
 import { NgbToastService, NgbToastType, NgbToast } from 'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -19,7 +19,13 @@ import { FormControl } from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class ColaboradorComponent implements OnInit {
-
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Token: localStorage.getItem('token')
+    })
+  };
+  
   show = false;
   autohide = true;
   selected = new FormControl(0);
@@ -545,7 +551,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.habilidades = this.habilidadesSelected;
 console.log(this.colaborador);
     if (ngForm.valid) {
-      this.http.post<any>('/api/colaborador/create', this.colaborador).subscribe(data => {
+      this.http.post<any>('/api/colaborador/create', this.colaborador,this.httpOptions).subscribe(data => {
         this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");
 
       });
@@ -572,7 +578,6 @@ console.log(this.colaborador);
         this.zonasSelected.push(zona);
       }
     }
-    console.log(this.zonasSelected);
   }
 
   showSuccess(type: any, message: string): void {
@@ -929,123 +934,123 @@ console.log(this.pagoSource);
   }
 
   public listaEstatus() {
-    this.http.get<any>('/api/catalogo/estatus?tipo=ESTUDIO').subscribe(data => {
+    this.http.get<any>('/api/catalogo/estatus?tipo=ESTUDIO',this.httpOptions).subscribe(data => {
       this.estatusEstudios = data.data;
     });
   }
 
   public comboCalificaciones() {
-    this.http.get<any>('/api/catalogo/calificaciones').subscribe(data => {
+    this.http.get<any>('/api/catalogo/calificaciones',this.httpOptions).subscribe(data => {
       this.calificaciones = data.data;
     });
   }
 
   public comboGradoEstudios() {
-    this.http.get<any>('/api/catalogo/gradoEstudios').subscribe(data => {
+    this.http.get<any>('/api/catalogo/gradoEstudios',this.httpOptions).subscribe(data => {
       this.gradoEstudios = data.data;
     });
   }
 
   public comboTiposColaboradores() {
-    this.http.get<any>('/api/catalogo/tiposColaboradores').subscribe(data => {
+    this.http.get<any>('/api/catalogo/tiposColaboradores',this.httpOptions).subscribe(data => {
       this.tiposColaboradores = data.data;
     });
   }
 
   public comboTeces() {
-    this.http.get<any>('/api/catalogo/teces').subscribe(data => {
+    this.http.get<any>('/api/catalogo/teces',this.httpOptions).subscribe(data => {
       this.teces = data.data;
     });
   }
 
   public comboTipoVisas() {
-    this.http.get<any>('/api/catalogo/tipoVisas').subscribe(data => {
+    this.http.get<any>('/api/catalogo/tipoVisas',this.httpOptions).subscribe(data => {
       this.tipoVisas = data.data;
     });
   }
 
   public comboBancos() {
-    this.http.get<any>('/api/catalogo/bancos').subscribe(data => {
+    this.http.get<any>('/api/catalogo/bancos',this.httpOptions).subscribe(data => {
       this.bancos = data.data;
     });
   }
 
   public comboEstadosCiviles() {
-    this.http.get<any>('/api/catalogo/comboEstadosCiviles').subscribe(data => {
+    this.http.get<any>('/api/catalogo/comboEstadosCiviles',this.httpOptions).subscribe(data => {
       this.estadosCiviles = data.data;
     });
   }
 
   public comboTiposTelefono() {
-    this.http.get<any>('/api/catalogo/tiposTelefono').subscribe(data => {
+    this.http.get<any>('/api/catalogo/tiposTelefono',this.httpOptions).subscribe(data => {
       this.tiposTelefono = data.data;
     });
   }
 
   public comboPermanencias() {
-    this.http.get<any>('/api/catalogo/permanencias').subscribe(data => {
+    this.http.get<any>('/api/catalogo/permanencias',this.httpOptions).subscribe(data => {
       this.permanencias = data.data;
     });
   }
 
   public comboZonasLaborales() {
-    this.http.get<any>('/api/catalogo/zonasLaborales').subscribe(data => {
+    this.http.get<any>('/api/catalogo/zonasLaborales',this.httpOptions).subscribe(data => {
       this.zonasLaborales = data.data;
     });
   }
 
   public comboEspecialidades() {
-    this.http.get<any>('/api/catalogo/especialidades').subscribe(data => {
+    this.http.get<any>('/api/catalogo/especialidades',this.httpOptions).subscribe(data => {
       this.especialidades = data.data;
     });
   }
 
   public comboHabilidades() {
-    this.http.get<any>('/api/catalogo/habilidades').subscribe(data => {
+    this.http.get<any>('/api/catalogo/habilidades',this.httpOptions).subscribe(data => {
       this.habilidades = data.data;
     });
   }
 
   public comboColonias() {
-    this.http.get<any>('/api/catalogo/colonias').subscribe(data => {
+    this.http.get<any>('/api/catalogo/colonias',this.httpOptions).subscribe(data => {
       this.colonias = data.data;
     });
   }
 
   public comboSexos() {
-    this.http.get<any>('/api/catalogo/sexos').subscribe(data => {
+    this.http.get<any>('/api/catalogo/sexos',this.httpOptions).subscribe(data => {
       this.sexos = data.data;
     });
   }
 
   public comboCiudades(idEstadoNacimiento) {
     this.colaborador.idEstadoNacimiento = idEstadoNacimiento;
-    this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento).subscribe(data => {
+    this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento,this.httpOptions).subscribe(data => {
       this.ciudades = data.data;
     });
   }
 
   public comboEstados() {
-    this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais).subscribe(data => {
+    this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais,this.httpOptions).subscribe(data => {
       this.estados = data.data;
     });
   }
 
   public comboPaises() {
-    this.http.get<any>('/api/catalogo/paises').subscribe(data => {
+    this.http.get<any>('/api/catalogo/paises',this.httpOptions).subscribe(data => {
       this.paises = data.data;
     });
   }
 
   public onCodigoPostal(selectedCodigoPostal) {
     this.colaborador.codigoPostal = selectedCodigoPostal;
-    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal).subscribe(data => {
+    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal,this.httpOptions).subscribe(data => {
       this.colonias = data.data;
       this.colaborador.idCiudad = data.data[0].idCiudad;
-      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad).subscribe(dataCiudad => {
+      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad,this.httpOptions).subscribe(dataCiudad => {
         this.ciudadesDir = dataCiudad.data;
         this.colaborador.idEstado = dataCiudad.data[0].idEstado;
-        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado).subscribe(data => {
+        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado,this.httpOptions).subscribe(data => {
           this.estadosDir = data.data;
         });
       });

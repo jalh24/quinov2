@@ -5,15 +5,18 @@ import { ClienteFisicoComponent} from './cliente-fisico/cliente-fisico.component
 import { ColaboradorComponent } from './colaborador/colaborador.component';
 import { ColaboradoresComponent } from './colaboradores/colaboradores.component';
 import { IndexComponent } from './index/index.component';
+import { LoginComponent } from './login/login.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { AuthGuard } from './service/auth.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: IndexComponent },
-  { path: 'colaborador', component: ColaboradorComponent },
-  { path: 'colaboradores', component: ColaboradoresComponent },
-  { path: 'clientemoral', pathMatch: 'full', component: ClienteMoralComponent},
-  { path: 'clientefisico', component: ClienteFisicoComponent },
-  { path: 'clientes', pathMatch: 'full', component: ClientesComponent },
+  { path: '', pathMatch: 'full', component: LoginComponent },
+  { path: 'dashboard', component: IndexComponent,canActivate: [AuthGuard] },
+  { path: 'colaborador', component: ColaboradorComponent,canActivate: [AuthGuard] },
+  { path: 'colaboradores', component: ColaboradoresComponent, canActivate: [AuthGuard] },
+  { path: 'clientemoral', component: ClienteMoralComponent, canActivate: [AuthGuard]},
+  { path: 'clientefisico', component: ClienteFisicoComponent, canActivate: [AuthGuard] },
+  { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard] },
 
 ];
 

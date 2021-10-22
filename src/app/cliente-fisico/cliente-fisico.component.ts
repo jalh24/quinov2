@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgbToastService, NgbToastType, NgbToast } from 'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
@@ -19,7 +19,12 @@ export class ClienteFisicoComponent implements OnInit {
   selectedCodigoPostal = null;
 
   public cliente: Cliente;
-  
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Token: localStorage.getItem('token')
+    })
+  };
   sexos: any[];
   complexiones: any[];
   parentescos: any[];
@@ -108,7 +113,7 @@ export class ClienteFisicoComponent implements OnInit {
 
    console.log(this.cliente);
     if (ngForm.valid) {
-      this.http.post<any>('/api/cliente/create', this.cliente).subscribe(data => {
+      this.http.post<any>('/api/cliente/create', this.cliente,this.httpOptions).subscribe(data => {
         this.showSuccess(NgbToastType.Success, "Se registro el cliente exitosamente");
 
       });
@@ -151,69 +156,69 @@ export class ClienteFisicoComponent implements OnInit {
 
   
   public comboEstadosCiviles() {
-    this.http.get<any>('/api/catalogo/comboEstadosCiviles').subscribe(data => {
+    this.http.get<any>('/api/catalogo/comboEstadosCiviles',this.httpOptions).subscribe(data => {
       this.estadosCiviles = data.data;
     });
   }
 
   public comboTiposTelefono() {
-    this.http.get<any>('/api/catalogo/tiposTelefono').subscribe(data => {
+    this.http.get<any>('/api/catalogo/tiposTelefono',this.httpOptions).subscribe(data => {
       this.tiposTelefono = data.data;
     });
   }
 
   public comboColonias() {
-    this.http.get<any>('/api/catalogo/colonias').subscribe(data => {
+    this.http.get<any>('/api/catalogo/colonias',this.httpOptions).subscribe(data => {
       this.colonias = data.data;
     });
   }
 
   public comboSexos() {
-    this.http.get<any>('/api/catalogo/sexos').subscribe(data => {
+    this.http.get<any>('/api/catalogo/sexos',this.httpOptions).subscribe(data => {
       this.sexos = data.data;
     });
   }
 
   public comboCiudades(idEstadoNacimiento) {
     this.cliente.idEstadoNacimiento = idEstadoNacimiento;
-    this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento).subscribe(data => {
+    this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento,this.httpOptions).subscribe(data => {
       this.ciudades = data.data;
     });
   }
 
   public comboComplexiones() {
-    this.http.get<any>('/api/catalogo/complexiones').subscribe(data => {
+    this.http.get<any>('/api/catalogo/complexiones',this.httpOptions).subscribe(data => {
       this.complexiones = data.data;
     });
   }
 
   public comboEstados() {
-    this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais).subscribe(data => {
+    this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais,this.httpOptions).subscribe(data => {
       this.estados = data.data;
     });
   }
 
   public comboParentescos() {
-    this.http.get<any>('/api/catalogo/parentescos').subscribe(data => {
+    this.http.get<any>('/api/catalogo/parentescos',this.httpOptions).subscribe(data => {
       this.parentescos = data.data;
     });
   }
 
   public comboPaises() {
-    this.http.get<any>('/api/catalogo/paises').subscribe(data => {
+    this.http.get<any>('/api/catalogo/paises',this.httpOptions).subscribe(data => {
       this.paises = data.data;
     });
   }
 
   public onCodigoPostal(selectedCodigoPostal) {
     this.cliente.codigoPostal = selectedCodigoPostal;
-    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal).subscribe(data => {
+    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal,this.httpOptions).subscribe(data => {
       this.colonias = data.data;
       this.cliente.idCiudad = data.data[0].idCiudad;
-      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad).subscribe(dataCiudad => {
+      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad,this.httpOptions).subscribe(dataCiudad => {
         this.ciudadesDir = dataCiudad.data;
         this.cliente.idEstado = dataCiudad.data[0].idEstado;
-        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado).subscribe(data => {
+        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado,this.httpOptions).subscribe(data => {
           this.estadosDir = data.data;
         });
       });
