@@ -138,7 +138,11 @@
           </tr>
           <tr>
             <th scope="row">Correo Electrónico</th>
-            <td colspan="9">{{colaborador?.correoElectronico}}</td>
+            <td colspan="3">{{colaborador?.correoElectronico}}</td>
+            <th scope="row">¿Tiene hijos?</th>
+            <td colspan="2">{{colaborador?.hijos}}</td>
+            <th scope="row">¿Viven con usted?</th>
+            <td colspan="2">{{colaborador?.hijosViven}}</td>
           </tr>
         </tbody>
       </table>
@@ -315,7 +319,11 @@
           </tr>
           <tr>
             <th scope="row">Disponibilidad para viajar</th>
-            <td colspan="7">{{colaborador?.dispuestoViajar}}</td>
+            <td >{{colaborador?.dispuestoViajar}}</td>
+            <th scope="row">Auto propio</th>
+            <td>{{colaborador?.autoPropio}}</td>
+            <th scope="row">Licencia Vigente</th>
+            <td colspan="3">{{colaborador?.licenciaManejar}}</td>            
           </tr>
           <tr>
             <th scope="row">Visa Americana</th>
@@ -334,6 +342,26 @@
             <td>{{colaborador?.pasaporteNumero}}</td>
             <th scope="row">Expiración</th>
             <td colspan="3">{{colaborador?.expiracionPasaporte}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">¿Está dispuesto(a) a hacerle de comer al paciente si así lo requiere?</th>
+            <td colspan="5">{{colaborador?.hacerComer}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">¿Está dispuesto(a) a limpiar lo utilizado en utensilios de cocina ocupados?</th>
+            <td colspan="5">{{colaborador?.limpiarUtensiliosCocina}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">¿Está dispuesto(a) a limpiar el dormitorio del paciente si así lo requiere?</th>
+            <td colspan="5">{{colaborador?.limpiarDormitorio}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">¿Está dispuesto(a) a limpiar el baño del paciente si así lo requiere?</th>
+            <td colspan="5">{{colaborador?.limpiarBano}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="5">¿Está dispuesto(a) a ayudar al paciente en el baño, regadera, cama, y cambiar el pañal si así lo requiere?</th>
+            <td colspan="3">{{colaborador?.ayudaPaciente}}</td>
           </tr>
         </tbody>
       </table>

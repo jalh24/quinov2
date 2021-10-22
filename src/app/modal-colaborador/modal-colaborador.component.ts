@@ -68,6 +68,46 @@ export class ModalColaboradorComponent implements OnInit {
       } else if (this.colaborador.pasaporte==0){
         this.colaborador.pasaporte = "No";
       }
+      if(this.colaborador.hijos==1){
+        this.colaborador.hijos = "Si";
+      } else if (this.colaborador.hijos==0){
+        this.colaborador.hijos = "No";
+      }
+      if(this.colaborador.hijosViven==1){
+        this.colaborador.hijosViven = "Si";
+      } else if (this.colaborador.hijosViven==0){
+        this.colaborador.hijosViven = "No";
+      }
+      if(this.colaborador.licenciaManejar==1){
+        this.colaborador.licenciaManejar = "Si";
+      } else if (this.colaborador.licenciaManejar==0){
+        this.colaborador.licenciaManejar = "No";
+      }
+      if(this.colaborador.hacerComer==1){
+        this.colaborador.hacerComer = "Si";
+      } else if (this.colaborador.hacerComer==0){
+        this.colaborador.hacerComer = "No";
+      }
+      if(this.colaborador.limpiarUtensiliosCocina==1){
+        this.colaborador.limpiarUtensiliosCocina = "Si";
+      } else if (this.colaborador.limpiarUtensiliosCocina==0){
+        this.colaborador.limpiarUtensiliosCocina = "No";
+      }
+      if(this.colaborador.limpiarDormitorio==1){
+        this.colaborador.limpiarDormitorio = "Si";
+      } else if (this.colaborador.limpiarDormitorio==0){
+        this.colaborador.limpiarDormitorio = "No";
+      }
+      if(this.colaborador.limpiarBano==1){
+        this.colaborador.limpiarBano = "Si";
+      } else if (this.colaborador.limpiarBano==0){
+        this.colaborador.limpiarBano = "No";
+      }
+      if(this.colaborador.ayudaPaciente==1){
+        this.colaborador.ayudaPaciente = "Si";
+      } else if (this.colaborador.ayudaPaciente==0){
+        this.colaborador.ayudaPaciente = "No";
+      }
       if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18))=="Matutino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18))=="Vespertino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18))=="Nocturno")){
         this.disponibilidad.todosDias = this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18));
       } else {
