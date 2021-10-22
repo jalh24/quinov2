@@ -6,6 +6,7 @@ import { ColaboradorComponent } from './colaborador/colaborador.component';
 import { ColaboradoresComponent } from './colaboradores/colaboradores.component';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
+//import { SigninComponent } from './signin/signin.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { AuthGuard } from './service/auth.guard';
 
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'clientemoral', component: ClienteMoralComponent, canActivate: [AuthGuard]},
   { path: 'clientefisico', component: ClienteFisicoComponent, canActivate: [AuthGuard] },
   { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard] },
-
+  //{ path: 'alta', component: SigninComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
