@@ -123,7 +123,7 @@
           <input maxlength="1" size="1" type="text" class="form-control" id="idCalificacion" [(ngModel)]="colaboradorFiltro.calificacion2" name="calificacionHasta"
             placeholder="Hasta">
         </td>
-        <td colspan="3">
+        <td colspan="2">
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="covidFiltro"
               [(ngModel)]="colaboradorFiltro.atiendeCovid">
@@ -140,7 +140,60 @@
           </div>
         </td>
         <td>
+          <button type="button" class="btn btn-primary" (click)="mostrarFiltros()">{{filtrosOcultos ? 'Ocultar' : 'Mostrar' }} Filtros</button>
+        </td>
+        <td>
           <button type="button" class="btn btn-danger" (click)="resetFields()">Limpiar Filtro</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table" *ngIf="filtrosOcultos">
+    <tbody>
+      <tr>
+        <td>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="hijosFiltro"
+              [(ngModel)]="colaboradorFiltro.hijos">
+            <label class="form-check-label" for="hijosFiltro">Tiene hijos</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="hijosVivenFiltro"
+              [(ngModel)]="colaboradorFiltro.hijosViven">
+            <label class="form-check-label" for="hijosVivenFiltro">Viven con colaborador</label>
+          </div>
+        </td>
+        <td>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="hacerComerFiltro"
+              [(ngModel)]="colaboradorFiltro.hacerComer">
+            <label class="form-check-label" for="hacerComerFiltro">Hace de comer</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="limpiarUtensiliosCocinaFiltro"
+              [(ngModel)]="colaboradorFiltro.limpiarUtensiliosCocina">
+            <label class="form-check-label" for="limpiarUtensiliosCocinaFiltro">Limpia utensilios</label>
+          </div>
+        </td>
+        <td>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="limpiarDormitorioFiltro"
+              [(ngModel)]="colaboradorFiltro.limpiarDormitorio">
+            <label class="form-check-label" for="limpiarDormitorioFiltro">Limpia dormitorio</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="limpiarBanoFiltro"
+              [(ngModel)]="colaboradorFiltro.limpiarBano">
+            <label class="form-check-label" for="limpiarBanoFiltro">Limpia baño</label>
+          </div>
+        </td>
+        <td>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="ayudaPacienteFiltro"
+              [(ngModel)]="colaboradorFiltro.ayudaPaciente">
+            <label class="form-check-label" for="ayudaPacienteFiltro">Apoya en baño, regadera, cama y cambio de pañal</label>
+          </div>
         </td>
       </tr>
     </tbody>

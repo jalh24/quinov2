@@ -47,7 +47,7 @@
           </tr>
           <tr>
             <th scope="row">Calificación</th>
-            <td></td>
+            <td>{{colaborador.calificacionConId}}</td>
             <th scope="row">Tipo de Colaborador</th>
             <td>{{colaborador.tipoColaboradorConId}}</td>
           </tr>
@@ -208,13 +208,13 @@
             <th scope="col">Telefono Referencia</th>
             <th scope="col">Actividades</th>
           </tr>
-          <tr *ngFor="let experiencias of colaborador.experiencia">
-            <td>{{experiencias.empresa}}</td>
-            <td>{{experiencias.fechaInicio}}</td>
-            <td>{{experiencias.fechaFin}}</td>
-            <td>{{experiencias.referencia}}</td>
-            <td>{{experiencias.telefono}}</td>
-            <td>{{experiencias.comentario}}</td>
+          <tr *ngFor="let experiencia of colaborador.experiencia">
+            <td>{{experiencia.empresa}}</td>
+            <td>{{experiencia.fechaInicio}}</td>
+            <td>{{experiencia.fechaFin}}</td>
+            <td>{{experiencia.referencia}}</td>
+            <td>{{experiencia.telefono}}</td>
+            <td>{{experiencia.comentario}}</td>
           </tr>
         </tbody>
       </table>
@@ -228,10 +228,23 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Especialidades</th>
-            <td></td>
-            <th scope="row">Habilidades</th>
-            <td></td>
+            <!-- <th scope="row">Especialidades</th> -->
+            <td><table>
+              <tr>
+                <th scope="row">Especialidades</th>
+              </tr>
+              <tr *ngFor="let especialidad of colaborador.especialidades">
+                <td>{{especialidad.nombre}}</td>
+              </tr>
+            </table></td>
+            <td><table>
+              <tr>
+                <th scope="row">Habilidades</th>
+              </tr>
+              <tr *ngFor="let habilidad of colaborador.habilidades">
+                <td>{{habilidad.nombre}}</td>
+              </tr>
+            </table></td>
           </tr>
         </tbody>
       </table>
@@ -248,36 +261,36 @@
             <th scope="row">Todos los Días</th>
             <!-- <td>{{colaborador.horario}}</td> -->
             <!-- <td>{{colaborador.horario[colaborador.horario.indexOf("todosDiasTurno")+16]}}</td> -->
-            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("todosDiasTurno")+17,colaborador.horario.indexOf('"',colaborador.horario.indexOf("todosDiasTurno")+18))}}</td>
+            <td>{{disponibilidad.todosDias}}</td>
           </tr>
           <tr>
             <th scope="row">Lunes</th>
             <!-- <td></td> -->
-            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("lunesTurno")+13,colaborador.horario.indexOf('"',colaborador.horario.indexOf("lunesTurno")+14))}}</td>
+            <td>{{disponibilidad.lunes}}</td>
           </tr>
           <tr>
             <th scope="row">Martes</th>
-            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("martesTurno")+14,colaborador.horario.indexOf('"',colaborador.horario.indexOf("martesTurno")+15))}}</td>
+            <td>{{disponibilidad.martes}}</td>
           </tr>
           <tr>
             <th scope="row">Miércoles</th>
-            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("miercolesTurno")+17,colaborador.horario.indexOf('"',colaborador.horario.indexOf("miercolesTurno")+18))}}</td>
+            <td>{{disponibilidad.miercoles}}</td>
           </tr>
           <tr>
             <th scope="row">Jueves</th>
-            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("juevesTurno")+14,colaborador.horario.indexOf('"',colaborador.horario.indexOf("juevesTurno")+15))}}</td>
+            <td>{{disponibilidad.jueves}}</td>
           </tr>
           <tr>
             <th scope="row">Viernes</th>
-            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("viernesTurno")+15,colaborador.horario.indexOf('"',colaborador.horario.indexOf("viernesTurno")+16))}}</td>
+            <td>{{disponibilidad.viernes}}</td>
           </tr>
           <tr>
             <th scope="row">Sábado</th>
-            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("sabadoTurno")+14,colaborador.horario.indexOf('"',colaborador.horario.indexOf("sabadoTurno")+15))}}</td>
+            <td>{{disponibilidad.sabado}}</td>
           </tr>
           <tr>
             <th scope="row">Domingo</th>
-            <td>{{colaborador.horario.substring(colaborador.horario.indexOf("domingoTurno")+15,colaborador.horario.length)}}</td>
+            <td>{{disponibilidad.domingo}}</td>
           </tr>
         </tbody>
       </table>
@@ -294,19 +307,19 @@
             <th scope="row">Permanencia</th>
             <td>{{colaborador.permanenciaColab}}</td>
             <th scope="row">¿Atiende COVID?</th>
-            <td></td>
+            <td>{{colaborador.atiendeCovid}}</td>
             <th scope="row">Antecedentes penales</th>
-            <td></td>
+            <td>{{colaborador.antecedentePenales}}</td>
             <th scope="row">Auto propio</th>
-            <td></td>
+            <td>{{colaborador.autoPropio}}</td>
           </tr>
           <tr>
             <th scope="row">Disponibilidad para viajar</th>
-            <td colspan="7"></td>
+            <td colspan="7">{{colaborador.dispuestoViajar}}</td>
           </tr>
           <tr>
             <th scope="row">Visa Americana</th>
-            <td></td>
+            <td>{{colaborador.visa}}</td>
             <th scope="row">Número de Visa</th>
             <td>{{colaborador.visaNumero}}</td>
             <th scope="row">Tipo de Visa</th>
@@ -316,7 +329,7 @@
           </tr>
           <tr>
             <th scope="row">Pasaporte</th>
-            <td></td>
+            <td>{{colaborador.pasaporte}}</td>
             <th scope="row">Número de Pasaporte</th>
             <td>{{colaborador.pasaporteNumero}}</td>
             <th scope="row">Expiración</th>

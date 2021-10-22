@@ -1,8 +1,11 @@
-<nav class="navbar navbar-light bg-primary">
+<nav class="navbar navbar-light bg-primary" *ngIf="activeSesion">
   <div class="container">
     <a class="navbar-brand" href="/dashboard">
       <img src="assets/images/logo.png" alt="" height="36">
     </a>
+    <div class="nav-item">
+      <button type="button" class="btn btn-outline-danger ml-auto" (click)="singOut()"><fa-icon [icon]="faSignOutAlt"></fa-icon> Cerrar Sesión</button>
+    </div>  
   </div>
 </nav>
 <router-outlet></router-outlet>

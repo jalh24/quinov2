@@ -17,10 +17,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   isLoggedIn(): Observable<any> {
-    const token = localStorage.getItem('token'); // get token from local storage
+    const token = localStorage.getItem('token') !== null ? localStorage.getItem('token') :'ABC' ; // get token from local storage
     const payload = ''; // decode payload of token
     //const parsedPayload = JSON.parse(payload); // convert payload into an Object
-    return this.http.post<any>('/api/login/validToken', { token:token},this.httpOptions); // check if token is expired
+    console.log(token);
+    return this.http.post<any>('/api/login/validToken', { token: token },this.httpOptions); // check if token is expired
   }
 
   login(user:string,password:string): Observable<any>{

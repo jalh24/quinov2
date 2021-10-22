@@ -5,6 +5,7 @@ import { NgbToastService, NgbToastType, NgbToast } from 'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { Cliente } from '../_model/cliente';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Cliente } from '../_model/cliente';
   styleUrls: ['./cliente-fisico.component.scss']
 })
 export class ClienteFisicoComponent implements OnInit {
-
+  faSignOutAlt = faSignOutAlt;
   selectedPais = 1;
   selectedEstado = null;
   selectedCodigoPostal = null;

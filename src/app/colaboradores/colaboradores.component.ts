@@ -13,7 +13,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
-import { faUserNurse, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faUserNurse, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 export interface DialogData {
   data: any;
@@ -27,7 +27,9 @@ export interface DialogData {
 export class ColaboradoresComponent implements OnInit {
   faUserNurse = faUserNurse;
   faTimes = faTimes;
+  faSignOutAlt = faSignOutAlt;
   idModal: string;
+  filtrosOcultos: boolean = false;
   @ViewChild(DataTableDirective, { static: false })
   private datatableElement: DataTableDirective;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -50,6 +52,7 @@ export class ColaboradoresComponent implements OnInit {
     {id: 6, nombre: 'Sabado'},
     {id: 7, nombre: 'Domingo'},
   ];
+
   permanencias: any;
   zonasLaborales: any;
   colaboradorFiltro: ColaboradorFiltro;
@@ -141,7 +144,7 @@ export class ColaboradoresComponent implements OnInit {
     this.colaboradorFiltro.habilidades = this.habilidadesSelected;
     this.colaboradorFiltro.zonasLaborales = this.selectedItems;
     this.colaboradorFiltro.diasLaborales = this.diasLaboralesSelected;
-    this.http.post<any>('/api/colaborador', this.colaboradorFiltro,this.httpOptions).subscribe(data => {
+    this.http.post<any>('/api/colaborador/lista', this.colaboradorFiltro,this.httpOptions).subscribe(data => {
       this.COLABORADOR_DATA = data.data;
       this.colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
       //this.colaborador = data.data;
@@ -194,6 +197,13 @@ export class ColaboradoresComponent implements OnInit {
     this.colaboradorFiltro.dispuestoViajar = null;
     this.colaboradorFiltro.especialidades = null;
     this.colaboradorFiltro.habilidades = null;
+    this.colaboradorFiltro.hijos = null;
+    this.colaboradorFiltro.hijosViven = null;
+    this.colaboradorFiltro.hacerComer = null;
+    this.colaboradorFiltro.limpiarUtensiliosCocina = null;
+    this.colaboradorFiltro.limpiarDormitorio = null;
+    this.colaboradorFiltro.limpiarBano = null;
+    this.colaboradorFiltro.ayudaPaciente = null;
     this.habilidadesSelected = null;
     this.selectedItems = null;
     this.diasLaboralesSelected = null;
@@ -233,6 +243,14 @@ export class ColaboradoresComponent implements OnInit {
 
   onSelectAll(items: any) {
     console.log(items);
+  }
+
+  mostrarFiltros() {
+    if (this.filtrosOcultos) {
+      this.filtrosOcultos = false;
+    } else {
+      this.filtrosOcultos = true;
+    }
   }
 
 }

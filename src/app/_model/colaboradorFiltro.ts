@@ -23,6 +23,13 @@ export class ColaboradorFiltro {
     public habilidades:any[];
     public limit:number;
     public start:number;
+    public hijos:boolean;
+    public hijosViven:boolean;
+    public hacerComer:boolean;
+    public limpiarUtensiliosCocina:boolean;
+    public limpiarDormitorio:boolean;
+    public limpiarBano:boolean;
+    public ayudaPaciente:boolean;
     constructor() {
     }
 }            

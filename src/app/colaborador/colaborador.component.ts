@@ -11,6 +11,7 @@ import { NgbToastService, NgbToastType, NgbToast } from 'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Estatus } from '../_model/estatus';
 import { FormControl } from '@angular/forms';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-colaborador',
@@ -26,6 +27,8 @@ export class ColaboradorComponent implements OnInit {
     })
   };
   
+  faSignOutAlt = faSignOutAlt;
+
   show = false;
   autohide = true;
   selected = new FormControl(0);
@@ -53,6 +56,7 @@ export class ColaboradorComponent implements OnInit {
   textBoxDisabledOtraZon = true;
   textBoxDisabledOtraHab = true;
   textBoxDisabledVis = true;
+  radioDisabledHijosViven = true;
   textBoxDisabledPas = true;
   textBoxDisabledDateofWorkL = true;
   textBoxDisabledDateofWorkM = true;
@@ -148,6 +152,7 @@ export class ColaboradorComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
+  
 
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -261,6 +266,8 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.a_paterno = null;
     this.colaborador.a_materno = null;
     this.colaborador.correoElectronico = null;
+    this.colaborador.hijos = false;
+    this.colaborador.hijosViven = false;
     this.colaborador.foto = null;
     this.colaborador.fotoNombre = null;
     this.colaborador.rfc = null;
@@ -273,9 +280,10 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.idEstadoCivil = null;
     this.colaborador.idTez = null;
     this.colaborador.sgmm = null;
-    this.colaborador.atiendeCovid = null;
-    this.colaborador.antecedentePenales = null;
+    this.colaborador.atiendeCovid = false;
+    this.colaborador.antecedentePenales = false;
     this.colaborador.autoPropio = false;
+    this.colaborador.licenciaManejar = false;
     this.colaborador.dispuestoViajar = false;
     this.colaborador.visa = false;
     this.colaborador.visaNumero = null;
@@ -287,6 +295,11 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.pasaporteNumero = null;
     this.colaborador.expiracionPasaporte = null;
     this.colaborador.pasaporteImagen = null;
+    this.colaborador.hacerComer = false;
+    this.colaborador.limpiarUtensiliosCocina = false;
+    this.colaborador.limpiarDormitorio = false;
+    this.colaborador.limpiarBano = false;
+    this.colaborador.ayudaPaciente = false;
     this.colaborador.pasaporteNombre = null;
     this.colaborador.ine1 = null;
     this.colaborador.ine1Nombre = null;
@@ -395,6 +408,13 @@ export class ColaboradorComponent implements OnInit {
     this.estudio.estatus = this.estatusEstudios.find(estu => { return estu.nombre === event });
     console.log(this.estudio);
     //this.estudio.estatus = event;
+  }
+
+  enableHijosViven() {
+    this.radioDisabledHijosViven = false;
+  }
+  disableHijosViven() {
+    this.radioDisabledHijosViven = true;
   }
 
   enableTextBoxVis() {
@@ -549,11 +569,13 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.experiencias = this.experienciaSource.data;
     this.colaborador.especialidades = this.especialidadesSelected;
     this.colaborador.habilidades = this.habilidadesSelected;
-console.log(this.colaborador);
+    console.log(this.colaborador);
     if (ngForm.valid) {
       this.http.post<any>('/api/colaborador/create', this.colaborador,this.httpOptions).subscribe(data => {
         this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");
-
+        window.history.back();
+        alert("Se creo el colaborador exitosamente");
+        
       });
       this.inicializaObjetos();
     } else {
@@ -771,7 +793,6 @@ console.log(this.colaborador);
 
   onBanco(event) {
     this.pago.banco = this.bancos.find(banco => { return banco.idBanco == event });
-    console.log(this.pago);
   }
 
   agregarPago() {
@@ -785,7 +806,6 @@ console.log(this.colaborador);
     }
     this.PAGO_DATA.push(this.pago);
     this.pagoSource = new MatTableDataSource(this.PAGO_DATA);
-console.log(this.pagoSource);
     this.pago = {
       idPago: null,
       nombre: null,
