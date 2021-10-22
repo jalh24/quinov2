@@ -14,6 +14,8 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
 import { faUserNurse, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+
 
 export interface DialogData {
   data: any;
@@ -28,6 +30,7 @@ export class ColaboradoresComponent implements OnInit {
   faUserNurse = faUserNurse;
   faTimes = faTimes;
   faSignOutAlt = faSignOutAlt;
+  faWhatsapp = faWhatsapp;
   idModal: string;
   filtrosOcultos: boolean = false;
   @ViewChild(DataTableDirective, { static: false })
@@ -72,6 +75,7 @@ export class ColaboradoresComponent implements OnInit {
   openDialog(idCol): void {
     this.http.post<any>('/api/colaborador/colaboradorId', { idColaborador: idCol }).subscribe(data => {
       let envio = data.data[0];
+      console.log(data.data);
       envio.cuentasColaborador=data.data.cuentas;
       envio.estudios = data.data.estudios;
       envio.experiencia = data.data.experiencia;
