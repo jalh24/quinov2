@@ -15,6 +15,7 @@ import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
 import { faUserNurse, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { ModalWhatsappComponent } from '../modal-whatsapp/modal-whatsapp.component';
 
 
 export interface DialogData {
@@ -60,6 +61,7 @@ export class ColaboradoresComponent implements OnInit {
   zonasLaborales: any;
   colaboradorFiltro: ColaboradorFiltro;
   habilidades: any;
+  whatsappSelected: any[];
   habilidadesSelected = [];
   diasLaboralesSelected = [];
   selectedItems: any = [];
@@ -95,12 +97,40 @@ export class ColaboradoresComponent implements OnInit {
 
   }
 
+  whatsappSelect(whatsapp: any) {
+    if (whatsapp != null && !this.whatsappSelected.includes(whatsapp)){
+      this.whatsappSelected.push(whatsapp);
+    } else {
+    if (this.whatsappSelected.includes(whatsapp)) {
+      this.whatsappSelected.forEach((element,index)=>{
+        if(element==whatsapp) this.whatsappSelected.splice(index,1);
+     });
+    }
+  }
+    
+    console.log(this.whatsappSelected);
+  }
+
+  openDialogWhatsapp(): void {
+    if (this.whatsappSelected.length != 0) {
+      const dialogRef = this.dialog.open(ModalWhatsappComponent, {
+        width: '1110px'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    } else {
+      alert("Se debe seleccionar al menos un colaborador");
+    }
+  }
+
   ngOnInit(): void {
     this.getColaboradores();
     this.comboSexos();
     this.comboPermanencias();
     this.comboZonasLaborales();
     this.comboHabilidades();
+    this.inicializaObjetos();
 
     this.zonasSettings = {
       singleSelection: false,
@@ -131,6 +161,10 @@ export class ColaboradoresComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+  }
+
+  inicializaObjetos() {
+    this.whatsappSelected = [];
   }
 
   ngAfterViewInit() {

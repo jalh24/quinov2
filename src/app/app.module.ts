@@ -26,6 +26,7 @@ import { ClienteFisicoComponent } from './cliente-fisico/cliente-fisico.componen
 import { ClienteMoralComponent } from './cliente-moral/cliente-moral.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { LoginComponent } from './login/login.component';
+import { ModalWhatsappComponent } from './modal-whatsapp/modal-whatsapp.component';
 //import { SigninComponent } from './signin/signin.component';
 
 
@@ -40,6 +41,7 @@ import { LoginComponent } from './login/login.component';
     ClienteMoralComponent,
     ClientesComponent,
     LoginComponent,
+    ModalWhatsappComponent,
   //  SigninComponent
   ],
   imports: [
