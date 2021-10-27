@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, Inject } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { DataTableDirective } from 'angular-datatables';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -20,7 +21,10 @@ export class ClientesComponent implements OnInit {
   faUserNurse = faUserNurse;
   faSignOutAlt = faSignOutAlt;
   @ViewChild(DataTableDirective, { static: false })
-  clienteFiltro: ClienteFiltro;
+  
+  clienteFiltro: ClienteFiltro = new ClienteFiltro();
+  correo: String;
+  nombre: String;
   public cliente: Cliente;
   pageEvent: PageEvent;
   pageIndex: number = 0;
@@ -42,7 +46,6 @@ export class ClientesComponent implements OnInit {
   
   constructor(private router: Router,
     private http: HttpClient) { 
-      this.clienteFiltro = new ClienteFiltro();
     }
 
   ngOnInit(): void {
@@ -69,6 +72,8 @@ export class ClientesComponent implements OnInit {
   public resetFields() {
     this.clienteFiltro = new ClienteFiltro();
     this.clienteFiltro.idTipoCliente = null;   
+    this.clienteFiltro.correoElectronico='';
+    console.log(this.clienteFiltro);
   }
 
   public comboTipoClientes() {
