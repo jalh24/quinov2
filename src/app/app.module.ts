@@ -47,11 +47,12 @@ import { ModalWhatsappComponent } from './modal-whatsapp/modal-whatsapp.componen
   imports: [
     CommonModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
     DataTablesModule,
     MatTabsModule,
-    FormsModule,
     BrowserAnimationsModule,
     MatRadioModule,
     MatTableExporterModule,
@@ -62,7 +63,6 @@ import { ModalWhatsappComponent } from './modal-whatsapp/modal-whatsapp.componen
     MatIconModule,
     MatPaginatorModule,
     NgMultiSelectDropDownModule.forRoot(),
-    ReactiveFormsModule,
     FontAwesomeModule
   ],
   providers: [],

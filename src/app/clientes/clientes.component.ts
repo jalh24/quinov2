@@ -52,7 +52,8 @@ export class ClientesComponent implements OnInit {
     this.resetFields();
     this.getClientes();
     this.comboTipoClientes();
-    
+    this.nombre="";
+    this.correo="";
   }
 
   public getClientes() {
