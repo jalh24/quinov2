@@ -10,6 +10,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { faUserNurse, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { ClienteFiltro } from '../_model/clienteFiltro';
+import { ModalClienteComponent } from '../modal-cliente/modal-cliente.component';
 
 @Component({
   selector: 'app-clientes',
@@ -40,11 +41,12 @@ export class ClientesComponent implements OnInit {
       Token: localStorage.getItem('token')
     })
   };
-  clienteColumns: string[] = ['nombre',  'telefono', 'correoElectronico','idTipoCliente'];
+  clienteColumns: string[] = ['nombre',  'telefono', 'correoElectronico','idTipoCliente', 'acciones', 'editar'];
 
   @ViewChild('clientesTable', { static: true }) clientesTable: MatTable<any>;
   
   constructor(private router: Router,
+    private dialog: MatDialog,
     private http: HttpClient) { 
     }
 
@@ -54,6 +56,19 @@ export class ClientesComponent implements OnInit {
     this.comboTipoClientes();
     this.nombre="";
     this.correo="";
+  }
+
+  openDialog(idCli): void {
+    
+      const dialogRef = this.dialog.open(ModalClienteComponent, {
+        width: '1110px',
+       
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+   
+
   }
 
   public getClientes() {

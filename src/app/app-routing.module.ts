@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'colaboradores', component: ColaboradoresComponent, canActivate: [AuthGuard] },
   { path: 'clientemoral', component: ClienteMoralComponent, canActivate: [AuthGuard]},
   { path: 'clientefisico', component: ClienteFisicoComponent, canActivate: [AuthGuard] },
+  { path: 'clientefisico/:idCliente', component: ClienteFisicoComponent, canActivate: [AuthGuard] },
   { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard] },
   //{ path: 'alta', component: SigninComponent, canActivate: [AuthGuard] },
 ];
