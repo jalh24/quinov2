@@ -10,7 +10,6 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { faUserNurse, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { ClienteFiltro } from '../_model/clienteFiltro';
-import { ModalClienteComponent } from '../modal-cliente/modal-cliente.component';
 
 @Component({
   selector: 'app-clientes',
@@ -23,9 +22,7 @@ export class ClientesComponent implements OnInit {
   faSignOutAlt = faSignOutAlt;
   @ViewChild(DataTableDirective, { static: false })
   
-  clienteFiltro: ClienteFiltro = new ClienteFiltro();
-  correo: String;
-  nombre: String;
+  clienteFiltro: ClienteFiltro;
   public cliente: Cliente;
   pageEvent: PageEvent;
   pageIndex: number = 0;
@@ -46,7 +43,6 @@ export class ClientesComponent implements OnInit {
   @ViewChild('clientesTable', { static: true }) clientesTable: MatTable<any>;
   
   constructor(private router: Router,
-    private dialog: MatDialog,
     private http: HttpClient) { 
     }
 
@@ -54,29 +50,19 @@ export class ClientesComponent implements OnInit {
     this.resetFields();
     this.getClientes();
     this.comboTipoClientes();
-    this.nombre="";
-    this.correo="";
   }
 
-  openDialog(idCli): void {
+  public getClientes(event?: PageEvent) {
     
-      const dialogRef = this.dialog.open(ModalClienteComponent, {
-        width: '1110px',
-       
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
-   
-
-  }
-
-  public getClientes() {
-    this.http.get<any>('/api/cliente',this.httpOptions).subscribe(data => {      
+    this.clienteFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
+    this.clienteFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
+    
+    this.http.post<any>('/api/cliente',this.clienteFiltro,this.httpOptions).subscribe(data => {      
       this.CLIENTE_DATA = data.data;     
       this.clienteSource = new MatTableDataSource<Cliente>(this.CLIENTE_DATA);      
-      //this.length = data.count.total;
+      this.length = data.count.total;
     });
+    return event;
   }
   public agregarClienteFisico() {
     this.router.navigateByUrl("/clientefisico");
@@ -87,15 +73,17 @@ export class ClientesComponent implements OnInit {
 
   public resetFields() {
     this.clienteFiltro = new ClienteFiltro();
-    this.clienteFiltro.idTipoCliente = null;   
+    this.clienteFiltro.idTipoCliente = "";   
     this.clienteFiltro.correoElectronico='';
-    console.log(this.clienteFiltro);
   }
 
   public comboTipoClientes() {
     this.http.get<any>('/api/catalogo/tipoClientes',this.httpOptions).subscribe(data => {
      this.tipoClientes = data.data;
-     console.log(this.tipoClientes);
     });
+  }
+
+  ngAfterViewInit() {
+    this.clienteSource.paginator = this.paginator;
   }
 }

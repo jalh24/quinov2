@@ -44,7 +44,8 @@ export class ColaboradoresComponent implements OnInit {
   length: number;
   COLABORADOR_DATA: Colaborador[] = [];
   colaboradorSource = new MatTableDataSource<Colaborador>(this.COLABORADOR_DATA);
-  colaboradorColumns: string[] = ['nombre', 'a_paterno', 'a_materno', 'telefono', 'correoElectronico','idCalificacion', 'acciones', 'Seleccionar'];
+  colaboradorColumns: string[] = ['nombre', 'a_paterno', 'a_materno', 'telefono', 'correoElectronico',
+  'idCalificacion', 'acciones', 'Seleccionar'];
   @ViewChild('colaboradoresTable', { static: true }) colaboradoresTable: MatTable<any>;
   sexos: any;
   diasLaborales: any = [] = [
@@ -82,7 +83,6 @@ export class ColaboradoresComponent implements OnInit {
   openDialog(idCol): void {
     this.http.post<any>('/api/colaborador/colaboradorId', { idColaborador: idCol },this.httpOptions).subscribe(data => {
       let envio = data.data[0];
-      console.log(data.data);
       envio.cuentasColaborador=data.data.cuentas;
       envio.estudios = data.data.estudios;
       envio.experiencia = data.data.experiencia;
@@ -114,7 +114,8 @@ export class ColaboradoresComponent implements OnInit {
   openDialogWhatsapp(): void {
     if (this.whatsappSelected.length != 0) {
       const dialogRef = this.dialog.open(ModalWhatsappComponent, {
-        width: '1110px'
+        width: '1110px',
+        data: this.whatsappSelected
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
