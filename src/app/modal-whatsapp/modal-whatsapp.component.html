@@ -1,14 +1,8 @@
 <form>
-    <div class="form-group" *ngIf="!enviado">
+    <div class="form-group">
         <label for="whatsapp">Mensaje</label>
-        <textarea class="form-control" id="whatsapp" rows="5" [(ngModel)]="mensaje" name="mensaje"></textarea>
-
-        <button type="submit" class="btn btn-success" (click)="enviarMensaje()">Enviar</button>
-        <button type="button" class="btn btn-danger ml-3" [mat-dialog-close]="true">Cerrar</button>
+        <textarea class="form-control" id="whatsapp" rows="5"></textarea>
     </div>
-    <div class="form-group" *ngIf="enviado">
-        <p>Se ha enviado el mensaje a los colaboradores seleccionados</p>
-        <button type="button" class="btn btn-danger ml-3" [mat-dialog-close]="true">Cerrar</button>
-    </div>
-
+    <button type="submit" class="btn btn-success">Enviar</button>
+    <button type="button" class="btn btn-danger ml-3">Cerrar</button>
 </form>

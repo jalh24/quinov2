@@ -182,7 +182,7 @@
           <div class="col">
             <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
             <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)"
-              #ciudadNac="ngModel" ngModel>
+              #ciudadNac="ngModel" ngModel [(ngModel)]="colaborador.idCiudadNacimiento">
               <!-- <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel"  ngModel required> -->
               <option value="" selected disabled hidden>Seleccionar</option>
               <option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
@@ -247,7 +247,7 @@
 
           <div class="col-md-2">
             <label for="codigopostal" class="form-label">Código Postal<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" maxlength="5" name="codigopostal" [ngModel]="selectedCodigoPostal"
+            <input type="text" class="form-control" maxlength="5" name="codigopostal" [(ngModel)]="colaborador.codigoPostal" [ngModel]="selectedCodigoPostal"
               (change)="onCodigoPostal($event.target.value)" ngModel #codigopostal="ngModel" pattern="[0-9]*">
             <!-- <input type="text" class="form-control" maxlength="5" name="codigopostal"
               [ngModel]="selectedCodigoPostal" (change)="onCodigoPostal($event.target.value)" ngModel
@@ -265,7 +265,7 @@
 
           <div class="col">
             <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-            <select class="form-control" name="colonia" ngModel #colonia="ngModel"
+            <select class="form-control" name="colonia" ngModel #colonia="ngModel" [(ngModel)]="colaborador.idColonia"
               (change)="onColonia($event.target.value)">
               <!-- <select class="form-control" name="colonia" ngModel
             #colonia="ngModel"  required (change)="onColonia($event.target.value)"> -->
@@ -671,7 +671,7 @@
         <div class="col-md-3">
           <label for="gradoEstudio" class="form-label">Último grado de estudios<span class="text-danger"> *</span></label>
           <select class="form-control" name="gradoEstudio" (change)="onGradoEstudio($event.target.value)"
-            #gradoEstudio="ngModel" [ngModel]="colaborador.idGradoEstudios" ngModel>
+            #gradoEstudio="ngModel" [ngModel]="colaborador.idGradoEstudio" ngModel>
             <option value="" selected disabled hidden>Seleccionar</option>
             <option *ngFor="let gradoEstudio of gradoEstudios" [value]="gradoEstudio.idGrado">
               {{gradoEstudio.nombre}}

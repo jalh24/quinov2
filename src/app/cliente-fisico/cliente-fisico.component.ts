@@ -6,6 +6,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { Cliente } from '../_model/cliente';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ClienteFisicoComponent implements OnInit {
       Token: localStorage.getItem('token')
     })
   };
+  textBoxDisabledSeg = true;
   sexos: any[];
   complexiones: any[];
   parentescos: any[];
@@ -37,9 +39,11 @@ export class ClienteFisicoComponent implements OnInit {
   paises: any[];
   estadosCiviles: any[];
   tiposTelefono: any[];
+  datos: any;
+  idCliente: number;
   selected = new FormControl(0);
   @ViewChild('myForm') ngForm: NgForm;
-  constructor(
+  constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private toastService: NgbToastService
     
@@ -54,6 +58,15 @@ export class ClienteFisicoComponent implements OnInit {
     this.comboSexos();
     this.comboEstadosCiviles();
     this.comboTiposTelefono();
+
+    this.route.queryParams.subscribe(params=>{
+      this.idCliente = params['idCliente'];
+    });
+
+    if(this.idCliente) {
+      this.llenarCampos(this.idCliente);
+    }
+
   }
   inicializaObjetos() {
     this.cliente = new Cliente();
@@ -124,6 +137,31 @@ export class ClienteFisicoComponent implements OnInit {
     }
 
   }
+  public llenarCampos(idCliente) {
+    this.http.post<any>('/api/cliente/clienteId', { idCliente: idCliente },this.httpOptions).subscribe(data => {
+      this.datos = data.data;
+      console.log(this.datos);
+      this.cliente = this.datos[0];
+      
+      //this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
+      
+      this.cliente.peso = Math.floor(this.cliente.peso);
+      this.cliente.estatura = Math.floor(this.cliente.estatura);
+      // this.datos.cuentas.forEach(element => {
+      //   this.PAGO_DATA.push(element);
+      // });
+      // // this.PAGO_DATA.push(this.pago);
+      // this.pagoSource = new MatTableDataSource(this.PAGO_DATA);
+    });
+  }
+
+  public editarCliente(ngForm: NgForm){
+    
+    this.http.put<any>('/api/cliente/update', this.cliente, this.httpOptions).subscribe(data => {
+      this.showSuccess(NgbToastType.Success, "Se edito el cliente exitosamente");
+
+    });
+  }
 
   pagAtras(index) {
     if (this.selected.value > 0) {
@@ -155,7 +193,13 @@ export class ClienteFisicoComponent implements OnInit {
     this.toastService.remove(toast);
   }
 
-  
+  enableSeguros() {
+    this.textBoxDisabledSeg = false;
+  }
+  disableSeguros() {
+    this.textBoxDisabledSeg = true;
+  }
+
   public comboEstadosCiviles() {
     this.http.get<any>('/api/catalogo/comboEstadosCiviles',this.httpOptions).subscribe(data => {
       this.estadosCiviles = data.data;

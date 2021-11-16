@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 //import { SigninComponent } from './signin/signin.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { AuthGuard } from './service/auth.guard';
+import { AltaServicioComponent } from './alta-servicio/alta-servicio.component';
+import { GestionServicioComponent } from './gestion-servicio/gestion-servicio.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LoginComponent },
@@ -17,8 +19,9 @@ const routes: Routes = [
   { path: 'colaboradores', component: ColaboradoresComponent, canActivate: [AuthGuard] },
   { path: 'clientemoral', component: ClienteMoralComponent, canActivate: [AuthGuard]},
   { path: 'clientefisico', component: ClienteFisicoComponent, canActivate: [AuthGuard] },
-  { path: 'clientefisico/:idCliente', component: ClienteFisicoComponent, canActivate: [AuthGuard] },
   { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard] },
+  { path: 'altaservicios', component: AltaServicioComponent, canActivate: [AuthGuard] },
+  { path: 'gestionservicios', component: GestionServicioComponent, canActivate: [AuthGuard] },
   //{ path: 'alta', component: SigninComponent, canActivate: [AuthGuard] },
 ];
 

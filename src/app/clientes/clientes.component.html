@@ -1,7 +1,8 @@
-<div class="container mt-5 pt-4 bg-white rounded-top shadow" >
+
+<div class="container mt-5 pt-4 bg-white rounded-top shadow">
      <button type="button" class="btn btn-success mb-4" (click)="agregarClienteFisico()" ><h3><fa-icon [icon]="faUserNurse"></fa-icon></h3> Agregar Persona Fisica</button> &nbsp;&nbsp;
      <button type="button" class="btn btn-success mb-4" (click)="agregarClienteMoral()" ><h3><fa-icon [icon]="faUserNurse"></fa-icon></h3> Agregar Persona Moral</button> &nbsp;&nbsp;
-     <form>
+
      <table class="table">
       
       <tbody>
@@ -12,8 +13,8 @@
           <th scope="row">Tipo de Cliente</th>
         <td>
           <div class="input-group">
-          <select class="form-control"  name="tipoClienteFiltro"  [value]="clienteFiltro?.idTipoCliente">
-            <option value="" >Seleccionar</option>
+          <select class="form-control"  name="tipoClienteFiltro" >
+            <option value="" selected disabled hidden>Seleccionar</option>
             <option *ngFor="let tipoCliente of tipoClientes" [value]="tipoCliente.idTipoCliente">
               {{tipoCliente.nombre}}
             </option>
@@ -22,25 +23,26 @@
         </td>
         <th scope="row">Correo Electronico</th>
         <td>
-          <input  type="text" class="form-control" id="correoElectronico" 
-          name="correoElectronico"  [value]="clienteFiltro?.correoElectronico" >
+          <input maxlength="3" size="3" type="text" class="form-control" id="correoElectronico" name="correoElectronico" 
+            >
         </td>
         <th scope="row">Nombre</th>
         <td>
-          <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" 
-          [value]="clienteFiltro?.nombre">
+          <input maxlength="3" size="3" type="text" class="form-control" id="nombre" name="nombre" 
+            >
         </td>
         
         </tr>
+       
         
          
       </tbody>
     </table> 
-  </form>
+  
   
     <div class="row text-center pb-4">
       <div class="col">
-        <button type="button" class="btn btn-primary" (click)="getClientes()">Buscar</button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" >Buscar</button> &nbsp;&nbsp;
       
         </div>
     </div>
@@ -69,27 +71,19 @@
           <th mat-header-cell *matHeaderCellDef> Tipo de Cliente</th>
           <td mat-cell *matCellDef="let element"> {{element.idTipoCliente}}  </td>
         </ng-container>   
-        <ng-container matColumnDef="acciones">
+       <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef> Acciones </th>
           <td mat-cell *matCellDef="let element">
             <button class="btn btn-primary" (click)="openDialog(element.idCliente)"><mat-icon>search</mat-icon></button>
+
+                      <button class="btn btn-warning" (click)="modificacionCliente(element.idCliente, element.idTipoCliente )"><mat-icon>edit</mat-icon></button>
           </td>
-          
-          
-        </ng-container>
-        <ng-container matColumnDef="editar">
-          <th mat-header-cell *matHeaderCellDef> Editar </th>
-          <td mat-cell *matCellDef="let element">
-            <a [routerLink]="['/clientefisico/', element.idCliente]" ><button class="btn btn-warning" ><mat-icon>edit</mat-icon></button></a>
-          </td>
-          
-         
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="clienteColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: clienteColumns;"></tr>
       </table>
       <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[1, 5, 25, 100]"
-      (page)="pageEvent = getClientes($event)" aria-label="Selecciona los elementos a mostrar">
+         aria-label="Selecciona los elementos a mostrar">
       </mat-paginator>
     </div>
     <br>

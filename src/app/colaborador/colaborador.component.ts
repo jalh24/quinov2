@@ -12,6 +12,8 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Estatus } from '../_model/estatus';
 import { FormControl } from '@angular/forms';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-colaborador',
@@ -149,6 +151,9 @@ export class ColaboradorComponent implements OnInit {
   estatusEstudios: Estatus[];
   estatusSelected: string;
   gradoEstudios: any[];
+  idColaborador: number;
+  datos: any;
+
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
@@ -165,6 +170,8 @@ export class ColaboradorComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private http: HttpClient,
     private toastService: NgbToastService,
     private changeDetectorRefs: ChangeDetectorRef
@@ -189,6 +196,13 @@ export class ColaboradorComponent implements OnInit {
     this.comboHabilidades();
     this.inicializaObjetos();
 
+    this.route.queryParams.subscribe(params=>{
+      this.idColaborador = params['idColaborador'];
+    });
+
+    if(this.idColaborador) {
+      this.llenarCampos(this.idColaborador);
+    }
 
     this.dtOptionsPago = {
       select: true,
@@ -377,6 +391,25 @@ export class ColaboradorComponent implements OnInit {
     this.experienciaSource.data = [];
     this.pagoSource.data = [];
     this.estudioSource.data = [];
+  }
+
+  public llenarCampos(idColaborador) {
+    this.http.post<any>('/api/colaborador/colaboradorId', { idColaborador: idColaborador },this.httpOptions).subscribe(data => {
+      this.datos = data.data;
+      console.log(this.datos);
+      this.colaborador = this.datos[0];
+      this.comboCiudades(this.colaborador.idEstadoNacimiento);
+      this.onCiudadNacimiento(this.colaborador.idCiudadNacimiento);
+      this.onCodigoPostal(this.colaborador.codigoPostal);
+      this.colaborador.peso = Math.floor(this.colaborador.peso);
+      this.colaborador.estatura = Math.floor(this.colaborador.estatura);
+      // this.datos.cuentas.forEach(element => {
+      //   this.PAGO_DATA.push(element);
+      // });
+      // // this.PAGO_DATA.push(this.pago);
+      // this.pagoSource = new MatTableDataSource(this.PAGO_DATA);
+    });
+    
   }
 
   enableSeguros() {

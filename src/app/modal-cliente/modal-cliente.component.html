@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Nombre </h1>
+<h1 mat-dialog-title>{{cliente?.nombre}} {{cliente?.a_paterno}} {{cliente?.a_materno}}  </h1>
 <div mat-dialog-content>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item waves-effect waves-light">
@@ -11,25 +11,196 @@
       <a class="nav-link" id="informacionPersonal-tab" data-toggle="tab" href="#informacionPersonal" role="tab" aria-controls="informacionPersonal" aria-selected="false">Información Personal</a>
     </li>
     <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="pago-tab" data-toggle="tab" href="#pago" role="tab" aria-controls="pago" aria-selected="false">Pago</a>
+      <a class="nav-link" id="medico-tab" data-toggle="tab" href="#medico" role="tab" aria-controls="medico" aria-selected="false">Medico</a>
     </li>
     <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="estudios-tab" data-toggle="tab" href="#estudios" role="tab" aria-controls="estudios" aria-selected="false">Estudios</a>
+      <a class="nav-link" id="enfermedades-tab" data-toggle="tab" href="#enfermedades" role="tab" aria-controls="enfermedades" aria-selected="false">Enfermedades</a>
     </li>
     <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="experienciaLaboral-tab" data-toggle="tab" href="#experienciaLaboral" role="tab" aria-controls="experienciaLaboral" aria-selected="false">Experiencia Laboral</a>
-    </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="competencias-tab" data-toggle="tab" href="#competencias" role="tab" aria-controls="competencias" aria-selected="false">Competencias</a>
-    </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="disponibilidadTrabajo-tab" data-toggle="tab" href="#disponibilidadTrabajo" role="tab" aria-controls="disponibilidadTrabajo" aria-selected="false">Disponibilidad de Trabajo</a>
-    </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="otros-tab" data-toggle="tab" href="#otros" role="tab" aria-controls="otros" aria-selected="false">Otros</a>
+      <a class="nav-link" id="cirugiasAccidentes-tab" data-toggle="tab" href="#cirugiasAccidentes" role="tab" aria-controls="cirugiasAccidentes" aria-selected="false">Cirugias y Accidentes</a>
     </li>
   </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="4">Información General</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">RFC</th>
+            <td>{{cliente?.rfc}}</td>
+            <th scope="row">NSS</th>
+            <td>{{cliente?.imss}}</td>
+    
+          </tr>
+          <tr>
+            
+            <th scope="row">Tipo de Cliente</th>
+            <td>{{cliente?.idTipoCliente}}</td>
+          </tr>
+        </tbody>
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="8">Lugar y Fecha de Nacimiento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Fecha</th>
+            <td>{{cliente?.fecha_nacimiento}}</td>
+            <th scope="row">País</th>
+            <td>{{cliente?.idPaisNacimiento}}</td>
+            <th scope="row">Estado</th>
+            <td>{{cliente?.idEstadoNacimiento}}</td>
+            <th scope="row">Ciudad</th>
+            <td>{{cliente?.idCiudadNacimiento}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="dirección" role="tabpanel" aria-labelledby="dirección-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="8">Dirección</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Calle</th>
+            <td colspan="3">{{cliente?.calle1}}</td>
+            <th scope="row">Calle 2</th>
+            <td colspan="3">{{cliente?.calle2}}</td>   
+          </tr>
+          <tr>
+            <th scope="row">Número Exterior</th>
+            <td>{{cliente?.noExt}}</td>
+            <th scope="row">Número Interior</th>
+            <td>{{cliente?.noInt}}</td>
+            <th scope="row">Código Postal</th>
+            <td>{{cliente?.codigoPostal}}</td>
+            <th scope="row">Colonia</th>
+            <td>{{cliente?.idColonia}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Ciudad</th>
+            <td>{{cliente?.idCiudad}}</td>
+            <th scope="row">Estado</th>
+            <td>{{cliente?.idEstado}}</td>
+            <th scope="row">País</th>
+            <td colspan="3">{{cliente?.idPais}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="informacionPersonal" role="tabpanel" aria-labelledby="informacionPersonal-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="10">Información Personal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Genero</th>
+            <td>{{cliente?.idSexo}}</td>
+            <th scope="row">Peso (Kg)</th>
+            <td>{{cliente?.peso}}</td>
+            <th scope="row">Estatura (cm)</th>
+            <td>{{cliente?.estatura}}</td>
+            <th scope="row">Complexion</th>
+            <td>{{cliente?.idComplexion}}</td>
+            <th scope="row">Estado Civil</th>
+            <td>{{cliente?.idEstadoCivil}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Teléfono 1</th>
+            <td>{{cliente?.telefono}}</td>
+            <th scope="row">Tipo Teléfono 1</th>
+            <td>{{cliente?.idTipoTelefono1}}</td>
+            <th scope="row">Teléfono 2</th>
+            <td>{{cliente?.telefono2}}</td>
+            <th scope="row">Tipo Teléfono 2</th>
+            <td colspan="3">{{cliente?.idTipoTelefono2}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Correo Electrónico</th>
+            <td colspan="3">{{cliente?.correoElectronico}}</td>
+           
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-pane fade" id="medico" role="tabpanel" aria-labelledby="medico-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="10">Información del Medico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Nombre</th>
+            <td>{{cliente?.nombreMedico}}</td>
+            <th scope="row">Especialidades</th>
+            <td>{{cliente?.especialidadesMedico}}</td>
+            <th scope="row">Telefono)</th>
+            <td>{{cliente?.telefonoMedico}}</td>
+            <th scope="row">Correo Electronico</th>
+            <td>{{cliente?.correoMedico}}</td>          
+          </tr>
+       
+        </tbody>
+      </table>
+    </div>
+   
+    <div class="tab-pane fade" id="enfermedades" role="tabpanel" aria-labelledby="enfermedades-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="10">Enfermedades</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Enfermedades Actuales</th>
+            <td>{{cliente?.enfermedadesActuales}}</td>
+            <th scope="row">Enfermedades Recientes</th>
+            <td>{{cliente?.enfermedadesRecientes}}</td>
+            <th scope="row">¿Padece Alzheimer?</th>
+            <td>{{cliente?.alzheimer}}</td>          
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-pane fade" id="cirugiasAccidentes" role="tabpanel" aria-labelledby="cirugiasAccidentes-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="10">Cirugias y Accidentes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Cirugias Recientes</th>
+            <td>{{cliente?.cirugiasRecientes}}</td>
+            <th scope="row">Accidentes Recientes</th>
+            <td>{{cliente?.accidentesRecientes}}</td>        
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
   
+   
+    
+  </div>
 </div>
 <div mat-dialog-actions>
   <button class="btn btn-primary" (click)="onNoClick()">Cerrar</button>

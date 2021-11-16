@@ -295,8 +295,9 @@
                 </div>
                 <div class="row text-center pb-4">
                     <div class="col">
-                      <button type="button" class="btn btn-primary" (click)="guardarCliente(myForm)"> Enviar Datos
+                      <button *ngIf="!idCliente" type="button" class="btn btn-primary" (click)="guardarCliente(myForm)"> Enviar Datos
                       </button>
+                      <button *ngIf="idCliente" type="button" class="btn btn-primary" (click)="editarCliente(myForm)">Editar Datos</button>
                       <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
                       <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarCliente(myForm)"> Grabar Cliente </button> -->
                     </div>

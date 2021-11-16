@@ -324,11 +324,11 @@
                             <label class="control-label">Seguro de Gastos Medicos Mayores<span class="text-danger"> *</span></label>
                             <div class="form-control">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sgmm" id="sgmm" value="option1">
+                                    <input class="form-check-input" type="radio" name="sgmm" id="sgmm" value="option1" (click)="enableSeguros()">
                                     <label class="form-check-label" for="inlineRadio1">Sí</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sgmm" id="inlineRadio2" value="option2">
+                                    <input class="form-check-input" type="radio" name="sgmm" id="inlineRadio2" value="option2" (click)="disableSeguros()">
                                     <label class="form-check-label" for="inlineRadio2">No</label>
                                 </div>
                             </div>
@@ -337,7 +337,7 @@
                     </div>
                     <div class="col">
                         <label for="aseguradora" class="form-label">Aseguradora</label>
-                        <input type="text" class="form-control" name="aseguradora" ngModel #aseguradora="ngModel" [(ngModel)]="cliente.sgmm" placeholder="Nombre">
+                        <input type="text" class="form-control" name="aseguradora" ngModel #aseguradora="ngModel" [(ngModel)]="cliente.sgmm" [disabled]="textBoxDisabledSeg" placeholder="Nombre">
                     </div>
                 </div>
                 <hr class="py-1" />
@@ -560,8 +560,9 @@
                 </div>
                 <div class="row text-center pb-4">
                     <div class="col">
-                        <button type="button" class="btn btn-primary" (click)="guardarCliente(myForm)"> Enviar Datos
+                        <button *ngIf="!idCliente" type="button" class="btn btn-primary" (click)="guardarCliente(myForm)"> Enviar Datos
                         </button>
+                        <button *ngIf="idCliente" type="button" class="btn btn-primary" (click)="editarCliente(myForm)">Editar Datos</button>
                         <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
                         <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
                     </div>

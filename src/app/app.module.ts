@@ -27,7 +27,8 @@ import { ClienteMoralComponent } from './cliente-moral/cliente-moral.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { LoginComponent } from './login/login.component';
 import { ModalWhatsappComponent } from './modal-whatsapp/modal-whatsapp.component';
-import { ModalClienteComponent } from './modal-cliente/modal-cliente.component';
+import { AltaServicioComponent } from './alta-servicio/alta-servicio.component';
+import { GestionServicioComponent } from './gestion-servicio/gestion-servicio.component';
 //import { SigninComponent } from './signin/signin.component';
 
 
@@ -43,18 +44,18 @@ import { ModalClienteComponent } from './modal-cliente/modal-cliente.component';
     ClientesComponent,
     LoginComponent,
     ModalWhatsappComponent,
-    ModalClienteComponent,
+    AltaServicioComponent,
+    GestionServicioComponent,
   //  SigninComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
     DataTablesModule,
     MatTabsModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatRadioModule,
     MatTableExporterModule,
@@ -65,6 +66,7 @@ import { ModalClienteComponent } from './modal-cliente/modal-cliente.component';
     MatIconModule,
     MatPaginatorModule,
     NgMultiSelectDropDownModule.forRoot(),
+    ReactiveFormsModule,
     FontAwesomeModule
   ],
   providers: [],

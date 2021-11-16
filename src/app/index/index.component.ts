@@ -41,5 +41,15 @@ export class IndexComponent implements OnInit {
 
     this.router.navigateByUrl("/clientes");
   }
+
+  public botonAltaServicios() {
+
+    this.router.navigateByUrl("/altaservicios");
+  }
+
+  public botonGestionServicios() {
+
+    this.router.navigateByUrl("/gestionservicios");
+  }
   
 }

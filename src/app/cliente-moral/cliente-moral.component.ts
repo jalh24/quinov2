@@ -10,6 +10,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { textChangeRangeIsUnchanged } from 'typescript';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cliente-moral',
@@ -36,6 +37,8 @@ export class ClienteMoralComponent implements OnInit {
   parentescos: any[];
   paises: any[];
   tiposTelefono: any[];
+  datos: any;
+  idCliente: number;
   dtOptionsContacto: any = {};
   contactosColumns: string[] = ['nombre', 'parentesco', 'telefono', 'tipoTelefono', 'correoElectronico', 'deleteContacto'];
   @ViewChild('contactosTable', { static: true }) contactosTable: MatTable<any>;
@@ -59,6 +62,7 @@ export class ClienteMoralComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private http: HttpClient,
     private toastService: NgbToastService
   ) { }
@@ -159,6 +163,14 @@ export class ClienteMoralComponent implements OnInit {
       correoElectronico: null
     };
     this.contactoSource.data = [];
+    
+    this.route.queryParams.subscribe(params=>{
+      this.idCliente = params['idCliente'];
+    });
+
+    if(this.idCliente) {
+      this.llenarCampos(this.idCliente);
+    }
   }
 
   public guardarCliente(ngForm: NgForm) {
@@ -273,6 +285,31 @@ export class ClienteMoralComponent implements OnInit {
   public comboPaises() {
     this.http.get<any>('/api/catalogo/paises',this.httpOptions).subscribe(data => {
       this.paises = data.data;
+    });
+  }
+
+  public llenarCampos(idCliente) {
+    this.http.post<any>('/api/cliente/clienteId', { idCliente: idCliente },this.httpOptions).subscribe(data => {
+      this.datos = data.data;
+      console.log(this.datos);
+      this.cliente = this.datos[0];
+      
+      //this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
+      
+      this.cliente.peso = Math.floor(this.cliente.peso);
+      this.cliente.estatura = Math.floor(this.cliente.estatura);
+      // this.datos.cuentas.forEach(element => {
+      //   this.CONTACTO_DATA.push(element);
+      // });
+      // // this.CONTACTO_DATA.push(this.contacto);
+      // this.contactoSource = new MatTableDataSource(this.CONTACTO_DATA);
+    });
+  }
+  public editarCliente(ngForm: NgForm){
+    
+    this.http.put<any>('/api/cliente/update', this.cliente, this.httpOptions).subscribe(data => {
+      this.showSuccess(NgbToastType.Success, "Se edito el cliente exitosamente");
+
     });
   }
 
