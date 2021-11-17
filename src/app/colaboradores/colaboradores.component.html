@@ -123,7 +123,19 @@
           <input maxlength="1" size="1" type="text" class="form-control" id="idCalificacion" [(ngModel)]="colaboradorFiltro.calificacion2" name="calificacionHasta"
             placeholder="Hasta">
         </td>
-        <td colspan="2">
+        <th scope="row">Tipo Colaborador</th>
+        <td>
+          <div class="input-group">
+          <select class="form-control" name="tipoColaboradorFiltro" [(ngModel)]="colaboradorFiltro.tipoColaborador">
+            <option value="" selected disabled hidden>Seleccionar</option>
+            <option *ngFor="let tipoColaborador of tiposColaboradores" [value]="tipoColaborador.idTipoColaborador">
+              {{tipoColaborador.nombre}}
+            </option>
+          </select>
+          <button type="button" class="btn btn-secondary" (click)="resetFieldTipoColaborador()"><fa-icon [icon]="faTimes"></fa-icon></button>
+          </div>
+        </td>
+        <td colspan="1">
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="covidFiltro"
               [(ngModel)]="colaboradorFiltro.atiendeCovid">
@@ -140,11 +152,13 @@
           </div>
         </td>
         <td>
-          <button type="button" class="btn btn-primary" (click)="mostrarFiltros()">{{filtrosOcultos ? 'Ocultar' : 'Mostrar' }} Filtros</button>
-        </td>
-        <td>
           <button type="button" class="btn btn-danger" (click)="resetFields()">Limpiar Filtro</button>
+          <br>
+          <button type="button" class="btn btn-primary mt-1" (click)="mostrarFiltros()">{{filtrosOcultos ? 'Ocultar' : 'Mostrar' }} Filtros</button>
         </td>
+        <!-- <td>
+          <button type="button" class="btn btn-danger" (click)="resetFields()">Limpiar Filtro</button>
+        </td> -->
       </tr>
     </tbody>
   </table>

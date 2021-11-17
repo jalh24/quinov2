@@ -1,3 +1,5 @@
+<!-- <div *ngIf="colaborador"> -->
+
 <form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
   <ngb-toast-container></ngb-toast-container>
   <mat-tab-group mat-align-tabs="center" [selectedIndex]="selected.value"
@@ -69,20 +71,30 @@
           </div>
 
           <div class="col">
-            <label for="identificacionF" class="form-label">Identificación (Frontal)<span class="text-danger">
+            <label for="identificacionF" class="form-label" *ngIf="!archivosDescargaIne1; else descargarArchivoIne1">Identificación (Frontal)<span class="text-danger">
                 *</span></label>
+                <ng-template #descargarArchivoIne1>
+                  <label for="identificacionF" class="form-label">Cambiar Identificación (Frontal)<span class="text-danger">
+                    *</span></label>
+                </ng-template>
             <input class="form-control-file" type="file" name="identificacionF" accept=".png, .jpg, .jpeg"
               (change)="ineFrontal($event.target.files)" #ineUpload>
           </div>
           <div class="col">
-            <label for="identificacionR" class="form-label">Identificación (Reverso)</label>
+            <label for="identificacionR" class="form-label" *ngIf="!archivosDescargaIne2; else descargarArchivoIne2">Identificación (Reverso)</label>
+            <ng-template #descargarArchivoIne2>
+              <label for="identificacionR" class="form-label">Cambiar Identificación (Reverso)</label>
+            </ng-template>
             <input class="form-control-file" type="file" name="identificacionR" accept=".png, .jpg, .jpeg"
               (change)="ineReverso($event.target.files)" #ineUpload1>
           </div>
         </div>
         <div class="row mt-4">
           <div class="col-md-3">
-            <label for="formFile" class="form-label">Foto Personal</label>
+            <label for="formFile" class="form-label" *ngIf="!archivosDescargaFoto; else descargarArchivoFoto">Foto Personal</label>
+            <ng-template #descargarArchivoFoto>
+              <label for="formFile" class="form-label">Cambiar Foto Personal</label>
+            </ng-template>
             <input class="form-control-file" type="file" id="foto" accept=".png, .jpg, .jpeg"
               (change)="cargaFotoPersonal($event.target.files)">
           </div>
@@ -125,6 +137,18 @@
             <label for="observaciones">Observaciones</label>
             <textarea class="form-control" id="observaciones" name="observaciones" ngModel #observaciones="ngModel"
               [(ngModel)]="colaborador.observaciones" rows="3" maxlength="255"></textarea>
+          </div>
+        </div>
+
+        <div class="btn-toolbar mt-4" role="toolbar" style="justify-content: center; display: flex;" *ngIf="archivosDescargaIne1 || archivosDescargaIne2 || archivosDescargaFoto">
+          <div class="btn-group mr-2" *ngIf="archivosDescargaIne1">
+            <button type="button" class="btn btn-primary" (click)="downloadBase64FileIne1()">Descargar Identificación (Frontal)</button>
+          </div>
+          <div class="btn-group mr-2" *ngIf="archivosDescargaIne2">
+            <button type="button" class="btn btn-primary" (click)="downloadBase64FileIne2()">Descargar Identificación (Reverso)</button>
+          </div>
+          <div class="btn-group mr-2" *ngIf="archivosDescargaFoto">
+            <button type="button" class="btn btn-primary" (click)="downloadBase64FileFoto()">Descargar Foto Personal</button>
           </div>
         </div>
 
@@ -318,12 +342,22 @@
               [(ngModel)]="colaborador.referenciaDireccion" rows="3"></textarea>
           </div>
 
-          <div class="col">
+          <div class="col" *ngIf="!archivosDescargaComprobanteDomicilio; else descargarArchivoComprobanteDomicilio">
             <label for="comprobante" class="form-label">Comprobante de Domicilio</label>
             <!-- <input class="form-control-file" type="file" name="comprobante"> -->
             <input class="form-control-file" type="file" name="comprobante" accept=".png, .jpg, .jpeg"
               (change)="comprobanteDomicilio($event.target.files)" #domicilioUpload>
           </div>
+          <ng-template #descargarArchivoComprobanteDomicilio>
+            <div class="col">
+              <label for="comprobante" class="form-label">Cambiar Comprobante de Domicilio</label>
+            <input class="form-control-file" type="file" name="comprobante" accept=".png, .jpg, .jpeg"
+              (change)="comprobanteDomicilio($event.target.files)" #domicilioUpload>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-primary my-auto" (click)="downloadBase64FileComprobanteDomicilio()">Descargar Comprobante de Domicilio</button>
+            </div>
+          </ng-template>
         </div>
         <div class="row pb-4">
           <div class="col-md-12"><span class="font-italic">Los campos con </span><span
@@ -621,7 +655,7 @@
 
         <div class="row mt-4">
           <div class="col-md-12 text-center">
-            <button class="btn btn-primary add-one" (click)="agregarPago()">Agregar Otro</button>
+            <button class="btn btn-primary add-one" (click)="agregarPago(null)">Agregar Otro</button>
             <button class="btn btn-warning delete ml-3" (click)="limpiarPago()">Cancelar</button>
           </div>
         </div>
@@ -759,7 +793,7 @@
 
         <div class="row mt-4">
           <div class="col-md-12 text-center">
-            <button class="btn btn-primary add-one" (click)="agregarEstudio()">Agregar Otro</button>
+            <button class="btn btn-primary add-one" (click)="agregarEstudio(null)">Agregar Otro</button>
             <button class="btn btn-warning delete ml-3" (click)="limpiarEstudio()">Cancelar</button>
           </div>
         </div>
@@ -870,7 +904,7 @@
 
         <div class="row mt-4">
           <div class="col-md-12 text-center">
-            <button class="btn btn-primary add-one" (click)="agregarExperiencia()">Agregar Otra</button>
+            <button class="btn btn-primary add-one" (click)="agregarExperiencia(null)">Agregar Otra</button>
             <button class="btn btn-warning delete ml-3" (click)="limpiarEstudio()">Cancelar</button>
           </div>
         </div>
@@ -932,7 +966,7 @@
               <div class="col-sm-12">
                 <div class="form-check" *ngFor="let especialidad of especialidades" [value]="especialidad.id">
                   <input class="form-check-input" type="checkbox" id="{{especialidad.nombre}}"
-                    (change)="especialidadCheck(especialidad)">
+                    (change)="especialidadCheck(especialidad)" [checked]="inputCheckedEspecialidad(especialidad)">
                   <label class="form-check-label" for="{{especialidad.nombre}}">
                     {{especialidad.nombre}}
                   </label>
@@ -956,7 +990,7 @@
               <div class="col-sm-12">
                 <div class="form-check" *ngFor="let habilidad of habilidades" [value]="habilidad.idHabilidad">
                   <input class="form-check-input" type="checkbox" id="{{habilidad.nombre}}"
-                    (change)="habilidadCheck(habilidad)">
+                    (change)="habilidadCheck(habilidad)" [checked]="inputCheckedHabilidad(habilidad)">
                   <label class="form-check-label" for="{{habilidad.nombre}}">
                     {{habilidad.nombre}}
                   </label>
@@ -991,7 +1025,7 @@
             <h5 class="pb-1">Días y Horarios de Disponibilidad<span class="text-danger"> *</span></h5>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" value="" id="todos" name="todosDias" ngModel
-                #todosDias="ngModel" [(ngModel)]="diasLaborales.todosDias" (click)="disableTextBoxDateofWorkT()">
+                #todosDias="ngModel" [(ngModel)]="diasLaborales.todosDias" (click)="checkboxesDiasLaborales(0,$event.currentTarget.checked)" [checked]="diasLaborales.todosDias">
               <label class="form-check-label" for="todos">
                 <p class="font-weight-bold">Todos los Dias
                 </p>
@@ -1000,29 +1034,17 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="turnoT">Turno</label>
-                <select class="form-control" id="turnoT" name="todosDiasTurno" ngModel #todosDiasTurno="ngModel" [(ngModel)]="diasLaborales.todosDiasTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
+                <select class="form-control" id="turnoT" name="todosDiasTurno" ngModel #todosDiasTurno="ngModel" [(ngModel)]="diasLaborales.todosDiasTurno" disabled="disabled" [disabled]="!diasLaborales.todosDias">
                   
                   <option value="Dia">Dia</option>
                   <option value="Noche">Noche</option>
                   <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
-              <!-- <div class="col-md-6">
-                <label for="desdeT" class="form-label">Desde</label>
-                <input type="time" class="form-control input-sm" id="desdeT" placeholder="" value=""
-                  name="todosDiasDesde" ngModel #todosDiasDesde="ngModel" [(ngModel)]="diasLaborales.todosDiasDesde"
-                  disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
-              </div>
-              <div class="col-md-6">
-                <label for="hastaT" class="form-label">Hasta</label>
-                <input type="time" class="form-control input-sm" id="hastaT" placeholder="" value=""
-                  name="todosDiasHasta" ngModel #todosDiasHasta="ngModel" [(ngModel)]="diasLaborales.todosDiasHasta"
-                  disabled="disabled" [disabled]="textBoxDisabledDateofWorkT">
-              </div> -->
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" value="" id="lunes" name="lunes" ngModel #lunes="ngModel"
-                [(ngModel)]="diasLaborales.lunes" (click)="disableTextBoxDateofWorkL()">
+                [(ngModel)]="diasLaborales.lunes" (click)="checkboxesDiasLaborales(1,$event.currentTarget.checked)" [checked]="diasLaborales.lunes">
               <label class="form-check-label" for="lunes">
                 <p class="font-weight-bold">Lunes</p>
               </label>
@@ -1030,31 +1052,18 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="turnoL">Turno</label>
-                <select class="form-control" id="turnoL" name="lunesTurno" ngModel #lunesTurno="ngModel" [(ngModel)]="diasLaborales.lunesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkL">
+                <select class="form-control" id="turnoL" name="lunesTurno" ngModel #lunesTurno="ngModel" [(ngModel)]="diasLaborales.lunesTurno" disabled="disabled" [disabled]="!diasLaborales.lunes">
                   
                   <option value="Dia">Dia</option>
                   <option value="Noche">Noche</option>
                   <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
-              <!-- <div class="col-md-6">
-                <label for="desdeL" class="form-label">Desde</label>
-                <input type="time" class="form-control input-sm" id="desdeL" placeholder="" value="" name="lunesDesde"
-                  ngModel #lunesDesde="ngModel" [(ngModel)]="diasLaborales.lunesDesde" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkL">
-              </div>
-              <div class="col-md-6">
-                <label for="hastaL" class="form-label">Hasta</label>
-                <input type="time" class="form-control input-sm" id="hastaL" placeholder="" value="" name="lunesHasta"
-                  ngModel #lunesHasta="ngModel" [(ngModel)]="diasLaborales.lunesHasta" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkL">
-              </div> -->
             </div>
-            <!-- </div> -->
 
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" value="" id="martes" name="martes" ngModel
-                #martes="ngModel" [(ngModel)]="diasLaborales.martes" (click)="disableTextBoxDateofWorkM()">
+                #martes="ngModel" [(ngModel)]="diasLaborales.martes" (click)="checkboxesDiasLaborales(2,$event.currentTarget.checked)">
               <label class="form-check-label" for="martes">
                 <p class="font-weight-bold">Martes
                 </p>
@@ -1063,30 +1072,17 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="turnoM">Turno</label>
-                <select class="form-control" id="turnoM" name="martesTurno" ngModel #martesTurno="ngModel" [(ngModel)]="diasLaborales.martesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkM">
+                <select class="form-control" id="turnoM" name="martesTurno" ngModel #martesTurno="ngModel" [(ngModel)]="diasLaborales.martesTurno" disabled="disabled" [disabled]="!diasLaborales.martes">
                   
                   <option value="Dia">Dia</option>
                   <option value="Noche">Noche</option>
                   <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
-              <!-- <div class="col-md-6">
-                <label for="desdeM" class="form-label">Desde</label>
-                <input type="time" class="form-control input-sm" id="desdeM" placeholder="" value="" name="martesDesde"
-                  ngModel #martesDesde="ngModel" [(ngModel)]="diasLaborales.martesDesde" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkM">
-              </div>
-              <div class="col-md-6">
-                <label for="hastaM" class="form-label">Hasta</label>
-                <input type="time" class="form-control input-sm" id="hastaM" placeholder="" value="" name="martesHasta"
-                  ngModel #martesHasta="ngModel" [(ngModel)]="diasLaborales.martesHasta" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkM">
-              </div> -->
             </div>
-            <!-- </div> -->
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" value="" id="miercoles" name="miercoles" ngModel
-                #miercoles="ngModel" [(ngModel)]="diasLaborales.miercoles" (click)="disableTextBoxDateofWorkMi()">
+                #miercoles="ngModel" [(ngModel)]="diasLaborales.miercoles" (click)="checkboxesDiasLaborales(3,$event.currentTarget.checked)">
               <label class="form-check-label" for="miercoles">
                 <p class="font-weight-bold">Miércoles</p>
               </label>
@@ -1094,30 +1090,17 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="turnoMi">Turno</label>
-                <select class="form-control" id="turnoMi" name="miercolesTurno" ngModel #miercolesTurno="ngModel" [(ngModel)]="diasLaborales.miercolesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
+                <select class="form-control" id="turnoMi" name="miercolesTurno" ngModel #miercolesTurno="ngModel" [(ngModel)]="diasLaborales.miercolesTurno" disabled="disabled" [disabled]="!diasLaborales.miercoles">
                   
                   <option value="Dia">Dia</option>
                   <option value="Noche">Noche</option>
                   <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
-              <!-- <div class="col-md-6">
-                <label for="desdeMi" class="form-label">Desde</label>
-                <input type="time" class="form-control input-sm" id="desdeMi" placeholder="" value=""
-                  name="miercolesDesde" ngModel #miercolesDesde="ngModel" [(ngModel)]="diasLaborales.miercolesDesde"
-                  disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
-              </div>
-              <div class="col-md-6">
-                <label for="hastaMi" class="form-label">Hasta</label>
-                <input type="time" class="form-control input-sm" id="hastaMi" placeholder="" value=""
-                  name="miercolesHasta" ngModel #miercolesHasta="ngModel" [(ngModel)]="diasLaborales.miercolesHasta"
-                  disabled="disabled" [disabled]="textBoxDisabledDateofWorkMi">
-              </div> -->
             </div>
-            <!-- </div> -->
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" value="" id="jueves" name="jueves" ngModel
-                #jueves="ngModel" [(ngModel)]="diasLaborales.jueves" (click)="disableTextBoxDateofWorkJ()">
+                #jueves="ngModel" [(ngModel)]="diasLaborales.jueves" (click)="checkboxesDiasLaborales(4,$event.currentTarget.checked)">
               <label class="form-check-label" for="jueves">
                 <p class="font-weight-bold">Jueves
                 </p>
@@ -1126,30 +1109,17 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="turnoJ">Turno</label>
-                <select class="form-control" id="turnoJ" name="juevesTurno" ngModel #juevesTurno="ngModel" [(ngModel)]="diasLaborales.juevesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkJ">
+                <select class="form-control" id="turnoJ" name="juevesTurno" ngModel #juevesTurno="ngModel" [(ngModel)]="diasLaborales.juevesTurno" disabled="disabled" [disabled]="!diasLaborales.jueves">
                   
                   <option value="Dia">Dia</option>
                   <option value="Noche">Noche</option>
                   <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
-              <!-- <div class="col-md-6">
-                <label for="desdeJ" class="form-label">Desde</label>
-                <input type="time" class="form-control input-sm" id="desdeJ" placeholder="" value="" name="juevesDesde"
-                  ngModel #juevesDesde="ngModel" [(ngModel)]="diasLaborales.juevesDesde" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkJ">
-              </div>
-              <div class="col-md-6">
-                <label for="hastaJ" class="form-label">Hasta</label>
-                <input type="time" class="form-control input-sm" id="hastaJ" placeholder="" value="" name="juevesHasta"
-                  ngModel #juevesHasta="ngModel" [(ngModel)]="diasLaborales.juevesHasta" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkJ">
-              </div> -->
             </div>
-            <!-- </div> -->
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" value="" id="viernes" name="viernes" ngModel
-                #viernes="ngModel" [(ngModel)]="diasLaborales.viernes" (click)="disableTextBoxDateofWorkV()">
+                #viernes="ngModel" [(ngModel)]="diasLaborales.viernes" (click)="checkboxesDiasLaborales(5,$event.currentTarget.checked)">
               <label class="form-check-label" for="viernes">
                 <p class="font-weight-bold">Viernes
                 </p>
@@ -1158,30 +1128,17 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="turnoV">Turno</label>
-                <select class="form-control" id="turnoV" name="viernesTurno" ngModel #viernesTurno="ngModel" [(ngModel)]="diasLaborales.viernesTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkV">
+                <select class="form-control" id="turnoV" name="viernesTurno" ngModel #viernesTurno="ngModel" [(ngModel)]="diasLaborales.viernesTurno" disabled="disabled" [disabled]="!diasLaborales.viernes">
                   
                   <option value="Dia">Dia</option>
                   <option value="Noche">Noche</option>
                   <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
-              <!-- <div class="col-md-6">
-                <label for="desdeV" class="form-label">Desde</label>
-                <input type="time" class="form-control input-sm" id="desdeV" placeholder="" value="" name="viernesDesde"
-                  ngModel #viernesDesde="ngModel" [(ngModel)]="diasLaborales.viernesDesde" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkV">
-              </div>
-              <div class="col-md-6">
-                <label for="hastaV" class="form-label">Hasta</label>
-                <input type="time" class="form-control input-sm" id="hastaV" placeholder="" value="" name="viernesHasta"
-                  ngModel #viernesHasta="ngModel" [(ngModel)]="diasLaborales.viernesHasta" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkV">
-              </div> -->
             </div>
-            <!-- </div> -->
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" value="" id="sabado" name="sabado" ngModel
-                #sabado="ngModel" [(ngModel)]="diasLaborales.sabado" (click)="disableTextBoxDateofWorkS()">
+                #sabado="ngModel" [(ngModel)]="diasLaborales.sabado" (click)="checkboxesDiasLaborales(6,$event.currentTarget.checked)">
               <label class="form-check-label" for="sabado">
                 <p class="font-weight-bold">Sábado
                 </p>
@@ -1190,30 +1147,17 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="turnoS">Turno</label>
-                <select class="form-control" id="turnoS" name="sabadoTurno" ngModel #sabadoTurno="ngModel" [(ngModel)]="diasLaborales.sabadoTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkS">
+                <select class="form-control" id="turnoS" name="sabadoTurno" ngModel #sabadoTurno="ngModel" [(ngModel)]="diasLaborales.sabadoTurno" disabled="disabled" [disabled]="!diasLaborales.sabado">
                   
                   <option value="Dia">Dia</option>
                   <option value="Noche">Noche</option>
                   <option value="TodoElDia">Todo el Dia</option>
                 </select>
               </div>
-              <!-- <div class="col-md-6">
-                <label for="desdeS" class="form-label">Desde</label>
-                <input type="time" class="form-control input-sm" id="desdeS" placeholder="" value="" name="sabadoDesde"
-                  ngModel #sabadoDesde="ngModel" [(ngModel)]="diasLaborales.sabadoDesde" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkS">
-              </div>
-              <div class="col-md-6">
-                <label for="hastaS" class="form-label">Hasta</label>
-                <input type="time" class="form-control input-sm" id="hastaS" placeholder="" value="" name="sabadoHasta"
-                  ngModel #sabadoHasta="ngModel" [(ngModel)]="diasLaborales.sabadoHasta" disabled="disabled"
-                  [disabled]="textBoxDisabledDateofWorkS">
-              </div> -->
             </div>
-            <!-- </div> -->
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" value="" id="domingo" name="domingo" ngModel
-                #domingo="ngModel" [(ngModel)]="diasLaborales.domingo" (click)="disableTextBoxDateofWorkD()">
+                #domingo="ngModel" [(ngModel)]="diasLaborales.domingo" (click)="checkboxesDiasLaborales(7,$event.currentTarget.checked)">
               <label class="form-check-label" for="domingo">
                 <p class="font-weight-bold">Domingo
                 </p>
@@ -1222,7 +1166,7 @@
             <div class="row pb-3">
               <div class="col-md-6">
                 <label for="turnoD">Turno</label>
-                <select class="form-control" id="turnoD" name="domingoTurno" ngModel #domingoTurno="ngModel" [(ngModel)]="diasLaborales.domingoTurno" disabled="disabled" [disabled]="textBoxDisabledDateofWorkD">
+                <select class="form-control" id="turnoD" name="domingoTurno" ngModel #domingoTurno="ngModel" [(ngModel)]="diasLaborales.domingoTurno" disabled="disabled" [disabled]="!diasLaborales.domingo">
                   
                   <option value="Dia">Dia</option>
                   <option value="Noche">Noche</option>
@@ -1273,7 +1217,7 @@
                     <div class="form-check" *ngFor="let zonaLaboral of zonasLaborales"
                       [value]="zonaLaboral.idZonaLaboral">
                       <input class="form-check-input" type="checkbox" id={{zonaLaboral.nombre}}
-                        (change)="zonasCheck(zonaLaboral)">
+                        (change)="zonasCheck(zonaLaboral)" [checked]="inputCheckedZonasLaborales(zonaLaboral)">
                       <!-- <input class="form-check-input" type="checkbox" id={{zonaLaboral.nombre}} 
                       (change)="zonasCheck(zonaLaboral)" required> -->
                       <label class="form-check-label" for={{zonaLaboral.nombre}}>
@@ -1473,9 +1417,10 @@
                   [(ngModel)]="colaborador.visaNumero" disabled="disabled" [disabled]="textBoxDisabledVis">
               </div>
               <div class="col-md-4">
+                <!-- Modificación tipo visa 14/11/2021 -->
                 <label for="tipoVisa" class="form-label">Tipo de Visa</label>
                 <select class="form-control" name="tipoVisa" (change)="onTipoVisa($event.target.value)"
-                  #tipoVisa="ngModel" [ngModel]="colaborador.idTipoVisa" ngModel disabled="disabled"
+                  #tipoVisa="ngModel" [ngModel]="colaborador.tipoVisa" ngModel disabled="disabled"
                   [disabled]="textBoxDisabledVis">
                   <option value="" selected disabled hidden>Seleccionar</option>
                   <option *ngFor="let tipoVisa of tipoVisas" [value]="tipoVisa.idTipoVisa">
@@ -1492,15 +1437,27 @@
                   [disabled]="textBoxDisabledVis">
               </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="!archivosDescargaVisa; else descargarArchivo">
               <div class="col-md-12 mt-3">
                 <label for="visaImg" class="form-label">Imagen de la Visa</label>
                 <input class="form-control-file" type="file" id="visaImg" name="visaImg" accept=".png, .jpg, .jpeg"
                   (change)="onVisa($event.target.files)" #visaUpload disabled="disabled"
                   [disabled]="textBoxDisabledVis">
-
               </div>
             </div>
+            <ng-template #descargarArchivo>
+              <div class="row">
+              <div class="col-md-6 mt-3">
+                <label for="visaImg" class="form-label">Cambiar Imagen de la Visa</label>
+                <input class="form-control-file" type="file" id="visaImg" name="visaImg" accept=".png, .jpg, .jpeg"
+                  (change)="onVisa($event.target.files)" #visaUpload disabled="disabled"
+                  [disabled]="textBoxDisabledVis">
+              </div>
+              <div class="col-md-6 my-auto">
+                <button type="button" class="btn btn-primary" (click)="downloadBase64FileVisa()">Descargar Visa</button>
+              </div>
+            </div>
+            </ng-template>
 
             <div class="row">
               <div class="col-md-4">
@@ -1546,15 +1503,27 @@
                   [disabled]="textBoxDisabledPas">
               </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="!archivosDescargaPasaporte; else descargarArchivoPasaporte">
               <div class="col-md-12 mt-3">
                 <label for="pasaporteImg" class="form-label">Imagen del Pasaporte</label>
                 <input class="form-control-file" type="file" id="pasaporteImg" name="pasaporteImg"
                   accept=".png, .jpg, .jpeg" (change)="onPasaporte($event.target.files)" #pasaporteUpload
                   disabled="disabled" [disabled]="textBoxDisabledPas">
-
               </div>
             </div>
+            <ng-template #descargarArchivoPasaporte>
+              <div class="row">
+                <div class="col-md-6 mt-3">
+                  <label for="pasaporteImg" class="form-label">Cambiar Imagen del Pasaporte</label>
+                  <input class="form-control-file" type="file" id="pasaporteImg" name="pasaporteImg"
+                    accept=".png, .jpg, .jpeg" (change)="onPasaporte($event.target.files)" #pasaporteUpload
+                    disabled="disabled" [disabled]="textBoxDisabledPas">
+                </div>
+              <div class="col-md-6 my-auto">
+                <button type="button" class="btn btn-primary" (click)="downloadBase64FilePasaporte()">Descargar Pasaporte</button>
+              </div>
+            </div>
+            </ng-template>
             <!-- <div class="row"> -->
 
             <!-- </div> -->
@@ -1730,3 +1699,4 @@
   </div>
 
 </form>
+<!-- </div> -->

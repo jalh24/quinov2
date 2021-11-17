@@ -12,6 +12,7 @@ export class ColaboradorFiltro {
     public calificacion1:number;
     public calificacion2:number;
     public permanencia:number;
+    public tipoColaborador:number;
     public zonasLaborales:[];
     public diasLaborales:any[];
     public turnoHorario:string;

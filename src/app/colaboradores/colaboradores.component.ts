@@ -58,6 +58,7 @@ export class ColaboradoresComponent implements OnInit {
   ];
 
   permanencias: any;
+  tiposColaboradores: any;
   zonasLaborales: any;
   colaboradorFiltro: ColaboradorFiltro;
   habilidades: any;
@@ -128,6 +129,7 @@ export class ColaboradoresComponent implements OnInit {
     this.getColaboradores();
     this.comboSexos();
     this.comboPermanencias();
+    this.comboTiposColaboradores();
     this.comboZonasLaborales();
     this.comboHabilidades();
     this.inicializaObjetos();
@@ -199,6 +201,10 @@ export class ColaboradoresComponent implements OnInit {
     this.colaboradorFiltro.permanencia = null;
   }
 
+  public resetFieldTipoColaborador() {
+    this.colaboradorFiltro.tipoColaborador = null;
+  }
+
   public resetFieldZonaLaboral() {
     this.colaboradorFiltro.permanencia = null;
   }
@@ -226,6 +232,7 @@ export class ColaboradoresComponent implements OnInit {
     this.colaboradorFiltro.calificacion1 = null;
     this.colaboradorFiltro.calificacion2 = null;
     this.colaboradorFiltro.permanencia = null;
+    this.colaboradorFiltro.tipoColaborador = null;
     this.colaboradorFiltro.zonasLaborales = null;
     this.colaboradorFiltro.diasLaborales = null;
     this.colaboradorFiltro.turnoHorario = null;
@@ -256,6 +263,13 @@ export class ColaboradoresComponent implements OnInit {
   public comboPermanencias() {
     this.http.get<any>('/api/catalogo/permanencias',this.httpOptions).subscribe(data => {
       this.permanencias = data.data;
+    });
+  }
+
+  public comboTiposColaboradores() {
+    this.http.get<any>('/api/catalogo/tiposColaboradores',this.httpOptions).subscribe(data => {
+      this.tiposColaboradores = data.data;
+      console.log(this.tiposColaboradores);
     });
   }
   

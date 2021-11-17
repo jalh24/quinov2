@@ -33,6 +33,12 @@ export class ColaboradorComponent implements OnInit {
 
   show = false;
   autohide = true;
+  archivosDescargaVisa: boolean = false;
+  archivosDescargaPasaporte: boolean = false;
+  archivosDescargaIne1: boolean = false;
+  archivosDescargaIne2: boolean = false;
+  archivosDescargaFoto: boolean = false;
+  archivosDescargaComprobanteDomicilio: boolean = false;
   selected = new FormControl(0);
   ESTUDIO_DATA: Estudio[] = [];
   estudioSource = new MatTableDataSource<Estudio>(this.ESTUDIO_DATA);
@@ -83,6 +89,18 @@ export class ColaboradorComponent implements OnInit {
   idPago: number;
   idEstudio: number;
   idExperiencia: number;
+  visaImagenDatos: any;
+  visaImagenNombre: any;
+  pasaporteImagenDatos: any;
+  pasaporteImagenNombre: any;
+  ineImagenDatos1: any;
+  ineImagenNombre1: any;
+  ineImagenDatos2: any;
+  ineImagenNombre2: any;
+  fotoImagenDatos: any;
+  fotoImagenNombre: any;
+  comprobanteDomicilioImagenDatos: any;
+  comprobanteDomicilioImagenNombre: any;
   public colaborador: Colaborador;
   diasLaborales: any = {
     todosDias: false,
@@ -276,7 +294,7 @@ export class ColaboradorComponent implements OnInit {
   inicializaObjetos() {
     this.colaborador = new Colaborador();
     this.colaborador.idColaborador = null;
-    this.colaborador.nombre = null;
+    this.colaborador.nombre = "";
     this.colaborador.a_paterno = null;
     this.colaborador.a_materno = null;
     this.colaborador.correoElectronico = null;
@@ -398,19 +416,144 @@ export class ColaboradorComponent implements OnInit {
       this.datos = data.data;
       console.log(this.datos);
       this.colaborador = this.datos[0];
+      this.colaborador.habilidades = JSON.parse(this.colaborador.habilidades.toString());
+      this.habilidadesSelected = this.colaborador.habilidades;
+      this.colaborador.especialidades = JSON.parse(this.colaborador.especialidades.toString());
+      this.especialidadesSelected = this.colaborador.especialidades;
+      this.colaborador.horario = JSON.parse(this.colaborador.horario.toString());
+      this.diasLaborales = this.colaborador.horario;
+      console.log(this.diasLaborales);
       this.comboCiudades(this.colaborador.idEstadoNacimiento);
       this.onCiudadNacimiento(this.colaborador.idCiudadNacimiento);
       this.onCodigoPostal(this.colaborador.codigoPostal);
       this.colaborador.peso = Math.floor(this.colaborador.peso);
       this.colaborador.estatura = Math.floor(this.colaborador.estatura);
-      // this.datos.cuentas.forEach(element => {
-      //   this.PAGO_DATA.push(element);
-      // });
-      // // this.PAGO_DATA.push(this.pago);
-      // this.pagoSource = new MatTableDataSource(this.PAGO_DATA);
+      this.datos.cuentas.forEach(element => {
+        let pago = new Pago;
+        pago.idPago = element.idCuenta;
+        pago.nombre = element.beneficiario;
+        pago.banco = {
+          idBanco: element.idBanco,
+          nombre: element.nombre,
+        };
+        pago.tipoCuenta = element.tipoCuenta;
+        pago.numero = element.numero;
+        this.agregarPago(pago);
+      });
+      this.datos.estudios.forEach(element => {
+        let estudio = new Estudio;
+        estudio.cedula = element.cedula;
+        // estudio.cedulaNombre = element.cedulaNombre;
+        estudio.comentarios = element.comentarios;
+        estudio.estatus = {
+          idEstatus: element.idEstatus,
+          nombre: element.estatusNombre,
+          tipo: "ESTUDIO",
+        };
+        estudio.fechaFin = element.fechaFin;
+        estudio.fechaInicio = element.fechaInicio;
+        // estudio = element;
+        estudio.idColaborador = idColaborador;
+        estudio.idEstudio = element.idEstudio;
+        estudio.institucion = element.institucion;
+        if(this.estudio.cedula){
+          estudio.cedulaNombre = "cedula."+estudio.cedula.substring(estudio.cedula.indexOf("/")+1,estudio.cedula.indexOf(";"));
+        }
+        // console.log(estudio);
+        this.agregarEstudio(estudio);
+      });
+      this.datos.experiencia.forEach(element => {
+        let experiencia = new Experiencia;
+        experiencia = element;
+        this.agregarExperiencia(experiencia);
+      });
+      if(this.datos[0].visaImagen != null) {
+        this.textBoxDisabledVis = false;
+        this.archivosDescargaVisa = true;
+        this.visaImagenDatos = this.datos[0].visaImagen;
+        this.visaImagenNombre = this.datos[0].visaNombre;
+      }
+      if(this.datos[0].pasaporteImagen != null) {
+        this.textBoxDisabledPas = false;
+        this.archivosDescargaPasaporte = true;
+        this.pasaporteImagenDatos = this.datos[0].pasaporteImagen;
+        this.pasaporteImagenNombre = this.datos[0].pasaporteNombre;
+      }
+      if(this.datos[0].ine1 != null) {
+        this.archivosDescargaIne1 = true;
+        this.ineImagenDatos1 = this.datos[0].ine1;
+        this.ineImagenNombre1 = this.datos[0].ine1Nombre;
+      }
+      if(this.datos[0].ine2 != null) {
+        this.archivosDescargaIne2 = true;
+        this.ineImagenDatos2 = this.datos[0].ine2;
+        this.ineImagenNombre2 = this.datos[0].ine2Nombre;
+      }
+      if(this.datos[0].foto != null) {
+        this.archivosDescargaFoto = true;
+        this.fotoImagenDatos = this.datos[0].foto;
+        this.fotoImagenNombre = this.datos[0].fotoNombre;
+      }
+      if(this.datos[0].comprobanteDomicilio != null) {
+        this.archivosDescargaComprobanteDomicilio = true;
+        this.comprobanteDomicilioImagenDatos = this.datos[0].comprobanteDomicilio;
+        this.comprobanteDomicilioImagenNombre = this.datos[0].comprobanteNombre;
+      }
+      this.http.post<any>('/api/colaborador/zonasLaborales', { idColaborador: idColaborador },this.httpOptions).subscribe(data => {
+        this.colaborador.zonas = data.data;
+        this.zonasSelected = this.colaborador.zonas;
+      });
+      console.log(this.colaborador);
     });
-    
   }
+
+  downloadBase64FileVisa() {
+    const linkSource = this.visaImagenDatos;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = this.visaImagenNombre;
+    downloadLink.click();
+}
+
+downloadBase64FilePasaporte() {
+  const linkSource = this.pasaporteImagenDatos;
+  const downloadLink = document.createElement("a");
+  downloadLink.href = linkSource;
+  downloadLink.download = this.pasaporteImagenNombre;
+  downloadLink.click();
+}
+
+downloadBase64FileIne1() {
+  const linkSource = this.ineImagenDatos1;
+  const downloadLink = document.createElement("a");
+  downloadLink.href = linkSource;
+  downloadLink.download = this.ineImagenNombre1;
+  downloadLink.click();
+}
+
+downloadBase64FileIne2() {
+  const linkSource = this.ineImagenDatos2;
+  const downloadLink = document.createElement("a");
+  downloadLink.href = linkSource;
+  downloadLink.download = this.ineImagenNombre2;
+  downloadLink.click();
+}
+
+downloadBase64FileFoto() {
+  const linkSource = this.fotoImagenDatos;
+  const downloadLink = document.createElement("a");
+  downloadLink.href = linkSource;
+  downloadLink.download = this.fotoImagenNombre;
+  downloadLink.click();
+}
+
+downloadBase64FileComprobanteDomicilio() {
+  const linkSource = this.comprobanteDomicilioImagenDatos;
+  const downloadLink = document.createElement("a");
+  downloadLink.href = linkSource;
+  downloadLink.download = this.comprobanteDomicilioImagenNombre;
+  downloadLink.click();
+}
 
   enableSeguros() {
     this.textBoxDisabledSeg = false;
@@ -462,121 +605,41 @@ export class ColaboradorComponent implements OnInit {
   disableTextBoxPas() {
     this.textBoxDisabledPas = true;
   }
-  disableTextBoxDateofWorkL() {
-    this.textBoxDisabledDateofWorkL = !this.textBoxDisabledDateofWorkL;
-    this.textBoxDisabledDateofWorkT = true;
-    this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasTurno = null;
-    if(this.textBoxDisabledDateofWorkL == true){
+
+  checkboxesDiasLaborales(index: number, event) {
+    console.log(index);
+    console.log(event);
+    if (index == 0 && event) {
+      this.diasLaborales.lunes = false;
       this.diasLaborales.lunesTurno = null;
-    }
-    // this.diasLaborales.todosDiasDesde = null;
-    // this.diasLaborales.todosDiasHasta = null;
-  }
-  disableTextBoxDateofWorkM() {
-    this.textBoxDisabledDateofWorkM = !this.textBoxDisabledDateofWorkM;
-    this.textBoxDisabledDateofWorkT = true;
-    this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasTurno = null;
-    if(this.textBoxDisabledDateofWorkM == true){
+      this.diasLaborales.martes = false;
       this.diasLaborales.martesTurno = null;
-    }
-    // this.diasLaborales.todosDiasDesde = null;
-    // this.diasLaborales.todosDiasHasta = null;
-  }
-  disableTextBoxDateofWorkMi() {
-    this.textBoxDisabledDateofWorkMi = !this.textBoxDisabledDateofWorkMi;
-    this.textBoxDisabledDateofWorkT = true;
-    this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasTurno = null;
-    if(this.textBoxDisabledDateofWorkMi == true){
+      this.diasLaborales.miercoles = false;
       this.diasLaborales.miercolesTurno = null;
-    }
-    // this.diasLaborales.todosDiasDesde = null;
-    // this.diasLaborales.todosDiasHasta = null;
-  }
-  disableTextBoxDateofWorkJ() {
-    this.textBoxDisabledDateofWorkJ = !this.textBoxDisabledDateofWorkJ;
-    this.textBoxDisabledDateofWorkT = true;
-    this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasTurno = null;
-    if(this.textBoxDisabledDateofWorkJ == true){
+      this.diasLaborales.jueves = false;
       this.diasLaborales.juevesTurno = null;
-    }
-    // this.diasLaborales.todosDiasDesde = null;
-    // this.diasLaborales.todosDiasHasta = null;
-  }
-  disableTextBoxDateofWorkV() {
-    this.textBoxDisabledDateofWorkV = !this.textBoxDisabledDateofWorkV;
-    this.textBoxDisabledDateofWorkT = true;
-    this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasTurno = null;
-    if(this.textBoxDisabledDateofWorkV == true){
+      this.diasLaborales.viernes = false;
       this.diasLaborales.viernesTurno = null;
-    }
-    // this.diasLaborales.todosDiasDesde = null;
-    // this.diasLaborales.todosDiasHasta = null;
-  }
-  disableTextBoxDateofWorkS() {
-    this.textBoxDisabledDateofWorkS = !this.textBoxDisabledDateofWorkS;
-    this.textBoxDisabledDateofWorkT = true;
-    this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasTurno = null;
-    if(this.textBoxDisabledDateofWorkS == true){
+      this.diasLaborales.sabado = false;
       this.diasLaborales.sabadoTurno = null;
-    }
-    // this.diasLaborales.todosDiasDesde = null;
-    // this.diasLaborales.todosDiasHasta = null;
-  }
-  disableTextBoxDateofWorkD() {
-    this.textBoxDisabledDateofWorkD = !this.textBoxDisabledDateofWorkD;
-    this.textBoxDisabledDateofWorkT = true;
-    this.diasLaborales.todosDias = false;
-    this.diasLaborales.todosDiasTurno = null;
-    if(this.textBoxDisabledDateofWorkD == true){
+      this.diasLaborales.domingo = false;
       this.diasLaborales.domingoTurno = null;
     }
-    // this.diasLaborales.todosDiasDesde = null;
-    // this.diasLaborales.todosDiasHasta = null;
-  }
-  disableTextBoxDateofWorkT() {
-    this.textBoxDisabledDateofWorkT = !this.textBoxDisabledDateofWorkT;
-    this.textBoxDisabledDateofWorkL = true;
-    this.textBoxDisabledDateofWorkM = true;
-    this.textBoxDisabledDateofWorkMi = true;
-    this.textBoxDisabledDateofWorkJ = true;
-    this.textBoxDisabledDateofWorkV = true;
-    this.textBoxDisabledDateofWorkS = true;
-    this.textBoxDisabledDateofWorkD = true;
-    this.diasLaborales.todosDias = !this.diasLaborales.todosDias;
-    this.diasLaborales.lunes = false;
-    this.diasLaborales.lunesTurno = null;
-    // this.diasLaborales.lunesDesde = null;
-    // this.diasLaborales.lunesHasta = null;
-    this.diasLaborales.martes = false;
-    this.diasLaborales.martesTurno = null;
-    // this.diasLaborales.martesDesde = null;
-    // this.diasLaborales.martesHasta = null;
-    this.diasLaborales.miercoles = false;
-    this.diasLaborales.miercolesTurno = null;
-    // this.diasLaborales.miercolesDesde = null;
-    // this.diasLaborales.miercolesHasta = null;
-    this.diasLaborales.jueves = false;
-    this.diasLaborales.juevesTurno = null;
-    // this.diasLaborales.juevesDesde = null;
-    // this.diasLaborales.juevesHasta = null;
-    this.diasLaborales.viernes = false;
-    this.diasLaborales.viernesTurno = null;
-    // this.diasLaborales.viernesDesde = null;
-    // this.diasLaborales.viernesHasta = null;
-    this.diasLaborales.sabado = false;
-    this.diasLaborales.sabadoTurno = null;
-    // this.diasLaborales.sabadoDesde = null;
-    // this.diasLaborales.sabadoHasta = null;
-    this.diasLaborales.domingo = false;
-    this.diasLaborales.domingoTurno = null;
-    // this.diasLaborales.domingoDesde = null;
-    // this.diasLaborales.domingoHasta = null;
+    if( index >0 && event) {
+      this.diasLaborales.todosDias = false;
+      this.diasLaborales.todosDiasTurno = null;
+    }
+    console.log(this.diasLaborales);
+    // this.textBoxDisabledDateofWorkT = !this.textBoxDisabledDateofWorkT;
+    // this.textBoxDisabledDateofWorkL = true;
+    // this.textBoxDisabledDateofWorkM = true;
+    // this.textBoxDisabledDateofWorkMi = true;
+    // this.textBoxDisabledDateofWorkJ = true;
+    // this.textBoxDisabledDateofWorkV = true;
+    // this.textBoxDisabledDateofWorkS = true;
+    // this.textBoxDisabledDateofWorkD = true;
+    // this.diasLaborales.todosDias = !this.diasLaborales.todosDias;
+    
   }
 
 
@@ -603,21 +666,38 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.especialidades = this.especialidadesSelected;
     this.colaborador.habilidades = this.habilidadesSelected;
     console.log(this.colaborador);
-    if (ngForm.valid) {
-      this.http.post<any>('/api/colaborador/create', this.colaborador,this.httpOptions).subscribe(data => {
-        this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");
-        window.history.back();
-        alert("Se creo el colaborador exitosamente");
-        
-      });
-      this.inicializaObjetos();
+    if(this.colaborador.idColaborador) {
+      console.log("EXISTS");
+      console.log(this.colaborador);
+      if (ngForm.valid) {
+        this.http.post<any>('/api/colaborador/update', this.colaborador,this.httpOptions).subscribe(data => {
+          this.showSuccess(NgbToastType.Success, "Se actualizo el colaborador exitosamente");
+          window.history.back();
+          alert("Se actualizo el colaborador exitosamente");        
+        });
+        this.inicializaObjetos();
+      } else {
+        this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
+      }
     } else {
-      this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
+      console.log("NOT EXISTS");
+      if (ngForm.valid) {
+        this.http.post<any>('/api/colaborador/create', this.colaborador,this.httpOptions).subscribe(data => {
+          this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");
+          window.history.back();
+          alert("Se creo el colaborador exitosamente");
+          
+        });
+        this.inicializaObjetos();
+      } else {
+        this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
+      }
     }
 
   }
 
   zonasCheck(zona: any) {
+    console.log(this.zonasSelected);
     if (this.zonasSelected.length == 0) {
       this.zonasSelected.push(zona)
     } else {
@@ -778,8 +858,11 @@ export class ColaboradorComponent implements OnInit {
     datatableElement.dtInstance.then((dtInstance: DataTables.Api) => console.log(dtInstance));
   }
 
-  agregarEstudio() {
-    if (this.estudio.idEstudio == null) {
+  agregarEstudio(estudioParam: any) {
+    if(estudioParam != null) {
+      this.estudio = estudioParam;
+    }
+    if (this.estudio.idEstudio == null || estudioParam != null) {
       if (this.estudios.length == 0) {
         this.idEstudio = this.estudioSource.data.length + 1;
       } else {
@@ -828,7 +911,10 @@ export class ColaboradorComponent implements OnInit {
     this.pago.banco = this.bancos.find(banco => { return banco.idBanco == event });
   }
 
-  agregarPago() {
+  agregarPago(pagoParam: any) {
+    if(pagoParam != null) {
+      this.pago = pagoParam;
+    }
     if (this.pago.idPago == null) {
       if (this.pagoSource.data.length == 0) {
         this.idPago = this.pagoSource.data.length + 1;
@@ -885,7 +971,11 @@ export class ColaboradorComponent implements OnInit {
     }
   }
 
-  agregarExperiencia() {
+  agregarExperiencia(experienciaParam: any) {
+    console.log(experienciaParam);
+    if(experienciaParam != null) {
+      this.experiencia = experienciaParam;
+    }
     if (this.experiencia.idExperiencia == null) {
       if (this.experienciaSource.data.length == 0) {
         this.idExperiencia = this.experienciaSource.data.length + 1;
@@ -1164,5 +1254,29 @@ export class ColaboradorComponent implements OnInit {
 
   onPermanencia(value: any) {
     this.colaborador.idPermanencia = value;
+  }
+
+  inputCheckedHabilidad(habilidadParam) {
+    if(this.habilidadesSelected.find(habilidad => { return habilidad.idHabilidad === habilidadParam.idHabilidad }) === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  inputCheckedEspecialidad(especialidadParam) {
+    if(this.especialidadesSelected.find(especialidad => { return especialidad.idEspecialidad === especialidadParam.idEspecialidad }) === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  inputCheckedZonasLaborales(zonasParam) {
+    if(this.zonasSelected.find(zonas => { return zonas.idZonaLaboral === zonasParam.idZonaLaboral }) === undefined) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
