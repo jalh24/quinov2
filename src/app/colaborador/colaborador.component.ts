@@ -14,21 +14,21 @@ import { FormControl } from '@angular/forms';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-colaborador',
   templateUrl: './colaborador.component.html',
   styleUrls: ['./colaborador.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class ColaboradorComponent implements OnInit {
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
       Token: localStorage.getItem('token')
     })
   };
-  
+
   faSignOutAlt = faSignOutAlt;
 
   show = false;
@@ -105,36 +105,20 @@ export class ColaboradorComponent implements OnInit {
   diasLaborales: any = {
     todosDias: false,
     todosDiasTurno: null,
-    // todosDiasDesde: null,
-    // todosDiasHasta: null,
     lunes: false,
     lunesTurno: null,
-    // lunesDesde: null,
-    // lunesHasta: null,
     martes: false,
     martesTurno: null,
-    // martesDesde: null,
-    // martesHasta: null,
     miercoles: false,
     miercolesTurno: null,
-    // miercolesDesde: null,
-    // miercolesHasta: null,
     jueves: false,
     juevesTurno: null,
-    // juevesDesde: null,
-    // juevesHasta: null,
     viernes: false,
     viernesTurno: null,
-    // viernesDesde: null,
-    // viernesHasta: null,
     sabado: false,
     sabadoTurno: null,
-    // sabadoDesde: null,
-    // sabadoHasta: null,
     domingo: false,
     domingoTurno: null
-    // domingoDesde: null,
-    // domingoHasta: null
   };
   sexos: any[];
   colonias: any[];
@@ -175,7 +159,7 @@ export class ColaboradorComponent implements OnInit {
 
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
-  
+
 
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -183,7 +167,6 @@ export class ColaboradorComponent implements OnInit {
       this.dtTriggerEstudio.next();
       this.dtTriggerPago.next();
       this.dtOptionsExperiencia.next();
-      //console.log(this.dtTriggerEstudio);
     });
   }
 
@@ -214,20 +197,18 @@ export class ColaboradorComponent implements OnInit {
     this.comboHabilidades();
     this.inicializaObjetos();
 
-    this.route.queryParams.subscribe(params=>{
+    this.route.queryParams.subscribe(params => {
       this.idColaborador = params['idColaborador'];
     });
 
-    if(this.idColaborador) {
+    if (this.idColaborador) {
       this.llenarCampos(this.idColaborador);
     }
 
     this.dtOptionsPago = {
       select: true,
       rowCallback: (row: Node, data: any | Object, index: number) => {
-        console.log(data);
         const self = this;
-
         $('td', row).on('click', () => {
           if (self.pago !== null) {
             if (self.pago.idPago === data.idPago) {
@@ -239,18 +220,14 @@ export class ColaboradorComponent implements OnInit {
             self.colaborador = data;
           }
         });
-
         return row;
       }
-
     };
 
     this.dtOptionsEstudio = {
       select: true,
       rowCallback: (row: Node, data: any | Object, index: number) => {
-        console.log(data);
         const self = this;
-
         $('td', row).on('click', () => {
           if (self.estudio !== null) {
             if (self.estudio.idEstudio === data.idEstudio) {
@@ -262,17 +239,14 @@ export class ColaboradorComponent implements OnInit {
             self.colaborador = data;
           }
         });
-
         return row;
       }
-
     };
+
     this.dtOptionsExperiencia = {
       select: true,
       rowCallback: (row: Node, data: any | Object, index: number) => {
-        console.log(data);
         const self = this;
-
         $('td', row).on('click', () => {
           if (self.experiencia !== null) {
             if (self.experiencia.idExperiencia === data.idExperiencia) {
@@ -284,10 +258,8 @@ export class ColaboradorComponent implements OnInit {
             self.colaborador = data;
           }
         });
-
         return row;
       }
-
     };
   }
 
@@ -368,11 +340,9 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.observaciones = null;
     this.colaborador.idPermanencia = null;
     this.colaborador.idGradoEstudio = null;
-
     this.idEstudio = 0;
     this.idPago = 0;
     this.idExperiencia = 0;
-
     this.pagos = [];
     this.pago = {
       idPago: null,
@@ -412,9 +382,8 @@ export class ColaboradorComponent implements OnInit {
   }
 
   public llenarCampos(idColaborador) {
-    this.http.post<any>('/api/colaborador/colaboradorId', { idColaborador: idColaborador },this.httpOptions).subscribe(data => {
+    this.http.post<any>('/api/colaborador/colaboradorId', { idColaborador: idColaborador }, this.httpOptions).subscribe(data => {
       this.datos = data.data;
-      console.log(this.datos);
       this.colaborador = this.datos[0];
       this.colaborador.habilidades = JSON.parse(this.colaborador.habilidades.toString());
       this.habilidadesSelected = this.colaborador.habilidades;
@@ -422,7 +391,6 @@ export class ColaboradorComponent implements OnInit {
       this.especialidadesSelected = this.colaborador.especialidades;
       this.colaborador.horario = JSON.parse(this.colaborador.horario.toString());
       this.diasLaborales = this.colaborador.horario;
-      console.log(this.diasLaborales);
       this.comboCiudades(this.colaborador.idEstadoNacimiento);
       this.onCiudadNacimiento(this.colaborador.idCiudadNacimiento);
       this.onCodigoPostal(this.colaborador.codigoPostal);
@@ -443,7 +411,6 @@ export class ColaboradorComponent implements OnInit {
       this.datos.estudios.forEach(element => {
         let estudio = new Estudio;
         estudio.cedula = element.cedula;
-        // estudio.cedulaNombre = element.cedulaNombre;
         estudio.comentarios = element.comentarios;
         estudio.estatus = {
           idEstatus: element.idEstatus,
@@ -452,14 +419,12 @@ export class ColaboradorComponent implements OnInit {
         };
         estudio.fechaFin = element.fechaFin;
         estudio.fechaInicio = element.fechaInicio;
-        // estudio = element;
         estudio.idColaborador = idColaborador;
         estudio.idEstudio = element.idEstudio;
         estudio.institucion = element.institucion;
-        if(this.estudio.cedula){
-          estudio.cedulaNombre = "cedula."+estudio.cedula.substring(estudio.cedula.indexOf("/")+1,estudio.cedula.indexOf(";"));
+        if (this.estudio.cedula) {
+          estudio.cedulaNombre = "cedula." + estudio.cedula.substring(estudio.cedula.indexOf("/") + 1, estudio.cedula.indexOf(";"));
         }
-        // console.log(estudio);
         this.agregarEstudio(estudio);
       });
       this.datos.experiencia.forEach(element => {
@@ -467,43 +432,42 @@ export class ColaboradorComponent implements OnInit {
         experiencia = element;
         this.agregarExperiencia(experiencia);
       });
-      if(this.datos[0].visaImagen != null) {
+      if (this.datos[0].visaImagen != null) {
         this.textBoxDisabledVis = false;
         this.archivosDescargaVisa = true;
         this.visaImagenDatos = this.datos[0].visaImagen;
         this.visaImagenNombre = this.datos[0].visaNombre;
       }
-      if(this.datos[0].pasaporteImagen != null) {
+      if (this.datos[0].pasaporteImagen != null) {
         this.textBoxDisabledPas = false;
         this.archivosDescargaPasaporte = true;
         this.pasaporteImagenDatos = this.datos[0].pasaporteImagen;
         this.pasaporteImagenNombre = this.datos[0].pasaporteNombre;
       }
-      if(this.datos[0].ine1 != null) {
+      if (this.datos[0].ine1 != null) {
         this.archivosDescargaIne1 = true;
         this.ineImagenDatos1 = this.datos[0].ine1;
         this.ineImagenNombre1 = this.datos[0].ine1Nombre;
       }
-      if(this.datos[0].ine2 != null) {
+      if (this.datos[0].ine2 != null) {
         this.archivosDescargaIne2 = true;
         this.ineImagenDatos2 = this.datos[0].ine2;
         this.ineImagenNombre2 = this.datos[0].ine2Nombre;
       }
-      if(this.datos[0].foto != null) {
+      if (this.datos[0].foto != null) {
         this.archivosDescargaFoto = true;
         this.fotoImagenDatos = this.datos[0].foto;
         this.fotoImagenNombre = this.datos[0].fotoNombre;
       }
-      if(this.datos[0].comprobanteDomicilio != null) {
+      if (this.datos[0].comprobanteDomicilio != null) {
         this.archivosDescargaComprobanteDomicilio = true;
         this.comprobanteDomicilioImagenDatos = this.datos[0].comprobanteDomicilio;
         this.comprobanteDomicilioImagenNombre = this.datos[0].comprobanteNombre;
       }
-      this.http.post<any>('/api/colaborador/zonasLaborales', { idColaborador: idColaborador },this.httpOptions).subscribe(data => {
+      this.http.post<any>('/api/colaborador/zonasLaborales', { idColaborador: idColaborador }, this.httpOptions).subscribe(data => {
         this.colaborador.zonas = data.data;
         this.zonasSelected = this.colaborador.zonas;
       });
-      console.log(this.colaborador);
     });
   }
 
@@ -513,82 +477,82 @@ export class ColaboradorComponent implements OnInit {
     downloadLink.href = linkSource;
     downloadLink.download = this.visaImagenNombre;
     downloadLink.click();
-}
+  }
 
-downloadBase64FilePasaporte() {
-  const linkSource = this.pasaporteImagenDatos;
-  const downloadLink = document.createElement("a");
-  downloadLink.href = linkSource;
-  downloadLink.download = this.pasaporteImagenNombre;
-  downloadLink.click();
-}
+  downloadBase64FilePasaporte() {
+    const linkSource = this.pasaporteImagenDatos;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = this.pasaporteImagenNombre;
+    downloadLink.click();
+  }
 
-downloadBase64FileIne1() {
-  const linkSource = this.ineImagenDatos1;
-  const downloadLink = document.createElement("a");
-  downloadLink.href = linkSource;
-  downloadLink.download = this.ineImagenNombre1;
-  downloadLink.click();
-}
+  downloadBase64FileIne1() {
+    const linkSource = this.ineImagenDatos1;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = this.ineImagenNombre1;
+    downloadLink.click();
+  }
 
-downloadBase64FileIne2() {
-  const linkSource = this.ineImagenDatos2;
-  const downloadLink = document.createElement("a");
-  downloadLink.href = linkSource;
-  downloadLink.download = this.ineImagenNombre2;
-  downloadLink.click();
-}
+  downloadBase64FileIne2() {
+    const linkSource = this.ineImagenDatos2;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = this.ineImagenNombre2;
+    downloadLink.click();
+  }
 
-downloadBase64FileFoto() {
-  const linkSource = this.fotoImagenDatos;
-  const downloadLink = document.createElement("a");
-  downloadLink.href = linkSource;
-  downloadLink.download = this.fotoImagenNombre;
-  downloadLink.click();
-}
+  downloadBase64FileFoto() {
+    const linkSource = this.fotoImagenDatos;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = this.fotoImagenNombre;
+    downloadLink.click();
+  }
 
-downloadBase64FileComprobanteDomicilio() {
-  const linkSource = this.comprobanteDomicilioImagenDatos;
-  const downloadLink = document.createElement("a");
-  downloadLink.href = linkSource;
-  downloadLink.download = this.comprobanteDomicilioImagenNombre;
-  downloadLink.click();
-}
+  downloadBase64FileComprobanteDomicilio() {
+    const linkSource = this.comprobanteDomicilioImagenDatos;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = this.comprobanteDomicilioImagenNombre;
+    downloadLink.click();
+  }
 
   enableSeguros() {
     this.textBoxDisabledSeg = false;
   }
+
   disableSeguros() {
     this.textBoxDisabledSeg = true;
   }
+
   enableOtraEsp() {
     this.textBoxDisabledOtraEsp = !this.textBoxDisabledOtraEsp;
   }
+
   enableOtraZon() {
     this.textBoxDisabledOtraZon = !this.textBoxDisabledOtraZon;
   }
+
   enableOtraHab() {
     this.textBoxDisabledOtraHab = !this.textBoxDisabledOtraHab;
   }
 
   enableCed(event) {
     this.textBoxDisabledCed = false;
-    console.log(event);
     this.estudio.estatus = this.estatusEstudios.find(estu => { console.log(estu); return estu.nombre == event });
-    console.log(this.estudio);
-    //this.estudio.estatus = event;
   }
 
   disableCed(event) {
     this.textBoxDisabledCed = true;
     this.estudio.estatus = this.estatusEstudios.find(estu => { return estu.nombre === event });
-    console.log(this.estudio);
-    //this.estudio.estatus = event;
   }
 
   enableHijosViven() {
     this.radioDisabledHijosViven = false;
   }
+
   disableHijosViven() {
     this.radioDisabledHijosViven = true;
   }
@@ -596,19 +560,20 @@ downloadBase64FileComprobanteDomicilio() {
   enableTextBoxVis() {
     this.textBoxDisabledVis = false;
   }
+
   disableTextBoxVis() {
     this.textBoxDisabledVis = true;
   }
+
   enableTextBoxPas() {
     this.textBoxDisabledPas = false;
   }
+
   disableTextBoxPas() {
     this.textBoxDisabledPas = true;
   }
 
   checkboxesDiasLaborales(index: number, event) {
-    console.log(index);
-    console.log(event);
     if (index == 0 && event) {
       this.diasLaborales.lunes = false;
       this.diasLaborales.lunesTurno = null;
@@ -625,36 +590,21 @@ downloadBase64FileComprobanteDomicilio() {
       this.diasLaborales.domingo = false;
       this.diasLaborales.domingoTurno = null;
     }
-    if( index >0 && event) {
+    if (index > 0 && event) {
       this.diasLaborales.todosDias = false;
       this.diasLaborales.todosDiasTurno = null;
     }
-    console.log(this.diasLaborales);
-    // this.textBoxDisabledDateofWorkT = !this.textBoxDisabledDateofWorkT;
-    // this.textBoxDisabledDateofWorkL = true;
-    // this.textBoxDisabledDateofWorkM = true;
-    // this.textBoxDisabledDateofWorkMi = true;
-    // this.textBoxDisabledDateofWorkJ = true;
-    // this.textBoxDisabledDateofWorkV = true;
-    // this.textBoxDisabledDateofWorkS = true;
-    // this.textBoxDisabledDateofWorkD = true;
-    // this.diasLaborales.todosDias = !this.diasLaborales.todosDias;
-    
   }
-
 
   ngAfterViewInit(): void {
     this.dtTriggerEstudio.next();
   }
 
-
   public mostrarTab(tab: any) {
     this.tabVisible = tab;
-    console.log(tab);
   }
 
   public guardarColaborador(ngForm: NgForm) {
-    console.log(this.diasLaborales);
     this.colaborador.horario = this.diasLaborales;
     this.colaborador.idPais = 1;
     this.colaborador.idPaisNacimiento = 1;
@@ -665,50 +615,41 @@ downloadBase64FileComprobanteDomicilio() {
     this.colaborador.experiencias = this.experienciaSource.data;
     this.colaborador.especialidades = this.especialidadesSelected;
     this.colaborador.habilidades = this.habilidadesSelected;
-    console.log(this.colaborador);
-    if(this.colaborador.idColaborador) {
-      console.log("EXISTS");
-      console.log(this.colaborador);
+    if (this.colaborador.idColaborador) {
       if (ngForm.valid) {
-        this.http.post<any>('/api/colaborador/update', this.colaborador,this.httpOptions).subscribe(data => {
+        this.http.post<any>('/api/colaborador/update', this.colaborador, this.httpOptions).subscribe(data => {
           this.showSuccess(NgbToastType.Success, "Se actualizo el colaborador exitosamente");
           window.history.back();
-          alert("Se actualizo el colaborador exitosamente");        
+          alert("Se actualizo el colaborador exitosamente");
         });
         this.inicializaObjetos();
       } else {
         this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
       }
     } else {
-      console.log("NOT EXISTS");
       if (ngForm.valid) {
-        this.http.post<any>('/api/colaborador/create', this.colaborador,this.httpOptions).subscribe(data => {
+        this.http.post<any>('/api/colaborador/create', this.colaborador, this.httpOptions).subscribe(data => {
           this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");
           window.history.back();
           alert("Se creo el colaborador exitosamente");
-          
         });
         this.inicializaObjetos();
       } else {
         this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
       }
     }
-
   }
 
   zonasCheck(zona: any) {
-    console.log(this.zonasSelected);
     if (this.zonasSelected.length == 0) {
       this.zonasSelected.push(zona)
     } else {
       if (this.zonasSelected.find(obj => {
         return obj.idZonaLaboral == zona.idZonaLaboral
       })) {
-
         this.zonasSelected = this.zonasSelected.filter((value, key) => {
           return value.idZonaLaboral != zona.idZonaLaboral;
         });
-
       } else {
         this.zonasSelected.push(zona);
       }
@@ -746,7 +687,6 @@ downloadBase64FileComprobanteDomicilio() {
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
-
   }
 
   public ineReverso(files: FileList) {
@@ -763,7 +703,6 @@ downloadBase64FileComprobanteDomicilio() {
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
-
   }
 
   public cargaFotoPersonal(files: FileList) {
@@ -771,7 +710,6 @@ downloadBase64FileComprobanteDomicilio() {
     let file = files[0];
     let currentDate = new Date();
     let extension = file.type.split("/");
-    console.log(extension);
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
@@ -781,7 +719,6 @@ downloadBase64FileComprobanteDomicilio() {
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
-
   }
 
   public comprobanteDomicilio(files: FileList) {
@@ -798,7 +735,6 @@ downloadBase64FileComprobanteDomicilio() {
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
-
   }
 
   public onVisa(files: FileList) {
@@ -815,7 +751,6 @@ downloadBase64FileComprobanteDomicilio() {
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
-
   }
 
   public onPasaporte(files: FileList) {
@@ -832,9 +767,7 @@ downloadBase64FileComprobanteDomicilio() {
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
-
   }
-
 
   public onCedulaFileSelected(files: FileList) {
     let me = this;
@@ -850,16 +783,14 @@ downloadBase64FileComprobanteDomicilio() {
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
-
   }
-
 
   displayToConsole(datatableElement: DataTableDirective): void {
     datatableElement.dtInstance.then((dtInstance: DataTables.Api) => console.log(dtInstance));
   }
 
   agregarEstudio(estudioParam: any) {
-    if(estudioParam != null) {
+    if (estudioParam != null) {
       this.estudio = estudioParam;
     }
     if (this.estudio.idEstudio == null || estudioParam != null) {
@@ -869,7 +800,6 @@ downloadBase64FileComprobanteDomicilio() {
         this.idEstudio++;
       }
       this.estudio.idEstudio = this.idEstudio;
-      console.log(this.estudio);
       this.ESTUDIO_DATA.push(this.estudio);
       this.estudioSource = new MatTableDataSource(this.ESTUDIO_DATA);
     } else {
@@ -904,7 +834,6 @@ downloadBase64FileComprobanteDomicilio() {
 
   onTipoCuenta(event) {
     this.pago.tipoCuenta = event;
-    console.log(event);
   }
 
   onBanco(event) {
@@ -912,7 +841,7 @@ downloadBase64FileComprobanteDomicilio() {
   }
 
   agregarPago(pagoParam: any) {
-    if(pagoParam != null) {
+    if (pagoParam != null) {
       this.pago = pagoParam;
     }
     if (this.pago.idPago == null) {
@@ -932,7 +861,6 @@ downloadBase64FileComprobanteDomicilio() {
       tipoCuenta: null,
       numero: null,
     };
-
   }
 
   especialidadCheck(especialidad: any) {
@@ -942,11 +870,9 @@ downloadBase64FileComprobanteDomicilio() {
       if (this.especialidadesSelected.find(obj => {
         return obj.idEspecialidad == especialidad.idEspecialidad
       })) {
-
         this.especialidadesSelected = this.especialidadesSelected.filter((value, key) => {
           return value.idEspecialidad != especialidad.idEspecialidad;
         });
-
       } else {
         this.especialidadesSelected.push(especialidad);
       }
@@ -960,11 +886,9 @@ downloadBase64FileComprobanteDomicilio() {
       if (this.habilidadesSelected.find(obj => {
         return obj.idEspecialidad == habilidad.idHabilidad
       })) {
-
         this.habilidadesSelected = this.habilidadesSelected.filter((value, key) => {
           return value.idEspecialidad != habilidad.idHabilidad;
         });
-
       } else {
         this.habilidadesSelected.push(habilidad);
       }
@@ -972,8 +896,7 @@ downloadBase64FileComprobanteDomicilio() {
   }
 
   agregarExperiencia(experienciaParam: any) {
-    console.log(experienciaParam);
-    if(experienciaParam != null) {
+    if (experienciaParam != null) {
       this.experiencia = experienciaParam;
     }
     if (this.experiencia.idExperiencia == null) {
@@ -996,16 +919,16 @@ downloadBase64FileComprobanteDomicilio() {
       referencia: null,
       telefono: null
     };
-
-
   }
 
   editaEstudio(estudioTmp: any) {
     this.estudio = estudioTmp;
   }
+
   editaPago(pagoTmp: any) {
     this.pago = pagoTmp;
   }
+
   editaExperiencia(experienciaTmp: any) {
     this.experiencia = experienciaTmp;
   }
@@ -1026,20 +949,18 @@ downloadBase64FileComprobanteDomicilio() {
     this.experienciaSource.data = this.experienciaSource.data.filter((value, key) => {
       return value.idExperiencia != experienciaTmp.idExperiencia;
     });
-
   }
 
   pagAtras(index) {
     if (this.selected.value > 0) {
       this.selected.setValue(this.selected.value - index);
     }
-
   }
+
   pagDelante(index) {
     if (this.selected.value < 7) {
       this.selected.setValue(this.selected.value + index);
     }
-
   }
 
   limpiarEstudio() {
@@ -1055,6 +976,7 @@ downloadBase64FileComprobanteDomicilio() {
       comentarios: null
     };
   }
+
   limpiarPago() {
     this.pago = {
       idPago: null,
@@ -1064,6 +986,7 @@ downloadBase64FileComprobanteDomicilio() {
       numero: null,
     };
   }
+  
   limpiarExperiencia() {
     this.experiencia = {
       idExperiencia: null,
@@ -1077,123 +1000,123 @@ downloadBase64FileComprobanteDomicilio() {
   }
 
   public listaEstatus() {
-    this.http.get<any>('/api/catalogo/estatus?tipo=ESTUDIO',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/estatus?tipo=ESTUDIO', this.httpOptions).subscribe(data => {
       this.estatusEstudios = data.data;
     });
   }
 
   public comboCalificaciones() {
-    this.http.get<any>('/api/catalogo/calificaciones',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/calificaciones', this.httpOptions).subscribe(data => {
       this.calificaciones = data.data;
     });
   }
 
   public comboGradoEstudios() {
-    this.http.get<any>('/api/catalogo/gradoEstudios',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/gradoEstudios', this.httpOptions).subscribe(data => {
       this.gradoEstudios = data.data;
     });
   }
 
   public comboTiposColaboradores() {
-    this.http.get<any>('/api/catalogo/tiposColaboradores',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/tiposColaboradores', this.httpOptions).subscribe(data => {
       this.tiposColaboradores = data.data;
     });
   }
 
   public comboTeces() {
-    this.http.get<any>('/api/catalogo/teces',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/teces', this.httpOptions).subscribe(data => {
       this.teces = data.data;
     });
   }
 
   public comboTipoVisas() {
-    this.http.get<any>('/api/catalogo/tipoVisas',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/tipoVisas', this.httpOptions).subscribe(data => {
       this.tipoVisas = data.data;
     });
   }
 
   public comboBancos() {
-    this.http.get<any>('/api/catalogo/bancos',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/bancos', this.httpOptions).subscribe(data => {
       this.bancos = data.data;
     });
   }
 
   public comboEstadosCiviles() {
-    this.http.get<any>('/api/catalogo/comboEstadosCiviles',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/comboEstadosCiviles', this.httpOptions).subscribe(data => {
       this.estadosCiviles = data.data;
     });
   }
 
   public comboTiposTelefono() {
-    this.http.get<any>('/api/catalogo/tiposTelefono',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/tiposTelefono', this.httpOptions).subscribe(data => {
       this.tiposTelefono = data.data;
     });
   }
 
   public comboPermanencias() {
-    this.http.get<any>('/api/catalogo/permanencias',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/permanencias', this.httpOptions).subscribe(data => {
       this.permanencias = data.data;
     });
   }
 
   public comboZonasLaborales() {
-    this.http.get<any>('/api/catalogo/zonasLaborales',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/zonasLaborales', this.httpOptions).subscribe(data => {
       this.zonasLaborales = data.data;
     });
   }
 
   public comboEspecialidades() {
-    this.http.get<any>('/api/catalogo/especialidades',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/especialidades', this.httpOptions).subscribe(data => {
       this.especialidades = data.data;
     });
   }
 
   public comboHabilidades() {
-    this.http.get<any>('/api/catalogo/habilidades',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/habilidades', this.httpOptions).subscribe(data => {
       this.habilidades = data.data;
     });
   }
 
   public comboColonias() {
-    this.http.get<any>('/api/catalogo/colonias',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/colonias', this.httpOptions).subscribe(data => {
       this.colonias = data.data;
     });
   }
 
   public comboSexos() {
-    this.http.get<any>('/api/catalogo/sexos',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/sexos', this.httpOptions).subscribe(data => {
       this.sexos = data.data;
     });
   }
 
   public comboCiudades(idEstadoNacimiento) {
     this.colaborador.idEstadoNacimiento = idEstadoNacimiento;
-    this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento,this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento, this.httpOptions).subscribe(data => {
       this.ciudades = data.data;
     });
   }
 
   public comboEstados() {
-    this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais,this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais, this.httpOptions).subscribe(data => {
       this.estados = data.data;
     });
   }
 
   public comboPaises() {
-    this.http.get<any>('/api/catalogo/paises',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/paises', this.httpOptions).subscribe(data => {
       this.paises = data.data;
     });
   }
 
   public onCodigoPostal(selectedCodigoPostal) {
     this.colaborador.codigoPostal = selectedCodigoPostal;
-    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal,this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal, this.httpOptions).subscribe(data => {
       this.colonias = data.data;
       this.colaborador.idCiudad = data.data[0].idCiudad;
-      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad,this.httpOptions).subscribe(dataCiudad => {
+      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad, this.httpOptions).subscribe(dataCiudad => {
         this.ciudadesDir = dataCiudad.data;
         this.colaborador.idEstado = dataCiudad.data[0].idEstado;
-        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado,this.httpOptions).subscribe(data => {
+        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado, this.httpOptions).subscribe(data => {
           this.estadosDir = data.data;
         });
       });
@@ -1257,7 +1180,7 @@ downloadBase64FileComprobanteDomicilio() {
   }
 
   inputCheckedHabilidad(habilidadParam) {
-    if(this.habilidadesSelected.find(habilidad => { return habilidad.idHabilidad === habilidadParam.idHabilidad }) === undefined) {
+    if (this.habilidadesSelected.find(habilidad => { return habilidad.idHabilidad === habilidadParam.idHabilidad }) === undefined) {
       return false;
     } else {
       return true;
@@ -1265,7 +1188,7 @@ downloadBase64FileComprobanteDomicilio() {
   }
 
   inputCheckedEspecialidad(especialidadParam) {
-    if(this.especialidadesSelected.find(especialidad => { return especialidad.idEspecialidad === especialidadParam.idEspecialidad }) === undefined) {
+    if (this.especialidadesSelected.find(especialidad => { return especialidad.idEspecialidad === especialidadParam.idEspecialidad }) === undefined) {
       return false;
     } else {
       return true;
@@ -1273,7 +1196,7 @@ downloadBase64FileComprobanteDomicilio() {
   }
 
   inputCheckedZonasLaborales(zonasParam) {
-    if(this.zonasSelected.find(zonas => { return zonas.idZonaLaboral === zonasParam.idZonaLaboral }) === undefined) {
+    if (this.zonasSelected.find(zonas => { return zonas.idZonaLaboral === zonasParam.idZonaLaboral }) === undefined) {
       return false;
     } else {
       return true;

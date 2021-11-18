@@ -8,8 +8,8 @@ import { Component, OnInit, ViewChild, ViewEncapsulation, Inject } from '@angula
 import { DataTableDirective } from 'angular-datatables';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgForm, FormControl } from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
@@ -22,6 +22,7 @@ import { ServicioFiltro } from '../_model/servicioFiltro';
   styleUrls: ['./gestion-servicio.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class GestionServicioComponent implements OnInit {
   faBriefcaseMedical = faBriefcaseMedical;
   faArrowRight = faArrowRight;
@@ -35,7 +36,7 @@ export class GestionServicioComponent implements OnInit {
   length: number;
   SERVICIO_DATA: Servicio[] = [];
   servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
-  servicioColumns: string[] = ['idServicio', 'fechaCreacion', 'nombre', 'responsable', 'estatus','cantidadPorPagar', 'acciones'];
+  servicioColumns: string[] = ['idServicio', 'fechaCreacion', 'nombre', 'responsable', 'estatus', 'cantidadPorPagar', 'acciones'];
   @ViewChild('serviciosTable', { static: true }) serviciosTable: MatTable<any>;
   responsables: any;
   responsablesSelected = [];
@@ -43,7 +44,7 @@ export class GestionServicioComponent implements OnInit {
   responsablesSettings: IDropdownSettings = {};
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
       Token: localStorage.getItem('token')
     })
   };
@@ -56,7 +57,7 @@ export class GestionServicioComponent implements OnInit {
   ngOnInit(): void {
     this.comboResponsables();
     this.getServicios();
-    
+
     this.responsablesSettings = {
       singleSelection: false,
       idField: 'idResponsable',
@@ -66,11 +67,10 @@ export class GestionServicioComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
-
   }
 
   public comboResponsables() {
-    this.http.get<any>('/api/catalogo/responsables',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/responsables', this.httpOptions).subscribe(data => {
       this.responsables = data.data;
     });
   }
@@ -87,21 +87,17 @@ export class GestionServicioComponent implements OnInit {
     this.servicioFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
     this.servicioFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
     this.servicioFiltro.responsables = this.responsablesSelected;
-    this.http.post<any>('/api/servicio/lista', this.servicioFiltro,this.httpOptions).subscribe(data => {
+    this.http.post<any>('/api/servicio/lista', this.servicioFiltro, this.httpOptions).subscribe(data => {
       this.SERVICIO_DATA = data.data;
       this.servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
       this.length = data.count.total;
-      console.log(this.servicioFiltro);
     });
-    
     return event;
   }
 
   public modificacionServicio(item: any) {
     const url = '/altaservicios?idColaborador=' + item;
     this.router.navigateByUrl(url);
-    // this.router.navigateByUrl("/altaservicios");
-    // console.log(item);
   }
 
   public resetFields() {
@@ -110,5 +106,4 @@ export class GestionServicioComponent implements OnInit {
     this.responsablesSelected = null;
     this.servicioFiltro.estatus = null;
   }
-
 }

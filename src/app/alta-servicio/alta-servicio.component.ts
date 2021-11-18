@@ -15,19 +15,20 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Servicio } from '../_model/servicio';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-alta-servicio',
   templateUrl: './alta-servicio.component.html',
   styleUrls: ['./alta-servicio.component.scss']
 })
+
 export class AltaServicioComponent implements OnInit {
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
       Token: localStorage.getItem('token')
     })
   };
+
   faMinus = faMinus;
   faEquals = faEquals;
   tabVisible: any = 1;
@@ -62,13 +63,12 @@ export class AltaServicioComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastService: NgbToastService) { }
 
   ngOnInit(): void {
-
     this.comboClientes();
     this.comboColaboradores();
     this.comboPaises();
     this.comboEstados();
     this.inicializaObjetos();
-    this.comboSexos();   
+    this.comboSexos();
     this.comboEstadosCiviles();
     this.comboTiposTelefono();
     this.comboTiposServicios();
@@ -76,11 +76,11 @@ export class AltaServicioComponent implements OnInit {
     this.comboComplexiones();
     this.comboParentescos();
 
-    this.route.queryParams.subscribe(params=>{
+    this.route.queryParams.subscribe(params => {
       this.idServicio = params['idColaborador'];
     });
 
-    if(this.idServicio) {
+    if (this.idServicio) {
       this.llenarCampos(this.idServicio);
     }
 
@@ -101,7 +101,6 @@ export class AltaServicioComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
-
   }
   selected = new FormControl(0);
 
@@ -157,11 +156,10 @@ export class AltaServicioComponent implements OnInit {
     this.servicio.colaboradores = null;
     this.servicio.estatus = "Abierta";
   }
-  
+
   public llenarCampos(idServicio) {
-    this.http.get<any>('/api/servicio/datos?idServicio=' + idServicio,this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/servicio/datos?idServicio=' + idServicio, this.httpOptions).subscribe(data => {
       this.datos = data.data;
-      console.log(this.datos[0]);
       this.servicio = this.datos[0];
       this.onFechaNacimiento();
       this.comboCiudades(this.servicio.idEstadoNacimiento);
@@ -169,104 +167,96 @@ export class AltaServicioComponent implements OnInit {
       this.onCodigoPostal(this.servicio.codigoPostal);
       this.servicio.peso = Math.floor(this.servicio.peso);
       this.servicio.estatura = Math.floor(this.servicio.estatura);
-      console.log(this.servicio.cliente);
-  //     let selection = JSON.parse(this.servicio.cliente+'');
-  //     this.selectedItems = [{
-  //       idCliente: selection.idCliente,
-  //       nombrecompleto: selection.nombrecompleto
-  //    }
-  // ];
-    this.http.get<any>('/api/servicio/datosServClien?idCliente=' + this.servicio.cliente,this.httpOptions).subscribe(data => {
-            this.selectedItems = [{
-            idCliente: data.data[0].idCliente,
-            nombrecompleto: data.data[0].nombrecompleto
-     }
-  ];
+
+      this.http.get<any>('/api/servicio/datosServClien?idCliente=' + this.servicio.cliente, this.httpOptions).subscribe(data => {
+        this.selectedItems = [{
+          idCliente: data.data[0].idCliente,
+          nombrecompleto: data.data[0].nombrecompleto
+        }
+        ];
+      });
     });
-    });
-    this.http.get<any>('/api/servicio/datosServColab?idServicio=' + idServicio,this.httpOptions).subscribe(data => {
+
+    this.http.get<any>('/api/servicio/datosServColab?idServicio=' + idServicio, this.httpOptions).subscribe(data => {
       this.selectedColaboradorItems = data.data;
-      console.log(data.data);
     });
-    
   }
 
   public comboClientes() {
-    this.http.get<any>('/api/catalogo/clientes',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/clientes', this.httpOptions).subscribe(data => {
       this.clientes = data.data;
     });
   }
 
   public comboColaboradores() {
-    this.http.get<any>('/api/catalogo/colaboradores',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/colaboradores', this.httpOptions).subscribe(data => {
       this.colaboradores = data.data;
     });
   }
 
   public comboPaises() {
-    this.http.get<any>('/api/catalogo/paises',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/paises', this.httpOptions).subscribe(data => {
       this.paises = data.data;
     });
   }
 
   public comboEstados() {
-    this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais,this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais, this.httpOptions).subscribe(data => {
       this.estados = data.data;
     });
   }
 
   public comboCiudades(idEstadoNacimiento) {
     this.servicio.idEstadoNacimiento = idEstadoNacimiento;
-    this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento,this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento, this.httpOptions).subscribe(data => {
       this.ciudades = data.data;
     });
-    console.log(this.ciudades);
   }
 
   public comboColonias() {
-    this.http.get<any>('/api/catalogo/colonias',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/colonias', this.httpOptions).subscribe(data => {
       this.colonias = data.data;
     });
   }
 
   public comboSexos() {
-    this.http.get<any>('/api/catalogo/sexos',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/sexos', this.httpOptions).subscribe(data => {
       this.sexos = data.data;
     });
   }
 
   public comboEstadosCiviles() {
-    this.http.get<any>('/api/catalogo/comboEstadosCiviles',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/comboEstadosCiviles', this.httpOptions).subscribe(data => {
       this.estadosCiviles = data.data;
     });
   }
 
   public comboTiposTelefono() {
-    this.http.get<any>('/api/catalogo/tiposTelefono',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/tiposTelefono', this.httpOptions).subscribe(data => {
       this.tiposTelefono = data.data;
     });
   }
 
   public comboTiposServicios() {
-    this.http.get<any>('/api/catalogo/tiposColaboradores',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/tiposColaboradores', this.httpOptions).subscribe(data => {
       this.tiposServicios = data.data;
     });
   }
 
   public comboResponsables() {
-    this.http.get<any>('/api/catalogo/responsables',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/responsables', this.httpOptions).subscribe(data => {
       this.responsables = data.data;
     });
   }
 
   public comboComplexiones() {
-    this.http.get<any>('/api/catalogo/complexiones',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/complexiones', this.httpOptions).subscribe(data => {
       this.complexiones = data.data;
     });
   }
 
   public comboParentescos() {
-    this.http.get<any>('/api/catalogo/parentescos',this.httpOptions).subscribe(data => {
+    this.http.get<any>('/api/catalogo/parentescos', this.httpOptions).subscribe(data => {
       this.parentescos = data.data;
     });
   }
@@ -284,19 +274,21 @@ export class AltaServicioComponent implements OnInit {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
-
     this.servicio.edad = age;
   }
 
   public onCodigoPostal(selectedCodigoPostal) {
     this.servicio.codigoPostal = selectedCodigoPostal;
-    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal,this.httpOptions).subscribe(data => {
+
+    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal, this.httpOptions).subscribe(data => {
       this.colonias = data.data;
       this.servicio.idCiudad = data.data[0].idCiudad;
-      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad,this.httpOptions).subscribe(dataCiudad => {
+
+      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad, this.httpOptions).subscribe(dataCiudad => {
         this.ciudadesDir = dataCiudad.data;
         this.servicio.idEstado = dataCiudad.data[0].idEstado;
-        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado,this.httpOptions).subscribe(data => {
+
+        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado, this.httpOptions).subscribe(data => {
           this.estadosDir = data.data;
         });
       });
@@ -347,34 +339,18 @@ export class AltaServicioComponent implements OnInit {
   }
 
   onEstatusSelect(item: any) {
-    // this.servicio.estatus = "Asignada";
-    // this.servicio.colaborador = item;
-    // item = Object.values(item);
-    // console.log(item);
-    console.log(this.selectedColaboradorItems.find(x => x.idColaborador === 25));
-    if(this.selectedColaboradorItems.find(x => x.idColaborador === item.idColaborador) === undefined){
-      console.log(this.selectedColaboradorItems);
+    if (this.selectedColaboradorItems.find(x => x.idColaborador === item.idColaborador) === undefined) {
       this.selectedColaboradorItems.push(item);
     }
-    console.log(this.selectedColaboradorItems);
-    // console.log(Object.keys(this.selectedColaboradorItems).length);
-    if(Object.keys(this.selectedColaboradorItems).length >= this.servicio.colabReq) {
+    if (Object.keys(this.selectedColaboradorItems).length >= this.servicio.colabReq) {
       this.servicio.estatus = "Asignada";
     }
-    // console.log(item);
-    // if (item != null) {
-    //   this.servicio.estatus = "Asignada";
-    // } else {
-    //   this.servicio.estatus = "Abierta";
-    // }
-    // // return this.servicio.estatus;
   }
 
   onEstatusDeSelect(item: any) {
-    this.selectedColaboradorItems.forEach((element,index)=>{
-      if(element.idColaborador === item.idColaborador) this.selectedColaboradorItems.splice(index,1);
+    this.selectedColaboradorItems.forEach((element, index) => {
+      if (element.idColaborador === item.idColaborador) this.selectedColaboradorItems.splice(index, 1);
     });
-    console.log(Object.keys(this.selectedColaboradorItems).length);
     this.servicio.estatus = "Abierta";
     this.servicio.colaboradores = null;
   }
@@ -393,55 +369,36 @@ export class AltaServicioComponent implements OnInit {
   }
 
   onGrabarServicio(ngForm: NgForm) {
-    if(this.servicio.idServicio) {
-      console.log("EXISTS");
+    if (this.servicio.idServicio) {
       this.servicio.idPais = 1;
       this.servicio.colaboradores = this.selectedColaboradorItems;
-      console.log(this.servicio);
-     if (ngForm.valid) {
-       this.http.post<any>('/api/servicio/update', this.servicio,this.httpOptions).subscribe(data => {
-         this.showSuccess(NgbToastType.Success, "Se actualizo el servicio exitosamente");
-         window.history.back();
-         alert("Se actualizo el servicio exitosamente");        
-       });
-       this.inicializaObjetos();
-     } else {
-       this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
-     }
+      if (ngForm.valid) {
+        this.http.post<any>('/api/servicio/update', this.servicio, this.httpOptions).subscribe(data => {
+          this.showSuccess(NgbToastType.Success, "Se actualizo el servicio exitosamente");
+          window.history.back();
+          alert("Se actualizo el servicio exitosamente");
+        });
+        this.inicializaObjetos();
+      } else {
+        this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
+      }
     } else {
-      console.log("NOT EXISTS");
       this.servicio.idPais = 1;
       this.servicio.colaboradores = this.selectedColaboradorItems;
-      console.log(this.servicio);
-     if (ngForm.valid) {
-       this.http.post<any>('/api/servicio/create', this.servicio,this.httpOptions).subscribe(data => {
-         this.showSuccess(NgbToastType.Success, "Se creo el servicio exitosamente");
-         window.history.back();
-         alert("Se creo el servicio exitosamente");
-        
-       });
-       this.inicializaObjetos();
-     } else {
-       this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
-     }
+      if (ngForm.valid) {
+        this.http.post<any>('/api/servicio/create', this.servicio, this.httpOptions).subscribe(data => {
+          this.showSuccess(NgbToastType.Success, "Se creo el servicio exitosamente");
+          window.history.back();
+          alert("Se creo el servicio exitosamente");
+        });
+        this.inicializaObjetos();
+      } else {
+        this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
+      }
     }
-    // this.servicio.idPais = 1;
-    // this.servicio.colaboradores = this.selectedColaboradorItems;
-    // console.log(this.servicio);
-    //  if (ngForm.valid) {
-    //    this.http.post<any>('/api/servicio/create', this.servicio,this.httpOptions).subscribe(data => {
-    //      this.showSuccess(NgbToastType.Success, "Se creo el servicio exitosamente");
-    //      window.history.back();
-    //      alert("Se creo el servicio exitosamente");
-        
-    //    });
-    //    this.inicializaObjetos();
-    //  } else {
-    //    this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
-    //  }
   }
 
-  nuevoColaborador() {    
+  nuevoColaborador() {
     window.open('/colaborador');
   }
 
@@ -463,11 +420,10 @@ export class AltaServicioComponent implements OnInit {
     }
 
   }
+  
   pagDelante(index) {
     if (this.selected.value < 5) {
       this.selected.setValue(this.selected.value + index);
     }
-
   }
-
 }
