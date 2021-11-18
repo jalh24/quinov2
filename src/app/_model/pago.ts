@@ -6,6 +6,8 @@ export class Pago {
     public banco:Banco;
     public tipoCuenta:string;
     public numero:number;
+    public comprobantePago:any;
+    public comprobantePagoNombre:string;
     constructor() {
     }
 }            

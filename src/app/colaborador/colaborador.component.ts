@@ -338,6 +338,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.idCalificacion = null;
     this.colaborador.idTipoColaborador = null;
     this.colaborador.observaciones = null;
+    this.colaborador.referenciaDireccion = null;
     this.colaborador.idPermanencia = null;
     this.colaborador.idGradoEstudio = null;
     this.idEstudio = 0;
@@ -349,7 +350,9 @@ export class ColaboradorComponent implements OnInit {
       nombre: null,
       banco: null,
       tipoCuenta: null,
-      numero: null
+      numero: null,
+      comprobantePago: null,
+      comprobantePagoNombre: null
     };
     this.estudios = [];
     this.estudio = {
@@ -785,6 +788,22 @@ export class ColaboradorComponent implements OnInit {
     };
   }
 
+  public onPagoFileSelected(files: FileList) {
+    let me = this;
+    let file = files[0];
+    let currentDate = new Date();
+    let extension = file.type.split("/");
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.pago.comprobantePago = reader.result;
+      me.pago.comprobantePagoNombre = currentDate.getTime() + "." + extension[1];
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
+
   displayToConsole(datatableElement: DataTableDirective): void {
     datatableElement.dtInstance.then((dtInstance: DataTables.Api) => console.log(dtInstance));
   }
@@ -844,7 +863,7 @@ export class ColaboradorComponent implements OnInit {
     if (pagoParam != null) {
       this.pago = pagoParam;
     }
-    if (this.pago.idPago == null) {
+    if (this.pago.idPago == null || pagoParam != null) {
       if (this.pagoSource.data.length == 0) {
         this.idPago = this.pagoSource.data.length + 1;
       } else {
@@ -860,6 +879,8 @@ export class ColaboradorComponent implements OnInit {
       banco: null,
       tipoCuenta: null,
       numero: null,
+      comprobantePago: null,
+      comprobantePagoNombre: null,
     };
   }
 
@@ -984,9 +1005,11 @@ export class ColaboradorComponent implements OnInit {
       banco: null,
       tipoCuenta: null,
       numero: null,
+      comprobantePago: null,
+      comprobantePagoNombre: null
     };
   }
-  
+
   limpiarExperiencia() {
     this.experiencia = {
       idExperiencia: null,
