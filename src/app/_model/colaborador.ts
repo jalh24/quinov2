@@ -16,6 +16,7 @@ export class Colaborador {
     public foto: any;
     public fotoNombre: string;
     public rfc: string;
+    public curp: string;
     public nss: string;
     public fecha_nacimiento: Date;
     public idSexo: number;

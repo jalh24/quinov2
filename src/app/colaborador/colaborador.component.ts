@@ -275,6 +275,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.foto = null;
     this.colaborador.fotoNombre = null;
     this.colaborador.rfc = null;
+    this.colaborador.curp = null;
     this.colaborador.nss = null;
     this.colaborador.fecha_nacimiento = null;
     this.colaborador.idSexo = null;

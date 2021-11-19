@@ -65,6 +65,12 @@
           </div>
 
           <div class="col">
+            <label for="curp" class="form-label">CURP</label>
+            <input maxlength="18" size="18" type="text" class="form-control" name="curp" placeholder="" value="" ngModel
+              #curp="ngModel" [(ngModel)]="colaborador.curp">
+          </div>
+
+          <div class="col">
             <label for="nss" class="form-label">NSS</label>
             <input maxlength="11" size="11" type="text" class="form-control" name="nss" ngModel #nss="ngModel"
               [(ngModel)]="colaborador.nss">
