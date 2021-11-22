@@ -66,8 +66,19 @@
 
           <div class="col">
             <label for="curp" class="form-label">CURP</label>
-            <input maxlength="18" size="18" type="text" class="form-control" name="curp" placeholder="" value="" ngModel
-              #curp="ngModel" [(ngModel)]="colaborador.curp">
+            <input maxlength="18" minlength="18" size="18" type="text" class="form-control" id="curp" name="curp" placeholder="" value="" ngModel
+              #curp="ngModel" [(ngModel)]="colaborador.curp" (change)="onCurp()" required>
+              <div *ngIf="curp.invalid && (curp.dirty || curp.touched)" class="alert">
+                <div *ngIf="curp.errors?.required">
+                    El CURP es obligatorio.
+                </div>
+                  <div *ngIf="!curp.errors?.required && curp.errors?.minlength">
+                    El CURP debe contener 18 digitos.
+                  </div>
+              </div>
+              <div *ngIf="curpExiste" class="alertCurp">
+                El CURP ya existe
+              </div>
           </div>
 
           <div class="col">
@@ -1665,10 +1676,10 @@
         <!-- <div class="container bg-white rounded-bottom shadow"> -->
         <div class="row text-center pb-4">
           <div class="col">
-            <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador
-            </button>
+            <!-- <button type="button" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador -->
+            <!-- </button> -->
             <!-- Comentar boton de arriba al finalizar. Descomentar el boton de abajo para que inhabilite el boton si existe algun error en algun campo. -->
-            <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
+            <button type="button" [disabled]="!myForm.form.valid || curpExiste" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button>
           </div>
         </div>
         <!-- </div> -->

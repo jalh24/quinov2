@@ -128,6 +128,8 @@ export class ColaboradorComponent implements OnInit {
   estados: any[];
   paises: any[];
   calificaciones: any[];
+  colaboradoresCurps: any[];
+  curpExiste: boolean;
   tiposColaboradores: any[];
   teces: any[];
   tipoVisas: any[];
@@ -196,6 +198,7 @@ export class ColaboradorComponent implements OnInit {
     this.comboEspecialidades();
     this.comboHabilidades();
     this.inicializaObjetos();
+    this.colaboradoresCurp();
 
     this.route.queryParams.subscribe(params => {
       this.idColaborador = params['idColaborador'];
@@ -383,6 +386,7 @@ export class ColaboradorComponent implements OnInit {
     this.experienciaSource.data = [];
     this.pagoSource.data = [];
     this.estudioSource.data = [];
+    this.curpExiste = false;
   }
 
   public llenarCampos(idColaborador) {
@@ -707,6 +711,24 @@ export class ColaboradorComponent implements OnInit {
     reader.onerror = function (error) {
       console.log('Error: ', error);
     };
+  }
+
+  public colaboradoresCurp() {
+      this.http.get<any>('/api/catalogo/colaboradoresCurp', this.httpOptions).subscribe(data => {
+        this.colaboradoresCurps = data.data;
+      });
+  }
+
+  public onCurp() {
+    this.colaboradoresCurps.forEach(element => {
+      if (element.curp == this.colaborador.curp) {
+        console.log("exist");
+        alert("El colaborador ya existe CURP");
+        this.curpExiste = true;
+      } else {
+        this.curpExiste = false;
+      }
+    });
   }
 
   public cargaFotoPersonal(files: FileList) {
