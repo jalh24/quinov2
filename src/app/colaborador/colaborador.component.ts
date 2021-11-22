@@ -43,13 +43,13 @@ export class ColaboradorComponent implements OnInit {
   ESTUDIO_DATA: Estudio[] = [];
   estudioSource = new MatTableDataSource<Estudio>(this.ESTUDIO_DATA);
 
-  estudioColumns: string[] = ['institucion', 'comentarios', 'inicio', 'fin', 'estatus', 'deleteColaborador'];
+  estudioColumns: string[] = ['institucion', 'comentarios', 'inicio', 'fin', 'estatus', 'comprobanteEstudios', 'deleteColaborador'];
   @ViewChild('estudiosTable', { static: true }) estudiosTable: MatTable<any>;
 
   PAGO_DATA: Pago[] = [];
   pagoSource = new MatTableDataSource<Pago>(this.PAGO_DATA);
 
-  pagoColumns: string[] = ['nombre', 'banco', 'tipoCuenta', 'numero', 'deletePago'];
+  pagoColumns: string[] = ['nombre', 'banco', 'tipoCuenta', 'numero', 'comprobantePago', 'deletePago'];
   @ViewChild('pagosTable', { static: true }) pagosTable: MatTable<any>;
 
   EXPERIENCIA_DATA: Experiencia[] = [];
@@ -91,6 +91,10 @@ export class ColaboradorComponent implements OnInit {
   idExperiencia: number;
   visaImagenDatos: any;
   visaImagenNombre: any;
+  comprobantePagoImagenDatos: any;
+  comprobantePagoImagenNombre: any;
+  cedulaImagenDatos: any;
+  cedulaImagenNombre: any;
   pasaporteImagenDatos: any;
   pasaporteImagenNombre: any;
   ineImagenDatos1: any;
@@ -391,6 +395,7 @@ export class ColaboradorComponent implements OnInit {
 
   public llenarCampos(idColaborador) {
     this.http.post<any>('/api/colaborador/colaboradorId', { idColaborador: idColaborador }, this.httpOptions).subscribe(data => {
+      console.log(data.data);
       this.datos = data.data;
       this.colaborador = this.datos[0];
       this.colaborador.habilidades = JSON.parse(this.colaborador.habilidades.toString());
@@ -414,8 +419,10 @@ export class ColaboradorComponent implements OnInit {
         };
         pago.tipoCuenta = element.tipoCuenta;
         pago.numero = element.numero;
+        pago.comprobantePago = element.comprobantePago;
         this.agregarPago(pago);
       });
+      console.log(this.datos.cuentas);
       this.datos.estudios.forEach(element => {
         let estudio = new Estudio;
         estudio.cedula = element.cedula;
@@ -477,6 +484,26 @@ export class ColaboradorComponent implements OnInit {
         this.zonasSelected = this.colaborador.zonas;
       });
     });
+  }
+
+  public descargarComprobantePago(item) {
+    this.comprobantePagoImagenNombre = "comprobante." + item.comprobantePago.substring(item.comprobantePago.indexOf("/") + 1, item.comprobantePago.indexOf(";"));
+    this.comprobantePagoImagenDatos = item.comprobantePago;
+    const linkSource = this.comprobantePagoImagenDatos;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = this.comprobantePagoImagenNombre;
+    downloadLink.click();
+  }
+
+  public descargarComprobanteEstudios(item) {
+    this.cedulaImagenNombre = "cedula." + item.cedula.substring(item.cedula.indexOf("/") + 1, item.cedula.indexOf(";"));
+    this.cedulaImagenDatos = item.cedula;
+    const linkSource = this.cedulaImagenDatos;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = this.cedulaImagenNombre;
+    downloadLink.click();
   }
 
   downloadBase64FileVisa() {

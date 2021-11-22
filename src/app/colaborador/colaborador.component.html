@@ -680,6 +680,15 @@
                 <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
               </ng-container>
 
+              <ng-container matColumnDef="comprobantePago">
+                <th mat-header-cell *matHeaderCellDef> Comprobante </th>
+                <td mat-cell *matCellDef="let element">
+                  <button class="btn btn-danger" color="danger" *ngIf="element.comprobantePago" (click)="descargarComprobantePago(element)">
+                    Descargar Comprobante
+                  </button>
+                </td>
+              </ng-container>
+
               <ng-container matColumnDef="deletePago">
                 <th mat-header-cell *matHeaderCellDef> Acci&oacute;n </th>
                 <td mat-cell *matCellDef="let element">
@@ -822,6 +831,15 @@
               <ng-container matColumnDef="estatus">
                 <th mat-header-cell *matHeaderCellDef> Estatus </th>
                 <td mat-cell *matCellDef="let element"> {{element?.estatus.nombre}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="comprobanteEstudios">
+                <th mat-header-cell *matHeaderCellDef> Comprobante </th>
+                <td mat-cell *matCellDef="let element">
+                  <button class="btn btn-danger" color="danger" *ngIf="element.cedula" (click)="descargarComprobanteEstudios(element)">
+                    Descargar Comprobante
+                  </button>
+                </td>
               </ng-container>
 
               <ng-container matColumnDef="deleteColaborador">
