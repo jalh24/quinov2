@@ -143,6 +143,9 @@ export class ClienteFisicoComponent implements OnInit {
       console.log(this.datos);
       this.cliente = this.datos[0];
       this.comboCiudades(this.cliente.idEstadoNacimiento);
+      this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
+      this.onCodigoPostal(this.cliente.codigoPostal);
+      this.onColonia(this.cliente.idColonia);
       //this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
       this.selectedCodigoPostal = this.cliente.codigoPostal;
       this.cliente.peso = Math.floor(this.cliente.peso);
@@ -277,6 +280,7 @@ export class ClienteFisicoComponent implements OnInit {
 
   onColonia(value: any) {
     this.cliente.idColonia = value;
+    
   }
 
   onCiudad(value: any) {

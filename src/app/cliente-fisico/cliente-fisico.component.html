@@ -83,10 +83,10 @@
                     <div class="col">
                         <label for="ciudadNac" class="form-label">Ciudad<span class="text-danger"> *</span></label>
                         <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)"
-                        #ciudadNac="ngModel" ngModel>
+                        #ciudadNac="ngModel" ngModel [(ngModel)]="cliente.idCiudad">
                             <!-- <select class="form-control" name="ciudadNac" (change)="onCiudadNacimiento($event.target.value)" #ciudadNac="ngModel"  ngModel required> -->
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option  *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
+                            <option  *ngFor="let ciudad of ciudades" [value]="cliente.idCiudad">
                                 {{ciudad.nombre}}
                             </option>
                         </select>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="col">
                         <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="colonia" ngModel #colonia="ngModel"
+                        <select class="form-control" name="colonia" ngModel #colonia="ngModel"  [(ngModel)]="cliente.idColonia"
                         (change)="onColonia($event.target.value)">
                             <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
                                 {{colonia.nombre}}
@@ -358,8 +358,8 @@
                         [ngModel]="cliente.idParentescoContacto" (change)="onParentesco1($event.target.value)">
                             <!-- <select class="form-control" name="paisNac" ngModel
               #paisNac="ngModel" [(ngModel)]="cliente.idPaisNacimiento" required> -->
-                            <option value="" selected disabled hidden>Seleccionar</option>
-                            <option *ngFor="let parentesco of parentescos" [value]="parentescos.idParentesco">
+                            
+                            <option *ngFor="let parentesco of parentescos" [value]="cliente.idParentescoContacto">
                                 {{parentesco.nombre}}
                             </option>
                         </select>
@@ -396,7 +396,7 @@
                             <!-- <select class="form-control" name="paisNac" ngModel
               #paisNac="ngModel" [(ngModel)]="cliente.idPaisNacimiento" required> -->
                             <option value="" selected disabled hidden>Seleccionar</option>
-                            <option *ngFor="let parentesco of parentescos" [value]="parentescos.idParentesco">
+                            <option *ngFor="let parentesco of parentescos" [value]="cliente.idParentescoContacto2">
                                 {{parentesco.nombre}}
                             </option>
                         </select>

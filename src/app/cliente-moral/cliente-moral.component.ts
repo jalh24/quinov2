@@ -192,7 +192,10 @@ export class ClienteMoralComponent implements OnInit {
 
   }
 
-  agregarContacto() {
+  agregarContacto(contactoParam: any) {
+    if (contactoParam != null) {
+      this.contacto = contactoParam;
+    }
     if (this.contacto.idContacto == null) {
       if (this.contactoSource.data.length == 0) {
         this.idContacto = this.contactoSource.data.length + 1;
@@ -295,11 +298,25 @@ export class ClienteMoralComponent implements OnInit {
       this.cliente = this.datos[0];
       
       //this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
-      this.CONTACTO_DATA = this.datos['cuentas'];
-      this.contactoSource = new MatTableDataSource(this.CONTACTO_DATA);
+     // this.CONTACTO_DATA = this.datos['cuentas'];
+     // this.contactoSource = new MatTableDataSource(this.CONTACTO_DATA);
       console.log(this.CONTACTO_DATA);
+      this.comboCiudades(this.cliente.idEstadoNacimiento);
+     // this.onCiudad(this.cliente.idCiudadNacimiento);
+      this.onCodigoPostal(this.cliente.codigoPostal);
+      this.onColonia(this.cliente.idColonia);
       this.cliente.peso = Math.floor(this.cliente.peso);
       this.cliente.estatura = Math.floor(this.cliente.estatura);
+      this.datos.cuentas.forEach(element => {
+        let contacto = new Contacto;
+        contacto.idContacto = element.idContacto;
+        contacto.nombre = element.nombre;
+        contacto.parentesco = element.parentesco;
+        contacto.correoElectronico= element.correoElectronico;
+        contacto.telefono = element.telefono;
+        contacto.tipoTelefono = element.tipoTelefono;
+        this.agregarContacto(contacto);
+      });
       // this.datos.cuentas.forEach(element => {
       //   this.CONTACTO_DATA.push(element);
       // });

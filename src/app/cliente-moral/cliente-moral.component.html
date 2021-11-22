@@ -122,15 +122,15 @@
                 
 
                 <div class="col-md-2">
-                    <label for="codigopostal" class="form-label">Código Postal<span class="text-danger">
+                    <label for="codigoPostal" class="form-label">Código Postal<span class="text-danger">
                             *</span></label>
                     <input type="text" class="form-control" maxlength="5" name="codigopostal" [ngModel]="selectedCodigoPostal"
-                    (change)="onCodigoPostal($event.target.value)" ngModel #codigopostal="ngModel" pattern="[0-9]*">
+                    (change)="onCodigoPostal($event.target.value)" [(ngModel)]="cliente.codigoPostal" #codigoPostal="ngModel" pattern="[0-9]*">
 
                 </div>
                 <div class="col">
                     <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-                    <select class="form-control" name="colonia" ngModel #colonia="ngModel"
+                    <select class="form-control" name="colonia" ngModel #colonia="ngModel"  [(ngModel)]="cliente.idColonia"
                     (change)="onColonia($event.target.value)">
                         <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
                             {{colonia.nombre}}
@@ -150,7 +150,7 @@
 
                     <div class="col">
                         <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
-                        <select class="form-control" name="estado" (change)="onEstado($event.target.value)">
+                        <select class="form-control" name="estado" (change)="onEstado($event.target.value)" >
                             <option *ngFor="let estado of estadosDir" [value]="estado.idEstado">
                                 {{estado.nombre}}
                             </option>
@@ -240,7 +240,7 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12 text-center">
-                      <button class="btn btn-primary add-one" (click)="agregarContacto()">Agregar Otro</button>
+                      <button class="btn btn-primary add-one" (click)="agregarContacto(null)">Agregar Otro</button>
                       <button class="btn btn-warning delete ml-3" >Cancelar</button>
                     </div>
                   </div>
