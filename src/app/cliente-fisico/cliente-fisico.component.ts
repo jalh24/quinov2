@@ -142,9 +142,9 @@ export class ClienteFisicoComponent implements OnInit {
       this.datos = data.data;
       console.log(this.datos);
       this.cliente = this.datos[0];
-      
+      this.comboCiudades(this.cliente.idEstadoNacimiento);
       //this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
-      
+      this.selectedCodigoPostal = this.cliente.codigoPostal;
       this.cliente.peso = Math.floor(this.cliente.peso);
       this.cliente.estatura = Math.floor(this.cliente.estatura);
       // this.datos.cuentas.forEach(element => {
@@ -158,8 +158,8 @@ export class ClienteFisicoComponent implements OnInit {
   public editarCliente(ngForm: NgForm){
     
     this.http.put<any>('/api/cliente/update', this.cliente, this.httpOptions).subscribe(data => {
+      window.history.back();
       this.showSuccess(NgbToastType.Success, "Se edito el cliente exitosamente");
-
     });
   }
 
@@ -225,9 +225,14 @@ export class ClienteFisicoComponent implements OnInit {
   }
 
   public comboCiudades(idEstadoNacimiento) {
-    this.cliente.idEstadoNacimiento = idEstadoNacimiento;
+   
+      this.cliente.idEstadoNacimiento = idEstadoNacimiento;
+    
+    
     this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento,this.httpOptions).subscribe(data => {
       this.ciudades = data.data;
+
+      console.log(this.ciudades);
     });
   }
 

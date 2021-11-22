@@ -295,7 +295,9 @@ export class ClienteMoralComponent implements OnInit {
       this.cliente = this.datos[0];
       
       //this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
-      
+      this.CONTACTO_DATA = this.datos['cuentas'];
+      this.contactoSource = new MatTableDataSource(this.CONTACTO_DATA);
+      console.log(this.CONTACTO_DATA);
       this.cliente.peso = Math.floor(this.cliente.peso);
       this.cliente.estatura = Math.floor(this.cliente.estatura);
       // this.datos.cuentas.forEach(element => {
@@ -308,6 +310,7 @@ export class ClienteMoralComponent implements OnInit {
   public editarCliente(ngForm: NgForm){
     
     this.http.put<any>('/api/cliente/update', this.cliente, this.httpOptions).subscribe(data => {
+      window.history.back();
       this.showSuccess(NgbToastType.Success, "Se edito el cliente exitosamente");
 
     });

@@ -203,10 +203,10 @@
 
                     </div>
                     <div class="col-md-2">
-                        <label for="parentescoContact" class="form-label">Parentesco</label>
-                        <select class="form-control" name="parentescoContact" ngModel #idParentescoContact="ngModel" [(ngModel)]="contacto.parentesco"
+                        <label for="idParentescoContacto" class="form-label">Parentesco</label>
+                        <select class="form-control" name="idParentescoContacto" ngModel #idParentescoContacto="ngModel" [(ngModel)]="contacto.parentesco"
                          (change)="onParentescoContacto($event.target.value)">
-                            <option value="" selected disabled hidden>Seleccionar</option>
+                            <option value="Seleccionar" selected disabled>Seleccionar</option>
                             <option *ngFor="let parentesco of parentescos" [value]="parentesco.idParentesco">
                                 {{parentesco.nombre}}
                             </option>
