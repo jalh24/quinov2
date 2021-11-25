@@ -398,12 +398,16 @@ export class ColaboradorComponent implements OnInit {
       console.log(data.data);
       this.datos = data.data;
       this.colaborador = this.datos[0];
-      this.colaborador.habilidades = JSON.parse(this.colaborador.habilidades.toString());
+      this.colaborador.habilidades = this.colaborador.habilidades !== undefined ? JSON.parse(this.colaborador.habilidades.toString()) : [];
       this.habilidadesSelected = this.colaborador.habilidades;
-      this.colaborador.especialidades = JSON.parse(this.colaborador.especialidades.toString());
+      this.colaborador.especialidades = this.colaborador.especialidades != undefined ? JSON.parse(this.colaborador.especialidades.toString()) : [];
       this.especialidadesSelected = this.colaborador.especialidades;
-      this.colaborador.horario = JSON.parse(this.colaborador.horario.toString());
-      this.diasLaborales = this.colaborador.horario;
+      this.colaborador.horario = this.colaborador.horario != undefined ? JSON.parse(this.colaborador.horario.toString()) : null;
+
+      if (this.colaborador.horario != null) {
+        this.diasLaborales = this.colaborador.horario;
+      }
+
       this.comboCiudades(this.colaborador.idEstadoNacimiento);
       this.onCiudadNacimiento(this.colaborador.idCiudadNacimiento);
       this.onCodigoPostal(this.colaborador.codigoPostal);
