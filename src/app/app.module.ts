@@ -29,6 +29,7 @@ import { LoginComponent } from './login/login.component';
 import { ModalWhatsappComponent } from './modal-whatsapp/modal-whatsapp.component';
 import { AltaServicioComponent } from './alta-servicio/alta-servicio.component';
 import { GestionServicioComponent } from './gestion-servicio/gestion-servicio.component';
+import { ReporteServicioComponent } from './reporte-servicio/reporte-servicio.component';
 //import { SigninComponent } from './signin/signin.component';
 
 
@@ -46,6 +47,7 @@ import { GestionServicioComponent } from './gestion-servicio/gestion-servicio.co
     ModalWhatsappComponent,
     AltaServicioComponent,
     GestionServicioComponent,
+    ReporteServicioComponent,
   //  SigninComponent
   ],
   imports: [

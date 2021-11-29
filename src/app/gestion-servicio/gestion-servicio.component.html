@@ -1,9 +1,12 @@
 <div class="container mt-5 pt-4 bg-white rounded-top shadow">
-  <button type="button" class="btn btn-success mb-4" (click)="agregarServicio()">
+  <button type="button" class="btn btn-success mb-4 float-left" (click)="agregarServicio()">
     <h3>
       <fa-icon [icon]="faBriefcaseMedical"></fa-icon>
     </h3> Agregar Servicio
-  </button> &nbsp;&nbsp;
+  </button>
+  <button type="button" class="btn btn-warning my-3 float-right" (click)="crearReporte()">
+    Reporte
+  </button>
   <table class="table">
     <tbody>
       <tr>
