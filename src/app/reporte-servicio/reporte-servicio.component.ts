@@ -31,7 +31,7 @@ export class ReporteServicioComponent implements OnInit {
   servicio: any = null;
   pageEvent: PageEvent;
   pageIndex: number = 0;
-  pageSize: number = 1000;
+  pageSize: number = Number.MAX_SAFE_INTEGER;
   length: number;
   SERVICIO_DATA: Servicio[] = [];
   servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
