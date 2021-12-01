@@ -12,6 +12,7 @@ import { AuthGuard } from './service/auth.guard';
 import { AltaServicioComponent } from './alta-servicio/alta-servicio.component';
 import { GestionServicioComponent } from './gestion-servicio/gestion-servicio.component';
 import { ReporteServicioComponent } from './reporte-servicio/reporte-servicio.component';
+import { ReporteColaboradorComponent } from './reporte-colaborador/reporte-colaborador.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LoginComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'altaservicios', component: AltaServicioComponent, canActivate: [AuthGuard] },
   { path: 'gestionservicios', component: GestionServicioComponent, canActivate: [AuthGuard] },
   { path: 'reporteservicios', component: ReporteServicioComponent, canActivate: [AuthGuard] },
+  { path: 'reportecolaborador', component: ReporteColaboradorComponent, canActivate: [AuthGuard] },
   //{ path: 'alta', component: SigninComponent, canActivate: [AuthGuard] },
 ];
 
