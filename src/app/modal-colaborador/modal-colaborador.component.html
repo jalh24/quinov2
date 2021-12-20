@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{colaborador?.nombre}} {{colaborador?.a_paterno}} {{colaborador?.a_materno}} </h1>
 <div mat-dialog-content>
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item waves-effect waves-light">
       <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
     </li>
@@ -28,7 +28,7 @@
     <li class="nav-item waves-effect waves-light">
       <a class="nav-link" id="otros-tab" data-toggle="tab" href="#otros" role="tab" aria-controls="otros" aria-selected="false">Otros</a>
     </li>
-  </ul>
+  </ul> -->
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
       <table class="table table-bordered">
@@ -70,8 +70,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="tab-pane fade" id="dirección" role="tabpanel" aria-labelledby="dirección-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -105,8 +103,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="tab-pane fade" id="informacionPersonal" role="tabpanel" aria-labelledby="informacionPersonal-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -146,9 +142,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-
-    <div class="tab-pane fade" id="pago" role="tabpanel" aria-labelledby="pago-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -170,8 +163,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="tab-pane fade" id="estudios" role="tabpanel" aria-labelledby="estudios-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -195,8 +186,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="tab-pane fade" id="experienciaLaboral" role="tabpanel" aria-labelledby="experienciaLaboral-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -222,8 +211,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="tab-pane fade" id="competencias" role="tabpanel" aria-labelledby="competencias-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -232,7 +219,6 @@
         </thead>
         <tbody>
           <tr>
-            <!-- <th scope="row">Especialidades</th> -->
             <td><table>
               <tr>
                 <th scope="row">Especialidades</th>
@@ -252,8 +238,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="tab-pane fade" id="disponibilidadTrabajo" role="tabpanel" aria-labelledby="disponibilidadTrabajo-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -263,13 +247,10 @@
         <tbody>
           <tr>
             <th scope="row">Todos los Días</th>
-            <!-- <td>{{colaborador.horario}}</td> -->
-            <!-- <td>{{colaborador.horario[colaborador.horario.indexOf("todosDiasTurno")+16]}}</td> -->
             <td>{{disponibilidad?.todosDias}}</td>
           </tr>
           <tr>
             <th scope="row">Lunes</th>
-            <!-- <td></td> -->
             <td>{{disponibilidad?.lunes}}</td>
           </tr>
           <tr>
@@ -298,8 +279,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="tab-pane fade" id="otros" role="tabpanel" aria-labelledby="otros-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -366,6 +345,297 @@
         </tbody>
       </table>
     </div>
+    <!-- <div class="tab-pane fade" id="dirección" role="tabpanel" aria-labelledby="dirección-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="8">Dirección</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Calle</th>
+            <td colspan="3">{{colaborador?.calle1}}</td>
+            <th scope="row">Calle 2</th>
+            <td colspan="3">{{colaborador?.calle2}}</td>   
+          </tr>
+          <tr>
+            <th scope="row">Número Exterior</th>
+            <td>{{colaborador?.noExt}}</td>
+            <th scope="row">Número Interior</th>
+            <td>{{colaborador?.noInt}}</td>
+            <th scope="row">Código Postal</th>
+            <td>{{colaborador?.codigoPostal}}</td>
+            <th scope="row">Colonia</th>
+            <td>{{colaborador?.coloniaDir}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Ciudad</th>
+            <td>{{colaborador?.ciudadDir}}</td>
+            <th scope="row">Estado</th>
+            <td>{{colaborador?.estadoDir}}</td>
+            <th scope="row">País</th>
+            <td colspan="3">{{colaborador?.paisDir}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <!-- <div class="tab-pane fade" id="informacionPersonal" role="tabpanel" aria-labelledby="informacionPersonal-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="10">Información Personal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Genero</th>
+            <td>{{colaborador?.genero}}</td>
+            <th scope="row">Peso (Kg)</th>
+            <td>{{colaborador?.peso}}</td>
+            <th scope="row">Estatura (cm)</th>
+            <td>{{colaborador?.estatura}}</td>
+            <th scope="row">Tez</th>
+            <td>{{colaborador?.tez}}</td>
+            <th scope="row">Estado Civil</th>
+            <td>{{colaborador?.estadoCivil}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Teléfono 1</th>
+            <td>{{colaborador?.telefono}}</td>
+            <th scope="row">Tipo Teléfono 1</th>
+            <td>{{colaborador?.tipoTelefono1}}</td>
+            <th scope="row">Teléfono 2</th>
+            <td>{{colaborador?.telefono2}}</td>
+            <th scope="row">Tipo Teléfono 2</th>
+            <td colspan="3">{{colaborador?.tipoTelefono2}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Correo Electrónico</th>
+            <td colspan="3">{{colaborador?.correoElectronico}}</td>
+            <th scope="row">¿Tiene hijos?</th>
+            <td colspan="2">{{colaborador?.hijos}}</td>
+            <th scope="row">¿Viven con usted?</th>
+            <td colspan="2">{{colaborador?.hijosViven}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+    <!-- <div class="tab-pane fade" id="pago" role="tabpanel" aria-labelledby="pago-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="4">Pago</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">Beneficiario</th>
+            <th scope="col">Banco</th>
+            <th scope="col">Tipo de Cuenta</th>
+            <th scope="col">Numero</th>
+          </tr>
+          <tr *ngFor="let cuenta of colaborador?.cuentasColaborador">
+            <td>{{cuenta?.beneficiario}}</td>
+            <td>{{cuenta?.bancoNombre}}</td>
+            <td>{{cuenta?.tipoCuenta}}</td>
+            <td>{{cuenta?.numero}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <!-- <div class="tab-pane fade" id="estudios" role="tabpanel" aria-labelledby="estudios-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="5">Estudios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">Institución</th>
+            <th scope="col">Estudio/Carrera/Curso</th>
+            <th scope="col">Estatus de Terminación</th>
+            <th scope="col">Inicio</th>
+            <th scope="col">Terminación</th>
+          </tr>
+          <tr *ngFor="let estudio of colaborador?.estudios">
+            <td>{{estudio?.institucion}}</td>
+            <td>{{estudio?.comentarios}}</td>
+            <td>{{estudio?.estatusNombre}}</td>
+            <td>{{estudio?.fechaInicio}}</td>
+            <td>{{estudio?.fechaFin}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <!-- <div class="tab-pane fade" id="experienciaLaboral" role="tabpanel" aria-labelledby="experienciaLaboral-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="6">Experiencia Laboral</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">Empresa/Institución</th>
+            <th scope="col">Inicio</th>
+            <th scope="col">Terminación</th>
+            <th scope="col">Referencia</th>
+            <th scope="col">Telefono Referencia</th>
+            <th scope="col">Actividades</th>
+          </tr>
+          <tr *ngFor="let experiencia of colaborador?.experiencia">
+            <td>{{experiencia?.empresa}}</td>
+            <td>{{experiencia?.fechaInicio}}</td>
+            <td>{{experiencia?.fechaFin}}</td>
+            <td>{{experiencia?.referencia}}</td>
+            <td>{{experiencia?.telefono}}</td>
+            <td>{{experiencia?.comentario}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <!-- <div class="tab-pane fade" id="competencias" role="tabpanel" aria-labelledby="competencias-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="4">Competencias</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><table>
+              <tr>
+                <th scope="row">Especialidades</th>
+              </tr>
+              <tr *ngFor="let especialidad of colaborador?.especialidades">
+                <td>{{especialidad?.nombre}}</td>
+              </tr>
+            </table></td>
+            <td><table>
+              <tr>
+                <th scope="row">Habilidades</th>
+              </tr>
+              <tr *ngFor="let habilidad of colaborador?.habilidades">
+                <td>{{habilidad?.nombre}}</td>
+              </tr>
+            </table></td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <!-- <div class="tab-pane fade" id="disponibilidadTrabajo" role="tabpanel" aria-labelledby="disponibilidadTrabajo-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="2">Días y Horarios de Disponibilidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Todos los Días</th>
+            <td>{{disponibilidad?.todosDias}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Lunes</th>
+            <td>{{disponibilidad?.lunes}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Martes</th>
+            <td>{{disponibilidad?.martes}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Miércoles</th>
+            <td>{{disponibilidad?.miercoles}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Jueves</th>
+            <td>{{disponibilidad?.jueves}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Viernes</th>
+            <td>{{disponibilidad?.viernes}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Sábado</th>
+            <td>{{disponibilidad?.sabado}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Domingo</th>
+            <td>{{disponibilidad?.domingo}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <!-- <div class="tab-pane fade" id="otros" role="tabpanel" aria-labelledby="otros-tab">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" colspan="8">Otros</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Permanencia</th>
+            <td>{{colaborador?.permanenciaColab}}</td>
+            <th scope="row">¿Atiende COVID?</th>
+            <td>{{colaborador?.atiendeCovid}}</td>
+            <th scope="row">Antecedentes penales</th>
+            <td>{{colaborador?.antecedentePenales}}</td>
+            <th scope="row">Auto propio</th>
+            <td>{{colaborador?.autoPropio}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Disponibilidad para viajar</th>
+            <td >{{colaborador?.dispuestoViajar}}</td>
+            <th scope="row">Auto propio</th>
+            <td>{{colaborador?.autoPropio}}</td>
+            <th scope="row">Licencia Vigente</th>
+            <td colspan="3">{{colaborador?.licenciaManejar}}</td>            
+          </tr>
+          <tr>
+            <th scope="row">Visa Americana</th>
+            <td>{{colaborador?.visa}}</td>
+            <th scope="row">Número de Visa</th>
+            <td>{{colaborador?.visaNumero}}</td>
+            <th scope="row">Tipo de Visa</th>
+            <td>{{colaborador?.tipoVisa}}</td>
+            <th scope="row">Expiración</th>
+            <td>{{colaborador?.expiracionVisa}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Pasaporte</th>
+            <td>{{colaborador?.pasaporte}}</td>
+            <th scope="row">Número de Pasaporte</th>
+            <td>{{colaborador?.pasaporteNumero}}</td>
+            <th scope="row">Expiración</th>
+            <td colspan="3">{{colaborador?.expiracionPasaporte}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">¿Está dispuesto(a) a hacerle de comer al paciente si así lo requiere?</th>
+            <td colspan="5">{{colaborador?.hacerComer}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">¿Está dispuesto(a) a limpiar lo utilizado en utensilios de cocina ocupados?</th>
+            <td colspan="5">{{colaborador?.limpiarUtensiliosCocina}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">¿Está dispuesto(a) a limpiar el dormitorio del paciente si así lo requiere?</th>
+            <td colspan="5">{{colaborador?.limpiarDormitorio}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">¿Está dispuesto(a) a limpiar el baño del paciente si así lo requiere?</th>
+            <td colspan="5">{{colaborador?.limpiarBano}}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="5">¿Está dispuesto(a) a ayudar al paciente en el baño, regadera, cama, y cambiar el pañal si así lo requiere?</th>
+            <td colspan="3">{{colaborador?.ayudaPaciente}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
   </div>
   <!-- <table class="table table-bordered">
     <thead class="thead-light">
