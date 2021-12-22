@@ -31,6 +31,9 @@
   </ul> -->
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
+      <div *ngIf="fotoFlag">
+        <img src="{{colaborador?.foto}}" class="img-thumbnail mb-4" style="width: 200px;">
+      </div>
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>

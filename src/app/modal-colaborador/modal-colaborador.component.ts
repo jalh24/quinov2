@@ -15,6 +15,8 @@ export class ModalColaboradorComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ModalColaboradorComponent>, private router:Router,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
+  fotoFlag: boolean = false;
+
   ngOnInit(): void {
     this.disponibilidad = {
       todosDias: "",
@@ -155,6 +157,9 @@ export class ModalColaboradorComponent implements OnInit {
       }
       this.colaborador.cuentasColaborador= this.data.data.cuentasColaborador;
       console.log(this.colaborador);
+      if (this.colaborador.foto) {
+        this.fotoFlag = true;
+      }
     }
     return event;
   }
