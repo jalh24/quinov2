@@ -2,16 +2,10 @@
   <ngb-toast-container></ngb-toast-container>
   <mat-tab-group mat-align-tabs="center" [selectedIndex]="selected.value"
     (selectedIndexChange)="selected.setValue($event)">
+    <!--
     <mat-tab label="General">
       <div class="container mt-5 bg-white rounded-top shadow">
-        <h4 class="pt-4 pb-1">Información del Cliente</h4>
-        <div class="row">
-          <div class="col-md-6">
-            <ng-multiselect-dropdown name="cliente" [placeholder]="'Seleccionar'" [settings]="clientesSettings"
-              [data]="clientes" [(ngModel)]="selectedItems" (onSelect)="onSelectedCliente($event)">
-            </ng-multiselect-dropdown>
-          </div>
-        </div>
+        
 
         <hr class="py-1" />
         <h4 class="pb-1">Información General</h4>
@@ -92,97 +86,7 @@
     </mat-tab>
 
     <mat-tab label="Ubicación">
-      <div class="container mt-5 bg-white rounded-top shadow">
-        <h4 class="pt-4 pb-1">Ubicación del Servicio</h4>
-        <div class="row">
-          <div class="col">
-            <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel"
-              [(ngModel)]="servicio.calle1">
-          </div>
-
-          <div class="col">
-            <label for="calle2" class="form-label">Calle 2</label>
-            <input type="text" class="form-control" id="calle1" name="calle2" ngModel #calle2="ngModel"
-              [(ngModel)]="servicio.calle2">
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-md-2">
-            <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel"
-              [(ngModel)]="servicio.noExt">
-          </div>
-
-          <div class="col-md-2">
-            <label for="numInterior" class="form-label">Número Interior</label>
-            <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel"
-              [(ngModel)]="servicio.noInt">
-          </div>
-
-          <div class="col-md-2">
-            <label for="codigopostal" class="form-label">Código Postal<span class="text-danger"> *</span></label>
-            <input type="text" class="form-control" maxlength="5" name="codigopostal" ngModel #codigopostal="ngModel"
-              [(ngModel)]="servicio.codigoPostal" [ngModel]="selectedCodigoPostal" pattern="[0-9]*"
-              (change)="onCodigoPostal($event.target.value)">
-          </div>
-
-
-          <div class="col">
-            <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
-            <select class="form-control" name="colonia" ngModel #colonia="ngModel" [(ngModel)]="servicio.idColonia"
-              (change)="onColonia($event.target.value)">
-              <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
-                {{colonia.nombre}}
-              </option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col">
-            <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
-            <select class="form-control" name="ciudad" (change)="onCiudad($event.target.value)">
-              <option *ngFor="let ciudad of ciudadesDir" [value]="ciudad.idCiudad">
-                {{ciudad.nombre}}
-              </option>
-            </select>
-          </div>
-
-          <div class="col">
-            <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
-            <select class="form-control" name="estado" (change)="onEstado($event.target.value)">
-              <option *ngFor="let estado of estadosDir" [value]="estado.idEstado">
-                {{estado.nombre}}
-              </option>
-            </select>
-          </div>
-
-          <div class="col">
-            <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
-            <select class="form-control" name="pais">
-              <option *ngFor="let pais of paises" [value]="pais.idPais">
-                {{pais.nombre}}
-              </option>
-            </select>
-          </div>
-
-        </div>
-
-        <div class="row mt-4 pb-4">
-          <div class="col-md-6">
-            <label for="referencia" class="form-label">Referencia</label>
-            <textarea name="referencia" class="form-control" ngModel #referencia="ngModel"
-              [(ngModel)]="servicio.referenciaDireccion" rows="3"></textarea>
-          </div>
-        </div>
-
-        <div class="row pb-4">
-          <div class="col-md-12"><span class="font-italic">Los campos con </span><span
-              class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
-        </div>
-      </div>
+     
     </mat-tab>
 
     <mat-tab label="Información del Paciente">
@@ -410,11 +314,20 @@
               class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
         </div>
       </div>
-    </mat-tab>
+    </mat-tab> -->
 
     <mat-tab label="Servicio">
       <div class="container mt-5 bg-white rounded-top shadow">
+        <h4 class="pt-4 pb-1">Información del Cliente</h4>
+        <div class="row">
+          <div class="col-md-6">
+            <ng-multiselect-dropdown name="cliente" [placeholder]="'Seleccionar'" [settings]="clientesSettings"
+              [data]="clientes" [(ngModel)]="selectedItems" (onSelect)="onSelectedCliente($event)">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
         <h4 class="pt-4 pb-1">Información del Servicio</h4>
+        
         <div class="row pb-4">
           <div class="col-md-2">
             <label for="tipoServicio" class="form-label">Tipo de Servicio</label>
@@ -494,6 +407,96 @@
               class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
         </div>
 
+        <h4 class="pt-4 pb-1">Ubicación del Servicio</h4>
+        <div class="row">
+          <div class="col">
+            <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" id="calle1" name="calle1" ngModel #calle1="ngModel"
+              [(ngModel)]="servicio.calle1">
+          </div>
+
+          <div class="col">
+            <label for="calle2" class="form-label">Calle 2</label>
+            <input type="text" class="form-control" id="calle1" name="calle2" ngModel #calle2="ngModel"
+              [(ngModel)]="servicio.calle2">
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-2">
+            <label for="numExterior" class="form-label">Número Exterior<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" name="numExterior" ngModel #numExterior="ngModel"
+              [(ngModel)]="servicio.noExt">
+          </div>
+
+          <div class="col-md-2">
+            <label for="numInterior" class="form-label">Número Interior</label>
+            <input type="text" class="form-control" name="numInterior" ngModel #numInterior="ngModel"
+              [(ngModel)]="servicio.noInt">
+          </div>
+
+          <div class="col-md-2">
+            <label for="codigopostal" class="form-label">Código Postal<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" maxlength="5" name="codigopostal" ngModel #codigopostal="ngModel"
+              [(ngModel)]="servicio.codigoPostal" [ngModel]="selectedCodigoPostal" pattern="[0-9]*"
+              (change)="onCodigoPostal($event.target.value)">
+          </div>
+
+
+          <div class="col">
+            <label for="colonia" class="form-label">Colonia<span class="text-danger"> *</span></label>
+            <select class="form-control" name="colonia" ngModel #colonia="ngModel" [(ngModel)]="servicio.idColonia"
+              (change)="onColonia($event.target.value)">
+              <option *ngFor="let colonia of colonias" [value]="colonia.idColonia">
+                {{colonia.nombre}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col">
+            <label for="ciudad" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+            <select class="form-control" name="ciudad" (change)="onCiudad($event.target.value)">
+              <option *ngFor="let ciudad of ciudadesDir" [value]="ciudad.idCiudad">
+                {{ciudad.nombre}}
+              </option>
+            </select>
+          </div>
+
+          <div class="col">
+            <label for="estado" class="form-label">Estado<span class="text-danger"> *</span></label>
+            <select class="form-control" name="estado" (change)="onEstado($event.target.value)">
+              <option *ngFor="let estado of estadosDir" [value]="estado.idEstado">
+                {{estado.nombre}}
+              </option>
+            </select>
+          </div>
+
+          <div class="col">
+            <label for="pais" class="form-label">País<span class="text-danger"> *</span></label>
+            <select class="form-control" name="pais">
+              <option *ngFor="let pais of paises" [value]="pais.idPais">
+                {{pais.nombre}}
+              </option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="row mt-4 pb-4">
+          <div class="col-md-6">
+            <label for="referencia" class="form-label">Referencia</label>
+            <textarea name="referencia" class="form-control" ngModel #referencia="ngModel"
+              [(ngModel)]="servicio.referenciaDireccion" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="row pb-4">
+          <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+              class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span></div>
+        </div>
+     
         <div class="row text-center pb-4">
           <div class="col">
             <button type="button" class="btn btn-primary" (click)="onGrabarServicio(myForm)">Grabar Servicio</button>
@@ -503,7 +506,7 @@
     </mat-tab>
   </mat-tab-group>
 
-  <div class="container bg-white rounded-bottom shadow">
+ <!-- <div class="container bg-white rounded-bottom shadow">
     <div class="row text-center pb-4">
       <div class="col">
         <div class="btn-toolbar" role="toolbar" style="justify-content: center; display: flex;">
@@ -516,5 +519,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 </form>

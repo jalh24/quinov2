@@ -29,12 +29,13 @@ export class ReporteColaboradorComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   servicio: any = null;
   pageEvent: PageEvent;
+  selectedColaboradorItems: any = [];
   pageIndex: number = 0;
   pageSize: number = 1000;
   length: number;
   SERVICIO_DATA: Servicio[] = [];
   servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
-  servicioColumns: string[] = ['idServicio', 'nombre', 'fechaCreacion', 'estatus'];
+  servicioColumns: string[] = ['idServicio', 'nombre', 'fechaCreacion', 'estatus', 'colaboradores'];
   @ViewChild('serviciosTable', { static: true }) serviciosTable: MatTable<any>;
   servicioFiltro: ServicioFiltro;
   httpOptions = {
@@ -51,6 +52,7 @@ export class ReporteColaboradorComponent implements OnInit {
 
   ngOnInit(): void {
     this.getServicios();
+    
   }
 
   ngAfterViewInit() {
@@ -62,13 +64,27 @@ export class ReporteColaboradorComponent implements OnInit {
     this.servicioFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
     this.http.post<any>('/api/servicio/lista', this.servicioFiltro, this.httpOptions).subscribe(data => {
       this.SERVICIO_DATA = data.data;
+      this.getColab();
       this.servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
       this.length = data.count.total;
-      console.log(this.SERVICIO_DATA);
-    });
+     
+     console.log(this.SERVICIO_DATA);
+    }); 
+   
+    
+    
     return event;
+    
   }
+public getColab(){
+  for (let index = 0; index < this.SERVICIO_DATA.length; index++) {
+    this.http.post<any>('/api/servicio/datosServColab?idServicio=' + this.SERVICIO_DATA[index].idServicio, this.httpOptions).subscribe(data => {
+      this.SERVICIO_DATA[index].colaboradores = data.data;
 
+      
+    });
+  }
+}
   public resetFields() {
     this.servicioFiltro.fecha1 = null;
     this.servicioFiltro.fecha2 = null;

@@ -45,6 +45,11 @@
           <th mat-header-cell *matHeaderCellDef> Estatus</th>
           <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
         </ng-container>
+        <ng-container matColumnDef="colaboradores">
+          <th mat-header-cell *matHeaderCellDef> Colaboradores</th>
+          <td mat-cell *matCellDef="let element"> {{element.colaboradores}} </td>
+          
+        </ng-container>
         <tr mat-header-row *matHeaderRowDef="servicioColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: servicioColumns;"></tr>
       </table>

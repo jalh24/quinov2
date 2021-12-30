@@ -28,7 +28,7 @@ export class AltaServicioComponent implements OnInit {
       Token: localStorage.getItem('token')
     })
   };
-
+ 
   faMinus = faMinus;
   faEquals = faEquals;
   tabVisible: any = 1;
@@ -179,6 +179,7 @@ export class AltaServicioComponent implements OnInit {
 
     this.http.get<any>('/api/servicio/datosServColab?idServicio=' + idServicio, this.httpOptions).subscribe(data => {
       this.selectedColaboradorItems = data.data;
+      console.log(this.selectedColaboradorItems);
     });
   }
 
