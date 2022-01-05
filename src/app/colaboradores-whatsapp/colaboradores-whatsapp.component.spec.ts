@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalWhatsappComponent } from './modal-whatsapp.component';
+import { ColaboradoresWhatsappComponent } from './colaboradores-whatsapp.component';
 
-describe('ModalWhatsappComponent', () => {
-  let component: ModalWhatsappComponent;
-  let fixture: ComponentFixture<ModalWhatsappComponent>;
+describe(' ', () => {
+  let component: ColaboradoresWhatsappComponent;
+  let fixture: ComponentFixture<ColaboradoresWhatsappComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalWhatsappComponent ]
+      declarations: [ ColaboradoresWhatsappComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalWhatsappComponent);
+    fixture = TestBed.createComponent(ColaboradoresWhatsappComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

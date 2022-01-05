@@ -13,12 +13,15 @@ import { AltaServicioComponent } from './alta-servicio/alta-servicio.component';
 import { GestionServicioComponent } from './gestion-servicio/gestion-servicio.component';
 import { ReporteServicioComponent } from './reporte-servicio/reporte-servicio.component';
 import { ReporteColaboradorComponent } from './reporte-colaborador/reporte-colaborador.component';
+// import { CotizadorServicioComponent } from './cotizador-servicio/cotizador-servicio.component';
+import { ColaboradoresWhatsappComponent } from './colaboradores-whatsapp/colaboradores-whatsapp.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LoginComponent },
   { path: 'dashboard', component: IndexComponent,canActivate: [AuthGuard] },
   { path: 'colaborador', component: ColaboradorComponent,canActivate: [AuthGuard] },
   { path: 'colaboradores', component: ColaboradoresComponent, canActivate: [AuthGuard] },
+  { path: 'colaboradoreswhatsapp', component: ColaboradoresWhatsappComponent, canActivate: [AuthGuard] },
   { path: 'clientemoral', component: ClienteMoralComponent, canActivate: [AuthGuard]},
   { path: 'clientefisico', component: ClienteFisicoComponent, canActivate: [AuthGuard] },
   { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard] },
@@ -26,6 +29,7 @@ const routes: Routes = [
   { path: 'gestionservicios', component: GestionServicioComponent, canActivate: [AuthGuard] },
   { path: 'reporteservicios', component: ReporteServicioComponent, canActivate: [AuthGuard] },
   { path: 'reportecolaborador', component: ReporteColaboradorComponent, canActivate: [AuthGuard] },
+  // { path: 'cotizadorservicios', component: CotizadorServicioComponent, canActivate: [AuthGuard] },
   //{ path: 'alta', component: SigninComponent, canActivate: [AuthGuard] },
 ];
 

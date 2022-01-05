@@ -26,11 +26,13 @@ import { ClienteFisicoComponent } from './cliente-fisico/cliente-fisico.componen
 import { ClienteMoralComponent } from './cliente-moral/cliente-moral.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { LoginComponent } from './login/login.component';
-import { ModalWhatsappComponent } from './modal-whatsapp/modal-whatsapp.component';
+import { ColaboradoresWhatsappComponent } from './colaboradores-whatsapp/colaboradores-whatsapp.component';
 import { AltaServicioComponent } from './alta-servicio/alta-servicio.component';
 import { GestionServicioComponent } from './gestion-servicio/gestion-servicio.component';
 import { ReporteServicioComponent } from './reporte-servicio/reporte-servicio.component';
 import { ReporteColaboradorComponent } from './reporte-colaborador/reporte-colaborador.component';
+// import { CotizadorServicioComponent } from './cotizador-servicio/cotizador-servicio.component';
+// import { ModalCotizadorServicioComponent } from './modal-cotizador-servicio/modal-cotizador-servicio.component';
 //import { SigninComponent } from './signin/signin.component';
 
 
@@ -45,11 +47,13 @@ import { ReporteColaboradorComponent } from './reporte-colaborador/reporte-colab
     ClienteMoralComponent,
     ClientesComponent,
     LoginComponent,
-    ModalWhatsappComponent,
+    ColaboradoresWhatsappComponent,
     AltaServicioComponent,
     GestionServicioComponent,
     ReporteServicioComponent,
     ReporteColaboradorComponent,
+    // CotizadorServicioComponent,
+    // ModalCotizadorServicioComponent,
   //  SigninComponent
   ],
   imports: [

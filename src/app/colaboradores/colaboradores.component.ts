@@ -15,7 +15,7 @@ import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
 import { faUserNurse, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import { ModalWhatsappComponent } from '../modal-whatsapp/modal-whatsapp.component';
+import { ColaboradoresWhatsappComponent } from '../colaboradores-whatsapp/colaboradores-whatsapp.component';
 
 export interface DialogData {
   data: any;
@@ -111,18 +111,18 @@ export class ColaboradoresComponent implements OnInit {
     console.log(this.whatsappSelected);
   }
 
-  openDialogWhatsapp(): void {
-    if (this.whatsappSelected.length != 0) {
-      const dialogRef = this.dialog.open(ModalWhatsappComponent, {
-        width: '1110px'
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
-    } else {
-      alert("Se debe seleccionar al menos un colaborador");
-    }
-  }
+  // openDialogWhatsapp(): void {
+  //   if (this.whatsappSelected.length != 0) {
+  //     const dialogRef = this.dialog.open(ModalWhatsappComponent, {
+  //       width: '1110px'
+  //     });
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       console.log('The dialog was closed');
+  //     });
+  //   } else {
+  //     alert("Se debe seleccionar al menos un colaborador");
+  //   }
+  // }
 
   ngOnInit(): void {
     this.getColaboradores();
@@ -283,6 +283,15 @@ export class ColaboradoresComponent implements OnInit {
 
   public agregarColaborador() {
     this.router.navigateByUrl("/colaborador");
+  }
+
+  public colaboradoresWhatsapp() {
+    if (this.whatsappSelected.length != 0) {
+      this.router.navigate(['/colaboradoreswhatsapp'], { queryParams: {whatsapp: JSON.stringify(this.whatsappSelected)}});
+      // this.router.navigateByUrl("/colaboradoreswhatsapp");
+    } else {
+      alert("Se debe seleccionar al menos un colaborador");
+    }
   }
 
   onItemSelect(item: any) {
