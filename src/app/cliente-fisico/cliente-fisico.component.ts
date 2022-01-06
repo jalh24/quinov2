@@ -117,6 +117,9 @@ export class ClienteFisicoComponent implements OnInit {
     this.cliente.referencia = null;
     this.cliente.alzheimer = null;
     this.cliente.idTipoCliente = null;
+    this.cliente.rfc = null;
+    this.cliente.contactosCliente = [];
+    this.cliente.imss = null;
   }
 
   public guardarCliente(ngForm: NgForm) {
