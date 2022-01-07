@@ -34,7 +34,9 @@ export class ColaboradoresWhatsappComponent implements OnInit {
   nombreCompleto: string;
   @ViewChild(DataTableDirective, { static: false })
   private datatableElement: DataTableDirective;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('paginator1',{read: MatPaginator}) paginator1: MatPaginator;
+  @ViewChild('paginator2',{read: MatPaginator}) paginator2: MatPaginator;
+
   destinatarioAdicionalNumero: number = 0;
   numTelefono: any = [];
   telefonosEnviar: any = [];
@@ -66,13 +68,18 @@ export class ColaboradoresWhatsappComponent implements OnInit {
     this.colaboradorWhatsapp.mensaje = null;
   }
 
+  ngAfterViewInit() {
+    this.colaboradorWhatsappSource.paginator = this.paginator1;
+    this.colaboradorNuevoWhatsappSource.paginator = this.paginator2;
+  }
+
   public getWhatsappColaboradores(event?: PageEvent) {
-    this.whatsapp.limit = event != undefined ? event.pageSize : this.pageSize;
-    this.whatsapp.start = event != undefined ? event.pageIndex : this.pageIndex;
+    // this.whatsapp.limit = event != undefined ? event.pageSize : this.pageSize;
+    // this.whatsapp.start = event != undefined ? event.pageIndex : this.pageIndex;
     this.COLABORADOR_WHATSAPP_DATA = this.whatsapp;
     this.colaboradorWhatsappSource = new MatTableDataSource<ColaboradorWhatsapp>(this.COLABORADOR_WHATSAPP_DATA);
     this.whatsapp.forEach(element => {
-      this.telefonosEnviar.push({nombre: element.nombrecompleto, telefono: element.telefono});
+      this.telefonosEnviar.push({nombre: element.nombrecompleto, telefono: element.telefono}); 
     });
     // this.http.post<any>('/api/colaborador/lista', this.colaboradorFiltro, this.httpOptions).subscribe(data => {
     //   this.COLABORADOR_DATA = data.data;
@@ -83,13 +90,14 @@ export class ColaboradoresWhatsappComponent implements OnInit {
     return event;
   }
 
-  public addWhatsappColaboradores() {
+  public addWhatsappColaboradores(event?: PageEvent) {
     // telefono.push({telefono: 123456, destinatarioAdicional: 1});
     if (this.colaboradorNuevoWhatsapp.telefono>=1000000000) {
       this.destinatarioAdicionalNumero += 1;
       this.numTelefono.push({telefono: this.colaboradorNuevoWhatsapp.telefono, destinatarioAdicional: this.destinatarioAdicionalNumero});
       this.COLABORADOR_NUEVO_WHATSAPP_DATA = this.numTelefono;
       this.colaboradorNuevoWhatsappSource = new MatTableDataSource<ColaboradorNuevoWhatsapp>(this.COLABORADOR_NUEVO_WHATSAPP_DATA);
+      this.colaboradorNuevoWhatsappSource.paginator = this.paginator2;
       this.colaboradorNuevoWhatsapp.telefono = 0;
     } else {
       alert("El numero tiene que ser de 10 digitos sin caracteres especiales");
@@ -97,6 +105,7 @@ export class ColaboradoresWhatsappComponent implements OnInit {
     // this.COLABORADOR_NUEVO_WHATSAPP_DATA = telefono;
     // console.log(this.COLABORADOR_NUEVO_WHATSAPP_DATA);
     // this.colaboradorNuevoWhatsappSource = new MatTableDataSource<ColaboradorNuevoWhatsapp>(this.COLABORADOR_NUEVO_WHATSAPP_DATA);
+    return event;
   }
 
   public borraNumero(numeroTmp) {

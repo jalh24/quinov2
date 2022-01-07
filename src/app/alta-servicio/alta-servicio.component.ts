@@ -189,6 +189,14 @@ export class AltaServicioComponent implements OnInit {
     });
   }
 
+  public comboClientesById(idCliente) {
+    this.http.get<any>('/api/catalogo/clientesById?idCliente=' + idCliente, this.httpOptions).subscribe(data => {
+      this.servicio.nombre = data.data[0].nombre;
+      this.servicio.a_paterno = data.data[0].a_paterno;
+      this.servicio.a_materno = data.data[0].a_materno;
+    });
+  }
+
   public comboColaboradores() {
     this.http.get<any>('/api/catalogo/colaboradores', this.httpOptions).subscribe(data => {
       this.colaboradores = data.data;
@@ -404,6 +412,7 @@ export class AltaServicioComponent implements OnInit {
   }
 
   onSelectedCliente(item: any) {
+    this.comboClientesById(item.idCliente);
     this.servicio.cliente = item.idCliente;
   }
 
