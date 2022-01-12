@@ -64,7 +64,8 @@ export class ReporteColaboradorComponent implements OnInit {
     this.servicioFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
     this.http.post<any>('/api/servicio/lista', this.servicioFiltro, this.httpOptions).subscribe(data => {
       this.SERVICIO_DATA = data.data;
-      this.getColab();
+      console.log(this.SERVICIO_DATA);
+      // this.getColab();
       this.servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
       this.length = data.count.total;
      
@@ -79,9 +80,7 @@ export class ReporteColaboradorComponent implements OnInit {
 public getColab(){
   for (let index = 0; index < this.SERVICIO_DATA.length; index++) {
     this.http.post<any>('/api/servicio/datosServColab?idServicio=' + this.SERVICIO_DATA[index].idServicio, this.httpOptions).subscribe(data => {
-      this.SERVICIO_DATA[index].colaboradores = data.data;
-
-      
+      this.SERVICIO_DATA[index].colaboradores = data.data;      
     });
   }
 }
