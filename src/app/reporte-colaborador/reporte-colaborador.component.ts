@@ -62,7 +62,7 @@ export class ReporteColaboradorComponent implements OnInit {
   public getServicios(event?: PageEvent) {
     this.servicioFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
     this.servicioFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
-    this.http.post<any>('/api/servicio/lista', this.servicioFiltro, this.httpOptions).subscribe(data => {
+    this.http.post<any>('/api/servicio/lista1', this.servicioFiltro, this.httpOptions).subscribe(data => {
       this.SERVICIO_DATA = data.data;
       console.log(this.SERVICIO_DATA);
       // this.getColab();
