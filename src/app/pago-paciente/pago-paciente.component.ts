@@ -23,6 +23,8 @@ export class PagoPacienteComponent implements OnInit {
   public servicio: Servicio;
   selectedIdServicio = null;
   fechaCreacion = null;
+  montoServicio:number=0;
+  motivoServicio:string;
 
   constructor(private http: HttpClient,) { }
 
@@ -76,4 +78,12 @@ export class PagoPacienteComponent implements OnInit {
     this.inicializaObjetos();
   }
 
+  public crearPago(){
+    let pagoServicio ={
+      idServicio : this.selectedIdServicio,
+      monto:this.montoServicio,
+      motivo: this.motivoServicio
+    }
+    console.log(pagoServicio);
+  }
 }
