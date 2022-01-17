@@ -1,0 +1,79 @@
+<form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
+    <ngb-toast-container></ngb-toast-container>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Pago">
+            <div class="container mt-5 pt-4 bg-white rounded-top shadow">
+                <h3 class="text-center">Alta de Pago</h3>
+                <hr class="py-1" />
+                <div class="form-group row">
+                    <label for="idServicio" class="col-md-2 col-form-label">ID Servicio</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control valGlobal" id="idServicio" name="idServicio" [(ngModel)]="servicio.idServicio" [ngModel]="selectedIdServicio" (change)="onIdServicio($event.target.value)" pattern="[0-9]*">                    
+                    </div>
+                    <label for="idServicio" class="col-md-2 col-form-label">Estatus Servicio</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control valGlobal" id="estatusServicio" name="estatusServicio" ngModel #estatusServicio="ngModel"
+                        [(ngModel)]="servicio.estatus" disabled>                    
+                    </div>
+                </div>
+                <div class="form-group row mt-4 pb-4">
+                    <label for="paciente" class="col-md-1 col-form-label">Paciente</label>
+                    <div class="col-md-5">
+                        <ng-multiselect-dropdown name="paciente" [placeholder]="'Seleccionar'" [settings]="pacientesSettings"
+              [data]="pacientes" [(ngModel)]="selectedPacienteItems" (onSelect)="onSelectedPaciente($event)" (onDeSelect)="onDeselectPaciente($event)">
+            </ng-multiselect-dropdown>
+                        <!-- <input type="text" class="form-control valGlobal" id="paciente" name="paciente">                     -->
+                    </div>
+                    <label for="idServicio" class="col-md-2 col-form-label">Fecha del Servicio</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control valGlobal" id="fechaServicio" name="fechaServicio" ngModel #fechaServicio="ngModel" [(ngModel)]="servicio.fechaCreacion" disabled>                    
+                    </div>
+                </div>
+                <div class="form-group row pb-4">
+                    <label for="precio" class="col-md-2 col-form-label">Precio del Servicio</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control valGlobal" id="precio" name="precio" ngModel #precio="ngModel"
+                        [(ngModel)]="servicio.precioServicio" disabled>                    
+                    </div>
+                    <label for="pagado" class="col-md-1 col-form-label">Pagado</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control valGlobal" id="pagado" name="pagado" ngModel #pagado="ngModel"
+                        [(ngModel)]="servicio.cantidadPagada" disabled>                    
+                    </div>
+                </div>
+                <div class="form-group row pb-4">
+                    <label for="pago" class="col-md-2 col-form-label font-weight-bold">Pago a Registrar</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control valGlobal" id="pago" name="pago">                    
+                    </div>
+                </div>
+                <div class="form-group row pb-4">
+                    <label for="motivo" class="col-md-2 col-form-label">Motivo del Pago</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" id="motivo" name="motivo" rows="5"></textarea>                    
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-2">
+                        <label for="idServicio" class="form-label">ID Servicio</label>
+                        <input type="text" class="form-control valGlobal" id="idServicio" name="idServicio" pattern="[0-9]*">
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <label for="nombre" class="form-label">Estatus Servicio</label>
+                        <input type="text" class="form-control valGlobal" id="estatusServicio" name="estatusServicio" disabled> 
+                    </div>
+                </div> -->
+                <div class="row">
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div class="container bg-white rounded-bottom shadow">
+      <div class="row text-center pb-4">
+        <div class="col">
+            <button type="submit" class="btn btn-success">Registrar Pago</button>
+        </div>
+      </div>
+    </div>
+</form>

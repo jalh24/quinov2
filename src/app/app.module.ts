@@ -31,6 +31,7 @@ import { AltaServicioComponent } from './alta-servicio/alta-servicio.component';
 import { GestionServicioComponent } from './gestion-servicio/gestion-servicio.component';
 import { ReporteServicioComponent } from './reporte-servicio/reporte-servicio.component';
 import { ReporteColaboradorComponent } from './reporte-colaborador/reporte-colaborador.component';
+import { PagoPacienteComponent } from './pago-paciente/pago-paciente.component';
 // import { CotizadorServicioComponent } from './cotizador-servicio/cotizador-servicio.component';
 // import { ModalCotizadorServicioComponent } from './modal-cotizador-servicio/modal-cotizador-servicio.component';
 //import { SigninComponent } from './signin/signin.component';
@@ -52,6 +53,7 @@ import { ReporteColaboradorComponent } from './reporte-colaborador/reporte-colab
     GestionServicioComponent,
     ReporteServicioComponent,
     ReporteColaboradorComponent,
+    PagoPacienteComponent,
     // CotizadorServicioComponent,
     // ModalCotizadorServicioComponent,
   //  SigninComponent

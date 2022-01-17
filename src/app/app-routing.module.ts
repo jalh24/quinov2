@@ -15,6 +15,7 @@ import { ReporteServicioComponent } from './reporte-servicio/reporte-servicio.co
 import { ReporteColaboradorComponent } from './reporte-colaborador/reporte-colaborador.component';
 // import { CotizadorServicioComponent } from './cotizador-servicio/cotizador-servicio.component';
 import { ColaboradoresWhatsappComponent } from './colaboradores-whatsapp/colaboradores-whatsapp.component';
+import { PagoPacienteComponent } from './pago-paciente/pago-paciente.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'gestionservicios', component: GestionServicioComponent, canActivate: [AuthGuard] },
   { path: 'reporteservicios', component: ReporteServicioComponent, canActivate: [AuthGuard] },
   { path: 'reportecolaborador', component: ReporteColaboradorComponent, canActivate: [AuthGuard] },
+  { path: 'pagopaciente', component: PagoPacienteComponent, canActivate: [AuthGuard] },
   // { path: 'cotizadorservicios', component: CotizadorServicioComponent, canActivate: [AuthGuard] },
   //{ path: 'alta', component: SigninComponent, canActivate: [AuthGuard] },
 ];
