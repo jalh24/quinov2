@@ -1,0 +1,76 @@
+<div class="container mt-5 pt-4 bg-white rounded-top shadow">
+    <h3 class="text-center">Reporte de Pagos</h3>
+    <table class="table">
+        
+      <tbody>
+        <tr>
+            <th scope="row">Nombre</th>
+          <td>
+            <input type="text" class="form-control" id="nombre" name="nombre">
+          </td>
+          <th scope="row">Fecha</th>
+          <td>
+            <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" value="yyyy-MM-dd">
+          </td>
+          <td>
+            <fa-icon [icon]="faArrowRight"></fa-icon>
+          </td>
+          <td>
+            <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" value="yyyy-MM-dd" >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="row text-center pb-4">
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="getPagos()">Buscar</button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" (click)="resetFields()">Limpiar Filtro</button> &nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+  
+  <div class="container bg-white rounded-bottom shadow pb-4">
+    <div class="mat-elevation-z8">
+      <table mat-table matTableExporter [dataSource]="pagoSource" class="mat-elevation-z8"
+        #exporter="matTableExporter">
+        <ng-container matColumnDef="idPago">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="pagoaRegistrar">
+            <th mat-header-cell *matHeaderCellDef> Pago a Registrar </th>
+            <td mat-cell *matCellDef="let element">  </td>
+          </ng-container>
+        <ng-container matColumnDef="montodePago">
+          <th mat-header-cell *matHeaderCellDef> Monto del Pago </th>
+          <td mat-cell *matCellDef="let element">  </td>
+        </ng-container>
+        <ng-container matColumnDef="fechaCreacion">
+            <th mat-header-cell *matHeaderCellDef> Fecha de Pago </th>
+            <td mat-cell *matCellDef="let element">  </td>
+          </ng-container>
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element">  </td>
+          </ng-container>
+        <ng-container matColumnDef="motivoPago">
+            <th mat-header-cell *matHeaderCellDef> Motivo de Pago </th>
+            <td mat-cell *matCellDef="let element">  </td>
+          </ng-container>
+        <tr mat-header-row *matHeaderRowDef="pagoColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: pagoColumns;"></tr>
+      </table>
+      <!-- <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[1, 5, 25, 100]"
+        (page)="pageEvent = getServicios($event)" aria-label="Selecciona los elementos a mostrar">
+      </mat-paginator> -->
+    </div>
+    
+    <div class="row text-center mt-4">
+        <div class="col">
+          <button class="btn btn-success" (click)="exporter.exportTable('xlsx', {fileName:'reportePago'})"><fa-icon [icon]="faFileExcel"></fa-icon> Exportar como Excel</button>
+        </div>
+      </div>
+  </div>
+
