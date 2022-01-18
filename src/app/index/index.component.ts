@@ -25,6 +25,9 @@ export class IndexComponent implements OnInit {
   public botonAltaColaboradores() {
     this.router.navigateByUrl("/colaborador");
   }
+  public botonPagoPaciente() {
+    this.router.navigateByUrl("/pagopaciente");
+  }
 
   public botonConsultaColaboradores() {
     this.router.navigateByUrl("/colaboradores");

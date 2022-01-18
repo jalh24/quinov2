@@ -1,13 +1,17 @@
 <div class="container mt-5 pt-4 bg-white rounded-top shadow">
     <h3 class="text-center">Reporte de Pagos</h3>
     <table class="table">
-        
+     
       <tbody>
         <tr>
             <th scope="row">Nombre</th>
           <td>
-            <input type="text" class="form-control" id="nombre" name="nombre">
-          </td>
+            <div class="col-md-5">
+              <ng-multiselect-dropdown name="paciente" [placeholder]="'Seleccionar'" [settings]="pacientesSettings"
+    [data]="pacientes" [(ngModel)]="selectedPacienteItems" (onSelect)="onSelectedPaciente($event)" (onDeSelect)="onDeselectPaciente($event)">
+  </ng-multiselect-dropdown>
+              <!-- <input type="text" class="form-control valGlobal" id="paciente" name="paciente">                     -->
+          </div>        </td>
           <th scope="row">Fecha</th>
           <td>
             <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" value="yyyy-MM-dd">
