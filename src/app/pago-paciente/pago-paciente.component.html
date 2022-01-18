@@ -3,7 +3,7 @@
     <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Pago">
             <div class="container mt-5 pt-4 bg-white rounded-top shadow">
-                <h3 class="text-center">Alta de Pago</h3>
+                <h3 class="text-center">Registro de Pago</h3>
                 <hr class="py-1" />
                 <div class="form-group row">
                     <label for="idServicio" class="col-md-2 col-form-label">ID Servicio</label>
@@ -19,10 +19,7 @@
                 <div class="form-group row mt-4 pb-4">
                     <label for="paciente" class="col-md-1 col-form-label">Paciente</label>
                     <div class="col-md-5">
-                        <ng-multiselect-dropdown name="paciente" [placeholder]="'Seleccionar'" [settings]="pacientesSettings"
-              [data]="pacientes" [(ngModel)]="selectedPacienteItems" (onSelect)="onSelectedPaciente($event)" (onDeSelect)="onDeselectPaciente($event)">
-            </ng-multiselect-dropdown>
-                        <!-- <input type="text" class="form-control valGlobal" id="paciente" name="paciente">                     -->
+                        <input type="text" class="form-control valGlobal" id="paciente" name="paciente" ngModel #paciente="ngModel" [(ngModel)]="servicio.nombrecompleto" disabled>                    
                     </div>
                     <label for="idServicio" class="col-md-2 col-form-label">Fecha del Servicio</label>
                     <div class="col-md-2">

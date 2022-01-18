@@ -50,6 +50,7 @@ export class Servicio {
     public colaboradores: any[];
     public colabReq: number;
     public fechaCreacion: Date;
+    public nombrecompleto: string;
     constructor() {
     }
 }

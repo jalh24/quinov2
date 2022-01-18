@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { NgbToast, NgbToastService, NgbToastType } from 'ngb-toast';
 import { Servicio } from '../_model/servicio';
 
 @Component({
@@ -16,17 +17,30 @@ export class PagoPacienteComponent implements OnInit {
     })
   };
 
-  selectedPacienteItems: any = [];
   pacientes: any;
   pacientesSettings: IDropdownSettings = {};
 
   public servicio: Servicio;
+  public servicioNew: Servicio;
   selectedIdServicio = null;
   fechaCreacion = null;
   montoServicio:number=0;
-  motivoServicio:string;
+  motivoServicio:string="";
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient,private toastService: NgbToastService,) { }
+
+  showSuccess(type: any, message: string): void {
+    const toast: NgbToast = {
+      toastType: type,
+      text: message,
+      dismissible: true,
+      timeInSeconds: 5,
+      onDismiss: () => {
+        console.log("Toast dismissed!!");
+      }
+    }
+    this.toastService.show(toast);
+  }
 
   ngOnInit(): void {
     this.inicializaObjetos();
@@ -43,6 +57,7 @@ export class PagoPacienteComponent implements OnInit {
 
   inicializaObjetos() {
     this.servicio = new Servicio();
+    this.servicioNew = new Servicio();
     this.servicio.precioServicio = null;
   }
 
@@ -56,34 +71,36 @@ export class PagoPacienteComponent implements OnInit {
     // this.servicio.idServicio = selectedIdServicio;
     this.http.get<any>('/api/servicio/datos?idServicio=' + selectedIdServicio, this.httpOptions).subscribe(data => {
       this.servicio = data.data[0];
+      this.servicioNew = data.data[0];
       this.fechaCreacion = new Date(this.servicio.fechaCreacion).toLocaleDateString();
       this.servicio.fechaCreacion = this.fechaCreacion;
 
-      this.selectedPacienteItems = [{
-        idServicio: data.data[0].idServicio,
-        nombrecompleto: data.data[0].nombre + " " + data.data[0].a_paterno + " " + data.data[0].a_materno
-      }
-      ];
-
-      console.log(this.fechaCreacion);
       console.log(this.servicio);
     });
   }
 
-  public onSelectedPaciente(item: any) {
-    this.onIdServicio(item.idServicio);
-  }
-
-  public onDeselectPaciente(item: any) {
-    this.inicializaObjetos();
-  }
-
   public crearPago(){
     let pagoServicio ={
-      idServicio : this.selectedIdServicio,
+      idServicio : this.servicio.idServicio,
       monto:this.montoServicio,
       motivo: this.motivoServicio
     }
+    if (!(pagoServicio.monto > (this.servicio.precioServicio-this.servicio.cantidadPagada))) {
+      this.servicioNew.cantidadPagada = (Number(this.servicioNew.cantidadPagada) + Number(this.montoServicio));
+      this.servicioNew.cantidadPorPagar = (Number(this.servicioNew.precioServicio)-Number(this.servicioNew.cantidadPagada));
+      console.log(this.servicioNew);
+      this.http.post<any>('/api/pago/create', pagoServicio, this.httpOptions).subscribe(data => {
+        this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");
+        alert("Se creo el colaborador exitosamente");
+      });
+      this.http.post<any>('/api/servicio/updatePago', this.servicioNew, this.httpOptions).subscribe(data => {
+        this.showSuccess(NgbToastType.Success, "Se actualizo el servicio exitosamente");
+        alert("Se actualizo el servicio exitosamente");
+      });
+    } else {
+      alert("El pago debe de ser mayor a 0 y menor o igual a la resta del precio con lo ya pagado");
+    }
+    
     console.log(pagoServicio);
   }
 }
