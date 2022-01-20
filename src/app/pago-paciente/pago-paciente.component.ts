@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgbToast, NgbToastService, NgbToastType } from 'ngb-toast';
 import { Servicio } from '../_model/servicio';
@@ -19,6 +20,8 @@ export class PagoPacienteComponent implements OnInit {
 
   pacientes: any;
   pacientesSettings: IDropdownSettings = {};
+  pagoCompleto: boolean;
+  idServicio: number;
 
   public servicio: Servicio;
   public servicioNew: Servicio;
@@ -27,7 +30,7 @@ export class PagoPacienteComponent implements OnInit {
   montoServicio:number=0;
   motivoServicio:string="";
 
-  constructor(private http: HttpClient,private toastService: NgbToastService,) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient,private toastService: NgbToastService,) { }
 
   showSuccess(type: any, message: string): void {
     const toast: NgbToast = {
@@ -53,12 +56,21 @@ export class PagoPacienteComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+
+    this.route.queryParams.subscribe(params => {
+      this.idServicio = params['idServicio'];
+    });
+
+    if (this.idServicio) {
+      this.onIdServicio(this.idServicio);
+    }
   }
 
   inicializaObjetos() {
     this.servicio = new Servicio();
     this.servicioNew = new Servicio();
     this.servicio.precioServicio = null;
+    this.pagoCompleto = false;
   }
 
   public comboPacientes() {
@@ -76,7 +88,14 @@ export class PagoPacienteComponent implements OnInit {
       this.servicio.fechaCreacion = this.fechaCreacion;
 
       console.log(this.servicio);
+      if (this.servicio.precioServicio == this.servicio.cantidadPagada) {
+        this.pagoCompleto = true;
+      } else {
+        this.pagoCompleto = false;
+      }
     });
+
+    
   }
 
   public crearPago(){

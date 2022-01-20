@@ -38,7 +38,7 @@
           </div>
         </div>
 
-        <div class="row pb-4">
+        <div class="row pb-4" *ngIf="!isSelected">
           <div class="col">
             <label for="precioServicio" class="form-label">Precio</label>
             <input type="number" class="form-control valGlobal" placeholder="$" id="precioServicio"
@@ -52,7 +52,7 @@
             <label for="cantidadPagada" class="form-label">Cantidad Pagada</label>
             <input type="number" class="form-control valGlobal" placeholder="$" id="cantidadPagada"
               name="cantidadPagada" step=".01" ngModel #precioServicio="ngModel" [(ngModel)]="servicio.cantidadPagada"
-              (change)="onPrecioChange()">
+              (change)="onPrecioChange()" disabled>
           </div>
           <p class="my-auto">
             <fa-icon [icon]="faEquals"></fa-icon>
@@ -60,7 +60,36 @@
           <div class="col">
             <label for="porPagar" class="form-label">Cantidad Por Pagar</label>
             <input type="text" class="form-control valGlobal" placeholder="$" id="porPagar" name="porPagar"
-              onkeydown="return false" value="{{servicio.cantidadPorPagar}}">
+              onkeydown="return false" value="{{servicio.cantidadPorPagar}}" disabled>
+          </div>
+        </div>
+
+        <div class="row pb-4" *ngIf="isSelected">
+          <div class="col">
+            <label for="precioServicio" class="form-label">Precio</label>
+            <input type="number" class="form-control valGlobal" placeholder="$" id="precioServicio"
+              name="precioServicio" step=".01" ngModel #precioServicio="ngModel" [(ngModel)]="servicio.precioServicio"
+              (change)="onPrecioChange()">
+          </div>
+          <p class="my-auto">
+            <fa-icon [icon]="faMinus"></fa-icon>
+          </p>
+          <div class="col">
+            <label for="cantidadPagada" class="form-label">Cantidad Pagada</label>
+            <input type="number" class="form-control valGlobal" placeholder="$" id="cantidadPagada"
+              name="cantidadPagada" step=".01" ngModel #precioServicio="ngModel" [(ngModel)]="servicio.cantidadPagada"
+              (change)="onPrecioChange()" disabled>
+          </div>
+          <p class="my-auto">
+            <fa-icon [icon]="faEquals"></fa-icon>
+          </p>
+          <div class="col">
+            <label for="porPagar" class="form-label">Cantidad Por Pagar</label>
+            <input type="text" class="form-control valGlobal" placeholder="$" id="porPagar" name="porPagar"
+              onkeydown="return false" value="{{servicio.cantidadPorPagar}}" disabled>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-success btn-sm my-4" (click)="registrarPago()">Registrar Pago</button>
           </div>
         </div>
 

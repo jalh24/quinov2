@@ -59,6 +59,7 @@ export class AltaServicioComponent implements OnInit {
   cliente: any[];
   colaborador: any[];
   idServicio: number;
+  isSelected: boolean;
   public servicio: Servicio;
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastService: NgbToastService) { }
 
@@ -82,6 +83,9 @@ export class AltaServicioComponent implements OnInit {
 
     if (this.idServicio) {
       this.llenarCampos(this.idServicio);
+      this.isSelected = true;
+    } else {
+      this.isSelected = false;
     }
 
     this.clientesSettings = {
@@ -155,6 +159,7 @@ export class AltaServicioComponent implements OnInit {
     this.servicio.cliente = null;
     this.servicio.colaboradores = null;
     this.servicio.estatus = "Abierta";
+    this.isSelected = false;
   }
 
   public llenarCampos(idServicio) {
@@ -410,6 +415,11 @@ export class AltaServicioComponent implements OnInit {
   nuevoColaborador() {
     window.open('/colaborador');
   }
+
+  registrarPago() {
+    const url = '/pagopaciente?idServicio=' + 24;
+    this.router.navigateByUrl(url);
+  } 
 
   onSelectedCliente(item: any) {
     this.comboClientesById(item.idCliente);
