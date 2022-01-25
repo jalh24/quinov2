@@ -6,7 +6,7 @@
         <tr>
             <th scope="row">Nombre</th>
           <td>
-            <div class="col-md-5">
+            <div class="col-md-12">
               <ng-multiselect-dropdown name="paciente" [placeholder]="'Seleccionar'" [settings]="pacientesSettings"
     [data]="pacientes" [(ngModel)]="selectedPacienteItems" (onSelect)="onSelectedPaciente($event)" (onDeSelect)="onDeselectPaciente($event)">
   </ng-multiselect-dropdown>
@@ -14,13 +14,15 @@
           </div>        </td>
           <th scope="row">Fecha</th>
           <td>
-            <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" value="yyyy-MM-dd">
+            <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" value="yyyy-MM-dd"
+            [(ngModel)]="pagoFiltro.fecha1">
           </td>
           <td>
             <fa-icon [icon]="faArrowRight"></fa-icon>
           </td>
           <td>
-            <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" value="yyyy-MM-dd" >
+            <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" value="yyyy-MM-dd" 
+            [(ngModel)]="pagoFiltro.fecha2">
           </td>
         </tr>
       </tbody>
@@ -40,28 +42,28 @@
         #exporter="matTableExporter">
         <ng-container matColumnDef="idPago">
           <th mat-header-cell *matHeaderCellDef> ID </th>
-          <td mat-cell *matCellDef="let element"> </td>
+          <td mat-cell *matCellDef="let element"> {{element.idPagoServicio}} </td>
         </ng-container>
         
-        <ng-container matColumnDef="pagoaRegistrar">
+        <!--<ng-container matColumnDef="pagoaRegistrar">
             <th mat-header-cell *matHeaderCellDef> Pago a Registrar </th>
             <td mat-cell *matCellDef="let element">  </td>
-          </ng-container>
+          </ng-container>-->
         <ng-container matColumnDef="montodePago">
           <th mat-header-cell *matHeaderCellDef> Monto del Pago </th>
-          <td mat-cell *matCellDef="let element">  </td>
+          <td mat-cell *matCellDef="let element"> $ {{element.monto}} </td>
         </ng-container>
         <ng-container matColumnDef="fechaCreacion">
             <th mat-header-cell *matHeaderCellDef> Fecha de Pago </th>
-            <td mat-cell *matCellDef="let element">  </td>
+            <td mat-cell *matCellDef="let element"> {{element.fechaPago}}  </td>
           </ng-container>
         <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let element">  </td>
+            <td mat-cell *matCellDef="let element"> Carlos Garza Garza </td>
           </ng-container>
         <ng-container matColumnDef="motivoPago">
             <th mat-header-cell *matHeaderCellDef> Motivo de Pago </th>
-            <td mat-cell *matCellDef="let element">  </td>
+            <td mat-cell *matCellDef="let element"> {{element.motivo}} </td>
           </ng-container>
         <tr mat-header-row *matHeaderRowDef="pagoColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: pagoColumns;"></tr>

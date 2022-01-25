@@ -16,6 +16,7 @@ import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborado
 import { faUserNurse, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { Pago } from '../_model/pago';
 import { Servicio } from '../_model/servicio';
+import { PagoFiltro } from '../_model/pagoFiltro';
 
 @Component({
   selector: 'app-pago-consulta',
@@ -33,6 +34,7 @@ export class PagoConsultaComponent implements OnInit {
   pacientes: any;
   pacientesSettings: IDropdownSettings = {};
   clientes: any;
+  pagoFiltro: PagoFiltro;
   pageEvent: PageEvent;
   pageIndex: number = 0;
   pageSize: number = Number.MAX_SAFE_INTEGER;
@@ -41,9 +43,9 @@ export class PagoConsultaComponent implements OnInit {
   clientesSettings: IDropdownSettings = {};
   PAGO_DATA: Pago[] = [];
   pagoSource = new MatTableDataSource<Pago>(this.PAGO_DATA);
-  pagoColumns: string[] = ['idPago', 'pagoaRegistrar','montodePago', 'nombre','fechaCreacion', 'motivoPago'];
+  pagoColumns: string[] = ['idPago','nombre','montodePago', 'fechaCreacion', 'motivoPago'];
   @ViewChild('pagosTable', { static: true }) pagosTable: MatTable<any>;
-  pagoFiltro: any;
+  
   public servicio: Servicio;
   httpOptions = {
     headers: new HttpHeaders({
@@ -55,12 +57,22 @@ export class PagoConsultaComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient, private dialog: MatDialog
-  ) { //this.pagoFiltro = new PagoFiltro();
+  ) { this.pagoFiltro = new PagoFiltro();
    }
 
   ngOnInit(): void {
     this.getPagos();
     this.comboPacientes();
+
+    this.pacientesSettings = {
+      singleSelection: false,
+      idField: 'idPaciente',
+      textField: 'nombrecompleto',
+      unSelectAllText: 'Quitar Selecciones',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+
   }
 
   ngAfterViewInit() {
@@ -68,7 +80,15 @@ export class PagoConsultaComponent implements OnInit {
   }
   public comboPacientes() {
     this.http.get<any>('/api/servicio/lista2', this.httpOptions).subscribe(data => {
+      
       this.pacientes = data.data;
+
+      this.selectedItems = [{
+        idPaciente: data.data[0].idPaciente,
+        nombrecompleto: data.data[0].nombre
+      }
+      ];
+      console.log(this.pacientes);
     });
   }
   public onDeselectPaciente(item: any) {
@@ -91,10 +111,10 @@ export class PagoConsultaComponent implements OnInit {
   public getPagos(event?: PageEvent) {
     this.pagoFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
     this.pagoFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
-    this.http.post<any>('/api/pago/lista', this.pagoFiltro, this.httpOptions).subscribe(data => {
+    this.http.post<any>('/api/pago', this.pagoFiltro, this.httpOptions).subscribe(data => {
       this.PAGO_DATA = data.data;
       this.pagoSource = new MatTableDataSource<Pago>(this.PAGO_DATA);
-      this.length = data.count.total;
+      //this.length = data.count.total;
       console.log(this.PAGO_DATA);
     });
     return event;

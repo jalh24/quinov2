@@ -42,6 +42,9 @@ export class IndexComponent implements OnInit {
 
     this.router.navigateByUrl("/clientemoral");
   }
+  botonGestionPago(){
+    this.router.navigateByUrl("/consultapago");
+  }
   public botonConsultaClientes() {
 
     this.router.navigateByUrl("/clientes");
