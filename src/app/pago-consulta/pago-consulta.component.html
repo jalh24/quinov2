@@ -68,9 +68,9 @@
         <tr mat-header-row *matHeaderRowDef="pagoColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: pagoColumns;"></tr>
       </table>
-      <!-- <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[1, 5, 25, 100]"
-        (page)="pageEvent = getServicios($event)" aria-label="Selecciona los elementos a mostrar">
-      </mat-paginator> -->
+     <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[1, 5, 25, 100]"
+        (page)="pageEvent = getPagos($event)" aria-label="Selecciona los elementos a mostrar">
+      </mat-paginator> 
     </div>
     
     <div class="row text-center mt-4">

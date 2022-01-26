@@ -114,7 +114,7 @@ export class PagoConsultaComponent implements OnInit {
     this.http.post<any>('/api/pago', this.pagoFiltro, this.httpOptions).subscribe(data => {
       this.PAGO_DATA = data.data;
       this.pagoSource = new MatTableDataSource<Pago>(this.PAGO_DATA);
-      //this.length = data.count.total;
+      this.length = data.count.total;
       console.log(this.PAGO_DATA);
     });
     return event;
