@@ -5,6 +5,7 @@ export class PagoFiltro {
     public idServicio:number;
     public limit:number;
     public start:number;
+    public pacientes:any[];
     
     constructor() {
     }

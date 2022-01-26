@@ -7,8 +7,8 @@
             <th scope="row">Nombre</th>
           <td>
             <div class="col-md-12">
-              <ng-multiselect-dropdown name="paciente" [placeholder]="'Seleccionar'" [settings]="pacientesSettings"
-    [data]="pacientes" [(ngModel)]="selectedPacienteItems" (onSelect)="onSelectedPaciente($event)" (onDeSelect)="onDeselectPaciente($event)">
+              <ng-multiselect-dropdown [placeholder]="'Seleccionar'" [settings]="pacientesSettings"
+    [data]="pacientes" [(ngModel)]="selectedPacienteItems">
   </ng-multiselect-dropdown>
               <!-- <input type="text" class="form-control valGlobal" id="paciente" name="paciente">                     -->
           </div>        </td>
@@ -59,7 +59,7 @@
           </ng-container>
         <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let element"> Carlos Garza Garza </td>
+            <td mat-cell *matCellDef="let element"> {{element.nombrecompleto}} </td>
           </ng-container>
         <ng-container matColumnDef="motivoPago">
             <th mat-header-cell *matHeaderCellDef> Motivo de Pago </th>

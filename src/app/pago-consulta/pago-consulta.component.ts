@@ -66,7 +66,7 @@ export class PagoConsultaComponent implements OnInit {
 
     this.pacientesSettings = {
       singleSelection: false,
-      idField: 'idPaciente',
+      idField: 'cliente',
       textField: 'nombrecompleto',
       unSelectAllText: 'Quitar Selecciones',
       itemsShowLimit: 3,
@@ -111,6 +111,8 @@ export class PagoConsultaComponent implements OnInit {
   public getPagos(event?: PageEvent) {
     this.pagoFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
     this.pagoFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
+    this.pagoFiltro.pacientes = this.selectedPacienteItems;
+    console.log(this.pagoFiltro);
     this.http.post<any>('/api/pago', this.pagoFiltro, this.httpOptions).subscribe(data => {
       this.PAGO_DATA = data.data;
       this.pagoSource = new MatTableDataSource<Pago>(this.PAGO_DATA);
