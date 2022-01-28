@@ -417,7 +417,7 @@ export class AltaServicioComponent implements OnInit {
   }
 
   registrarPago() {
-    const url = '/pagopaciente?idServicio=' + 24;
+    const url = '/pagopaciente?idServicio=' + this.idServicio;
     this.router.navigateByUrl(url);
   } 
 
