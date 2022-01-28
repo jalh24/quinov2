@@ -82,6 +82,7 @@ export class ClienteFisicoComponent implements OnInit {
     this.cliente.idEstadoCivil = null;
     this.cliente.idComplexion = null;
     this.cliente.sgmm = null;
+    this.cliente.imss = null;
     this.cliente.calle1 = null;
     this.cliente.calle2 = null;
     this.cliente.codigoPostal = null;
@@ -119,7 +120,7 @@ export class ClienteFisicoComponent implements OnInit {
     this.cliente.idTipoCliente = null;
     this.cliente.rfc = null;
     this.cliente.contactosCliente = [];
-    this.cliente.imss = null;
+    
   }
 
   public guardarCliente(ngForm: NgForm) {
@@ -134,7 +135,7 @@ export class ClienteFisicoComponent implements OnInit {
         this.showSuccess(NgbToastType.Success, "Se registro el cliente exitosamente");
 
       });
-      this.inicializaObjetos();
+     // this.inicializaObjetos();
     } else {
       this.showSuccess(NgbToastType.Danger, "Debe llenar todos los campos obligatorios");
     }
