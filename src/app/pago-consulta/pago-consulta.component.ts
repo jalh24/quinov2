@@ -43,7 +43,7 @@ export class PagoConsultaComponent implements OnInit {
   clientesSettings: IDropdownSettings = {};
   PAGO_DATA: Pago[] = [];
   pagoSource = new MatTableDataSource<Pago>(this.PAGO_DATA);
-  pagoColumns: string[] = ['idPago','nombre','montodePago', 'fechaCreacion', 'motivoPago'];
+  pagoColumns: string[] = ['idPago', 'idServicio','nombre','montodePago', 'fechaCreacion', 'motivoPago'];
   @ViewChild('pagosTable', { static: true }) pagosTable: MatTable<any>;
   
   public servicio: Servicio;
