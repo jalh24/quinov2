@@ -342,13 +342,32 @@ export class AltaServicioComponent implements OnInit {
   }
 
   onPrecioChange() {
-    if (this.servicio.precioServicio != null && this.servicio.cantidadPagada != null) {
-      if (this.servicio.precioServicio >= this.servicio.cantidadPagada) {
-        this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+    if (this.servicio.precioServicio != null) {
+      if (this.servicio.cantidadPagada != null) {
+        if (this.servicio.precioServicio >= this.servicio.cantidadPagada) {
+          this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+        } else {
+          this.servicio.cantidadPorPagar = null;
+          alert("La precio del servicio debe de ser mayor o igual que la cantidad pagada");
+        }
       } else {
-        this.servicio.cantidadPorPagar = null;
-        alert("La precio del servicio debe de ser mayor o igual que la cantidad pagada");
+        this.servicio.cantidadPagada = 0;
+        if (this.servicio.precioServicio >= this.servicio.cantidadPagada) {
+          this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+        } else {
+          this.servicio.cantidadPorPagar = null;
+          alert("La precio del servicio debe de ser mayor o igual que la cantidad pagada");
+        }
       }
+
+
+
+      // if (this.servicio.precioServicio >= this.servicio.cantidadPagada) {
+      //   this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+      // } else {
+      //   this.servicio.cantidadPorPagar = null;
+      //   alert("La precio del servicio debe de ser mayor o igual que la cantidad pagada");
+      // }
     }
   }
 

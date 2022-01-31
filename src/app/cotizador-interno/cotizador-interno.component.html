@@ -1,0 +1,154 @@
+<form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
+    <ngb-toast-container></ngb-toast-container>
+    <mat-tab-group mat-align-tabs="center" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+        <mat-tab label="Cotizador">
+            <div class="container mt-5 pt-4 pb-4 bg-white rounded-top shadow">
+                <h3 class="text-center">Cotizador de Servicios</h3>
+                <hr class="py-1" />
+                <div class="form-group row mt-4 mb-4">
+                    <label for="cuidador" class="col-md-3 col-form-label">CUIDADOR (A)</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="cuidador" name="cuidador" ngModel #cuidador="ngModel" [(ngModel)]="cotizadorInternoServicio.cuidador">                    
+                    </div>
+                    <div class="col-md-1">
+                        0 = NO
+                        <br>
+                        1 = SI
+                    </div>
+                    <div class="col-md-1">
+                        <fa-icon [icon]="faArrowRight"></fa-icon>
+                    </div>
+                    <label for="noHorasCuidador" class="col-md-3 col-form-label">No. DE HORAS DE TURNO</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="noHorasCuidador" name="noHorasCuidador" ngModel #noHorasCuidador="ngModel" [(ngModel)]="cotizadorInternoServicio.noHorasCuidador">                    
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <label for="enfermero" class="col-md-3 col-form-label">ENFERMERO (A)</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="enfermero" name="enfermero" ngModel #enfermero="ngModel" [(ngModel)]="cotizadorInternoServicio.enfermero">                    
+                    </div>
+                    <div class="col-md-1">
+                        0 = NO
+                        <br>
+                        1 = SI
+                    </div>
+                    <div class="col-md-1">
+                        <fa-icon [icon]="faArrowRight"></fa-icon>
+                    </div>
+                    <label for="noHorasEnfermero" class="col-md-3 col-form-label">No. DE HORAS DE TURNO</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="noHorasEnfermero" name="noHorasEnfermero" ngModel #noHorasEnfermero="ngModel" [(ngModel)]="cotizadorInternoServicio.noHorasEnfermero">                    
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <label for="enfermeroCovid" class="col-md-3 col-form-label">ENFERMERO (A) COVID</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="enfermeroCovid" name="enfermeroCovid" ngModel #enfermeroCovid="ngModel" [(ngModel)]="cotizadorInternoServicio.enfermeroCovid">                    
+                    </div>
+                    <div class="col-md-1">
+                        0 = NO
+                        <br>
+                        1 = SI
+                    </div>
+                    <div class="col-md-1">
+                        <fa-icon [icon]="faArrowRight"></fa-icon>
+                    </div>
+                    <label for="noHorasEnfermeroCovid" class="col-md-3 col-form-label">No. DE HORAS DE TURNO</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="noHorasEnfermeroCovid" name="noHorasEnfermeroCovid" ngModel #noHorasEnfermeroCovid="ngModel" [(ngModel)]="cotizadorInternoServicio.noHorasEnfermeroCovid">                    
+                    </div>
+                </div>
+                <hr class="py-1" />
+                <div class="form-group row mt-4 mb-4">
+                    <label for="noDias" class="col-md-3 col-form-label">No. DE DIAS CONTRATADO</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="noDias" name="noDias" ngModel #noDias="ngModel" [(ngModel)]="cotizadorInternoServicio.noDias">                    
+                    </div>
+                    <div class="col-md-7"></div>
+                </div>
+                <div class="form-group row mb-4">
+                    <label for="domingo" class="col-md-3 col-form-label">¿TRABAJA EN DOMINGO?</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="domingo" name="domingo" ngModel #domingo="ngModel" [(ngModel)]="cotizadorInternoServicio.domingo">                    
+                    </div>
+                    <div class="col-md-1">
+                        0 = NO
+                        <br>
+                        1 = SI
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+                <div class="form-group row mb-4">
+                    <label for="asueto" class="col-md-3 col-form-label">¿TRABAJA EN ASUETO?</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="asueto" name="asueto" ngModel #asueto="ngModel" [(ngModel)]="cotizadorInternoServicio.asueto">                    
+                    </div>
+                    <div class="col-md-1">
+                        0 = NO
+                        <br>
+                        1 = SI
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+                <div class="form-group row mb-4">
+                    <label for="hospital" class="col-md-3 col-form-label">¿SERVICIO EN HOSPITAL?</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="hospital" name="hospital" ngModel #hospital="ngModel" [(ngModel)]="cotizadorInternoServicio.hospital">                    
+                    </div>
+                    <div class="col-md-1">
+                        0 = NO
+                        <br>
+                        1 = SI
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+                <div class="form-group row mb-4">
+                    <label for="servicioFuera" class="col-md-3 col-form-label">¿SERVICIO EN SAN PEDRO / CARR. NACIONAL?</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="servicioFuera" name="servicioFuera" ngModel #servicioFuera="ngModel" [(ngModel)]="cotizadorInternoServicio.servicioFuera">                    
+                    </div>
+                    <div class="col-md-1">
+                        0 = NO
+                        <br>
+                        1 = SI
+                    </div>
+                    <div class="col-md-1">
+                        <fa-icon [icon]="faArrowRight"></fa-icon>
+                    </div>
+                    <label for="noTaxis" class="col-md-3 col-form-label">No. DE TAXIS</label>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control valGlobal" id="noTaxis" name="noTaxis" ngModel #noTaxis="ngModel" [(ngModel)]="cotizadorInternoServicio.noTaxis">                    
+                    </div>
+                </div>
+                <hr class="py-1" />
+                <div class="container" *ngIf="cotizarClick"><div class="row mt-4 pb-4">
+                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA (BARATO)</div>
+                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.cotizacionBaja | currency}}</div>
+                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA X DIA</div>
+                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.porDiaBaja | currency}}</div>
+                </div>
+                <div class="row mt-4 pb-4">
+                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA (MEDIO)</div>
+                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.cotizacionMedia | currency}}</div>
+                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA X DIA</div>
+                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.porDiaMedia | currency}}</div>
+                </div>
+                <div class="row mt-4 pb-4">
+                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA (CARO)</div>
+                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.cotizacionAlta | currency}}</div>
+                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA X DIA</div>
+                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.porDiaAlta | currency}}</div>
+                </div></div>
+                
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div class="container bg-white rounded-bottom shadow">
+      <div class="row text-center pb-4">
+        <div class="col">
+          <button type="button" class="btn btn-primary" (click)="onCotizar()"> Cotizar </button>
+        </div>
+      </div>
+    </div>
+</form>

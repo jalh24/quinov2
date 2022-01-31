@@ -33,6 +33,7 @@ import { ReporteServicioComponent } from './reporte-servicio/reporte-servicio.co
 import { ReporteColaboradorComponent } from './reporte-colaborador/reporte-colaborador.component';
 import { PagoPacienteComponent } from './pago-paciente/pago-paciente.component';
 import { PagoConsultaComponent } from './pago-consulta/pago-consulta.component';
+import { CotizadorInternoComponent } from './cotizador-interno/cotizador-interno.component';
 // import { CotizadorServicioComponent } from './cotizador-servicio/cotizador-servicio.component';
 // import { ModalCotizadorServicioComponent } from './modal-cotizador-servicio/modal-cotizador-servicio.component';
 //import { SigninComponent } from './signin/signin.component';
@@ -56,6 +57,7 @@ import { PagoConsultaComponent } from './pago-consulta/pago-consulta.component';
     ReporteColaboradorComponent,
     PagoPacienteComponent,
     PagoConsultaComponent,
+    CotizadorInternoComponent,
     // CotizadorServicioComponent,
     // ModalCotizadorServicioComponent,
   //  SigninComponent
