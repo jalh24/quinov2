@@ -133,7 +133,7 @@ export class ClienteFisicoComponent implements OnInit {
     if (ngForm.valid) {
       this.http.post<any>('/api/cliente/create', this.cliente,this.httpOptions).subscribe(data => {
         this.showSuccess(NgbToastType.Success, "Se registro el cliente exitosamente");
-
+        window.history.back();
       });
      // this.inicializaObjetos();
     } else {

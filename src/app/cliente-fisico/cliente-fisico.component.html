@@ -196,7 +196,7 @@
                     <div class="col">
                         <label for="referencia" class="form-label">Referencia</label>
                         <textarea name="referencia" class="form-control" ngModel #referencia="ngModel"
-                            [(ngModel)]="cliente.referencia" rows="3"></textarea>
+                            [(ngModel)]="cliente.referencia" rows="3" maxlength="65535"></textarea>
                     </div>
 
                 </div>
@@ -526,7 +526,7 @@
                                     *</span></label>
                             <textarea name="enfermedadesRecientes" class="form-control" ngModel
                                 #enfermedadesRecientes="ngModel" [(ngModel)]="cliente.enfermedadesRecientes"
-                                rows="5"></textarea>
+                                rows="5" maxlength="65535"></textarea>
                         </div>
                     </div>
                 </div>
@@ -557,7 +557,7 @@
                                     class="text-danger">
                                     *</span></label>
                             <textarea name="cirugiasRecientes" class="form-control" ngModel #cirugiasRecientes="ngModel"
-                                [(ngModel)]="cliente.cirugiasRecientes" rows="5"></textarea>
+                                [(ngModel)]="cliente.cirugiasRecientes" rows="5" maxlength="65535"></textarea>
 
                         </div>
 
@@ -567,7 +567,7 @@
                                     *</span></label>
                             <textarea name="accidentesRecientes" class="form-control" ngModel
                                 #accidentesRecientes="ngModel" [(ngModel)]="cliente.accidentesRecientes"
-                                rows="5"></textarea>
+                                rows="5" maxlength="65535"></textarea>
                         </div>
                     </div>
                 </div>

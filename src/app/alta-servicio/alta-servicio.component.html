@@ -204,7 +204,7 @@
           <div class="col-md-6">
             <label for="referencia" class="form-label">Referencia</label>
             <textarea name="referencia" class="form-control" ngModel #referencia="ngModel"
-              [(ngModel)]="servicio.referenciaDireccion" rows="3"></textarea>
+              [(ngModel)]="servicio.referenciaDireccion" rows="3" maxlength="65535"></textarea>
           </div>
         </div>
 
@@ -224,12 +224,12 @@
           <div class="col">
             <label for="enfermedades" class="form-label">Enfermedades / Padecimientos Actuales</label>
             <textarea name="enfermedades" class="form-control" rows="5" maxlength="256"
-              [(ngModel)]="servicio.enfermedades"></textarea>
+              [(ngModel)]="servicio.enfermedades" maxlength="65535"></textarea>
           </div>
           <div class="col">
             <label for="procedimientos" class="form-label">Procedimientos Requeridos</label>
             <textarea name="procedimientos" class="form-control" rows="5" maxlength="256"
-              [(ngModel)]="servicio.procedimientos"></textarea>
+              [(ngModel)]="servicio.procedimientos" maxlength="65535"></textarea>
           </div>
         </div>
   
@@ -237,12 +237,12 @@
           <div class="col">
             <label for="medicamentos" class="form-label">Medicamentos a Administrar</label>
             <textarea name="medicamentos" class="form-control" rows="5" maxlength="256"
-              [(ngModel)]="servicio.medicamentos"></textarea>
+              [(ngModel)]="servicio.medicamentos" maxlength="65535"></textarea>
           </div>
           <div class="col">
             <label for="notas" class="form-label">Notas y Observaciones</label>
             <textarea name="notas" class="form-control" rows="5" maxlength="256"
-              [(ngModel)]="servicio.notas"></textarea>
+              [(ngModel)]="servicio.notas" maxlength="65535"></textarea>
           </div>
         </div>
   
