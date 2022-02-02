@@ -18,6 +18,8 @@ export class CotizadorInternoComponent implements OnInit {
     })
   };
 
+  panelOpenState = false;
+
   public cotizadorInternoServicio: CotizadorInternoServicio;
   cotizarClick: boolean;
   bajo: boolean;
@@ -58,6 +60,21 @@ export class CotizadorInternoComponent implements OnInit {
     this.cotizadorInternoServicio.porDiaBaja = 0;
     this.cotizadorInternoServicio.porDiaMedia = 0;
     this.cotizadorInternoServicio.porDiaAlta = 0;
+    this.cotizadorInternoServicio.margenBaja = 0;
+    this.cotizadorInternoServicio.margenMedia = 0;
+    this.cotizadorInternoServicio.margenAlta = 0;
+    this.cotizadorInternoServicio.pagoPersonalBaja = 0;
+    this.cotizadorInternoServicio.pagoPersonalPorDiaBaja = 0;
+    this.cotizadorInternoServicio.pagoPersonalMedia = 0;
+    this.cotizadorInternoServicio.pagoPersonalPorDiaMedia = 0;
+    this.cotizadorInternoServicio.pagoPersonalAlta = 0;
+    this.cotizadorInternoServicio.pagoPersonalPorDiaAlta = 0;
+    this.cotizadorInternoServicio.costoDirectoBaja = 0;
+    this.cotizadorInternoServicio.costoDirectoPorDiaBaja = 0;
+    this.cotizadorInternoServicio.costoDirectoMedia = 0;
+    this.cotizadorInternoServicio.costoDirectoPorDiaMedia = 0;
+    this.cotizadorInternoServicio.costoDirectoAlta = 0;
+    this.cotizadorInternoServicio.costoDirectoPorDiaAlta = 0;
 
     this.comboDatos();
   }
@@ -745,25 +762,88 @@ export class CotizadorInternoComponent implements OnInit {
       var D23Alto = (D9Alto+D10Alto+D11Alto)*(this.gastoServicioAlto[14].porcentaje/100);
       var D24Alto = (D9Alto+D10Alto+D11Alto)*(this.gastoServicioAlto[15].porcentaje/100);
       var D25Alto = (D9Alto+D10Alto+D11Alto)*(this.gastoServicioAlto[16].porcentaje/100);
-      if (K2!=24) {
+      if (K2!=24 && H2!=0) {
         var D26Bajo = ((H2*H6*this.gastoServicioBajo[17].cantidad)+(H3*H6*this.gastoServicioBajo[18].cantidad)+(H4*H6*this.gastoServicioBajo[19].cantidad));
         var D26Medio = ((H2*H6*this.gastoServicioMedio[17].cantidad)+(H3*H6*this.gastoServicioMedio[18].cantidad)+(H4*H6*this.gastoServicioMedio[19].cantidad));
         var D26Alto = ((H2*H6*this.gastoServicioAlto[17].cantidad)+(H3*H6*this.gastoServicioAlto[18].cantidad)+(H4*H6*this.gastoServicioAlto[19].cantidad));
       } else {
-        var D26Bajo = ((2*(H2*H6*this.gastoServicioBajo[17].cantidad))+(2*(H3*H6*this.gastoServicioBajo[18].cantidad))+(2*(H4*H6*this.gastoServicioBajo[19].cantidad)));
-        var D26Medio = ((2*(H2*H6*this.gastoServicioMedio[17].cantidad))+(2*(H3*H6*this.gastoServicioMedio[18].cantidad))+(2*(H4*H6*this.gastoServicioMedio[19].cantidad)));
-        var D26Alto = ((2*(H2*H6*this.gastoServicioAlto[17].cantidad))+(2*(H3*H6*this.gastoServicioAlto[18].cantidad))+(2*(H4*H6*this.gastoServicioAlto[19].cantidad)));
+        if (K2==24 && H2==1) {
+          var D26Bajo = ((2*(H2*H6*this.gastoServicioBajo[17].cantidad))+(2*(H3*H6*this.gastoServicioBajo[18].cantidad))+(2*(H4*H6*this.gastoServicioBajo[19].cantidad)));
+          var D26Medio = ((2*(H2*H6*this.gastoServicioMedio[17].cantidad))+(2*(H3*H6*this.gastoServicioMedio[18].cantidad))+(2*(H4*H6*this.gastoServicioMedio[19].cantidad)));
+          var D26Alto = ((2*(H2*H6*this.gastoServicioAlto[17].cantidad))+(2*(H3*H6*this.gastoServicioAlto[18].cantidad))+(2*(H4*H6*this.gastoServicioAlto[19].cantidad)));
+        }        
+      }
+      if (K3!=24 && H3!=0) {
+        var D26Bajo = ((H2*H6*this.gastoServicioBajo[17].cantidad)+(H3*H6*this.gastoServicioBajo[18].cantidad)+(H4*H6*this.gastoServicioBajo[19].cantidad));
+        var D26Medio = ((H2*H6*this.gastoServicioMedio[17].cantidad)+(H3*H6*this.gastoServicioMedio[18].cantidad)+(H4*H6*this.gastoServicioMedio[19].cantidad));
+        var D26Alto = ((H2*H6*this.gastoServicioAlto[17].cantidad)+(H3*H6*this.gastoServicioAlto[18].cantidad)+(H4*H6*this.gastoServicioAlto[19].cantidad));
+      } else {
+        if (K3==24 && H3==1) {
+          var D26Bajo = ((2*(H2*H6*this.gastoServicioBajo[17].cantidad))+(2*(H3*H6*this.gastoServicioBajo[18].cantidad))+(2*(H4*H6*this.gastoServicioBajo[19].cantidad)));
+          var D26Medio = ((2*(H2*H6*this.gastoServicioMedio[17].cantidad))+(2*(H3*H6*this.gastoServicioMedio[18].cantidad))+(2*(H4*H6*this.gastoServicioMedio[19].cantidad)));
+          var D26Alto = ((2*(H2*H6*this.gastoServicioAlto[17].cantidad))+(2*(H3*H6*this.gastoServicioAlto[18].cantidad))+(2*(H4*H6*this.gastoServicioAlto[19].cantidad)));
+        }        
+      }
+      if (K4!=24 && H4!=0) {
+        var D26Bajo = ((H2*H6*this.gastoServicioBajo[17].cantidad)+(H3*H6*this.gastoServicioBajo[18].cantidad)+(H4*H6*this.gastoServicioBajo[19].cantidad));
+        var D26Medio = ((H2*H6*this.gastoServicioMedio[17].cantidad)+(H3*H6*this.gastoServicioMedio[18].cantidad)+(H4*H6*this.gastoServicioMedio[19].cantidad));
+        var D26Alto = ((H2*H6*this.gastoServicioAlto[17].cantidad)+(H3*H6*this.gastoServicioAlto[18].cantidad)+(H4*H6*this.gastoServicioAlto[19].cantidad));
+      } else {
+        if (K4==24 && H4==1) {
+          var D26Bajo = ((2*(H2*H6*this.gastoServicioBajo[17].cantidad))+(2*(H3*H6*this.gastoServicioBajo[18].cantidad))+(2*(H4*H6*this.gastoServicioBajo[19].cantidad)));
+          var D26Medio = ((2*(H2*H6*this.gastoServicioMedio[17].cantidad))+(2*(H3*H6*this.gastoServicioMedio[18].cantidad))+(2*(H4*H6*this.gastoServicioMedio[19].cantidad)));
+          var D26Alto = ((2*(H2*H6*this.gastoServicioAlto[17].cantidad))+(2*(H3*H6*this.gastoServicioAlto[18].cantidad))+(2*(H4*H6*this.gastoServicioAlto[19].cantidad)));
+        }        
       }
       var D27Bajo = (D9Bajo+D10Bajo+D11Bajo)*(this.gastoServicioBajo[20].porcentaje/100);
       var D27Medio = (D9Medio+D10Medio+D11Medio)*(this.gastoServicioMedio[20].porcentaje/100);
       var D27Alto = (D9Alto+D10Alto+D11Alto)*(this.gastoServicioAlto[20].porcentaje/100);
 
-      this.cotizadorInternoServicio.cotizacionBaja = Math.round((D2Bajo+D3Bajo+D4Bajo+D5Bajo+D6Bajo+D7Bajo+D8Bajo+D9Bajo+D10Bajo+D11Bajo+D12Bajo+D13Bajo+D14Bajo+D15Bajo+D16+D17+D18Bajo+D19Bajo+D20Bajo+D21Bajo+D22Bajo+D23Bajo+D24Bajo+D25Bajo+D26Bajo+D27Bajo)*(this.gastoServicioBajo[21].porcentaje+1));
-      this.cotizadorInternoServicio.porDiaBaja = Math.round(this.cotizadorInternoServicio.cotizacionBaja/H6);
-      this.cotizadorInternoServicio.cotizacionMedia = Math.round((D2Medio+D3Medio+D4Medio+D5Medio+D6Medio+D7Medio+D8Medio+D9Medio+D10Medio+D11Medio+D12Medio+D13Medio+D14Medio+D15Medio+D16+D17+D18Medio+D19Medio+D20Medio+D21Medio+D22Medio+D23Medio+D24Medio+D25Medio+D26Medio+D27Medio)*(this.gastoServicioMedio[21].porcentaje+1));
-      this.cotizadorInternoServicio.porDiaMedia = Math.round(this.cotizadorInternoServicio.cotizacionMedia/H6);
-      this.cotizadorInternoServicio.cotizacionAlta = Math.round((D2Alto+D3Alto+D4Alto+D5Alto+D6Alto+D7Alto+D8Alto+D9Alto+D10Alto+D11Alto+D12Alto+D13Alto+D14Alto+D15Alto+D16+D17+D18Alto+D19Alto+D20Alto+D21Alto+D22Alto+D23Alto+D24Alto+D25Alto+D26Alto+D27Alto)*(this.gastoServicioAlto[21].porcentaje+1));
-      this.cotizadorInternoServicio.porDiaAlta = Math.round(this.cotizadorInternoServicio.cotizacionAlta/H6);
+      this.cotizadorInternoServicio.pagoPersonalBaja = D9Bajo+D10Bajo+D14Bajo+D15Bajo+D16+D17+D11Bajo;
+      this.cotizadorInternoServicio.pagoPersonalMedia = D9Medio+D10Medio+D14Medio+D15Medio+D16+D17+D11Medio;
+      this.cotizadorInternoServicio.pagoPersonalAlta = D9Alto+D10Alto+D14Alto+D15Alto+D16+D17+D11Alto;
+      this.cotizadorInternoServicio.pagoPersonalPorDiaBaja = this.cotizadorInternoServicio.pagoPersonalBaja/H6;
+      this.cotizadorInternoServicio.pagoPersonalPorDiaMedia = this.cotizadorInternoServicio.pagoPersonalMedia/H6;
+      this.cotizadorInternoServicio.pagoPersonalPorDiaAlta = this.cotizadorInternoServicio.pagoPersonalAlta/H6;
+
+      this.cotizadorInternoServicio.costoDirectoBaja = D2Bajo+D3Bajo+D4Bajo+D5Bajo+D6Bajo+D7Bajo+D8Bajo+D9Bajo+D10Bajo+D11Bajo+D12Bajo+D13Bajo+D14Bajo+D15Bajo+D16+D17+D18Bajo+D19Bajo+D20Bajo+D21Bajo+D22Bajo+D23Bajo+D24Bajo+D25Bajo+D26Bajo+D27Bajo;
+      this.cotizadorInternoServicio.costoDirectoMedia = D2Medio+D3Medio+D4Medio+D5Medio+D6Medio+D7Medio+D8Medio+D9Medio+D10Medio+D11Medio+D12Medio+D13Medio+D14Medio+D15Medio+D16+D17+D18Medio+D19Medio+D20Medio+D21Medio+D22Medio+D23Medio+D24Medio+D25Medio+D26Medio+D27Medio;
+      this.cotizadorInternoServicio.costoDirectoAlta = D2Alto+D3Alto+D4Alto+D5Alto+D6Alto+D7Alto+D8Alto+D9Alto+D10Alto+D11Alto+D12Alto+D13Alto+D14Alto+D15Alto+D16+D17+D18Alto+D19Alto+D20Alto+D21Alto+D22Alto+D23Alto+D24Alto+D25Alto+D26Alto+D27Alto;
+      this.cotizadorInternoServicio.costoDirectoPorDiaBaja = this.cotizadorInternoServicio.costoDirectoBaja/H6;
+      this.cotizadorInternoServicio.costoDirectoPorDiaMedia = this.cotizadorInternoServicio.costoDirectoMedia/H6;
+      this.cotizadorInternoServicio.costoDirectoPorDiaAlta = this.cotizadorInternoServicio.costoDirectoAlta/H6;
+
+      this.cotizadorInternoServicio.cotizacionBaja = (D2Bajo+D3Bajo+D4Bajo+D5Bajo+D6Bajo+D7Bajo+D8Bajo+D9Bajo+D10Bajo+D11Bajo+D12Bajo+D13Bajo+D14Bajo+D15Bajo+D16+D17+D18Bajo+D19Bajo+D20Bajo+D21Bajo+D22Bajo+D23Bajo+D24Bajo+D25Bajo+D26Bajo+D27Bajo)*(this.gastoServicioBajo[21].porcentaje+1);
+      this.cotizadorInternoServicio.porDiaBaja = this.cotizadorInternoServicio.cotizacionBaja/H6;
+      this.cotizadorInternoServicio.cotizacionMedia = (D2Medio+D3Medio+D4Medio+D5Medio+D6Medio+D7Medio+D8Medio+D9Medio+D10Medio+D11Medio+D12Medio+D13Medio+D14Medio+D15Medio+D16+D17+D18Medio+D19Medio+D20Medio+D21Medio+D22Medio+D23Medio+D24Medio+D25Medio+D26Medio+D27Medio)*(this.gastoServicioMedio[21].porcentaje+1);
+      this.cotizadorInternoServicio.porDiaMedia = this.cotizadorInternoServicio.cotizacionMedia/H6;
+      this.cotizadorInternoServicio.cotizacionAlta = (D2Alto+D3Alto+D4Alto+D5Alto+D6Alto+D7Alto+D8Alto+D9Alto+D10Alto+D11Alto+D12Alto+D13Alto+D14Alto+D15Alto+D16+D17+D18Alto+D19Alto+D20Alto+D21Alto+D22Alto+D23Alto+D24Alto+D25Alto+D26Alto+D27Alto)*(this.gastoServicioAlto[21].porcentaje+1);
+      this.cotizadorInternoServicio.porDiaAlta = this.cotizadorInternoServicio.cotizacionAlta/H6;
+      this.cotizadorInternoServicio.margenBaja = this.cotizadorInternoServicio.pagoPersonalPorDiaBaja/this.cotizadorInternoServicio.porDiaBaja;
+      this.cotizadorInternoServicio.margenMedia = this.cotizadorInternoServicio.pagoPersonalPorDiaMedia/this.cotizadorInternoServicio.porDiaMedia;
+      this.cotizadorInternoServicio.margenAlta = this.cotizadorInternoServicio.pagoPersonalPorDiaAlta/this.cotizadorInternoServicio.porDiaAlta;
+
+      this.cotizadorInternoServicio.pagoPersonalBaja = Math.round(this.cotizadorInternoServicio.pagoPersonalBaja);
+      this.cotizadorInternoServicio.pagoPersonalMedia = Math.round(this.cotizadorInternoServicio.pagoPersonalMedia);
+      this.cotizadorInternoServicio.pagoPersonalAlta = Math.round(this.cotizadorInternoServicio.pagoPersonalAlta);
+      this.cotizadorInternoServicio.pagoPersonalPorDiaBaja = Math.round(this.cotizadorInternoServicio.pagoPersonalPorDiaBaja);
+      this.cotizadorInternoServicio.pagoPersonalPorDiaMedia = Math.round(this.cotizadorInternoServicio.pagoPersonalPorDiaMedia);
+      this.cotizadorInternoServicio.pagoPersonalPorDiaAlta = Math.round(this.cotizadorInternoServicio.pagoPersonalPorDiaAlta);
+
+      this.cotizadorInternoServicio.costoDirectoBaja = Math.round(this.cotizadorInternoServicio.costoDirectoBaja);
+      this.cotizadorInternoServicio.costoDirectoMedia = Math.round(this.cotizadorInternoServicio.costoDirectoMedia);
+      this.cotizadorInternoServicio.costoDirectoAlta = Math.round(this.cotizadorInternoServicio.costoDirectoAlta);
+      this.cotizadorInternoServicio.costoDirectoPorDiaBaja = Math.round(this.cotizadorInternoServicio.costoDirectoPorDiaBaja);
+      this.cotizadorInternoServicio.costoDirectoPorDiaMedia = Math.round(this.cotizadorInternoServicio.costoDirectoPorDiaMedia);
+      this.cotizadorInternoServicio.costoDirectoPorDiaAlta = Math.round(this.cotizadorInternoServicio.costoDirectoPorDiaAlta);
+
+      this.cotizadorInternoServicio.cotizacionBaja = Math.round(this.cotizadorInternoServicio.cotizacionBaja);
+      this.cotizadorInternoServicio.porDiaBaja = Math.round(this.cotizadorInternoServicio.porDiaBaja);
+      this.cotizadorInternoServicio.cotizacionMedia = Math.round(this.cotizadorInternoServicio.cotizacionMedia);
+      this.cotizadorInternoServicio.porDiaMedia = Math.round(this.cotizadorInternoServicio.porDiaMedia);
+      this.cotizadorInternoServicio.cotizacionAlta = Math.round(this.cotizadorInternoServicio.cotizacionAlta);
+      this.cotizadorInternoServicio.porDiaAlta = Math.round(this.cotizadorInternoServicio.porDiaAlta);
+
     }
   //   // if (this.bajo==true || this.medio==true) {
   //   //   var B6 = 4.0;

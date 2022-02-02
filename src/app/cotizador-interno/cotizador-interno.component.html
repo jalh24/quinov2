@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <hr class="py-1" />
-                <div class="container" *ngIf="cotizarClick"><div class="row mt-4 pb-4">
+                <!-- <div class="container" *ngIf="cotizarClick"><div class="row mt-4 pb-4">
                     <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA (BARATO)</div>
                     <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.cotizacionBaja | currency}}</div>
                     <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA X DIA</div>
@@ -139,7 +139,187 @@
                     <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.cotizacionAlta | currency}}</div>
                     <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA X DIA</div>
                     <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.porDiaAlta | currency}}</div>
-                </div></div>
+                </div>
+            </div> -->
+            <mat-accordion *ngIf="cotizarClick">
+                <!-- #enddocregion basic-panel -->
+                  <mat-expansion-panel (opened)="panelOpenState = true"
+                                       (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title style="font-size: 111%;">
+                        PRECIO DE VENTA (BARATO)
+                      </mat-panel-title>
+                      <mat-panel-description style="font-size: 111%;">
+                        {{cotizadorInternoServicio.cotizacionBaja | currency}}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th style="font-size: 111%;">TOTAL</th>
+                                <th style="font-size: 111%;">X DIA</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="font-size: 111%;">PAGO A PERSONAL</th>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalBaja | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalPorDiaBaja | currency}}</td>
+                            </tr>
+ 
+                        </tbody>
+                      </table>
+                      <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th style="font-size: 111%;">TOTAL</th>
+                                <th style="font-size: 111%;">X DIA</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="font-size: 111%;">COSTO DIRECTO</th>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoBaja | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoPorDiaBaja | currency}}</td>
+                            </tr>
+ 
+                        </tbody>
+                      </table>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th style="font-size: 111%;">TOTAL</th>
+                                <th style="font-size: 111%;">X DIA</th>
+                                <th style="font-size: 111%;">MARGEN BRUTO</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="font-size: 111%;">PRECIO DE VENTA</th>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.cotizacionBaja | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.porDiaBaja | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.margenBaja | percent:'2.1-1'}}</td>
+                            </tr>
+ 
+                        </tbody>
+                      </table>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel (opened)="panelOpenState = true"
+                                       (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title style="font-size: 111%;">
+                        PRECIO DE VENTA (MEDIO)
+                      </mat-panel-title>
+                      <mat-panel-description style="font-size: 111%;">
+                        {{cotizadorInternoServicio.cotizacionMedia | currency}}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th style="font-size: 111%;">TOTAL</th>
+                                <th style="font-size: 111%;">X DIA</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="font-size: 111%;">PAGO A PERSONAL</th>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalMedia | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalPorDiaMedia | currency}}</td>
+                            </tr>
+ 
+                        </tbody>
+                      </table>
+                      <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th style="font-size: 111%;">TOTAL</th>
+                                <th style="font-size: 111%;">X DIA</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="font-size: 111%;">COSTO DIRECTO</th>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoMedia | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoPorDiaMedia | currency}}</td>
+                            </tr>
+ 
+                        </tbody>
+                      </table>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th style="font-size: 111%;">TOTAL</th>
+                                <th style="font-size: 111%;">X DIA</th>
+                                <th style="font-size: 111%;">MARGEN BRUTO</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">PRECIO DE VENTA</th>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.cotizacionMedia | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.porDiaMedia | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.margenMedia | percent:'2.1-1'}}</td>
+                            </tr>
+ 
+                        </tbody>
+                      </table>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel (opened)="panelOpenState = true"
+                                       (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title style="font-size: 111%;">
+                        PRECIO DE VENTA (CARO)
+                      </mat-panel-title>
+                      <mat-panel-description style="font-size: 111%;">
+                        {{cotizadorInternoServicio.cotizacionAlta | currency}}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th style="font-size: 111%;">TOTAL</th>
+                                <th style="font-size: 111%;">X DIA</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="font-size: 111%;">PAGO A PERSONAL</th>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalAlta | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalPorDiaAlta | currency}}</td>
+                            </tr>
+ 
+                        </tbody>
+                      </table>
+                      <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th style="font-size: 111%;">TOTAL</th>
+                                <th style="font-size: 111%;">X DIA</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="font-size: 111%;">COSTO DIRECTO</th>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoAlta | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoPorDiaAlta | currency}}</td>
+                            </tr>
+ 
+                        </tbody>
+                      </table>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th style="font-size: 111%;">TOTAL</th>
+                                <th style="font-size: 111%;">X DIA</th>
+                                <th style="font-size: 111%;">MARGEN BRUTO</th>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="font-size: 111%;">PRECIO DE VENTA</th>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.cotizacionAlta | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.porDiaAlta | currency}}</td>
+                                <td style="font-size: 111%;">{{cotizadorInternoServicio.margenAlta | percent:'2.1-1'}}</td>
+                            </tr>
+ 
+                        </tbody>
+                      </table>
+                  </mat-expansion-panel>
+                </mat-accordion>
                 
             </div>
         </mat-tab>

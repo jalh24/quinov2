@@ -18,6 +18,23 @@ export class CotizadorInternoServicio {
     public porDiaBaja: number;
     public porDiaMedia: number;
     public porDiaAlta: number;
+    public margenBaja: number;
+    public margenMedia: number;
+    public margenAlta: number;
+
+    public pagoPersonalBaja: number;
+    public pagoPersonalPorDiaBaja: number;
+    public pagoPersonalMedia: number;
+    public pagoPersonalPorDiaMedia: number;
+    public pagoPersonalAlta: number;
+    public pagoPersonalPorDiaAlta: number;
+
+    public costoDirectoBaja: number;
+    public costoDirectoPorDiaBaja: number;
+    public costoDirectoMedia: number;
+    public costoDirectoPorDiaMedia: number;
+    public costoDirectoAlta: number;
+    public costoDirectoPorDiaAlta: number;
 
     constructor() {
     }

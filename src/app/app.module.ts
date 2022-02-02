@@ -34,6 +34,7 @@ import { ReporteColaboradorComponent } from './reporte-colaborador/reporte-colab
 import { PagoPacienteComponent } from './pago-paciente/pago-paciente.component';
 import { PagoConsultaComponent } from './pago-consulta/pago-consulta.component';
 import { CotizadorInternoComponent } from './cotizador-interno/cotizador-interno.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 // import { CotizadorServicioComponent } from './cotizador-servicio/cotizador-servicio.component';
 // import { ModalCotizadorServicioComponent } from './modal-cotizador-servicio/modal-cotizador-servicio.component';
 //import { SigninComponent } from './signin/signin.component';
@@ -81,7 +82,8 @@ import { CotizadorInternoComponent } from './cotizador-interno/cotizador-interno
     MatPaginatorModule,
     NgMultiSelectDropDownModule.forRoot(),
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
