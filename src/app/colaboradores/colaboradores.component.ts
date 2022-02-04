@@ -219,6 +219,7 @@ export class ColaboradoresComponent implements OnInit {
   }
 
   public resetFields() {
+    this.colaboradorFiltro.nombre = null;
     this.colaboradorFiltro.edad1 = null;
     this.colaboradorFiltro.edad2 = null;
     this.colaboradorFiltro.peso1 = null;

@@ -126,6 +126,11 @@
             </button>
           </div>
         </td>
+        <th scope="row">Nombre</th>
+        <td>
+          <input maxlength="30" type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"
+            [(ngModel)]="colaboradorFiltro.nombre">
+        </td>
         <td colspan="1">
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="covidFiltro"
