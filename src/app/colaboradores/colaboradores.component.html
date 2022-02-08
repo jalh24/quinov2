@@ -131,7 +131,7 @@
           <input maxlength="30" type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"
             [(ngModel)]="colaboradorFiltro.nombre">
         </td>
-        <td colspan="1">
+        <!-- <td colspan="1">
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="covidFiltro"
               [(ngModel)]="colaboradorFiltro.atiendeCovid">
@@ -150,6 +150,29 @@
         <td>
           <button type="button" class="btn btn-danger" (click)="resetFields()">Limpiar Filtro</button>
           <br>
+          <button type="button" class="btn btn-primary mt-1" (click)="mostrarFiltros()">{{filtrosOcultos ? 'Ocultar' :
+            'Mostrar' }} Filtros</button>
+        </td> -->
+      </tr>
+      <tr>
+        <td colspan="1">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="covidFiltro"
+              [(ngModel)]="colaboradorFiltro.atiendeCovid">
+            <label class="form-check-label" for="covidFiltro">Atiende COVID</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="autoFiltro" [(ngModel)]="colaboradorFiltro.autoPropio">
+            <label class="form-check-label" for="autoFiltro">Auto Propio</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="viajeFiltro"
+              [(ngModel)]="colaboradorFiltro.dispuestoViajar">
+            <label class="form-check-label" for="viajeFiltro">Disp. para viajar</label>
+          </div>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="resetFields()">Limpiar Filtro</button>
           <button type="button" class="btn btn-primary mt-1" (click)="mostrarFiltros()">{{filtrosOcultos ? 'Ocultar' :
             'Mostrar' }} Filtros</button>
         </td>
