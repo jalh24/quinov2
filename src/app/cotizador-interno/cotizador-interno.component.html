@@ -6,66 +6,29 @@
                 <h3 class="text-center">Cotizador de Servicios</h3>
                 <hr class="py-1" />
                 <div class="form-group row mt-4 mb-4">
-                    <label for="cuidador" class="col-md-3 col-form-label">CUIDADOR (A)</label>
+                    <label for="horas" class="col-md-3 col-form-label">No. DE HORAS REQUERIDAS</label>
                     <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="cuidador" name="cuidador" ngModel #cuidador="ngModel" [(ngModel)]="cotizadorInternoServicio.cuidador">                    
+                        <input type="number" class="form-control valGlobal" id="horas" name="horas" ngModel #horas="ngModel" [(ngModel)]="cotizadorInternoServicio.horas">                    
                     </div>
-                    <div class="col-md-1">
-                        0 = NO
-                        <br>
-                        1 = SI
-                    </div>
-                    <div class="col-md-1">
-                        <fa-icon [icon]="faArrowRight"></fa-icon>
-                    </div>
-                    <label for="noHorasCuidador" class="col-md-3 col-form-label">No. DE HORAS DE TURNO</label>
-                    <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="noHorasCuidador" name="noHorasCuidador" ngModel #noHorasCuidador="ngModel" [(ngModel)]="cotizadorInternoServicio.noHorasCuidador">                    
-                    </div>
+                    <label class="col-md-3 col-form-label" style="color: red; font-weight: bold;">OPCIONES:&emsp;4&emsp;8&emsp;10&emsp;12&emsp;24</label>      
                 </div>
                 <div class="form-group row mb-4">
-                    <label for="enfermero" class="col-md-3 col-form-label">ENFERMERO (A)</label>
+                    <label for="dias" class="col-md-3 col-form-label">No. DE DIAS CONTRATADO</label>
                     <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="enfermero" name="enfermero" ngModel #enfermero="ngModel" [(ngModel)]="cotizadorInternoServicio.enfermero">                    
+                        <input type="number" class="form-control valGlobal" id="dias" name="dias" ngModel #dias="ngModel" [(ngModel)]="cotizadorInternoServicio.dias">                    
                     </div>
-                    <div class="col-md-1">
-                        0 = NO
-                        <br>
-                        1 = SI
-                    </div>
-                    <div class="col-md-1">
-                        <fa-icon [icon]="faArrowRight"></fa-icon>
-                    </div>
-                    <label for="noHorasEnfermero" class="col-md-3 col-form-label">No. DE HORAS DE TURNO</label>
-                    <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="noHorasEnfermero" name="noHorasEnfermero" ngModel #noHorasEnfermero="ngModel" [(ngModel)]="cotizadorInternoServicio.noHorasEnfermero">                    
-                    </div>
+                    <label class="col-md-3 col-form-label" style="color: red; font-weight: bold;">OPCIONES:&emsp;1&emsp;AL&emsp;7</label>
                 </div>
                 <div class="form-group row mb-4">
-                    <label for="enfermeroCovid" class="col-md-3 col-form-label">ENFERMERO (A) COVID</label>
+                    <label for="hombre" class="col-md-3 col-form-label">SE REQUIERE ENFERMERO HOMBRE</label>
                     <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="enfermeroCovid" name="enfermeroCovid" ngModel #enfermeroCovid="ngModel" [(ngModel)]="cotizadorInternoServicio.enfermeroCovid">                    
+                        <input type="number" class="form-control valGlobal" id="hombre" name="hombre" ngModel #hombre="ngModel" [(ngModel)]="cotizadorInternoServicio.hombre">                    
                     </div>
                     <div class="col-md-1">
                         0 = NO
                         <br>
                         1 = SI
                     </div>
-                    <div class="col-md-1">
-                        <fa-icon [icon]="faArrowRight"></fa-icon>
-                    </div>
-                    <label for="noHorasEnfermeroCovid" class="col-md-3 col-form-label">No. DE HORAS DE TURNO</label>
-                    <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="noHorasEnfermeroCovid" name="noHorasEnfermeroCovid" ngModel #noHorasEnfermeroCovid="ngModel" [(ngModel)]="cotizadorInternoServicio.noHorasEnfermeroCovid">                    
-                    </div>
-                </div>
-                <hr class="py-1" />
-                <div class="form-group row mt-4 mb-4">
-                    <label for="noDias" class="col-md-3 col-form-label">No. DE DIAS CONTRATADO</label>
-                    <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="noDias" name="noDias" ngModel #noDias="ngModel" [(ngModel)]="cotizadorInternoServicio.noDias">                    
-                    </div>
-                    <div class="col-md-7"></div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="domingo" class="col-md-3 col-form-label">¿TRABAJA EN DOMINGO?</label>
@@ -77,7 +40,6 @@
                         <br>
                         1 = SI
                     </div>
-                    <div class="col-md-6"></div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="asueto" class="col-md-3 col-form-label">¿TRABAJA EN ASUETO?</label>
@@ -89,7 +51,6 @@
                         <br>
                         1 = SI
                     </div>
-                    <div class="col-md-6"></div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="hospital" class="col-md-3 col-form-label">¿SERVICIO EN HOSPITAL?</label>
@@ -101,7 +62,6 @@
                         <br>
                         1 = SI
                     </div>
-                    <div class="col-md-6"></div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="servicioFuera" class="col-md-3 col-form-label">¿SERVICIO EN SAN PEDRO / CARR. NACIONAL?</label>
@@ -122,205 +82,122 @@
                     </div>
                 </div>
                 <hr class="py-1" />
-                <!-- <div class="container" *ngIf="cotizarClick"><div class="row mt-4 pb-4">
-                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA (BARATO)</div>
-                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.cotizacionBaja | currency}}</div>
-                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA X DIA</div>
-                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.porDiaBaja | currency}}</div>
-                </div>
-                <div class="row mt-4 pb-4">
-                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA (MEDIO)</div>
-                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.cotizacionMedia | currency}}</div>
-                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA X DIA</div>
-                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.porDiaMedia | currency}}</div>
-                </div>
-                <div class="row mt-4 pb-4">
-                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA (CARO)</div>
-                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.cotizacionAlta | currency}}</div>
-                    <div class="col-md-3" style="font-size: 111%;">PRECIO DE VENTA X DIA</div>
-                    <div class="col-md-2" style="font-size: 111%; font-weight: bold;">{{cotizadorInternoServicio.porDiaAlta | currency}}</div>
-                </div>
-            </div> -->
-            <mat-accordion *ngIf="cotizarClick">
-                <!-- #enddocregion basic-panel -->
-                  <mat-expansion-panel (opened)="panelOpenState = true"
-                                       (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                      <mat-panel-title style="font-size: 111%;">
-                        PRECIO DE VENTA (BARATO)
-                      </mat-panel-title>
-                      <mat-panel-description style="font-size: 111%;">
-                        {{cotizadorInternoServicio.cotizacionBaja | currency}}
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th style="font-size: 111%;">TOTAL</th>
-                                <th style="font-size: 111%;">X DIA</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="font-size: 111%;">PAGO A PERSONAL</th>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalBaja | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalPorDiaBaja | currency}}</td>
-                            </tr>
- 
-                        </tbody>
-                      </table>
-                      <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th style="font-size: 111%;">TOTAL</th>
-                                <th style="font-size: 111%;">X DIA</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="font-size: 111%;">COSTO DIRECTO</th>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoBaja | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoPorDiaBaja | currency}}</td>
-                            </tr>
- 
-                        </tbody>
-                      </table>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th style="font-size: 111%;">TOTAL</th>
-                                <th style="font-size: 111%;">X DIA</th>
-                                <th style="font-size: 111%;">MARGEN BRUTO</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="font-size: 111%;">PRECIO DE VENTA</th>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.cotizacionBaja | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.porDiaBaja | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.margenBaja | percent:'2.1-1'}}</td>
-                            </tr>
- 
-                        </tbody>
-                      </table>
-                  </mat-expansion-panel>
-
-                  <mat-expansion-panel (opened)="panelOpenState = true"
-                                       (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                      <mat-panel-title style="font-size: 111%;">
-                        PRECIO DE VENTA (MEDIO)
-                      </mat-panel-title>
-                      <mat-panel-description style="font-size: 111%;">
-                        {{cotizadorInternoServicio.cotizacionMedia | currency}}
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th style="font-size: 111%;">TOTAL</th>
-                                <th style="font-size: 111%;">X DIA</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="font-size: 111%;">PAGO A PERSONAL</th>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalMedia | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalPorDiaMedia | currency}}</td>
-                            </tr>
- 
-                        </tbody>
-                      </table>
-                      <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th style="font-size: 111%;">TOTAL</th>
-                                <th style="font-size: 111%;">X DIA</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="font-size: 111%;">COSTO DIRECTO</th>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoMedia | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoPorDiaMedia | currency}}</td>
-                            </tr>
- 
-                        </tbody>
-                      </table>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th style="font-size: 111%;">TOTAL</th>
-                                <th style="font-size: 111%;">X DIA</th>
-                                <th style="font-size: 111%;">MARGEN BRUTO</th>
-                            </tr>
-                            <tr>
-                                <th scope="row">PRECIO DE VENTA</th>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.cotizacionMedia | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.porDiaMedia | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.margenMedia | percent:'2.1-1'}}</td>
-                            </tr>
- 
-                        </tbody>
-                      </table>
-                  </mat-expansion-panel>
-
-                  <mat-expansion-panel (opened)="panelOpenState = true"
-                                       (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                      <mat-panel-title style="font-size: 111%;">
-                        PRECIO DE VENTA (CARO)
-                      </mat-panel-title>
-                      <mat-panel-description style="font-size: 111%;">
-                        {{cotizadorInternoServicio.cotizacionAlta | currency}}
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th style="font-size: 111%;">TOTAL</th>
-                                <th style="font-size: 111%;">X DIA</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="font-size: 111%;">PAGO A PERSONAL</th>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalAlta | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.pagoPersonalPorDiaAlta | currency}}</td>
-                            </tr>
- 
-                        </tbody>
-                      </table>
-                      <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th style="font-size: 111%;">TOTAL</th>
-                                <th style="font-size: 111%;">X DIA</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="font-size: 111%;">COSTO DIRECTO</th>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoAlta | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.costoDirectoPorDiaAlta | currency}}</td>
-                            </tr>
- 
-                        </tbody>
-                      </table>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th></th>
-                                <th style="font-size: 111%;">TOTAL</th>
-                                <th style="font-size: 111%;">X DIA</th>
-                                <th style="font-size: 111%;">MARGEN BRUTO</th>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="font-size: 111%;">PRECIO DE VENTA</th>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.cotizacionAlta | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.porDiaAlta | currency}}</td>
-                                <td style="font-size: 111%;">{{cotizadorInternoServicio.margenAlta | percent:'2.1-1'}}</td>
-                            </tr>
- 
-                        </tbody>
-                      </table>
-                  </mat-expansion-panel>
-                </mat-accordion>
-                
+                <mat-accordion *ngIf="cotizarClick">
+                    <!-- #enddocregion basic-panel -->
+                      <mat-expansion-panel (opened)="panelOpenState = true"
+                                           (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title style="font-size: 111%;">
+                            PRECIOS DE LISTA
+                          </mat-panel-title>
+                          <mat-panel-description style="font-size: 111%;">
+                            {{cotizadorInternoServicio.dias}} Dias
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th style="font-size: 111%;">PRECIO TOTAL</th>
+                                    <th style="font-size: 111%;">PRECIO POR DIA</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 111%;">CUIDADOR</th>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioListaCuidador | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioListaCuidadorPorDia | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 111%;">ENFERMERA</th>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioListaEnfermera | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioListaEnfermeraPorDia | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioListaEnfermeraCovid | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioListaEnfermeraCovidPorDia | currency}}</td>
+                                </tr>  
+                            </tbody>
+                          </table>
+                      </mat-expansion-panel>
+    
+                      <mat-expansion-panel (opened)="panelOpenState = true"
+                                           (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title style="font-size: 111%;">
+                            PRECIOS EN PAQUETE
+                          </mat-panel-title>
+                          <mat-panel-description style="font-size: 111%;">
+                            {{cotizadorInternoServicio.dias}} Dias
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th style="font-size: 111%;">PRECIO TOTAL</th>
+                                    <th style="font-size: 111%;">PRECIO POR DIA</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 111%;">CUIDADOR</th>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioPaqueteCuidador | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioPaqueteCuidadorPorDia | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 111%;">ENFERMERA</th>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioPaqueteEnfermera | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioPaqueteEnfermeraPorDia | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioPaqueteEnfermeraCovid | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.precioPaqueteEnfermeraCovidPorDia | currency}}</td>
+                                </tr>  
+                            </tbody>
+                          </table>
+                      </mat-expansion-panel>
+    
+                      <mat-expansion-panel (opened)="panelOpenState = true"
+                                           (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title style="font-size: 111%;">
+                            PRECIOS DE POLIZAS
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th style="font-size: 111%;">1 MES</th>
+                                    <th style="font-size: 111%;">2 MESES</th>
+                                    <th style="font-size: 111%;">3 MESES</th>
+                                    <th style="font-size: 111%;">4 MESES</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 111%;">CUIDADORA</th>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaCuidadora1 | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaCuidadora2 | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaCuidadora3 | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaCuidadora4 | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 111%;">ENFERMERA</th>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaEnfermera1 | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaEnfermera2 | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaEnfermera3 | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaEnfermera4 | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaEnfermeraCovid1 | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaEnfermeraCovid2 | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaEnfermeraCovid3 | currency}}</td>
+                                    <td style="font-size: 111%;">{{cotizadorInternoServicio.polizaEnfermeraCovid4 | currency}}</td>
+                                </tr>  
+     
+                            </tbody>
+                          </table>
+                      </mat-expansion-panel>
+                    </mat-accordion>
             </div>
         </mat-tab>
     </mat-tab-group>
