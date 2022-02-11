@@ -427,14 +427,14 @@
           </div>
 
           <div class="col-md-1">
-            <label for="estatura" class="form-label">Estatura(cm)</label>
-            <input maxlength="3" size="3" type="text" class="form-control" name="estatura" ngModel #estatura="ngModel"
-              [(ngModel)]="colaborador.estatura" pattern="[0-9]*">
-            <div *ngIf="estatura.invalid && (estatura.dirty || estatura.touched)" class="alert">
+            <label for="estatura" class="form-label">Estatura(m)</label>
+            <input maxlength="4" size="4" type="text" class="form-control" name="estatura" ngModel #estatura="ngModel"
+              [(ngModel)]="colaborador.estatura">
+            <!-- <div *ngIf="estatura.invalid && (estatura.dirty || estatura.touched)" class="alert">
               <div *ngIf="estatura.errors?.pattern">
                 La estatura debe contener solamente numeros.
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="col-md-2">

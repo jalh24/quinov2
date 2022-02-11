@@ -153,7 +153,7 @@ export class ClienteFisicoComponent implements OnInit {
       //this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
       this.selectedCodigoPostal = this.cliente.codigoPostal;
       this.cliente.peso = Math.floor(this.cliente.peso);
-      this.cliente.estatura = Math.floor(this.cliente.estatura);
+      // this.cliente.estatura = Math.floor(this.cliente.estatura);
       // this.datos.cuentas.forEach(element => {
       //   this.PAGO_DATA.push(element);
       // });

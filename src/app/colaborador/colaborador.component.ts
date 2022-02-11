@@ -412,7 +412,7 @@ export class ColaboradorComponent implements OnInit {
       this.onCiudadNacimiento(this.colaborador.idCiudadNacimiento);
       this.onCodigoPostal(this.colaborador.codigoPostal);
       this.colaborador.peso = Math.floor(this.colaborador.peso);
-      this.colaborador.estatura = Math.floor(this.colaborador.estatura);
+      // this.colaborador.estatura = Math.floor(this.colaborador.estatura);
       this.datos.cuentas.forEach(element => {
         let pago = new Pago;
         pago.idPago = element.idCuenta;
