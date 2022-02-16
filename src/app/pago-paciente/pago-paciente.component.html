@@ -42,14 +42,14 @@
                     <label for="pago" class="col-md-2 col-form-label font-weight-bold">Pago a Registrar</label>
                     <div class="col-md-2">
                         <input type="text" class="form-control valGlobal" id="pago" name="pago" ngModel #pagado="ngModel"
-                        [(ngModel)]="montoServicio" [disabled]="pagoCompleto">
+                        [(ngModel)]="montoServicio">
                     </div>
                 </div>
                 <div class="form-group row pb-4">
                     <label for="motivo" class="col-md-2 col-form-label">Motivo del Pago</label>
                     <div class="col-md-10">
                         <textarea class="form-control" id="motivo" name="motivo" rows="5"
-                        ngModel #pagado="ngModel" [(ngModel)]="motivoServicio" [disabled]="pagoCompleto"></textarea>                    
+                        ngModel #pagado="ngModel" [(ngModel)]="motivoServicio"></textarea>                    
                     </div>
                 </div>
                 <div class="row">
@@ -60,7 +60,7 @@
     <div class="container bg-white rounded-bottom shadow">
       <div class="row text-center pb-4">
         <div class="col">
-            <button  class="btn btn-success" (click)="crearPago()" [disabled]="pagoCompleto">Registrar Pago</button>
+            <button  class="btn btn-success" (click)="crearPago()">Registrar Pago</button>
         </div>
       </div>
     </div>

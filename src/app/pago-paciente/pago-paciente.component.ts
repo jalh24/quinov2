@@ -102,23 +102,35 @@ export class PagoPacienteComponent implements OnInit {
     let pagoServicio ={
       idServicio : this.servicio.idServicio,
       monto:this.montoServicio,
-      motivo: this.motivoServicio
+      motivo: this.motivoServicio,
+      estatusPago: null
     }
-    if (!(pagoServicio.monto > (this.servicio.precioServicio-this.servicio.cantidadPagada))) {
+    // if (!(pagoServicio.monto > (this.servicio.precioServicio-this.servicio.cantidadPagada))) {
       this.servicioNew.cantidadPagada = (Number(this.servicioNew.cantidadPagada) + Number(this.montoServicio));
       this.servicioNew.cantidadPorPagar = (Number(this.servicioNew.precioServicio)-Number(this.servicioNew.cantidadPagada));
+      if (Number(this.servicioNew.cantidadPagada)<Number(this.servicioNew.precioServicio)) {
+        this.servicioNew.estatusPago = 2;
+      }
+      if (Number(this.servicioNew.cantidadPagada)==Number(this.servicioNew.precioServicio)) {
+        this.servicioNew.estatusPago = 3;
+      }
+      if (Number(this.servicioNew.cantidadPagada)>Number(this.servicioNew.precioServicio)) {
+        this.servicioNew.estatusPago = 4;
+      }
+      pagoServicio.estatusPago = this.servicioNew.estatusPago;
+
       console.log(this.servicioNew);
       this.http.post<any>('/api/pago/create', pagoServicio, this.httpOptions).subscribe(data => {
-        this.showSuccess(NgbToastType.Success, "Se creo el colaborador exitosamente");
-        alert("Se creo el colaborador exitosamente");
+        this.http.post<any>('/api/servicio/updatePago', this.servicioNew, this.httpOptions).subscribe(data => {
+          this.showSuccess(NgbToastType.Success, "Se actualizo el servicio exitosamente");
+          alert("Se actualizo el servicio exitosamente");
+          window.history.back();
+        });
       });
-      this.http.post<any>('/api/servicio/updatePago', this.servicioNew, this.httpOptions).subscribe(data => {
-        this.showSuccess(NgbToastType.Success, "Se actualizo el servicio exitosamente");
-        alert("Se actualizo el servicio exitosamente");
-      });
-    } else {
-      alert("El pago debe de ser mayor a 0 y menor o igual a la resta del precio con lo ya pagado");
-    }
+      
+    // } else {
+    //   alert("El pago debe de ser mayor a 0 y menor o igual a la resta del precio con lo ya pagado");
+    // }
     
     console.log(pagoServicio);
   }

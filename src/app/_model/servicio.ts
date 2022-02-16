@@ -5,6 +5,7 @@ export class Servicio {
     public idEstadoNacimiento: number;
     public idCiudadNacimiento: number;
     public fecha_nacimiento: Date;
+    public fechaTerminacion: Date;
     public edad: number;
     public codigoPostal: number;
     public idCiudad: number;
@@ -19,6 +20,8 @@ export class Servicio {
     public cantidadPagada: number;
     public cantidadPorPagar: number;
     public estatus: string;
+    public estatusOperativo: number;
+    public estatusPago: number;
     public nombre: string;
     public a_paterno: string;
     public a_materno: string;

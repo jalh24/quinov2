@@ -32,16 +32,21 @@ export class GestionServicioComponent implements OnInit {
   servicio: any = null;
   pageEvent: PageEvent;
   pageIndex: number = 0;
-  pageSize: number = 5;
+  pageSize: number = 25;
   length: number;
   SERVICIO_DATA: Servicio[] = [];
   servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
-  servicioColumns: string[] = ['idServicio', 'fechaCreacion', 'nombre', 'responsable', 'estatus', 'cantidadPorPagar', 'acciones'];
+  servicioColumns: string[] = ['idServicio', 'fechaCreacion', 'nombre', 'responsable', 'estatus', 'estatusPago', 'cantidadPorPagar', 'acciones'];
   @ViewChild('serviciosTable', { static: true }) serviciosTable: MatTable<any>;
   responsables: any;
+  pacientes: any;
+  estatusOperaciones: any[];
   responsablesSelected = [];
+  pacientesSelected = [];
+  estatusPagos: any[];
   servicioFiltro: ServicioFiltro;
   responsablesSettings: IDropdownSettings = {};
+  pacientesSettings: IDropdownSettings = {};
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -56,7 +61,12 @@ export class GestionServicioComponent implements OnInit {
 
   ngOnInit(): void {
     this.comboResponsables();
+    this.comboPacientes();
     this.getServicios();
+    this.comboEstatusOperaciones();
+    this.comboEstatusPagos();
+    this.servicioFiltro.estatusOperativo = null;
+    this.servicioFiltro.estatusPago = null;
 
     this.responsablesSettings = {
       singleSelection: false,
@@ -67,11 +77,48 @@ export class GestionServicioComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+
+    this.pacientesSettings = {
+      singleSelection: false,
+      idField: 'cliente',
+      textField: 'nombrecompleto',
+      selectAllText: 'Seleccionar Todos',
+      unSelectAllText: 'Quitar Selecciones',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+  }
+
+  onEstatusOperacion(value: any) {
+    this.servicioFiltro.estatusOperativo = value;
+  }
+
+  onEstatusPago(value: any) {
+    this.servicioFiltro.estatusPago = value;
+  }
+
+  public comboEstatusPagos() {
+    this.http.get<any>('/api/catalogo/estatusPago', this.httpOptions).subscribe(data => {
+      this.estatusPagos = data.data;
+    });
+  }
+
+  public comboEstatusOperaciones() {
+    this.http.get<any>('/api/catalogo/estatusOperacion', this.httpOptions).subscribe(data => {
+      
+      this.estatusOperaciones = data.data;
+    });
   }
 
   public comboResponsables() {
     this.http.get<any>('/api/catalogo/responsables', this.httpOptions).subscribe(data => {
       this.responsables = data.data;
+    });
+  }
+
+  public comboPacientes() {
+    this.http.get<any>('/api/servicio/lista2', this.httpOptions).subscribe(data => {
+      this.pacientes = data.data;
     });
   }
 
@@ -95,6 +142,7 @@ export class GestionServicioComponent implements OnInit {
     this.servicioFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
     this.servicioFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
     this.servicioFiltro.responsables = this.responsablesSelected;
+    this.servicioFiltro.pacientes = this.pacientesSelected;
     this.http.post<any>('/api/servicio/lista', this.servicioFiltro, this.httpOptions).subscribe(data => {
       this.SERVICIO_DATA = data.data;
       this.servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
@@ -113,6 +161,9 @@ export class GestionServicioComponent implements OnInit {
     this.servicioFiltro.fecha1 = null;
     this.servicioFiltro.fecha2 = null;
     this.responsablesSelected = null;
+    this.pacientesSelected = null;
     this.servicioFiltro.estatus = null;
+    this.servicioFiltro.estatusOperativo = null;
+    this.servicioFiltro.estatusPago = null;
   }
 }

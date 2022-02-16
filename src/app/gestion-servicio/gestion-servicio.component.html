@@ -34,12 +34,37 @@
         <th scope="row">Estatus</th>
         <td>
           <div class="input-group">
-            <select class="form-control" name="estatusFiltro" [(ngModel)]="servicioFiltro.estatus">
+            <!-- <select class="form-control" name="estatusFiltro" [(ngModel)]="servicioFiltro.estatus">
               <option value="" selected disabled hidden>Seleccionar</option>
               <option value="Abierta">Abierta</option>
               <option value="Asignada">Asignada</option>
+            </select> -->
+            <select class="form-control" name="estatusOperativo" #estatusOperativo="ngModel" [(ngModel)]="servicioFiltro.estatusOperativo" ngModel  
+            (change)="onEstatusOperacion($event.target.value)">
+              <option *ngFor="let estatusOperativo of estatusOperaciones" [value]="estatusOperativo.idTipoEstatusOperacion">
+                {{estatusOperativo.Nombre}}
+              </option>
             </select>
           </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Estatus Pago</th>
+        <td>
+          <div class="input-group">
+            <select class="form-control" name="estatusPago" #estatusPago="ngModel" [(ngModel)]="servicioFiltro.estatusPago" ngModel  
+            (change)="onEstatusPago($event.target.value)">
+              <option *ngFor="let estatusPago of estatusPagos" [value]="estatusPago.idTipoEstatusPago">
+                {{estatusPago.Nombre}}
+              </option>
+            </select>
+          </div>
+        </td>
+        <th scope="row">Paciente</th>
+        <td>
+          <ng-multiselect-dropdown [placeholder]="'Seleccionar'" [settings]="pacientesSettings" [data]="pacientes"
+            [(ngModel)]="pacientesSelected">
+          </ng-multiselect-dropdown>
         </td>
       </tr>
     </tbody>
@@ -74,8 +99,12 @@
         <td mat-cell *matCellDef="let element"> {{element.nombreResp}} </td>
       </ng-container>
       <ng-container matColumnDef="estatus">
-        <th mat-header-cell *matHeaderCellDef> Estatus</th>
-        <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+        <th mat-header-cell *matHeaderCellDef> Estatus Operación</th>
+        <td mat-cell *matCellDef="let element"> {{element.estatusOperativoNombre}} </td>
+      </ng-container>
+      <ng-container matColumnDef="estatusPago">
+        <th mat-header-cell *matHeaderCellDef> Estatus Pago</th>
+        <td mat-cell *matCellDef="let element"> {{element.estatusPagoNombre}} </td>
       </ng-container>
       <ng-container matColumnDef="cantidadPorPagar">
         <th mat-header-cell *matHeaderCellDef> Pago Pend.</th>

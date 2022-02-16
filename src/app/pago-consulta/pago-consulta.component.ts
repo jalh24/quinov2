@@ -40,10 +40,11 @@ export class PagoConsultaComponent implements OnInit {
   pageSize: number = Number.MAX_SAFE_INTEGER;
   length: number;
   selectedItems: any = [];
+  estatusPagos: any[];
   clientesSettings: IDropdownSettings = {};
   PAGO_DATA: Pago[] = [];
   pagoSource = new MatTableDataSource<Pago>(this.PAGO_DATA);
-  pagoColumns: string[] = ['idPago', 'idServicio','nombre','montodePago', 'fechaCreacion', 'motivoPago'];
+  pagoColumns: string[] = ['idPago', 'idServicio','nombre','montodePago', 'fechaCreacion', 'motivoPago', 'estatusPago'];
   @ViewChild('pagosTable', { static: true }) pagosTable: MatTable<any>;
   
   public servicio: Servicio;
@@ -61,8 +62,11 @@ export class PagoConsultaComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.pagoFiltro = new PagoFiltro();
+    this.pagoFiltro.estatusPago = null;
     this.getPagos();
     this.comboPacientes();
+    this.comboEstatusPagos();
 
     this.pacientesSettings = {
       singleSelection: false,
@@ -91,16 +95,26 @@ export class PagoConsultaComponent implements OnInit {
       console.log(this.pacientes);
     });
   }
+  public comboEstatusPagos() {
+    this.http.get<any>('/api/catalogo/estatusPago', this.httpOptions).subscribe(data => {
+      this.estatusPagos = data.data;
+    });
+  }
   public onDeselectPaciente(item: any) {
     this.inicializaObjetos();
   }
   inicializaObjetos() {
     this.servicio = new Servicio();
     this.servicio.precioServicio = null;
+    
   }
 
   public onSelectedPaciente(item: any) {
     //this.onIdServicio(item.idServicio);
+  }
+
+  onEstatusPago(value: any) {
+    this.pagoFiltro.estatusPago = value;
   }
 
   onSelectedCliente(item: any) {
@@ -132,5 +146,6 @@ export class PagoConsultaComponent implements OnInit {
   public resetFields() {
     this.pagoFiltro.fecha1 = null;
     this.pagoFiltro.fecha2 = null;
+    this.pagoFiltro.estatusPago = null;
   }
 }

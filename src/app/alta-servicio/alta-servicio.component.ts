@@ -36,6 +36,7 @@ export class AltaServicioComponent implements OnInit {
   selectedCodigoPostal = null;
   selectedItems: any = [];
   selectedColaboradorItems: any = [];
+  servicios: any[];
   clientes: any;
   datos: any;
   colaboradores: any;
@@ -44,6 +45,7 @@ export class AltaServicioComponent implements OnInit {
   paises: any[];
   estados: any[];
   estatusOperaciones: any[];
+  estatusPagos: any[];
   estadoPorId: any;
   selectedPais = 1;
   ciudades: any[];
@@ -78,6 +80,7 @@ export class AltaServicioComponent implements OnInit {
     this.comboComplexiones();
     this.comboParentescos();
     this.comboEstatusOperaciones();
+    this.comboEstatusPagos();
     this.route.queryParams.subscribe(params => {
       this.idServicio = params['idColaborador'];
     });
@@ -161,7 +164,10 @@ export class AltaServicioComponent implements OnInit {
     this.servicio.colaboradores = null;
     this.servicio.pagoColaborador = null;
     this.servicio.estatus = "Abierta";
+    this.servicio.estatusOperativo = 1;
+    this.servicio.estatusPago = 1;
     this.isSelected = false;
+    this.servicio.fechaTerminacion = null;
   }
 
   public llenarCampos(idServicio) {
@@ -187,6 +193,7 @@ export class AltaServicioComponent implements OnInit {
 
     this.http.get<any>('/api/servicio/datosServColab?idServicio=' + idServicio, this.httpOptions).subscribe(data => {
       this.selectedColaboradorItems = data.data;
+      console.log(this.selectedColaboradorItems);
     });
   }
 
@@ -196,11 +203,37 @@ export class AltaServicioComponent implements OnInit {
     });
   }
 
+  public onCopiar() {
+    this.http.get<any>('/api/servicio/lista2', this.httpOptions).subscribe(data => {
+      this.servicios = data.data;
+      alert("Se copiará servicio #"+this.servicio.idServicio+" al servicio #"+(Number(this.servicios[this.servicios.length-1].idServicio)+1));
+      this.servicio.idServicio = null;
+      this.servicio.cantidadPagada = 0;
+      this.servicio.cantidadPorPagar = this.servicio.precioServicio;
+      this.servicio.estatusPago = 1;
+      this.isSelected = null;
+    });
+    // console.log(Number(this.servicios[this.servicios.length-1].idServicio)+1);
+  }
+
   public comboClientesById(idCliente) {
     this.http.get<any>('/api/catalogo/clientesById?idCliente=' + idCliente, this.httpOptions).subscribe(data => {
       this.servicio.nombre = data.data[0].nombre;
       this.servicio.a_paterno = data.data[0].a_paterno;
       this.servicio.a_materno = data.data[0].a_materno;
+    });
+  }
+
+  public comboClientesByIdDir(idCliente) {
+    this.http.get<any>('/api/catalogo/clientesById?idCliente=' + idCliente, this.httpOptions).subscribe(data => {
+      this.servicio.calle1 = data.data[0].calle1;
+      this.servicio.calle2 = data.data[0].calle2;
+      this.servicio.noExt = data.data[0].noExt;
+      this.servicio.noInt = data.data[0].noInt;
+      this.servicio.codigoPostal = data.data[0].codigoPostal;
+      this.servicio.referenciaDireccion = data.data[0].referencia;
+      this.onCodigoPostal(this.servicio.codigoPostal);
+      this.servicio.idColonia = data.data[0].idColonia;
     });
   }
 
@@ -220,16 +253,22 @@ export class AltaServicioComponent implements OnInit {
     this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais, this.httpOptions).subscribe(data => {
       this.estados = data.data;
     });
-    console.log(this.estados);
   }
+
   public comboEstatusOperaciones() {
     this.http.get<any>('/api/catalogo/estatusOperacion', this.httpOptions).subscribe(data => {
       
       this.estatusOperaciones = data.data;
-      
+      console.log(this.estatusOperaciones);
     });
-    console.log(this.estatusOperaciones);
   }
+
+  public comboEstatusPagos() {
+    this.http.get<any>('/api/catalogo/estatusPago', this.httpOptions).subscribe(data => {
+      this.estatusPagos = data.data;
+    });
+  }
+
   public comboCiudades(idEstadoNacimiento) {
     this.servicio.idEstadoNacimiento = idEstadoNacimiento;
     this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento, this.httpOptions).subscribe(data => {
@@ -288,8 +327,14 @@ export class AltaServicioComponent implements OnInit {
   onCiudadNacimiento(value: any) {
     this.servicio.idCiudadNacimiento = value;
   }
-  onEstatusOperacion(value: any){
- this.servicio.estatus = value;
+  
+  onEstatusOperacion(value: any) {
+    this.servicio.estatusOperativo = value;
+    console.log(value);
+  }
+
+  onEstatusPago(value: any) {
+    this.servicio.estatusPago = value;
   }
 
   onFechaNacimiento() {
@@ -356,22 +401,34 @@ export class AltaServicioComponent implements OnInit {
 
   onPrecioChange() {
     if (this.servicio.precioServicio != null) {
-      if (this.servicio.cantidadPagada != null) {
-        if (this.servicio.precioServicio >= this.servicio.cantidadPagada) {
-          this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
-        } else {
-          this.servicio.cantidadPorPagar = null;
-          alert("La precio del servicio debe de ser mayor o igual que la cantidad pagada");
-        }
-      } else {
-        this.servicio.cantidadPagada = 0;
-        if (this.servicio.precioServicio >= this.servicio.cantidadPagada) {
-          this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
-        } else {
-          this.servicio.cantidadPorPagar = null;
-          alert("La precio del servicio debe de ser mayor o igual que la cantidad pagada");
-        }
+      if (this.servicio.precioServicio>this.servicio.cantidadPagada && this.servicio.cantidadPagada != null && this.servicio.cantidadPagada != 0) {
+        this.servicio.estatusPago = 2;
+        this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
       }
+      if (this.servicio.precioServicio==this.servicio.cantidadPagada) {
+        this.servicio.estatusPago = 3;
+        this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+      }
+      if (this.servicio.precioServicio<this.servicio.cantidadPagada) {
+        this.servicio.estatusPago = 4;
+        this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+      }
+      // if (this.servicio.cantidadPagada != null) {
+      //   if (this.servicio.precioServicio >= this.servicio.cantidadPagada) {
+      //     this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+      //   } else {
+      //     this.servicio.cantidadPorPagar = null;
+      //     alert("La precio del servicio debe de ser mayor o igual que la cantidad pagada");
+      //   }
+      // } else {
+      //   this.servicio.cantidadPagada = 0;
+      //   if (this.servicio.precioServicio >= this.servicio.cantidadPagada) {
+      //     this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+      //   } else {
+      //     this.servicio.cantidadPorPagar = null;
+      //     alert("La precio del servicio debe de ser mayor o igual que la cantidad pagada");
+      //   }
+      // }
 
 
 
@@ -390,6 +447,7 @@ export class AltaServicioComponent implements OnInit {
     }
     if (Object.keys(this.selectedColaboradorItems).length >= this.servicio.colabReq) {
       this.servicio.estatus = "Asignada";
+      this.servicio.estatusOperativo = 2;
     }
   }
 
@@ -398,7 +456,14 @@ export class AltaServicioComponent implements OnInit {
       if (element.idColaborador === item.idColaborador) this.selectedColaboradorItems.splice(index, 1);
     });
     this.servicio.estatus = "Abierta";
+    this.servicio.estatusOperativo = 1;
     this.servicio.colaboradores = null;
+  }
+
+  onCopiarDir() {
+    if (this.servicio.cliente) {
+      this.comboClientesByIdDir(this.servicio.cliente);
+    }
   }
 
   showSuccess(type: any, message: string): void {
@@ -456,6 +521,10 @@ export class AltaServicioComponent implements OnInit {
   onSelectedCliente(item: any) {
     this.comboClientesById(item.idCliente);
     this.servicio.cliente = item.idCliente;
+  }
+
+  onDeSelectedCliente(item: any) {
+    this.servicio.cliente = null;
   }
 
   onComplexion(value: any) {

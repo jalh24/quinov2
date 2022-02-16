@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-md-6">
             <ng-multiselect-dropdown name="cliente" [placeholder]="'Seleccionar'" [settings]="clientesSettings"
-              [data]="clientes" [(ngModel)]="selectedItems" (onSelect)="onSelectedCliente($event)">
+              [data]="clientes" [(ngModel)]="selectedItems" (onSelect)="onSelectedCliente($event)" (onDeSelect)="onDeSelectedCliente($event)">
             </ng-multiselect-dropdown>
           </div>
         </div>
@@ -35,6 +35,13 @@
                 {{responsable.nombre}}
               </option>
             </select>
+          </div>
+          <div class="col-md-3">
+            <label for="fechaTerminacion" class="form-label">Fecha de Terminación<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="fechaTerminacion" name="fechaTerminacion" ngModel #fechaTerminacion="ngModel" [(ngModel)]="servicio.fechaTerminacion" value="yyyy-MM-dd">
+          </div>
+          <div class="col-md-3" *ngIf="isSelected">
+            <button type="button" class="btn btn-success btn-sm my-4" (click)="onCopiar()">Copiar Servicio</button>
           </div>
         </div>
 
@@ -117,15 +124,24 @@
               >
           </div>
           <div class="col">
-            <label for="estatus" class="form-label">Estatus</label>
-            <select class="form-control" name="estatusOperaciones" ngModel #estatus="ngModel" [(ngModel)]="servicio.estatus"
+            <label for="estatusOperativo" class="form-label">Estatus Operación</label>
+            <select class="form-control" name="estatusOperativo" #estatusOperativo="ngModel" [(ngModel)]="servicio.estatusOperativo" ngModel  
             (change)="onEstatusOperacion($event.target.value)">
-              <option *ngFor="let operacion of estatusOperaciones" [value]="estatusOperaciones.idTipoEstatusOperaciones">
-                {{operacion.nombre}}
+              <option *ngFor="let estatusOperativo of estatusOperaciones" [value]="estatusOperativo.idTipoEstatusOperacion">
+                {{estatusOperativo.Nombre}}
               </option>
             </select>
             <!--<input type="text" class="form-control" id="estatus" name="estatus" onkeydown="return false"
               value="{{servicio.estatus}}">-->
+          </div>
+          <div class="col">
+            <label for="estatusPago" class="form-label">Estatus Pago</label>
+            <select class="form-control" name="estatusPago" #estatusPago="ngModel" [(ngModel)]="servicio.estatusPago" ngModel  
+            (change)="onEstatusPago($event.target.value)" disabled>
+              <option *ngFor="let estatusPago of estatusPagos" [value]="estatusPago.idTipoEstatusPago">
+                {{estatusPago.Nombre}}
+              </option>
+            </select>
           </div>
         </div>
 
@@ -135,6 +151,12 @@
         </div>
 
         <h4 class="pt-4 pb-1">Ubicación del Servicio</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <button type="button" class="btn btn-success btn-sm mb-4" (click)="onCopiarDir()" *ngIf="servicio.cliente">Copiar dirección del paciente</button>
+            <button type="button" class="btn btn-success btn-sm mb-4" *ngIf="!servicio.cliente" disabled>Copiar dirección del paciente</button>
+          </div>
+        </div>
         <div class="row">
           <div class="col">
             <label for="calle" class="form-label">Calle<span class="text-danger"> *</span></label>
