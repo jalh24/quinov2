@@ -43,6 +43,7 @@ export class AltaServicioComponent implements OnInit {
   colaboradoresSettings: IDropdownSettings = {};
   paises: any[];
   estados: any[];
+  estatusOperaciones: any[];
   estadoPorId: any;
   selectedPais = 1;
   ciudades: any[];
@@ -76,7 +77,7 @@ export class AltaServicioComponent implements OnInit {
     this.comboResponsables();
     this.comboComplexiones();
     this.comboParentescos();
-
+    this.comboEstatusOperaciones();
     this.route.queryParams.subscribe(params => {
       this.idServicio = params['idColaborador'];
     });
@@ -158,6 +159,7 @@ export class AltaServicioComponent implements OnInit {
     this.servicio.idResponsable = null;
     this.servicio.cliente = null;
     this.servicio.colaboradores = null;
+    this.servicio.pagoColaborador = null;
     this.servicio.estatus = "Abierta";
     this.isSelected = false;
   }
@@ -166,7 +168,8 @@ export class AltaServicioComponent implements OnInit {
     this.http.get<any>('/api/servicio/datos?idServicio=' + idServicio, this.httpOptions).subscribe(data => {
       this.datos = data.data;
       this.servicio = this.datos[0];
-      this.onFechaNacimiento();
+      this.onFechaNacimiento(); 
+      
       this.comboCiudades(this.servicio.idEstadoNacimiento);
       this.onCiudadNacimiento(this.servicio.idCiudadNacimiento);
       this.onCodigoPostal(this.servicio.codigoPostal);
@@ -184,7 +187,6 @@ export class AltaServicioComponent implements OnInit {
 
     this.http.get<any>('/api/servicio/datosServColab?idServicio=' + idServicio, this.httpOptions).subscribe(data => {
       this.selectedColaboradorItems = data.data;
-      console.log(this.selectedColaboradorItems);
     });
   }
 
@@ -218,8 +220,16 @@ export class AltaServicioComponent implements OnInit {
     this.http.get<any>('/api/catalogo/estados?idPais=' + this.selectedPais, this.httpOptions).subscribe(data => {
       this.estados = data.data;
     });
+    console.log(this.estados);
   }
-
+  public comboEstatusOperaciones() {
+    this.http.get<any>('/api/catalogo/estatusOperacion', this.httpOptions).subscribe(data => {
+      
+      this.estatusOperaciones = data.data;
+      
+    });
+    console.log(this.estatusOperaciones);
+  }
   public comboCiudades(idEstadoNacimiento) {
     this.servicio.idEstadoNacimiento = idEstadoNacimiento;
     this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento, this.httpOptions).subscribe(data => {
@@ -277,6 +287,9 @@ export class AltaServicioComponent implements OnInit {
 
   onCiudadNacimiento(value: any) {
     this.servicio.idCiudadNacimiento = value;
+  }
+  onEstatusOperacion(value: any){
+ this.servicio.estatus = value;
   }
 
   onFechaNacimiento() {

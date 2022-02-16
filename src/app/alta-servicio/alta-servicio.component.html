@@ -110,11 +110,22 @@
             <button type="button" class="btn btn-success btn-sm my-4" (click)="nuevoColaborador()"> Nuevo
               Colaborador</button>
           </div>
-
+          <div class="col">
+            <label for="pagoColaborador" class="form-label">Pago a Colaborador</label>
+            <input type="number" class="form-control valGlobal" placeholder="$" id="pagoColaborador"
+              name="pagoColaborador" step=".01" ngModel #pagoColaborador="ngModel" [(ngModel)]="servicio.pagoColaborador"
+              >
+          </div>
           <div class="col">
             <label for="estatus" class="form-label">Estatus</label>
-            <input type="text" class="form-control" id="estatus" name="estatus" onkeydown="return false"
-              value="{{servicio.estatus}}">
+            <select class="form-control" name="estatusOperaciones" ngModel #estatus="ngModel" [(ngModel)]="servicio.estatus"
+            (change)="onEstatusOperacion($event.target.value)">
+              <option *ngFor="let operacion of estatusOperaciones" [value]="estatusOperaciones.idTipoEstatusOperaciones">
+                {{operacion.nombre}}
+              </option>
+            </select>
+            <!--<input type="text" class="form-control" id="estatus" name="estatus" onkeydown="return false"
+              value="{{servicio.estatus}}">-->
           </div>
         </div>
 

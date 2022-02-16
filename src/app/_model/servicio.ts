@@ -49,6 +49,7 @@ export class Servicio {
     public cliente: number;
     public colaboradores: any[];
     public colabReq: number;
+    public pagoColaborador: number;
     public fechaCreacion: Date;
     public nombrecompleto: string;
     constructor() {
