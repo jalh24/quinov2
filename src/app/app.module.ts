@@ -35,6 +35,7 @@ import { PagoPacienteComponent } from './pago-paciente/pago-paciente.component';
 import { PagoConsultaComponent } from './pago-consulta/pago-consulta.component';
 import { CotizadorInternoComponent } from './cotizador-interno/cotizador-interno.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
 // import { CotizadorServicioComponent } from './cotizador-servicio/cotizador-servicio.component';
 // import { ModalCotizadorServicioComponent } from './modal-cotizador-servicio/modal-cotizador-servicio.component';
 //import { SigninComponent } from './signin/signin.component';
@@ -83,7 +84,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     NgMultiSelectDropDownModule.forRoot(),
     ReactiveFormsModule,
     FontAwesomeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

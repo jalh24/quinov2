@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { CotizadorInternoServicio } from '../_model/cotizadorInternoServicio';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 
 @Component({
@@ -11,6 +13,12 @@ import { CotizadorInternoServicio } from '../_model/cotizadorInternoServicio';
   styleUrls: ['./cotizador-interno.component.scss']
 })
 export class CotizadorInternoComponent implements OnInit {
+
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+  
+  faQuestionCircle = faQuestionCircle;
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
