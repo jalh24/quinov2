@@ -404,14 +404,21 @@ export class AltaServicioComponent implements OnInit {
       if (this.servicio.precioServicio>this.servicio.cantidadPagada && this.servicio.cantidadPagada != null && this.servicio.cantidadPagada != 0) {
         this.servicio.estatusPago = 2;
         this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+        console.log(this.servicio.cantidadPorPagar);
       }
       if (this.servicio.precioServicio==this.servicio.cantidadPagada) {
         this.servicio.estatusPago = 3;
         this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+        console.log(this.servicio.cantidadPorPagar);
       }
       if (this.servicio.precioServicio<this.servicio.cantidadPagada) {
         this.servicio.estatusPago = 4;
         this.servicio.cantidadPorPagar = this.servicio.precioServicio - this.servicio.cantidadPagada;
+        console.log(this.servicio.cantidadPorPagar);
+      }
+      if(this.servicio.cantidadPagada == 0 || this.servicio.cantidadPagada == null) {
+        this.servicio.estatusPago = 1;
+        this.servicio.cantidadPorPagar = this.servicio.precioServicio;
       }
       // if (this.servicio.cantidadPagada != null) {
       //   if (this.servicio.precioServicio >= this.servicio.cantidadPagada) {

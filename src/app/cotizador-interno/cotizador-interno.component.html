@@ -21,7 +21,7 @@
                     <label class="col-md-3 col-form-label" style="color: red; font-weight: bold;">OPCIONES:&emsp;1&emsp;AL&emsp;7&emsp;<fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Cantidad de días consecutivos en la semana" [matTooltipPosition]="position.value"></fa-icon></label>
                 </div>
                 <div class="form-group row mb-4">
-                    <label for="hombre" class="col-md-3 col-form-label">SE REQUIERE ENFERMERO HOMBRE</label>
+                    <label for="hombre" class="col-md-3 col-form-label">SE REQUIERE ENFERMERO Masculino</label>
                     <div class="col-md-2">
                         <input type="number" class="form-control valGlobal" id="hombre" name="hombre" ngModel #hombre="ngModel" [(ngModel)]="cotizadorInternoServicio.hombre">                    
                     </div>
@@ -30,7 +30,7 @@
                         <br>
                         1 = SI
                     </div>
-                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Seleccionar “1 - Si” de llegar a requerir un colaborador hombre" [matTooltipPosition]="position.value"></fa-icon></div>
+                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Seleccionar “1 - Si” de llegar a requerir un colaborador masculino" [matTooltipPosition]="position.value"></fa-icon></div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="domingo" class="col-md-3 col-form-label">¿TRABAJA EN DOMINGO?</label>
