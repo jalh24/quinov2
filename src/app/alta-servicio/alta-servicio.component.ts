@@ -14,6 +14,7 @@ import { faMinus, faEquals } from '@fortawesome/free-solid-svg-icons';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Servicio } from '../_model/servicio';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CotizadorInternoServicio } from '../_model/cotizadorInternoServicio';
 
 @Component({
   selector: 'app-alta-servicio',
@@ -28,7 +29,11 @@ export class AltaServicioComponent implements OnInit {
       Token: localStorage.getItem('token')
     })
   };
- 
+  COLABORADOR_DATA: CotizadorInternoServicio[] = [];
+  colaboradorSource = new MatTableDataSource<CotizadorInternoServicio>(this.COLABORADOR_DATA);
+  colaboradorColumns: string[] = ['nombre', 'sueldo'];
+  @ViewChild('colaboradoresTable', { static: true }) colaboradoresTable: MatTable<any>;
+
   faMinus = faMinus;
   faEquals = faEquals;
   tabVisible: any = 1;
@@ -456,6 +461,7 @@ export class AltaServicioComponent implements OnInit {
       this.servicio.estatus = "Asignada";
       this.servicio.estatusOperativo = 2;
     }
+    console.log(this.selectedColaboradorItems);
   }
 
   onEstatusDeSelect(item: any) {
