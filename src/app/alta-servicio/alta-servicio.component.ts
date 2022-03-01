@@ -10,7 +10,7 @@ import { NgbToastService, NgbToastType, NgbToast } from 'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Estatus } from '../_model/estatus';
 import { FormControl } from '@angular/forms';
-import { faMinus, faEquals } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faEquals, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Servicio } from '../_model/servicio';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,22 +31,28 @@ export class AltaServicioComponent implements OnInit {
   };
   COLABORADOR_DATA: CotizadorInternoServicio[] = [];
   colaboradorSource = new MatTableDataSource<CotizadorInternoServicio>(this.COLABORADOR_DATA);
-  colaboradorColumns: string[] = ['nombre', 'sueldo'];
+  colaboradorColumns: string[] = ['nombre', 'sueldo', 'eliminar'];
   @ViewChild('colaboradoresTable', { static: true }) colaboradoresTable: MatTable<any>;
 
   faMinus = faMinus;
   faEquals = faEquals;
+  faTrash = faTrash;
+  faPlus = faPlus;
   tabVisible: any = 1;
   @ViewChild('myForm') ngForm: NgForm;
   selectedCodigoPostal = null;
   selectedItems: any = [];
   selectedColaboradorItems: any = [];
+  selectedColaboradorItems2: any = [];
+  selectedColaboradorItems2Ind: any = [];
+  selectedColaboradorItems2Tbl: any = [];
   servicios: any[];
   clientes: any;
   datos: any;
   colaboradores: any;
   clientesSettings: IDropdownSettings = {};
   colaboradoresSettings: IDropdownSettings = {};
+  colaboradoresSettings2: IDropdownSettings = {};
   paises: any[];
   estados: any[];
   estatusOperaciones: any[];
@@ -114,6 +120,15 @@ export class AltaServicioComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+
+    this.colaboradoresSettings2 = {
+      singleSelection: true,
+      idField: 'idColaborador',
+      textField: 'nombrecompleto',
+      unSelectAllText: 'Quitar Selecciones',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   }
   selected = new FormControl(0);
 
@@ -167,7 +182,7 @@ export class AltaServicioComponent implements OnInit {
     this.servicio.idResponsable = null;
     this.servicio.cliente = null;
     this.servicio.colaboradores = null;
-    this.servicio.pagoColaborador = null;
+    this.servicio.pagoColaborador = 0;
     this.servicio.estatus = "Abierta";
     this.servicio.estatusOperativo = 1;
     this.servicio.estatusPago = 1;
@@ -198,6 +213,8 @@ export class AltaServicioComponent implements OnInit {
 
     this.http.get<any>('/api/servicio/datosServColab?idServicio=' + idServicio, this.httpOptions).subscribe(data => {
       this.selectedColaboradorItems = data.data;
+      this.selectedColaboradorItems2Tbl = data.data;
+      this.colaboradorSource = new MatTableDataSource(this.selectedColaboradorItems2Tbl);
       console.log(this.selectedColaboradorItems);
     });
   }
@@ -495,7 +512,8 @@ export class AltaServicioComponent implements OnInit {
   onGrabarServicio(ngForm: NgForm) {
     if (this.servicio.idServicio) {
       this.servicio.idPais = 1;
-      this.servicio.colaboradores = this.selectedColaboradorItems;
+      // this.servicio.colaboradores = this.selectedColaboradorItems;
+      this.servicio.colaboradores = this.selectedColaboradorItems2Tbl;
       if (ngForm.valid) {
         this.http.post<any>('/api/servicio/update', this.servicio, this.httpOptions).subscribe(data => {
           this.showSuccess(NgbToastType.Success, "Se actualizo el servicio exitosamente");
@@ -508,7 +526,8 @@ export class AltaServicioComponent implements OnInit {
       }
     } else {
       this.servicio.idPais = 1;
-      this.servicio.colaboradores = this.selectedColaboradorItems;
+      // this.servicio.colaboradores = this.selectedColaboradorItems;
+      this.servicio.colaboradores = this.selectedColaboradorItems2Tbl;
       if (ngForm.valid) {
         this.http.post<any>('/api/servicio/create', this.servicio, this.httpOptions).subscribe(data => {
           this.showSuccess(NgbToastType.Success, "Se creo el servicio exitosamente");
@@ -524,6 +543,69 @@ export class AltaServicioComponent implements OnInit {
 
   nuevoColaborador() {
     window.open('/colaborador');
+  }
+
+  onNumColab() {
+    if (Object.keys(this.selectedColaboradorItems2Tbl).length >= this.servicio.colabReq) {
+      this.servicio.estatus = "Asignada";
+      this.servicio.estatusOperativo = 2;
+    } else {
+      if (Object.keys(this.selectedColaboradorItems2Tbl).length < this.servicio.colabReq) {
+        this.servicio.estatus = "Abierta";
+        this.servicio.estatusOperativo = 1;
+      }
+    }
+  }
+
+  onEliminarColaborador(value: any) {
+    this.selectedColaboradorItems2Tbl.forEach((element, index) => {
+      if (element.idColaborador === value.idColaborador) this.selectedColaboradorItems2Tbl.splice(index, 1);
+    });
+    this.colaboradorSource = new MatTableDataSource(this.selectedColaboradorItems2Tbl);
+    if (Object.keys(this.selectedColaboradorItems2Tbl).length >= this.servicio.colabReq) {
+      this.servicio.estatus = "Asignada";
+      this.servicio.estatusOperativo = 2;
+    } else {
+      if (Object.keys(this.selectedColaboradorItems2Tbl).length < this.servicio.colabReq) {
+        this.servicio.estatus = "Abierta";
+        this.servicio.estatusOperativo = 1;
+      }
+    }
+    return;
+  }
+
+  agregarColaborador() {
+    // this.selectedColaboradorItems2Ind.push(this.selectedColaboradorItems2);
+
+    this.selectedColaboradorItems2Ind = Object.keys(this.selectedColaboradorItems2).map(index => {
+      let person = this.selectedColaboradorItems2[index];
+      return person;
+  });
+
+  this.selectedColaboradorItems2Ind[0]["sueldo"] = this.servicio.pagoColaborador;
+  // this.selectedColaboradorItems2Tbl=this.selectedColaboradorItems2Ind;
+
+  if (this.selectedColaboradorItems2Tbl.length>0) {
+    this.selectedColaboradorItems2Tbl.push(this.selectedColaboradorItems2Ind[0]);
+  } else {
+    if (this.selectedColaboradorItems2Tbl.length==0 || this.selectedColaboradorItems2Tbl.length==undefined) {
+      this.selectedColaboradorItems2Tbl=this.selectedColaboradorItems2Ind;
+    }
+  }
+
+  this.colaboradorSource = new MatTableDataSource(this.selectedColaboradorItems2Tbl);
+  if (Object.keys(this.selectedColaboradorItems2Tbl).length >= this.servicio.colabReq) {
+    this.servicio.estatus = "Asignada";
+    this.servicio.estatusOperativo = 2;
+  } else {
+    if (Object.keys(this.selectedColaboradorItems2Tbl).length < this.servicio.colabReq) {
+      this.servicio.estatus = "Abierta";
+      this.servicio.estatusOperativo = 1;
+    }
+  }
+  this.servicio.pagoColaborador = 0;
+  this.selectedColaboradorItems2 = null;
+  console.log(this.selectedColaboradorItems2Tbl);
   }
 
   registrarPago() {

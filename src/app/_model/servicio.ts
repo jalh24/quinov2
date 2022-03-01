@@ -55,6 +55,7 @@ export class Servicio {
     public pagoColaborador: number;
     public fechaCreacion: Date;
     public nombrecompleto: string;
+    public sueldo: any[];
     constructor() {
     }
 }
