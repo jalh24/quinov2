@@ -179,6 +179,7 @@ export class ColaboradoresComponent implements OnInit {
   public getColaboradores(event?: PageEvent) {
     this.colaboradorFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
     this.colaboradorFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
+    this.colaboradorFiltro.start = this.colaboradorFiltro.limit * this.colaboradorFiltro.start;
     this.colaboradorFiltro.habilidades = this.habilidadesSelected;
     this.colaboradorFiltro.zonasLaborales = this.selectedItems;
     this.colaboradorFiltro.diasLaborales = this.diasLaboralesSelected;

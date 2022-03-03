@@ -141,6 +141,7 @@ export class GestionServicioComponent implements OnInit {
   public getServicios(event?: PageEvent) {
     this.servicioFiltro.limit = event != undefined ? event.pageSize : this.pageSize;
     this.servicioFiltro.start = event != undefined ? event.pageIndex : this.pageIndex;
+    this.servicioFiltro.start = this.servicioFiltro.limit * this.servicioFiltro.start;
     this.servicioFiltro.responsables = this.responsablesSelected;
     this.servicioFiltro.pacientes = this.pacientesSelected;
     this.http.post<any>('/api/servicio/lista', this.servicioFiltro, this.httpOptions).subscribe(data => {

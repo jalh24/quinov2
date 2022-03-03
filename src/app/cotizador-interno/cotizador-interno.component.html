@@ -21,68 +21,98 @@
                     <label class="col-md-3 col-form-label" style="color: red; font-weight: bold;">OPCIONES:&emsp;1&emsp;AL&emsp;7&emsp;<fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Cantidad de días consecutivos en la semana" [matTooltipPosition]="position.value"></fa-icon></label>
                 </div>
                 <div class="form-group row mb-4">
-                    <label for="hombre" class="col-md-3 col-form-label">SE REQUIERE ENFERMERO Masculino</label>
+                    <label for="hombre" class="col-md-3 col-form-label">SE REQUIERE ENFERMERO MASCULINO</label>
                     <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="hombre" name="hombre" ngModel #hombre="ngModel" [(ngModel)]="cotizadorInternoServicio.hombre">                    
+                        <!-- <input type="number" class="form-control valGlobal" id="hombre" name="hombre" ngModel #hombre="ngModel" [(ngModel)]="cotizadorInternoServicio.hombre">                     -->
+                        <select class="form-control valGlobal" id="hombre" name="hombre" ngModel #hombre="ngModel"
+                          [(ngModel)]="cotizadorInternoServicio.hombre">
+        
+                          <option value="1">Sí</option>
+                          <option value="0">No</option>
+                        </select>
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                         0 = NO
                         <br>
                         1 = SI
-                    </div>
-                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Seleccionar “1 - Si” de llegar a requerir un colaborador masculino" [matTooltipPosition]="position.value"></fa-icon></div>
+                    </div> -->
+                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="En el combo de la izquierda seleccionar 'Sí' si se requiere de un enfermero masculino" [matTooltipPosition]="position.value"></fa-icon></div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="domingo" class="col-md-3 col-form-label">¿TRABAJA EN DOMINGO?</label>
                     <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="domingo" name="domingo" ngModel #domingo="ngModel" [(ngModel)]="cotizadorInternoServicio.domingo">                    
+                        <!-- <input type="number" class="form-control valGlobal" id="domingo" name="domingo" ngModel #domingo="ngModel" [(ngModel)]="cotizadorInternoServicio.domingo">                     -->
+                        <select class="form-control valGlobal" id="domingo" name="domingo" ngModel #domingo="ngModel"
+                          [(ngModel)]="cotizadorInternoServicio.domingo">
+        
+                          <option value="1">Sí</option>
+                          <option value="0">No</option>
+                        </select>
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                         0 = NO
                         <br>
                         1 = SI
-                    </div>
-                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Seleccionar “1 - Si” si se requiere el servicio en domingo" [matTooltipPosition]="position.value"></fa-icon></div>
+                    </div> -->
+                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="En el combo de la izquierda seleccionar 'Sí' si se requiere el servicio en domingo" [matTooltipPosition]="position.value"></fa-icon></div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="asueto" class="col-md-3 col-form-label">¿TRABAJA EN ASUETO?</label>
                     <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="asueto" name="asueto" ngModel #asueto="ngModel" [(ngModel)]="cotizadorInternoServicio.asueto">                    
+                        <!-- <input type="number" class="form-control valGlobal" id="asueto" name="asueto" ngModel #asueto="ngModel" [(ngModel)]="cotizadorInternoServicio.asueto">                     -->
+                        <select class="form-control valGlobal" id="asueto" name="asueto" ngModel #asueto="ngModel"
+                          [(ngModel)]="cotizadorInternoServicio.asueto">
+        
+                          <option value="1">Sí</option>
+                          <option value="0">No</option>
+                        </select>
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                         0 = NO
                         <br>
                         1 = SI
-                    </div>
-                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Seleccionar “1 - Si” si se requiere el servicio en asueto" [matTooltipPosition]="position.value"></fa-icon></div>
+                    </div> -->
+                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="En el combo de la izquierda seleccionar 'Sí' si se requiere el servicio en asueto" [matTooltipPosition]="position.value"></fa-icon></div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="hospital" class="col-md-3 col-form-label">¿SERVICIO EN HOSPITAL?</label>
                     <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="hospital" name="hospital" ngModel #hospital="ngModel" [(ngModel)]="cotizadorInternoServicio.hospital">                    
+                        <!-- <input type="number" class="form-control valGlobal" id="hospital" name="hospital" ngModel #hospital="ngModel" [(ngModel)]="cotizadorInternoServicio.hospital">                     -->
+                        <select class="form-control valGlobal" id="hospital" name="hospital" ngModel #hospital="ngModel"
+                          [(ngModel)]="cotizadorInternoServicio.hospital">
+        
+                          <option value="1">Sí</option>
+                          <option value="0">No</option>
+                        </select>
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                         0 = NO
                         <br>
                         1 = SI
-                    </div>
-                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Seleccionar “1 - Si” si se requiere el servicio en un hospital" [matTooltipPosition]="position.value"></fa-icon></div>
+                    </div> -->
+                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="En el combo de la izquierda seleccionar 'Sí' si se requiere el servicio en hospital" [matTooltipPosition]="position.value"></fa-icon></div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="servicioFuera" class="col-md-3 col-form-label">¿SERVICIO EN SAN PEDRO / CARR. NACIONAL?</label>
                     <div class="col-md-2">
-                        <input type="number" class="form-control valGlobal" id="servicioFuera" name="servicioFuera" ngModel #servicioFuera="ngModel" [(ngModel)]="cotizadorInternoServicio.servicioFuera">                    
+                        <!-- <input type="number" class="form-control valGlobal" id="servicioFuera" name="servicioFuera" ngModel #servicioFuera="ngModel" [(ngModel)]="cotizadorInternoServicio.servicioFuera">                     -->
+                        <select class="form-control valGlobal" id="servicioFuera" name="servicioFuera" ngModel #servicioFuera="ngModel"
+                          [(ngModel)]="cotizadorInternoServicio.servicioFuera">
+        
+                          <option value="1">Sí</option>
+                          <option value="0">No</option>
+                        </select>
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                         0 = NO
                         <br>
                         1 = SI
-                    </div>
-                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Si el servicio está fuera de la zona de cobertura normal, seleccionar “1 - Si”" [matTooltipPosition]="position.value"></fa-icon></div>
+                    </div> -->
+                    <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="En el combo de la izquierda seleccionar 'Sí' si se requiere el servicio fuera de la cobertura normal" [matTooltipPosition]="position.value"></fa-icon></div>
                     <div class="col-md-1">
                         <fa-icon [icon]="faArrowRight"></fa-icon>
                     </div>
-                    <label for="noTaxis" class="col-md-1 col-form-label">No. DE TAXIS</label>
+                    <label for="noTaxis" class="col-md-2 col-form-label">No. DE TAXIS</label>
                     <div class="col-md-2">
                         <input type="number" class="form-control valGlobal" id="noTaxis" name="noTaxis" ngModel #noTaxis="ngModel" [(ngModel)]="cotizadorInternoServicio.noTaxis">                    
                     </div>
@@ -208,6 +238,10 @@
                           <div class="row" style="color: black;">** No. DE REEMPLAZOS: 1, 2 y 3</div>
                           <div class="row" style="color: black;">** EN CASO DE REQUERIR QUE SEA VARON ES MAS EL 20% (POR LA ESCASES DE PERSONAL MASCULINO)</div>
                       </mat-expansion-panel>
+                      <div class="col-md-1 mt-4"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Precios de Polizas:
+                        &#8226; 1 ó 2 meses: 1 reemplazo
+                        &#8226; 3 meses: 2 reemplazos
+                        &#8226; 4 meses: 3 reemplazos" [matTooltipPosition]="position.value"></fa-icon></div>
                     </mat-accordion>
             </div>
         </mat-tab>

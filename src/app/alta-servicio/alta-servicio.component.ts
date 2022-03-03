@@ -31,7 +31,7 @@ export class AltaServicioComponent implements OnInit {
   };
   COLABORADOR_DATA: CotizadorInternoServicio[] = [];
   colaboradorSource = new MatTableDataSource<CotizadorInternoServicio>(this.COLABORADOR_DATA);
-  colaboradorColumns: string[] = ['nombre', 'sueldo', 'eliminar'];
+  colaboradorColumns: string[] = ['nombre', 'sueldo', 'observacion', 'eliminar'];
   @ViewChild('colaboradoresTable', { static: true }) colaboradoresTable: MatTable<any>;
 
   faMinus = faMinus;
@@ -46,6 +46,7 @@ export class AltaServicioComponent implements OnInit {
   selectedColaboradorItems2: any = [];
   selectedColaboradorItems2Ind: any = [];
   selectedColaboradorItems2Tbl: any = [];
+  observacionColaborador: string;
   servicios: any[];
   clientes: any;
   datos: any;
@@ -74,6 +75,7 @@ export class AltaServicioComponent implements OnInit {
   colaborador: any[];
   idServicio: number;
   isSelected: boolean;
+  tienePrecio: boolean;
   public servicio: Servicio;
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastService: NgbToastService) { }
 
@@ -188,6 +190,7 @@ export class AltaServicioComponent implements OnInit {
     this.servicio.estatusPago = 1;
     this.isSelected = false;
     this.servicio.fechaTerminacion = null;
+    this.tienePrecio = false;
   }
 
   public llenarCampos(idServicio) {
@@ -201,6 +204,14 @@ export class AltaServicioComponent implements OnInit {
       this.onCodigoPostal(this.servicio.codigoPostal);
       this.servicio.peso = Math.floor(this.servicio.peso);
       this.servicio.estatura = Math.floor(this.servicio.estatura);
+
+      if (this.servicio.precioServicio) {
+        this.tienePrecio = true;
+        console.log("true");
+      } else {
+        this.tienePrecio = false;
+        console.log("false");
+      }
 
       this.http.get<any>('/api/servicio/datosServClien?idCliente=' + this.servicio.cliente, this.httpOptions).subscribe(data => {
         this.selectedItems = [{
@@ -234,6 +245,7 @@ export class AltaServicioComponent implements OnInit {
       this.servicio.cantidadPorPagar = this.servicio.precioServicio;
       this.servicio.estatusPago = 1;
       this.isSelected = null;
+      this.tienePrecio = false;
     });
     // console.log(Number(this.servicios[this.servicios.length-1].idServicio)+1);
   }
@@ -583,6 +595,7 @@ export class AltaServicioComponent implements OnInit {
   });
 
   this.selectedColaboradorItems2Ind[0]["sueldo"] = this.servicio.pagoColaborador;
+  this.selectedColaboradorItems2Ind[0]["observacion"] = this.observacionColaborador;
   // this.selectedColaboradorItems2Tbl=this.selectedColaboradorItems2Ind;
 
   if (this.selectedColaboradorItems2Tbl.length>0) {
