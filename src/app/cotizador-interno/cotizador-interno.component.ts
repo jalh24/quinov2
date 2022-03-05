@@ -88,8 +88,8 @@ export class CotizadorInternoComponent implements OnInit {
     this.cotizadorInternoServicio.costoDirectoAlta = 0;
     this.cotizadorInternoServicio.costoDirectoPorDiaAlta = 0;
 
-    this.cotizadorInternoServicio.horas = 0;
-    this.cotizadorInternoServicio.dias = 0;
+    this.cotizadorInternoServicio.horas = 4;
+    this.cotizadorInternoServicio.dias = 1;
     this.cotizadorInternoServicio.hombre = 0;
     this.cotizadorInternoServicio.precioListaCuidador = 0;
     this.cotizadorInternoServicio.precioListaEnfermera = 0;
