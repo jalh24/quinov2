@@ -618,6 +618,7 @@ export class AltaServicioComponent implements OnInit {
   }
   this.servicio.pagoColaborador = 0;
   this.selectedColaboradorItems2 = null;
+  this.observacionColaborador = null;
   console.log(this.selectedColaboradorItems2Tbl);
   }
 
