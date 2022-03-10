@@ -202,8 +202,8 @@
 
               <ng-container matColumnDef="eliminar">
                 <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-                <td mat-cell *matCellDef="let element">
-                  <button type="button" class="btn btn-danger" (click)="onEliminarColaborador(element)"><fa-icon [icon]="faTrash"></fa-icon></button>
+                <td mat-cell *matCellDef="let i = index">
+                  <button type="button" class="btn btn-danger" (click)="onEliminarColaborador(i)"><fa-icon [icon]="faTrash"></fa-icon></button>
                   <!-- <input type="number" class="form-control valGlobal" placeholder="$" id="pagoColaborador"
               name="pagoColaborador" step=".01" ngModel #pagoColaborador="ngModel" [(ngModel)]="servicio.pagoColaborador"
               >  -->
