@@ -15,6 +15,8 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Servicio } from '../_model/servicio';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CotizadorInternoServicio } from '../_model/cotizadorInternoServicio';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-alta-servicio',
@@ -33,7 +35,10 @@ export class AltaServicioComponent implements OnInit {
   colaboradorSource = new MatTableDataSource<CotizadorInternoServicio>(this.COLABORADOR_DATA);
   colaboradorColumns: string[] = ['nombre', 'sueldo', 'observacion', 'eliminar'];
   @ViewChild('colaboradoresTable', { static: true }) colaboradoresTable: MatTable<any>;
-
+  faQuestionCircle = faQuestionCircle;
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+  
   faMinus = faMinus;
   faEquals = faEquals;
   faTrash = faTrash;
@@ -49,6 +54,7 @@ export class AltaServicioComponent implements OnInit {
   observacionColaborador: string;
   servicios: any[];
   clientes: any;
+  dia: any;
   datos: any;
   colaboradores: any;
   clientesSettings: IDropdownSettings = {};
@@ -415,6 +421,37 @@ export class AltaServicioComponent implements OnInit {
 
   onSexo(value: any) {
     this.servicio.idSexo = value;
+  }
+
+  onFechaChange(fecha){
+var IsDate = new Date(fecha);
+   this.dia = IsDate.getDay();
+   switch (IsDate.getDay()) {
+     case 0:
+       this.dia="Lunes"
+       break;
+       case 1:
+        this.dia="Martes"
+        break;
+        case 2:
+       this.dia="Miércoles"
+       break;
+       case 3:
+       this.dia="Jueves"
+       break;
+       case 4:
+       this.dia="Viernes"
+       break;
+       case 5:
+       this.dia="Sábado"
+       break;
+       case 6:
+       this.dia="Domingo"
+       break;
+     default:
+       break;
+   }
+   
   }
 
   onEstadoCivil(value: any) {

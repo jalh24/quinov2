@@ -281,7 +281,15 @@ export class ClienteFisicoComponent implements OnInit {
       });
     });
   }
+ onTelefono1(telefono){
+if (this.cliente.telefonoContacto == null) {
+  this.cliente.telefonoContacto = telefono;
+} 
+//if(this.cliente.telefonoContacto2 == null){
+  //this.cliente.telefonoContacto2 = telefono;
 
+//}
+ }
   onColonia(value: any) {
     this.cliente.idColonia = value;
     

@@ -38,8 +38,11 @@
           </div>
           <div class="col-md-3">
             <label for="fechaTerminacion" class="form-label">Fecha de Terminación<span class="text-danger">*</span></label>
-            <input type="date" class="form-control" id="fechaTerminacion" name="fechaTerminacion" ngModel #fechaTerminacion="ngModel" [(ngModel)]="servicio.fechaTerminacion" value="yyyy-MM-dd">
+            <input type="date" class="form-control" (change)="onFechaChange($event.target.value)" id="fechaTerminacion" name="fechaTerminacion" ngModel #fechaTerminacion="ngModel" [(ngModel)]="servicio.fechaTerminacion" value="yyyy-MM-dd">
+            <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" [matTooltip]="dia" [matTooltipPosition]="position.value"></fa-icon></div>
+
           </div>
+          
           <div class="col-md-3" *ngIf="isSelected">
             <button type="button" class="btn btn-success btn-sm my-4" (click)="onCopiar()">Copiar Servicio</button>
           </div>
