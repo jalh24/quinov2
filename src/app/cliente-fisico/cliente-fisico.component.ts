@@ -238,7 +238,17 @@ export class ClienteFisicoComponent implements OnInit {
     
     this.http.get<any>('/api/catalogo/ciudades?idEstado=' + idEstadoNacimiento,this.httpOptions).subscribe(data => {
       this.ciudades = data.data;
-
+      if (idEstadoNacimiento==19) {
+        const ciudadesPrincipales = [19049,19019,19041,19048,19018,19046,19031,19021,19026,19006,19039];
+        const ciudadesArreglo = [];
+        ciudadesPrincipales.forEach(element => {
+          ciudadesArreglo.push(this.ciudades.find(value => value.idCiudad == element));
+        });
+        ciudadesArreglo.forEach(element => {
+          this.ciudades.unshift(element);
+        });
+        this.ciudades = this.ciudades.filter((value, index) => this.ciudades.indexOf(value) === index);
+      }
       console.log(this.ciudades);
     });
   }

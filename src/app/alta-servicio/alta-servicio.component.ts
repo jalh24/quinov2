@@ -250,6 +250,7 @@ export class AltaServicioComponent implements OnInit {
       this.servicio.cantidadPagada = 0;
       this.servicio.cantidadPorPagar = this.servicio.precioServicio;
       this.servicio.estatusPago = 1;
+      this.servicio.fechaTerminacion = null;
       this.isSelected = null;
       this.tienePrecio = false;
     });
@@ -607,9 +608,10 @@ var IsDate = new Date(fecha);
   }
 
   onEliminarColaborador(value: any) {
-    this.selectedColaboradorItems2Tbl.forEach((element, index) => {
-      if (element.idColaborador === value.idColaborador) this.selectedColaboradorItems2Tbl.splice(index, 1);
-    });
+    // this.selectedColaboradorItems2Tbl.forEach((element, index) => {
+    //   if (element.idColaborador === value.idColaborador) this.selectedColaboradorItems2Tbl.splice(index, 1);
+    // });
+    this.selectedColaboradorItems2Tbl.splice(value, 1);
     this.colaboradorSource = new MatTableDataSource(this.selectedColaboradorItems2Tbl);
     if (Object.keys(this.selectedColaboradorItems2Tbl).length >= this.servicio.colabReq) {
       this.servicio.estatus = "Asignada";
