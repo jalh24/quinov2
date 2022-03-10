@@ -204,7 +204,7 @@ export class AltaServicioComponent implements OnInit {
       this.datos = data.data;
       this.servicio = this.datos[0];
       this.onFechaNacimiento(); 
-      
+      this.onFechaChange(this.servicio.fechaTerminacion);
       this.comboCiudades(this.servicio.idEstadoNacimiento);
       this.onCiudadNacimiento(this.servicio.idCiudadNacimiento);
       this.onCodigoPostal(this.servicio.codigoPostal);
