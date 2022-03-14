@@ -193,6 +193,7 @@ export class AltaServicioComponent implements OnInit {
     this.servicio.pagoColaborador = 0;
     this.servicio.estatus = "Abierta";
     this.servicio.estatusOperativo = 1;
+    this.servicio.semanaTerminacion = 0;
     this.servicio.estatusPago = 1;
     this.isSelected = false;
     this.servicio.fechaTerminacion = null;
@@ -256,6 +257,10 @@ export class AltaServicioComponent implements OnInit {
     });
     // console.log(Number(this.servicios[this.servicios.length-1].idServicio)+1);
   }
+
+  counter(i: number) {
+    return new Array(i);
+}
 
   public comboClientesById(idCliente) {
     this.http.get<any>('/api/catalogo/clientesById?idCliente=' + idCliente, this.httpOptions).subscribe(data => {

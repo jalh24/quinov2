@@ -42,7 +42,17 @@
             <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" [matTooltip]="dia" [matTooltipPosition]="position.value"></fa-icon></div>
 
           </div>
-          
+          <div class="col">
+            <label for="semanaTerminacion" class="form-label"><br>Semana de Terminación</label>
+            <select class="form-control" name="semanaTerminacion" #semanaTerminacion="ngModel" [(ngModel)]="servicio.semanaTerminacion" ngModel  
+            >
+              <option *ngFor='let in of counter(52) ;let i = index' [value]="i">
+                {{i}}
+              </option>
+            </select>
+            <!--<input type="text" class="form-control" id="estatus" name="estatus" onkeydown="return false"
+              value="{{servicio.estatus}}">-->
+          </div>
           <div class="col-md-3" *ngIf="isSelected">
             <button type="button" class="btn btn-success btn-sm my-4" (click)="onCopiar()">Copiar Servicio</button>
           </div>

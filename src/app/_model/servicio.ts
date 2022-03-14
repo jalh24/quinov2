@@ -21,6 +21,7 @@ export class Servicio {
     public cantidadPorPagar: number;
     public estatus: string;
     public estatusOperativo: number;
+    public semanaTerminacion: number;
     public estatusPago: number;
     public nombre: string;
     public a_paterno: string;
