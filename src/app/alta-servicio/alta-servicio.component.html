@@ -40,14 +40,12 @@
             <label for="fechaTerminacion" class="form-label">Fecha de Terminación<span class="text-danger">*</span></label>
             <input type="date" class="form-control" (change)="onFechaChange($event.target.value)" id="fechaTerminacion" name="fechaTerminacion" ngModel #fechaTerminacion="ngModel" [(ngModel)]="servicio.fechaTerminacion" value="yyyy-MM-dd">
             <div class="col-md-1"><fa-icon [icon]="faQuestionCircle" style="color: gray;" [matTooltip]="dia" [matTooltipPosition]="position.value"></fa-icon></div>
-
           </div>
           <div class="col">
-            <label for="semanaTerminacion" class="form-label"><br>Semana de Terminación</label>
-            <select class="form-control" name="semanaTerminacion" #semanaTerminacion="ngModel" [(ngModel)]="servicio.semanaTerminacion" ngModel  
-            >
-              <option *ngFor='let in of counter(52) ;let i = index' [value]="i">
-                {{i}}
+            <label for="semanaAlta" class="form-label">Semana del Servicio</label>
+            <select class="form-control" name="semanaAlta" #semanaAlta="ngModel" [(ngModel)]="servicio.semanaAlta" ngModel>
+              <option *ngFor='let in of counter(52) ;let i = index' [value]="i+1">
+                {{i+1}}
               </option>
             </select>
             <!--<input type="text" class="form-control" id="estatus" name="estatus" onkeydown="return false"

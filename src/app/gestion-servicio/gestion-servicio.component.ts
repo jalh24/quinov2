@@ -36,7 +36,7 @@ export class GestionServicioComponent implements OnInit {
   length: number;
   SERVICIO_DATA: Servicio[] = [];
   servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
-  servicioColumns: string[] = ['idServicio', 'fechaCreacion', 'nombre', 'responsable', 'estatus', 'estatusPago', 'cantidadPorPagar', 'acciones'];
+  servicioColumns: string[] = ['idServicio', 'fechaCreacion','semanaAlta', 'nombre', 'responsable', 'estatus', 'estatusPago', 'cantidadPorPagar', 'acciones'];
   @ViewChild('serviciosTable', { static: true }) serviciosTable: MatTable<any>;
   responsables: any;
   pacientes: any;
@@ -145,6 +145,10 @@ export class GestionServicioComponent implements OnInit {
     this.servicioFiltro.responsables = this.responsablesSelected;
     this.servicioFiltro.pacientes = this.pacientesSelected;
     this.http.post<any>('/api/servicio/lista', this.servicioFiltro, this.httpOptions).subscribe(data => {
+      // this.SERVICIO_DATA = data.data;
+      if (data.data.semanaAlta == 0) {
+        data.data.semanaAlta = null;
+      }
       this.SERVICIO_DATA = data.data;
       this.servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
       this.length = data.count.total;

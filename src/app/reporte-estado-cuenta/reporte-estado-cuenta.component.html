@@ -1,0 +1,132 @@
+<div class="container mt-5 pt-4 bg-white rounded-top shadow">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">Desde:</th>
+          <td>
+            <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" value="yyyy-MM-dd"
+              [(ngModel)]="estadoCuentaFiltro.fecha1">
+          </td>
+          <th scope="row">Hasta:</th>
+          <td>
+            <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" value="yyyy-MM-dd"
+              [(ngModel)]="estadoCuentaFiltro.fecha2">
+          </td>
+          <th scope="row">Paciente:</th>
+          <td>
+            <ng-multiselect-dropdown [placeholder]="'Seleccionar'" [settings]="pacientesSettings" [data]="pacientes"
+              [(ngModel)]="pacientesSelected">
+            </ng-multiselect-dropdown>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="row text-center pb-4">
+      <div class="col">
+        <button type="button" class="btn btn-success">Reporte</button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-danger">Limpiar Filtro</button> &nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+
+  <div class="container bg-white rounded-bottom shadow pb-4">
+    <div>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th>ID Servicio</th>
+              <th>Tipo de Servicio</th>
+              <th>Fecha alta Servicio</th>
+              <th>Precio</th>
+              <th>ID Pago</th>
+              <th>Fecha Pago</th>
+              <th>Monto Pago</th>
+              <th>Pendiente por Pagar</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of ItemsArray;">{{calculo(item)}}
+            <tr *ngIf="!flagSubTotal && !flagLast">
+              <td>{{ item.idServicio }}</td>
+              <td>{{ item.idTipoServicio }}</td>
+              <td>{{ item.fechaCreacion }}</td>
+              <td>{{ item.precioServicio }}</td>
+              <td>{{ item.idPagoServicio }}</td>
+              <td>{{ item.fechaPago }}</td>
+              <td>{{ item.monto }}</td>
+              <td>{{ item.cantidadPorPagar }}</td>
+            </tr>
+            <tr *ngIf="flagSubTotal">
+              <th>Subtotal:</th>
+              <th></th>
+              <th></th>
+              <th>{{precioServicioTempAnterior}}</th>
+              <th></th>
+              <th></th>
+              <th>{{montoPagoTempAnterior}}</th>
+              <th>{{precioServicioTempAnterior-montoPagoTempAnterior}}</th>
+            </tr>
+            <tr *ngIf="flagSubTotal && !flagLast">
+              <td>{{ item.idServicio }}</td>
+              <td>{{ item.idTipoServicio }}</td>
+              <td>{{ item.fechaCreacion }}</td>
+              <td>{{ item.precioServicio }}</td>
+              <td>{{ item.idPagoServicio }}</td>
+              <td>{{ item.fechaPago }}</td>
+              <td>{{ item.monto }}</td>
+              <td>{{ item.cantidadPorPagar }}</td>
+            </tr>
+            <tr *ngIf="flagSubTotal && flagLast">
+              <td>{{ item.idServicio }}</td>
+              <td>{{ item.idTipoServicio }}</td>
+              <td>{{ item.fechaCreacion }}</td>
+              <td>{{ item.precioServicio }}</td>
+              <td>{{ item.idPagoServicio }}</td>
+              <td>{{ item.fechaPago }}</td>
+              <td>{{ item.monto }}</td>
+              <td>{{ item.cantidadPorPagar }}</td>
+            </tr>
+            <tr *ngIf="flagLast">
+              <th>Subtotal:</th>
+              <th></th>
+              <th></th>
+              <th>{{precioServicioTemp}}</th>
+              <th></th>
+              <th></th>
+              <th>{{montoPagoTemp}}</th>
+              <th>{{precioServicioTemp-montoPagoTemp}}</th>
+            </tr>
+            <tr *ngIf="flagLast">
+              <td></td>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr *ngIf="flagLast">
+              <td>Total Paciente:</td>
+              <th></th>
+              <th></th>
+              <th>{{precioTotal}}</th>
+              <th></th>
+              <th></th>
+              <th>Monto</th>
+              <th>Pendiente</th>
+            </tr>
+          </tbody>
+          <!-- <tr *ngIf="flagLast">
+            <th>Subtotal:</th>
+            <th></th>
+            <th></th>
+            <th>{{precioServicioTemp}}</th>
+            <th></th>
+            <th></th>
+            <th>{{montoPagoTempAnterior}}</th>
+            <th>Pendiente</th>
+          </tr> -->
+        </table>
+      </div>
+  </div>

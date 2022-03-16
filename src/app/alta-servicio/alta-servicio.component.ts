@@ -193,7 +193,7 @@ export class AltaServicioComponent implements OnInit {
     this.servicio.pagoColaborador = 0;
     this.servicio.estatus = "Abierta";
     this.servicio.estatusOperativo = 1;
-    this.servicio.semanaTerminacion = 0;
+    this.servicio.semanaAlta = 0;
     this.servicio.estatusPago = 1;
     this.isSelected = false;
     this.servicio.fechaTerminacion = null;
@@ -252,6 +252,7 @@ export class AltaServicioComponent implements OnInit {
       this.servicio.cantidadPorPagar = this.servicio.precioServicio;
       this.servicio.estatusPago = 1;
       this.servicio.fechaTerminacion = null;
+      this.servicio.semanaAlta = null;
       this.isSelected = null;
       this.tienePrecio = false;
     });
