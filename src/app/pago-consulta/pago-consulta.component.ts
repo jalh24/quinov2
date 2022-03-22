@@ -148,4 +148,8 @@ export class PagoConsultaComponent implements OnInit {
     this.pagoFiltro.fecha2 = null;
     this.pagoFiltro.estatusPago = null;
   }
+
+  public estadoCuenta() {
+    this.router.navigateByUrl("/estadocuenta");
+  }
 }

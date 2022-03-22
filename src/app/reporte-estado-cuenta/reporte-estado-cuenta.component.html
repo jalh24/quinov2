@@ -1,4 +1,5 @@
 <div class="container mt-5 pt-4 bg-white rounded-top shadow">
+  <h4 class="pt-1 pb-1" class="text-center">Reporte Estado de Cuenta</h4>
     <table class="table">
       <tbody>
         <tr>
@@ -15,7 +16,7 @@
           <th scope="row">Paciente:</th>
           <td>
             <ng-multiselect-dropdown [placeholder]="'Seleccionar'" [settings]="pacientesSettings" [data]="pacientes"
-              [(ngModel)]="pacientesSelected">
+              [(ngModel)]="pacientesSelected" (onDeSelect)="onDeSelectedPaciente($event)">
             </ng-multiselect-dropdown>
           </td>
         </tr>
@@ -24,13 +25,79 @@
 
     <div class="row text-center pb-4">
       <div class="col">
-        <button type="button" class="btn btn-success">Reporte</button> &nbsp;&nbsp;
-        <button type="button" class="btn btn-danger">Limpiar Filtro</button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-success" [disabled]="!pacientesSelected[0]" (click)="onReporte()">Reporte</button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" (click)="onDeSelectedPaciente(1)">Limpiar Filtro</button> &nbsp;&nbsp;
       </div>
     </div>
   </div>
 
   <div class="container bg-white rounded-bottom shadow pb-4">
+    <div>
+        <table class="table table-bordered" *ngIf="reporteFlag" id="tablaEstadoCuenta">
+          <thead class="tableHeader">
+            <tr>
+              <th scope="col">ID Servicio</th>
+              <th scope="col">Tipo de Servicio</th>
+              <th scope="col">Fecha alta Servicio</th>
+              <th scope="col">Precio</th>
+              <th scope="col">ID Pago</th>
+              <th scope="col">Fecha Pago</th>
+              <th scope="col">Monto Pago</th>
+              <th scope="col">Pendiente por Pagar</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of ItemsArray;">
+            <tr *ngIf="!item.subTotal" scope="row">
+              <td>{{item.idServicio }}</td>
+              <td>{{item.nombreTipoServicio}}</td>
+              <td>{{item.fechaCreacion }}</td>
+              <td>{{item.precioServicio | currency}}</td>
+              <td>{{item.idPagoServicio }}</td>
+              <td>{{item.fechaPago }}</td>
+              <td>{{item.monto | currency}}</td>
+              <td>{{item.montoPendienteSubTotal | currency}}</td>
+            </tr>
+            <tr *ngIf="item.subTotal" scope="row">
+              <td>{{item.idServicio}}</td>
+              <td>{{item.nombreTipoServicio}}</td>
+              <td>{{item.fechaCreacion}}</td>
+              <td>{{item.precioServicio | currency}}</td>
+              <td>{{item.idPagoServicio}}</td>
+              <td>{{item.fechaPago }}</td>
+              <td>{{item.monto | currency}}</td>
+              <td>{{item.montoPendienteSubTotal | currency}}</td>
+            </tr>
+            <tr *ngIf="item.subTotal" scope="row" class="subTotal">
+              <th>Subtotal:</th>
+              <td></td>
+              <td></td>
+              <th>{{item.precioServicio | currency}}</th>
+              <td></td>
+              <td></td>
+              <th>{{item.montoSubTotal | currency}}</th>
+              <th>{{item.montoPendienteSubTotal | currency}}</th>
+            </tr>
+            <tr *ngIf="item.subTotal" scope="row"><td colspan="8"></td></tr>
+            <tr *ngIf="item.ultimo" scope="row" class="total">
+              <td colspan="2">Total Paciente:</td>
+              <td></td>
+              <th>{{precioSumaTotal | currency}}</th>
+              <td></td>
+              <td></td>
+              <th>{{montoSumaTotal | currency}}</th>
+              <th>{{pendienteSumaTotal | currency}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row text-center pb-4" *ngIf="reporteFlag">
+        <div class="col">
+          <button class="btn excelColor" (click)="exportTableToExcel()"><fa-icon [icon]="faFileExcel"></fa-icon> Exportar como Excel</button>
+        </div>
+      </div>
+  </div>
+
+  <!-- <div class="container bg-white rounded-bottom shadow pb-4">
     <div>
         <table class="table table-bordered">
           <thead class="thead-light">
@@ -117,16 +184,6 @@
               <th>Pendiente</th>
             </tr>
           </tbody>
-          <!-- <tr *ngIf="flagLast">
-            <th>Subtotal:</th>
-            <th></th>
-            <th></th>
-            <th>{{precioServicioTemp}}</th>
-            <th></th>
-            <th></th>
-            <th>{{montoPagoTempAnterior}}</th>
-            <th>Pendiente</th>
-          </tr> -->
         </table>
       </div>
-  </div>
+  </div> -->
