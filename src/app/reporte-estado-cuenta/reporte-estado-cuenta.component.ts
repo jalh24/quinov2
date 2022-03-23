@@ -138,6 +138,7 @@ export class ReporteEstadoCuentaComponent implements OnInit {
             if (this.ItemsArray[index-1].subTotal == true) {
               pendienteSuma = this.ItemsArray[index].precioServicio - this.ItemsArray[index].monto;
               this.ItemsArray[index].montoPendienteSubTotal = pendienteSuma;
+              this.pendienteSumaTotal += pendienteSuma;
             } else {
               pendienteSuma = pendienteSuma - this.ItemsArray[index].monto;
               this.ItemsArray[index].montoPendienteSubTotal = pendienteSuma;
