@@ -152,4 +152,8 @@ export class PagoConsultaComponent implements OnInit {
   public estadoCuenta() {
     this.router.navigateByUrl("/estadocuenta");
   }
+
+  public antiguedadSaldos() {
+    this.router.navigateByUrl("/antiguedadsaldos");
+  }
 }

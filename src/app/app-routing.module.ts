@@ -19,6 +19,7 @@ import { PagoPacienteComponent } from './pago-paciente/pago-paciente.component';
 import { PagoConsultaComponent } from './pago-consulta/pago-consulta.component';
 import { CotizadorInternoComponent } from './cotizador-interno/cotizador-interno.component';
 import { ReporteEstadoCuentaComponent } from './reporte-estado-cuenta/reporte-estado-cuenta.component';
+import { ReporteAntiguedadSaldosComponent } from './reporte-antiguedad-saldos/reporte-antiguedad-saldos.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LoginComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'consultapago', component: PagoConsultaComponent, canActivate: [AuthGuard] },
   { path: 'cotizadorservicios', component: CotizadorInternoComponent, canActivate: [AuthGuard] },
   { path: 'estadocuenta', component: ReporteEstadoCuentaComponent, canActivate: [AuthGuard] },
+  { path: 'antiguedadsaldos', component: ReporteAntiguedadSaldosComponent, canActivate: [AuthGuard] },
   //{ path: 'alta', component: SigninComponent, canActivate: [AuthGuard] },
 ];
 

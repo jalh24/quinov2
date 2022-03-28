@@ -1,0 +1,90 @@
+<div class="container mt-5 pt-4 bg-white rounded-top shadow">
+    <h4 class="pt-1 pb-1" class="text-center">Reporte Antiguedad de Saldos</h4>
+    <div class="row text-center pb-4">
+      </div>
+    </div>
+    
+  
+    <div class="container bg-white rounded-bottom shadow pb-4">
+      <div>
+          <table class="table table-bordered" id="tablaAntiguedadSaldos">
+            <thead class="tableHeader">
+                <tr>
+                    <th colspan="6" style="background: white;"></th>
+                    <th scope="col" colspan="3">Pendiente por Pagar</th>
+                </tr>
+              <tr>
+                <th scope="col">ID Servicio</th>
+                <th scope="col">Paciente</th>
+                <th scope="col">Tipo de Servicio</th>
+                <th scope="col">Fecha alta Servicio</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Pagos</th>
+                <th scope="col">5 días</th>
+                <th scope="col">10 días</th>
+                <th scope="col">+15 días</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of deudores;">
+              <tr *ngIf="!item.subTotal" scope="row">
+                <td>{{item.idServicio}}</td>
+                <td>{{item.nombre + " " + item.a_paterno + " " + item.a_materno}}</td>
+                <td>{{item.nombreTipoServicio}}</td>
+                <td>{{item.fechaCreacion}}</td>
+                <td>{{item.precioServicio | currency}}</td>
+                <td>{{item.cantidadPagada | currency}}</td>
+                <td *ngIf="item.pendienteCincoDias>0; else pendienteCincoF">{{item.pendienteCincoDias | currency}}</td>
+                <ng-template #pendienteCincoF><td></td></ng-template>
+                <td *ngIf="item.pendienteDiezDias>0; else pendienteDiezF">{{item.pendienteDiezDias | currency}}</td>
+                <ng-template #pendienteDiezF><td></td></ng-template>
+                <td *ngIf="item.pendienteMasQuinceDias>0; else pendienteMasQuinceF">{{item.pendienteMasQuinceDias | currency}}</td>
+                <ng-template #pendienteMasQuinceF><td></td></ng-template>
+              </tr>
+              <tr *ngIf="item.subTotal" scope="row">
+                <td>{{item.idServicio}}</td>
+                <td>{{item.nombre + " " + item.a_paterno + " " + item.a_materno}}</td>
+                <td>{{item.nombreTipoServicio}}</td>
+                <td>{{item.fechaCreacion}}</td>
+                <td>{{item.precioServicio | currency}}</td>
+                <td>{{item.cantidadPagada | currency}}</td>
+                <td *ngIf="item.pendienteCincoDias>0; else pendienteCincoF">{{item.pendienteCincoDias | currency}}</td>
+                <ng-template #pendienteCincoF><td></td></ng-template>
+                <td *ngIf="item.pendienteDiezDias>0; else pendienteDiezF">{{item.pendienteDiezDias | currency}}</td>
+                <ng-template #pendienteDiezF><td></td></ng-template>
+                <td *ngIf="item.pendienteMasQuinceDias>0; else pendienteMasQuinceF">{{item.pendienteMasQuinceDias | currency}}</td>
+                <ng-template #pendienteMasQuinceF><td></td></ng-template>
+              </tr>
+              <tr *ngIf="item.subTotal" scope="row" class="subTotal">
+                <th>Subtotal:</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th>{{item.precioSubTotal | currency}}</th>
+                <th>{{item.pagosSubTotal | currency}}</th>
+                <td *ngIf="item.cincoDiasSubTotal>0; else cincoF">{{item.cincoDiasSubTotal | currency}}</td>
+                <ng-template #cincoF><td>-</td></ng-template>
+                <!-- <th>{{item.cincoDiasSubTotal | currency}}</th> -->
+                <td *ngIf="item.diezDiasSubTotal>0; else diezF">{{item.diezDiasSubTotal | currency}}</td>
+                <ng-template #diezF><td>-</td></ng-template>
+                <td *ngIf="item.masQuinceDiasSubTotal>0; else masQuinceF">{{item.masQuinceDiasSubTotal | currency}}</td>
+                <ng-template #masQuinceF><td>-</td></ng-template>
+                <!-- <th>{{item.diezDiasSubTotal | currency}}</th>
+                <th>{{item.masQuinceDiasSubTotal | currency}}</th> -->
+              </tr>
+              <tr *ngIf="item.ultimo" scope="row"><td colspan="9"></td></tr>
+              <tr *ngIf="item.ultimo" scope="row" class="total">
+                <td>Gran Total:</td>
+                <td colspan="5"></td>
+                <th>{{cincoDiasSumaTotal | currency}}</th>
+                <th>{{diezDiasSumaTotal | currency}}</th>
+                <th>{{masQuinceDiasSumaTotal | currency}}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row text-center pb-4">
+            <div class="col">
+              <button class="btn excelColor" (click)="exportTableToExcel()"><fa-icon [icon]="faFileExcel"></fa-icon> Exportar como Excel</button>
+            </div>
+          </div>
+    </div>

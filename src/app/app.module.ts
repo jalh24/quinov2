@@ -37,6 +37,7 @@ import { CotizadorInternoComponent } from './cotizador-interno/cotizador-interno
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReporteEstadoCuentaComponent } from './reporte-estado-cuenta/reporte-estado-cuenta.component';
+import { ReporteAntiguedadSaldosComponent } from './reporte-antiguedad-saldos/reporte-antiguedad-saldos.component';
 // import { CotizadorServicioComponent } from './cotizador-servicio/cotizador-servicio.component';
 // import { ModalCotizadorServicioComponent } from './modal-cotizador-servicio/modal-cotizador-servicio.component';
 //import { SigninComponent } from './signin/signin.component';
@@ -62,6 +63,7 @@ import { ReporteEstadoCuentaComponent } from './reporte-estado-cuenta/reporte-es
     PagoConsultaComponent,
     CotizadorInternoComponent,
     ReporteEstadoCuentaComponent,
+    ReporteAntiguedadSaldosComponent,
     // CotizadorServicioComponent,
     // ModalCotizadorServicioComponent,
   //  SigninComponent
