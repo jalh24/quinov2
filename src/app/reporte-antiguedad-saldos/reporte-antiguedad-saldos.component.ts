@@ -31,7 +31,7 @@ export class ReporteAntiguedadSaldosComponent implements OnInit {
   public getDeudores() {
     this.http.get<any>('/api/antiguedadsaldos/deudores', this.httpOptions).subscribe(data => {
       this.deudores = data.data;
-      this.deudores.splice(0,14); //eliminar al subir a prod
+      // this.deudores.splice(0,14); //eliminar al subir a prod
       this.http.get<any>('/api/catalogo/tiposColaboradores', this.httpOptions).subscribe(data => {
         this.tiposColaboradores = data.data;
         console.log(this.tiposColaboradores);
