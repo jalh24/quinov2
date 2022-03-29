@@ -150,6 +150,8 @@ export class GestionServicioComponent implements OnInit {
         data.data.semanaAlta = null;
       }
       this.SERVICIO_DATA = data.data;
+      this.SERVICIO_DATA.sort((a, b) => (a.idServicio > b.idServicio ? -1 : 1));
+
       this.servicioSource = new MatTableDataSource<Servicio>(this.SERVICIO_DATA);
       this.length = data.count.total;
       console.log(this.SERVICIO_DATA);
