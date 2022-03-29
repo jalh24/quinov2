@@ -3,6 +3,12 @@
     <table class="table">
       <tbody>
         <tr>
+          <th scope="row">Paciente:</th>
+          <td class="col-md-6">
+            <ng-multiselect-dropdown [placeholder]="'Seleccionar'" [settings]="pacientesSettings" [data]="pacientes"
+              [(ngModel)]="pacientesSelected" (onDeSelect)="onDeSelectedPaciente($event)">
+            </ng-multiselect-dropdown>
+          </td>
           <th scope="row">Desde:</th>
           <td>
             <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" value="yyyy-MM-dd"
@@ -12,12 +18,6 @@
           <td>
             <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" value="yyyy-MM-dd"
               [(ngModel)]="estadoCuentaFiltro.fecha2">
-          </td>
-          <th scope="row">Paciente:</th>
-          <td>
-            <ng-multiselect-dropdown [placeholder]="'Seleccionar'" [settings]="pacientesSettings" [data]="pacientes"
-              [(ngModel)]="pacientesSelected" (onDeSelect)="onDeSelectedPaciente($event)">
-            </ng-multiselect-dropdown>
           </td>
         </tr>
       </tbody>
