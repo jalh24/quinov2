@@ -20,8 +20,8 @@
                 <th scope="col">Fecha alta Servicio</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Pagos</th>
-                <th scope="col">5-9 días</th>
-                <th scope="col">10-14 días</th>
+                <th scope="col">1-7 días</th>
+                <th scope="col">8-14 días</th>
                 <th scope="col">+15 días</th>
               </tr>
             </thead>
@@ -33,10 +33,10 @@
                 <td>{{item.fechaCreacion}}</td>
                 <td>{{item.precioServicio | currency}}</td>
                 <td>{{item.cantidadPagada | currency}}</td>
-                <td *ngIf="item.pendienteCincoDias>0; else pendienteCincoF">{{item.pendienteCincoDias | currency}}</td>
-                <ng-template #pendienteCincoF><td></td></ng-template>
-                <td *ngIf="item.pendienteDiezDias>0; else pendienteDiezF">{{item.pendienteDiezDias | currency}}</td>
-                <ng-template #pendienteDiezF><td></td></ng-template>
+                <td *ngIf="item.pendienteUnDia>0; else pendienteUnF">{{item.pendienteUnDia | currency}}</td>
+                <ng-template #pendienteUnF><td></td></ng-template>
+                <td *ngIf="item.pendienteOchoDias>0; else pendienteOchoF">{{item.pendienteOchoDias | currency}}</td>
+                <ng-template #pendienteOchoF><td></td></ng-template>
                 <td *ngIf="item.pendienteMasQuinceDias>0; else pendienteMasQuinceF">{{item.pendienteMasQuinceDias | currency}}</td>
                 <ng-template #pendienteMasQuinceF><td></td></ng-template>
               </tr>
@@ -47,10 +47,10 @@
                 <td>{{item.fechaCreacion}}</td>
                 <td>{{item.precioServicio | currency}}</td>
                 <td>{{item.cantidadPagada | currency}}</td>
-                <td *ngIf="item.pendienteCincoDias>0; else pendienteCincoF">{{item.pendienteCincoDias | currency}}</td>
-                <ng-template #pendienteCincoF><td></td></ng-template>
-                <td *ngIf="item.pendienteDiezDias>0; else pendienteDiezF">{{item.pendienteDiezDias | currency}}</td>
-                <ng-template #pendienteDiezF><td></td></ng-template>
+                <td *ngIf="item.pendienteUnDia>0; else pendienteUnF">{{item.pendienteUnDia | currency}}</td>
+                <ng-template #pendienteUnF><td></td></ng-template>
+                <td *ngIf="item.pendienteOchoDias>0; else pendienteOchoF">{{item.pendienteOchoDias | currency}}</td>
+                <ng-template #pendienteOchoF><td></td></ng-template>
                 <td *ngIf="item.pendienteMasQuinceDias>0; else pendienteMasQuinceF">{{item.pendienteMasQuinceDias | currency}}</td>
                 <ng-template #pendienteMasQuinceF><td></td></ng-template>
               </tr>
@@ -61,22 +61,23 @@
                 <td></td>
                 <th>{{item.precioSubTotal | currency}}</th>
                 <th>{{item.pagosSubTotal | currency}}</th>
-                <td *ngIf="item.cincoDiasSubTotal>0; else cincoF">{{item.cincoDiasSubTotal | currency}}</td>
-                <ng-template #cincoF><td>-</td></ng-template>
-                <!-- <th>{{item.cincoDiasSubTotal | currency}}</th> -->
-                <td *ngIf="item.diezDiasSubTotal>0; else diezF">{{item.diezDiasSubTotal | currency}}</td>
-                <ng-template #diezF><td>-</td></ng-template>
+                <td *ngIf="item.unDiaSubTotal>0; else unF">{{item.unDiaSubTotal | currency}}</td>
+                <ng-template #unF><td>-</td></ng-template>
+                <!-- <th>{{item.unDiaSubTotal | currency}}</th> -->
+                <td *ngIf="item.ochoDiasSubTotal>0; else ochoF">{{item.ochoDiasSubTotal | currency}}</td>
+                <ng-template #ochoF><td>-</td></ng-template>
                 <td *ngIf="item.masQuinceDiasSubTotal>0; else masQuinceF">{{item.masQuinceDiasSubTotal | currency}}</td>
                 <ng-template #masQuinceF><td>-</td></ng-template>
-                <!-- <th>{{item.diezDiasSubTotal | currency}}</th>
+                <!-- <th>{{item.ochoDiasSubTotal | currency}}</th>
                 <th>{{item.masQuinceDiasSubTotal | currency}}</th> -->
               </tr>
               <tr *ngIf="item.ultimo" scope="row"><td colspan="9"></td></tr>
               <tr *ngIf="item.ultimo" scope="row" class="total">
                 <td>Gran Total:</td>
-                <td colspan="5"></td>
-                <th>{{cincoDiasSumaTotal | currency}}</th>
-                <th>{{diezDiasSumaTotal | currency}}</th>
+                <th>{{granTotal | currency}}</th>
+                <td colspan="4"></td>
+                <th>{{unDiaSumaTotal | currency}}</th>
+                <th>{{ochoDiasSumaTotal | currency}}</th>
                 <th>{{masQuinceDiasSumaTotal | currency}}</th>
               </tr>
             </tbody>
