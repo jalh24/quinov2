@@ -1,0 +1,297 @@
+<form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
+    <ngb-toast-container></ngb-toast-container>
+            <div class="container mt-5 pt-0 pb-0 bg-white rounded-top shadow">
+                <div class="row">
+                <div class="col-md-5">
+                    <h2 class="text-center pt-4"><small>Cotizador de Servicios</small></h2>
+                    <div class="text-center padding-vertical-1">
+                        <!-- <div class="btn-group-vertical" role="group">
+                            <button type="button" class="btn btn-primary btn-sm">Precios de Lista</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm">Paquetes</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm">Polizas</button>
+                        </div> -->
+                    </div>
+                    <hr style="margin-top: 0; margin-bottom: 0;"/>
+                    <div class="text-center padding-vertical-1">
+                      <div class="form-group">
+                        <label for="tipoServicio">Tipo de servicio</label>
+                        <select class="form-control" id="tipoServicio" name="tipoServicio" ngModel #tipoServicio="ngModel" [(ngModel)]="cotizadorCliente.tipoServicio">
+                          <option value="1">Cuidador</option>
+                          <option value="2">Enfermera</option>
+                          <option value="3">Enfermera COVID</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="text-center padding-vertical-1">
+                      <!-- <div class="row">
+                        <div class="col-md-6">
+                          <label for="fechaEntrada" class="form-label">Entrada<span class="text-danger"> *</span></label>
+                          <input type="date" class="form-control" id="fechaEntrada" name="fechaEntrada" ngModel #fechaEntrada="ngModel" [(ngModel)]="cotizadorCliente.fechaEntrada" (change)="onEntradaSalida()">        
+                        </div>
+  
+                        <div class="col-md-6">
+                            <label for="fechaSalida" class="form-label">Salida<span class="text-danger"> *</span></label>
+                            <input type="date" class="form-control" id="fechaSalida" name="fechaSalida" ngModel #fechaSalida="ngModel" [(ngModel)]="cotizadorCliente.fechaSalida" (change)="onEntradaSalida()">           
+                        </div>
+                      </div> -->
+                      <!-- <div class="col-md-12">
+                        <p class="align-center">
+                            Días
+                        </p>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <button class="btn btn-secondary" type="button" id="restaDias" (click)="onMinusDias()">-</button>
+                                </div>
+                                <input class="form-control align-center no-fill" type="number" name="dias" id="dias" min="1" max="7" readonly="readonly" ngModel #dias="ngModel" [(ngModel)]="cotizadorCliente.dias">
+                                <div class="input-group-append" style="cursor: pointer;">
+                                  <button class="btn btn-secondary" type="button" id="sumaDias" (click)="onPlusDias()">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <label>Días requeridos</label>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" id="lunes" value="" (change)="ifDiaSelect($event)">Lunes
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" id="martes" value="" (change)="ifDiaSelect($event)">Martes
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" id="miercoles" value="" (change)="ifDiaSelect($event)">Miercoles
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" id="jueves" value="" (change)="ifDiaSelect($event)">Jueves
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" id="viernes" value="" (change)="ifDiaSelect($event)">Viernes
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" id="sabado" value="" (change)="ifDiaSelect($event)">Sabado
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" id="domingo" value="" (change)="ifDiaSelect($event)">Domingo
+                        </label>
+                      </div>
+
+                    </div>
+                    <!-- <div class="text-center padding-vertical-1">
+                      <div class="col-md-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="domingo" />
+                          <label class="form-check-label" for="domingo">¿El servicio tiene un domingo?</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="festivo" />
+                          <label class="form-check-label" for="festivo">¿El servicio tiene un día festivo?</label>
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="text-center padding-vertical-1">
+                      <div class="col-md-12">
+                        <p class="align-center">
+                            Horas por día
+                        </p>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <button class="btn btn-secondary" type="button" id="restaHoras" (click)="onMinus()">-</button>
+                                </div>
+                                <input class="form-control align-center no-fill" type="number" name="horas" id="horas" min="4" max="24" readonly="readonly" ngModel #horas="ngModel" [(ngModel)]="cotizadorCliente.horas">
+                                <div class="input-group-append" style="cursor: pointer;">
+                                  <button class="btn btn-secondary" type="button" id="sumaHoras" (click)="onPlus()">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="text-center padding-vertical-1">
+                      <div class="col-md-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="hospital" />
+                          <label class="form-check-label" for="hospital">Servicio en hospital</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="masculino"/>
+                          <label class="form-check-label" for="masculino">Enfermero/cuidador masculino</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="text-center padding-vertical-1">
+                      <div class="col-md-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="hospital" />
+                          <label class="form-check-label" for="hospital">Servicio en hospital</label>
+                        </div>
+
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="fueraArea"/>
+                          <label class="form-check-label" for="fueraArea">Servicio fuera del area</label>
+                        </div>
+
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="masculino"/>
+                          <label class="form-check-label" for="masculino">Enfermero/cuidador masculino</label>
+                        </div>
+                      </div>
+                    </div> -->
+                    
+                    <div class="text-center padding-vertical-1 pb-4">
+                      <button class="btn btn-primary" type="button" id="sumaHoras" (click)="onCotizar()">Cotizar</button>
+                    </div>
+                </div>
+                <div class="col-md-7 segCol">
+                  <div class="text-center padding-vertical-1 pt-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel tortor et libero tristique ullamcorper. Nam eu elit efficitur, dictum elit a, pharetra eros. Vestibulum ultrices sit amet nisi a placerat. Pellentesque eu urna ac arcu suscipit tempor id eu ipsum. In hac habitasse platea dictumst. Donec euismod nulla a turpis dignissim, eu porta nisi scelerisque. Nulla dictum dolor quis tortor dictum tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed et leo et nisi blandit commodo. Quisque lacinia nulla sed velit lacinia, quis vulputate mauris porttitor. Curabitur et odio felis. Sed sit amet ex non augue faucibus pulvinar. Proin a lectus consectetur, suscipit risus in, faucibus tellus.
+                  </div>
+                  <div class="text-center padding-vertical-1" *ngIf="cotizarClick">
+                    <!-- <h1>{{cotizadorCliente.cotizacion | currency}}</h1> -->
+                    <mat-accordion *ngIf="cotizarClick">
+                      <!-- #enddocregion basic-panel -->
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title style="font-size: 111%;">
+                              PRECIOS DE LISTA
+                            </mat-panel-title>
+                            <mat-panel-description style="font-size: 111%;">
+                              {{cotizadorCliente.dias}} Dias
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <table class="table table-bordered">
+                              <tbody>
+                                  <tr>
+                                      <th></th>
+                                      <th style="font-size: 111%;">PRECIO TOTAL</th>
+                                      <th style="font-size: 111%;">PRECIO POR DIA</th>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" style="font-size: 111%;">CUIDADOR</th>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioListaCuidador | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioListaCuidadorPorDia | currency}}</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" style="font-size: 111%;">ENFERMERA</th>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermera | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermeraPorDia | currency}}</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermeraCovid | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermeraCovidPorDia | currency}}</td>
+                                  </tr>  
+                              </tbody>
+                            </table>
+                        </mat-expansion-panel>
+      
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false" *ngIf="consecutivos">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title style="font-size: 111%;">
+                              PRECIOS EN PAQUETE
+                            </mat-panel-title>
+                            <mat-panel-description style="font-size: 111%;">
+                              {{cotizadorCliente.dias}} Dias
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <table class="table table-bordered">
+                              <tbody>
+                                  <tr>
+                                      <th></th>
+                                      <th style="font-size: 111%;">PRECIO TOTAL</th>
+                                      <th style="font-size: 111%;">PRECIO POR DIA</th>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" style="font-size: 111%;">CUIDADOR</th>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteCuidador | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteCuidadorPorDia | currency}}</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" style="font-size: 111%;">ENFERMERA</th>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermera | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermeraPorDia | currency}}</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermeraCovid | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermeraCovidPorDia | currency}}</td>
+                                  </tr>  
+                              </tbody>
+                            </table>
+                            <div class="row" style="color: black;">** LOS PAQUETES SOLO SE OFRECEN PARA SERVICIOS DE 24 HORAS, DIAS CONSECUTIVOS Y QUE EL PERSONAL SE QUEDE EN LA CASA DEL PACIENTE U HOSPITAL.</div>
+                            <div class="row" style="color: black;">** SE DEBE ALIMENTAR AL CUIDADOR / ENFERMERA</div>
+                        </mat-expansion-panel>
+      
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title style="font-size: 111%;">
+                              PRECIOS DE POLIZAS
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <table class="table table-bordered">
+                              <tbody>
+                                  <tr>
+                                      <th></th>
+                                      <th style="font-size: 111%;">1 MES</th>
+                                      <th style="font-size: 111%;">2 MESES</th>
+                                      <th style="font-size: 111%;">3 MESES</th>
+                                      <th style="font-size: 111%;">4 MESES</th>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" style="font-size: 111%;">CUIDADORA</th>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora1 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora2 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora3 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora4 | currency}}</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" style="font-size: 111%;">ENFERMERA</th>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera1 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera2 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera3 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera4 | currency}}</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid1 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid2 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid3 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid4 | currency}}</td>
+                                  </tr>  
+       
+                              </tbody>
+                            </table>
+                            <div class="row" style="color: black;">** No. DE REEMPLAZOS: 1, 2 y 3</div>
+                            <div class="row" style="color: black;">** EN CASO DE REQUERIR QUE SEA VARON ES MAS EL 20% (POR LA ESCASES DE PERSONAL MASCULINO)</div>
+                        </mat-expansion-panel>
+                        <div class="col-md-1 mt-4"><fa-icon [icon]="faQuestionCircle" style="color: gray;" matTooltip="Precios de Polizas:
+                          &#8226; 1 ó 2 meses: 1 reemplazo
+                          &#8226; 3 meses: 2 reemplazos
+                          &#8226; 4 meses: 3 reemplazos" [matTooltipPosition]="position.value"></fa-icon></div>
+                      </mat-accordion>
+                  </div>
+                </div>
+              </div>
+            </div>
+    <!-- <div class="container bg-white rounded-bottom shadow">
+      <div class="row text-center pb-4">
+        <div class="col">
+          <button type="button" class="btn btn-primary" (click)="onCotizar()"> Cotizar </button>
+        </div>
+      </div>
+    </div> -->
+</form>

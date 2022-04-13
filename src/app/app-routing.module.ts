@@ -20,6 +20,7 @@ import { PagoConsultaComponent } from './pago-consulta/pago-consulta.component';
 import { CotizadorInternoComponent } from './cotizador-interno/cotizador-interno.component';
 import { ReporteEstadoCuentaComponent } from './reporte-estado-cuenta/reporte-estado-cuenta.component';
 import { ReporteAntiguedadSaldosComponent } from './reporte-antiguedad-saldos/reporte-antiguedad-saldos.component';
+import { CotizadorClienteComponent } from './cotizador-cliente/cotizador-cliente.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LoginComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'cotizadorservicios', component: CotizadorInternoComponent, canActivate: [AuthGuard] },
   { path: 'estadocuenta', component: ReporteEstadoCuentaComponent, canActivate: [AuthGuard] },
   { path: 'antiguedadsaldos', component: ReporteAntiguedadSaldosComponent, canActivate: [AuthGuard] },
+  { path: 'cotizadorcliente', component: CotizadorClienteComponent },
   //{ path: 'alta', component: SigninComponent, canActivate: [AuthGuard] },
 ];
 
