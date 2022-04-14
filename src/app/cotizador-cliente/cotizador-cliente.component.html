@@ -178,17 +178,17 @@
                                       <th style="font-size: 111%;">PRECIO TOTAL</th>
                                       <th style="font-size: 111%;">PRECIO POR DIA</th>
                                   </tr>
-                                  <tr>
+                                  <tr *ngIf="cuidadorFlag">
                                       <th scope="row" style="font-size: 111%;">CUIDADOR</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaCuidador | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaCuidadorPorDia | currency}}</td>
                                   </tr>
-                                  <tr>
+                                  <tr *ngIf="enfermeroFlag">
                                       <th scope="row" style="font-size: 111%;">ENFERMERA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermera | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermeraPorDia | currency}}</td>
                                   </tr>
-                                  <tr>
+                                  <tr *ngIf="enfermeroCovidFlag">
                                       <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermeraCovid | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermeraCovidPorDia | currency}}</td>
@@ -214,17 +214,17 @@
                                       <th style="font-size: 111%;">PRECIO TOTAL</th>
                                       <th style="font-size: 111%;">PRECIO POR DIA</th>
                                   </tr>
-                                  <tr>
+                                  <tr *ngIf="cuidadorFlag">
                                       <th scope="row" style="font-size: 111%;">CUIDADOR</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteCuidador | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteCuidadorPorDia | currency}}</td>
                                   </tr>
-                                  <tr>
+                                  <tr *ngIf="enfermeroFlag">
                                       <th scope="row" style="font-size: 111%;">ENFERMERA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermera | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermeraPorDia | currency}}</td>
                                   </tr>
-                                  <tr>
+                                  <tr *ngIf="enfermeroCovidFlag">
                                       <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermeraCovid | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermeraCovidPorDia | currency}}</td>
@@ -244,33 +244,33 @@
                           </mat-expansion-panel-header>
                           <table class="table table-bordered">
                               <tbody>
-                                  <tr>
+                                  <tr *ngIf="cuidadorFlag">
                                       <th></th>
                                       <th style="font-size: 111%;">1 MES</th>
-                                      <th style="font-size: 111%;">2 MESES</th>
+                                      <!-- <th style="font-size: 111%;">2 MESES</th>
                                       <th style="font-size: 111%;">3 MESES</th>
-                                      <th style="font-size: 111%;">4 MESES</th>
+                                      <th style="font-size: 111%;">4 MESES</th> -->
                                   </tr>
                                   <tr>
                                       <th scope="row" style="font-size: 111%;">CUIDADORA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora1 | currency}}</td>
-                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora2 | currency}}</td>
+                                      <!-- <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora2 | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora3 | currency}}</td>
-                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora4 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora4 | currency}}</td> -->
                                   </tr>
-                                  <tr>
+                                  <tr *ngIf="enfermeroFlag">
                                       <th scope="row" style="font-size: 111%;">ENFERMERA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera1 | currency}}</td>
-                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera2 | currency}}</td>
+                                      <!-- <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera2 | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera3 | currency}}</td>
-                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera4 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera4 | currency}}</td> -->
                                   </tr>
-                                  <tr>
+                                  <tr *ngIf="enfermeroCovidFlag">
                                       <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid1 | currency}}</td>
-                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid2 | currency}}</td>
+                                      <!-- <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid2 | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid3 | currency}}</td>
-                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid4 | currency}}</td>
+                                      <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid4 | currency}}</td> -->
                                   </tr>  
        
                               </tbody>

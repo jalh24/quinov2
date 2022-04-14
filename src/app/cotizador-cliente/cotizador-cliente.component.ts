@@ -47,6 +47,9 @@ export class CotizadorClienteComponent implements OnInit {
   fueraAreaFlag: boolean = false;
   domingoLunes: boolean = false;
   consecutivos: boolean = false;
+  cuidadorFlag: boolean = false;
+  enfermeroFlag: boolean = false;
+  enfermeroCovidFlag: boolean = false;
 
   constructor(private http: HttpClient,) { }
 
@@ -101,6 +104,7 @@ export class CotizadorClienteComponent implements OnInit {
     this.cotizadorCliente.polizaEnfermeraCovid2 = 0;
     this.cotizadorCliente.polizaEnfermeraCovid3 = 0;
     this.cotizadorCliente.polizaEnfermeraCovid4 = 0;
+    this.cotizadorCliente.tipoServicio = 1;
     this.comboDatos();
   }
 
@@ -352,28 +356,59 @@ export class CotizadorClienteComponent implements OnInit {
     if (domingo.checked == true) {
       diasSemana.push(7);
     }
+
+    if (this.cotizadorCliente.tipoServicio == 1) {
+      this.cuidadorFlag = true;
+      this.enfermeroFlag = false;
+      this.enfermeroCovidFlag = false;
+    } else {
+      if (this.cotizadorCliente.tipoServicio == 2) {
+        this.cuidadorFlag = false;
+        this.enfermeroFlag = true;
+        this.enfermeroCovidFlag = false;
+      } else {
+        if (this.cotizadorCliente.tipoServicio == 3) {
+          this.cuidadorFlag = false;
+          this.enfermeroFlag = false;
+          this.enfermeroCovidFlag = true;
+        }
+      }
+    }
+
     console.log(diasSemana);
     
     diasSemana.sort();
 
     if (diasSemana.includes(1) && diasSemana.includes(7)) {
       this.domingoLunes = true;
+      diasSemana.splice(diasSemana.length-1,1);
+      diasSemana.splice(0,1);
+      console.log(diasSemana);
     } else {
       this.domingoLunes = false;
     }
 
     diasSemana.forEach((value, index) => {
-      if (index < diasSemana.length) {
-        if (value + 1 == diasSemana[index+1]) {
+      if (index < diasSemana.length-1) {
+        // if (value + 1 == diasSemana[index+1]) {
+          console.log(diasSemana[index+1] - value);
+        if (diasSemana[index+1] - value == 1) {
           this.consecutivos = true;
         } else {
           this.consecutivos = false;
-          if (this.domingoLunes == true) {
-            this.consecutivos = true;
-          }
+          // if (this.domingoLunes == true) {
+          //   this.consecutivos = true;
+          // }
         }
       }
+      
     });
+
+    if (this.cotizadorCliente.horas == 24 && this.consecutivos == true) {
+      this.consecutivos = true;
+    } else {
+      this.consecutivos = false;
+    }
    
 
 
