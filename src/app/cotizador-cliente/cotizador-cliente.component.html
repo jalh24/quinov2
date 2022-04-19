@@ -22,7 +22,7 @@
                         </select>
                       </div>
                     </div>
-                    <div class="text-center padding-vertical-1">
+                    <div class="padding-vertical-1">
                       <!-- <div class="row">
                         <div class="col-md-6">
                           <label for="fechaEntrada" class="form-label">Entrada<span class="text-danger"> *</span></label>
@@ -50,7 +50,12 @@
                             </div>
                         </div>
                     </div> -->
+                    <div class="text-center">
                     <label>Días de la semana requeridos para el servicio</label>
+                  </div>
+                  <div class="row">
+                  <div class="col-md-5"></div>
+                  <div class="col-md-4">
                       <div class="form-check">
                         <label class="form-check-label">
                           <input type="checkbox" class="form-check-input" id="lunes" value="" (change)="ifDiaSelect($event)">Lunes
@@ -86,7 +91,9 @@
                           <input type="checkbox" class="form-check-input" id="domingo" value="" (change)="ifDiaSelect($event)">Domingo
                         </label>
                       </div>
-
+                    </div>
+                    <div class="col-md-3"></div>
+                  </div>
                     </div>
                     <!-- <div class="text-center padding-vertical-1">
                       <div class="col-md-12">
@@ -134,7 +141,7 @@
                     </div>
                     <div class="text-center padding-vertical-1">
                       <div class="form-group">
-                        <label for="generoColaborador">Seleccionar el genero del enfermero / cuidador</label>
+                        <label for="generoColaborador">Seleccionar el género del enfermero / cuidador</label>
                         <select class="form-control" id="generoColaborador" name="generoColaborador" ngModel #generoColaborador="ngModel" [(ngModel)]="cotizadorCliente.generoColaborador">
                           <option value="1">Hombre</option>
                           <option value="2">Mujer</option>
@@ -166,8 +173,35 @@
                     </div>
                 </div>
                 <div class="col-md-7 segCol">
-                  <div class="text-center padding-vertical-1 pt-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel tortor et libero tristique ullamcorper. Nam eu elit efficitur, dictum elit a, pharetra eros. Vestibulum ultrices sit amet nisi a placerat. Pellentesque eu urna ac arcu suscipit tempor id eu ipsum. In hac habitasse platea dictumst. Donec euismod nulla a turpis dignissim, eu porta nisi scelerisque. Nulla dictum dolor quis tortor dictum tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed et leo et nisi blandit commodo. Quisque lacinia nulla sed velit lacinia, quis vulputate mauris porttitor. Curabitur et odio felis. Sed sit amet ex non augue faucibus pulvinar. Proin a lectus consectetur, suscipit risus in, faucibus tellus.
+                  <div class="padding-vertical-1 pt-4">
+                    <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel tortor et libero tristique ullamcorper. Nam eu elit efficitur, dictum elit a, pharetra eros. Vestibulum ultrices sit amet nisi a placerat. Pellentesque eu urna ac arcu suscipit tempor id eu ipsum. In hac habitasse platea dictumst. Donec euismod nulla a turpis dignissim, eu porta nisi scelerisque. Nulla dictum dolor quis tortor dictum tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed et leo et nisi blandit commodo. Quisque lacinia nulla sed velit lacinia, quis vulputate mauris porttitor. Curabitur et odio felis. Sed sit amet ex non augue faucibus pulvinar. Proin a lectus consectetur, suscipit risus in, faucibus tellus. -->
+                    Los precios aquí mostrados pueden variar según particularidades que pueda tener el servicio solicitado. Esto se verificará con nuestro personal de Atención al Cliente, al momento de registrar su Orden de Servicio.
+                  </div>
+                  <div class="padding-vertical-1">
+                    <p class="font-weight-bold">Precios de Lista:</p>
+                    <ul>
+                      <li>El precio mostrado puede sufrir cambios después de la verificación por parte de Atención al Cliente.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold">Precios de Paquete:</p>
+                    <ul>
+                      <li>Los paquetes solo se ofrecen para servicios de 24 horas, días consecutivos y que el personal se quede en la casa del paciente u hospital.</li>
+                      <li>Se debe alimentar al cuidador / enfermera.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-weight-bold">Pólizas:</p>
+                    <ul>
+                      <li>El número de reemplazos es variable dependiendo de cuantos meses sea la póliza.
+                        <ul>
+                          <li>1 ó 2 meses: 1 reemplazo</li>
+                          <li>3 meses: 2 reemplazos</li>
+                          <li>4 meses: 3 reemplazos</li>
+                        </ul>
+                      </li>
+                      <li>En caso de requerir que sea varón, el precio aumenta un 20%.</li>
+                    </ul>
                   </div>
                   <div class="text-center padding-vertical-1" *ngIf="cotizarClick">
                     <!-- <h1>{{cotizadorCliente.cotizacion | currency}}</h1> -->
@@ -191,17 +225,20 @@
                                       <th style="font-size: 111%;">PRECIO POR DIA</th>
                                   </tr>
                                   <tr *ngIf="cuidadorFlag">
-                                      <th scope="row" style="font-size: 111%;">CUIDADOR</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="cotizadorCliente.masculino">CUIDADOR</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="!cotizadorCliente.masculino">CUIDADORA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaCuidador | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaCuidadorPorDia | currency}}</td>
                                   </tr>
                                   <tr *ngIf="enfermeroFlag">
-                                      <th scope="row" style="font-size: 111%;">ENFERMERA</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="cotizadorCliente.masculino">ENFERMERO</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="!cotizadorCliente.masculino">ENFERMERA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermera | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermeraPorDia | currency}}</td>
                                   </tr>
                                   <tr *ngIf="enfermeroCovidFlag">
-                                      <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="cotizadorCliente.masculino">ENFERMERO COVID</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="!cotizadorCliente.masculino">ENFERMERA COVID</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermeraCovid | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioListaEnfermeraCovidPorDia | currency}}</td>
                                   </tr>  
@@ -227,17 +264,20 @@
                                       <th style="font-size: 111%;">PRECIO POR DIA</th>
                                   </tr>
                                   <tr *ngIf="cuidadorFlag">
-                                      <th scope="row" style="font-size: 111%;">CUIDADOR</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="cotizadorCliente.masculino">CUIDADOR</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="!cotizadorCliente.masculino">CUIDADORA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteCuidador | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteCuidadorPorDia | currency}}</td>
                                   </tr>
                                   <tr *ngIf="enfermeroFlag">
-                                      <th scope="row" style="font-size: 111%;">ENFERMERA</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="cotizadorCliente.masculino">ENFERMERO</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="!cotizadorCliente.masculino">ENFERMERA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermera | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermeraPorDia | currency}}</td>
                                   </tr>
                                   <tr *ngIf="enfermeroCovidFlag">
-                                      <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="cotizadorCliente.masculino">ENFERMERO COVID</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="!cotizadorCliente.masculino">ENFERMERA COVID</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermeraCovid | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.precioPaqueteEnfermeraCovidPorDia | currency}}</td>
                                   </tr>  
@@ -256,29 +296,32 @@
                           </mat-expansion-panel-header>
                           <table class="table table-bordered">
                               <tbody>
-                                  <tr *ngIf="cuidadorFlag">
+                                  <tr>
                                       <th></th>
                                       <th style="font-size: 111%;">1 MES</th>
                                       <!-- <th style="font-size: 111%;">2 MESES</th>
                                       <th style="font-size: 111%;">3 MESES</th>
                                       <th style="font-size: 111%;">4 MESES</th> -->
                                   </tr>
-                                  <tr>
-                                      <th scope="row" style="font-size: 111%;">CUIDADORA</th>
+                                  <tr *ngIf="cuidadorFlag">
+                                      <th scope="row" style="font-size: 111%;" *ngIf="cotizadorCliente.masculino">CUIDADOR</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="!cotizadorCliente.masculino">CUIDADORA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora1 | currency}}</td>
                                       <!-- <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora2 | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora3 | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaCuidadora4 | currency}}</td> -->
                                   </tr>
                                   <tr *ngIf="enfermeroFlag">
-                                      <th scope="row" style="font-size: 111%;">ENFERMERA</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="cotizadorCliente.masculino">ENFERMERO</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="!cotizadorCliente.masculino">ENFERMERA</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera1 | currency}}</td>
                                       <!-- <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera2 | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera3 | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermera4 | currency}}</td> -->
                                   </tr>
                                   <tr *ngIf="enfermeroCovidFlag">
-                                      <th scope="row" style="font-size: 111%;">ENFERMERA COVID</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="cotizadorCliente.masculino">ENFERMERO COVID</th>
+                                      <th scope="row" style="font-size: 111%;" *ngIf="!cotizadorCliente.masculino">ENFERMERA COVID</th>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid1 | currency}}</td>
                                       <!-- <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid2 | currency}}</td>
                                       <td style="font-size: 111%;">{{cotizadorCliente.polizaEnfermeraCovid3 | currency}}</td>

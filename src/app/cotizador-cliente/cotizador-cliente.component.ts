@@ -378,6 +378,12 @@ export class CotizadorClienteComponent implements OnInit {
 
     if (this.cotizadorCliente.generoColaborador == 1) {
       this.cotizadorCliente.masculino = 1;
+    } else {
+      if (this.cotizadorCliente.generoColaborador == 2) {
+        this.cotizadorCliente.masculino = 0;
+      } else {
+        this.cotizadorCliente.masculino = 1;
+      }
     }
 
     console.log(diasSemana);
