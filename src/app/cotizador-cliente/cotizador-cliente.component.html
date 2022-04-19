@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <label>Días requeridos</label>
+                    <label>Días de la semana requeridos para el servicio</label>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input type="checkbox" class="form-check-input" id="lunes" value="" (change)="ifDiaSelect($event)">Lunes
@@ -122,12 +122,24 @@
                       <div class="col-md-12">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" value="" id="hospital" />
-                          <label class="form-check-label" for="hospital">Servicio en hospital</label>
+                          <!-- <label class="form-check-label" for="hospital">Servicio en hospital</label> -->
+                          <label class="form-check-label" for="hospital">¿El servicio es requerido en algun hospital?</label>
                         </div>
-                        <div class="form-check">
+                        <!-- <div class="form-check">
                           <input class="form-check-input" type="checkbox" value="" id="masculino"/>
                           <label class="form-check-label" for="masculino">Enfermero/cuidador masculino</label>
-                        </div>
+                          <label class="form-check-label" for="masculino">Enfermero/cuidador masculino</label>
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="text-center padding-vertical-1">
+                      <div class="form-group">
+                        <label for="generoColaborador">Seleccionar el genero del enfermero / cuidador</label>
+                        <select class="form-control" id="generoColaborador" name="generoColaborador" ngModel #generoColaborador="ngModel" [(ngModel)]="cotizadorCliente.generoColaborador">
+                          <option value="1">Hombre</option>
+                          <option value="2">Mujer</option>
+                          <option value="3">Cualquier opción</option>
+                        </select>
                       </div>
                     </div>
                     <!-- <div class="text-center padding-vertical-1">

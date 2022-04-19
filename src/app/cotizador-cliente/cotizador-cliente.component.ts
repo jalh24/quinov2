@@ -105,6 +105,7 @@ export class CotizadorClienteComponent implements OnInit {
     this.cotizadorCliente.polizaEnfermeraCovid3 = 0;
     this.cotizadorCliente.polizaEnfermeraCovid4 = 0;
     this.cotizadorCliente.tipoServicio = 1;
+    this.cotizadorCliente.generoColaborador = 3;
     this.comboDatos();
   }
 
@@ -325,7 +326,7 @@ export class CotizadorClienteComponent implements OnInit {
     // var festivo = <HTMLInputElement> document.getElementById("festivo");
     var fueraArea = <HTMLInputElement> document.getElementById("fueraArea");
     var hospital = <HTMLInputElement> document.getElementById("hospital");
-    var masculino = <HTMLInputElement> document.getElementById("masculino");
+    // var masculino = <HTMLInputElement> document.getElementById("masculino");
     var lunes = <HTMLInputElement> document.getElementById("lunes");
     var martes = <HTMLInputElement> document.getElementById("martes");
     var miercoles = <HTMLInputElement> document.getElementById("miercoles");
@@ -373,6 +374,10 @@ export class CotizadorClienteComponent implements OnInit {
           this.enfermeroCovidFlag = true;
         }
       }
+    }
+
+    if (this.cotizadorCliente.generoColaborador == 1) {
+      this.cotizadorCliente.masculino = 1;
     }
 
     console.log(diasSemana);
@@ -436,11 +441,11 @@ export class CotizadorClienteComponent implements OnInit {
     //   this.cotizadorCliente.fueraArea = 0;
     //   // this.cotizadorCliente.noTaxis = 0; //revisar
     // }
-    if (masculino.checked == true) {
-      this.cotizadorCliente.masculino = 1;
-    } else {
-      this.cotizadorCliente.masculino = 0;
-    }
+    // if (masculino.checked == true) {
+    //   this.cotizadorCliente.masculino = 1;
+    // } else {
+    //   this.cotizadorCliente.masculino = 0;
+    // }
     // if (this.cotizadorCliente.domingos > 0) { // revisar
     //   this.cotizadorCliente.domingo = 1;
     // } else {
@@ -636,18 +641,57 @@ export class CotizadorClienteComponent implements OnInit {
     // var f30 = 5900;
     // var f31 = 6900;
     // var f32 = 7900;
-    var c30 = this.polizas[0].precio;
-    var c31 = this.polizas[1].precio;
-    var c32 = this.polizas[2].precio;
-    var d30 = this.polizas[3].precio;
-    var d31 = this.polizas[4].precio;
-    var d32 = this.polizas[5].precio;
-    var e30 = this.polizas[6].precio;
-    var e31 = this.polizas[7].precio;
-    var e32 = this.polizas[8].precio;
-    var f30 = this.polizas[9].precio;
-    var f31 = this.polizas[10].precio;
-    var f32 = this.polizas[11].precio;
+    var c30 = 0;
+    var c31 = 0;
+    var c32 = 0;
+    var d30 = 0;
+    var d31 = 0;
+    var d32 = 0;
+    var e30 = 0;
+    var e31 = 0;
+    var e32 = 0;
+    var f30 = 0;
+    var f31 = 0;
+    var f32 = 0;
+    if (this.cotizadorCliente.masculino == 1) {
+      c30 = this.polizas[0].precio*1.2;
+      c31 = this.polizas[1].precio*1.2;
+      c32 = this.polizas[2].precio*1.2;
+      d30 = this.polizas[3].precio*1.2;
+      d31 = this.polizas[4].precio*1.2;
+      d32 = this.polizas[5].precio*1.2;
+      e30 = this.polizas[6].precio*1.2;
+      e31 = this.polizas[7].precio*1.2;
+      e32 = this.polizas[8].precio*1.2;
+      f30 = this.polizas[9].precio*1.2;
+      f31 = this.polizas[10].precio*1.2;
+      f32 = this.polizas[11].precio*1.2;
+    } else {
+      c30 = this.polizas[0].precio;
+      c31 = this.polizas[1].precio;
+      c32 = this.polizas[2].precio;
+      d30 = this.polizas[3].precio;
+      d31 = this.polizas[4].precio;
+      d32 = this.polizas[5].precio;
+      e30 = this.polizas[6].precio;
+      e31 = this.polizas[7].precio;
+      e32 = this.polizas[8].precio;
+      f30 = this.polizas[9].precio;
+      f31 = this.polizas[10].precio;
+      f32 = this.polizas[11].precio;
+    }
+    // var c30 = this.polizas[0].precio;
+    // var c31 = this.polizas[1].precio;
+    // var c32 = this.polizas[2].precio;
+    // var d30 = this.polizas[3].precio;
+    // var d31 = this.polizas[4].precio;
+    // var d32 = this.polizas[5].precio;
+    // var e30 = this.polizas[6].precio;
+    // var e31 = this.polizas[7].precio;
+    // var e32 = this.polizas[8].precio;
+    // var f30 = this.polizas[9].precio;
+    // var f31 = this.polizas[10].precio;
+    // var f32 = this.polizas[11].precio;
     this.cotizadorCliente.precioListaCuidador = Math.round(c13);
     this.cotizadorCliente.precioListaEnfermera = Math.round(c14);
     this.cotizadorCliente.precioListaEnfermeraCovid = Math.round(c15);

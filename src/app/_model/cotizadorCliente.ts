@@ -20,6 +20,8 @@ export class CotizadorCliente {
     public idZonaLaboral: number;
     public festivos: number;
 
+    public generoColaborador: number;
+
     public precioListaCuidador: number;
     public precioListaEnfermera: number;
     public precioListaEnfermeraCovid: number;
