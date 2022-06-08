@@ -49,6 +49,31 @@ export class Cliente {
     public alzheimer: boolean;
     public idTipoCliente: boolean;
     public contactosCliente: any[];
+
+    public idUsuarioFacturacion: number;
+    public accionInfoCliente: boolean;
+    public nombrecliente: string;
+    public a_paternocliente: string;
+    public a_maternocliente: string;
+    public telefonocliente: string;
+    public correoelectronicocliente: string;
+    public calle1cliente: string;
+    public calle2cliente: string;
+    public noExtcliente: string;
+    public noIntcliente: string;
+    public codigoPostalcliente: number;
+    public idColoniacliente: number;
+    public idCiudadcliente: number;
+    public idEstadocliente: number;
+    public idPaiscliente: number;
+    public idBancocliente: number;
+    public tipoCuentacliente: string;
+    public numerocuentacliente: number;
+    public clienteExistente: boolean;
+    public clienteExistenteSelected: number;
+
+    public usuarioFacturacion: any;
+
     constructor() {
     }
 }

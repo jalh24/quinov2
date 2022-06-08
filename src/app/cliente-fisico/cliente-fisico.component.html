@@ -582,6 +582,219 @@
                             class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span>
                     </div>
                 </div>
+                <!-- <div class="row text-center pb-4">
+                    <div class="col">
+                        <button *ngIf="!idCliente" type="button" class="btn btn-primary"
+                            (click)="guardarCliente(myForm)"> Enviar Datos
+                        </button>
+                        <button *ngIf="idCliente" type="button" class="btn btn-primary"
+                            (click)="editarCliente(myForm)">Editar Datos</button>
+                    </div>
+                </div> -->
+            </div>
+        </mat-tab>
+        <mat-tab label="Información Cliente">
+            <div class="container mt-5 bg-white rounded-top shadow">
+                <h4 class="pt-4 pb-1">Información Cliente</h4>
+                <div class="row mt-4 pb-4">
+                    <div class="col-md-4">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" id="checkboxUsuarioF" value="" [checked]="clienteExistente" (change)="onClienteExistente()">¿Cliente existente?
+                            </label>
+                          </div>
+                    </div>
+                    
+                </div>
+                <div class="row pb-5" *ngIf="clienteExistente">
+                    <div class="col-md-5">
+                        <ng-multiselect-dropdown [placeholder]="'Seleccionar'" [settings]="usuariosFacturacionSettings" [(ngModel)]="selectedItems" [data]="usuariosFacturacion" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    
+                </div>
+
+                <div class="row" *ngIf="!clienteExistente ">
+                    <div class="col">
+                        <label for="nombrecliente" class="form-label">Nombre(s)<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control valGlobal" id="nombrecliente" name="nombrecliente" ngModel
+                            #nombrecliente="ngModel" [(ngModel)]="cliente.nombrecliente" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required>
+                            <div *ngIf="nombrecliente.invalid && (nombrecliente.dirty || nombrecliente.touched)" class="alert">
+                                <div *ngIf="nombrecliente.errors?.required">
+                                    El Nombre es obligatorio.
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="col">
+                        <label for="apaternocliente" class="form-label">Apellido Paterno<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control valGlobal" id="apaternocliente" name="apaternocliente"
+                            #apaternocliente="ngModel" [(ngModel)]="cliente.a_paternocliente" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required>
+                            <div *ngIf="apaternocliente.invalid && (apaternocliente.dirty || apaternocliente.touched)" class="alert">
+                                <div *ngIf="apaternocliente.errors?.required">
+                                    El Apellido paterno es obligatorio.
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="col">
+                        <label for="amaternocliente" class="form-label">Apellido Materno<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control" id="amaternocliente" name="amaternocliente" ngModel
+                            #amaternocliente="ngModel" [(ngModel)]="cliente.a_maternocliente" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required>
+                            <div *ngIf="amaternocliente.invalid && (amaternocliente.dirty || amaternocliente.touched)" class="alert">
+                                <div *ngIf="amaternocliente.errors?.required">
+                                    El Apellido materno es obligatorio.
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="row mt-4" *ngIf="!clienteExistente ">
+                    <div class="col-md-2">
+                        <label for="telefonocliente" class="form-label">Teléfono<span class="text-danger"> *</span></label>
+                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefonocliente" ngModel
+                            #telefonocliente="ngModel" [(ngModel)]="cliente.telefonocliente" placeholder="10 Dígitos"
+                            pattern="[0-9]*" minlength="10" required>
+                            <div *ngIf="telefonocliente.invalid && (telefonocliente.dirty || telefonocliente.touched)" class="alert">
+                                <div *ngIf="telefonocliente.errors?.required">
+                                    El Telefono es obligatorio.
+                                </div>
+                                  <div *ngIf="!telefonocliente.errors?.required && telefonocliente.errors?.minlength">
+                                    El Telefono debe contener 10 digitos.
+                                  </div>
+                              </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="correoelectronicocliente" class="form-label">Correo Electrónico<span class="text-danger">
+                                *</span></label>
+                        <input type="email" class="form-control" name="correoelectronicocliente" ngModel
+                            #correoelectronicocliente="ngModel" [(ngModel)]="cliente.correoelectronicocliente"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                            <div *ngIf="correoelectronicocliente.invalid && (correoelectronicocliente.dirty || correoelectronicocliente.touched)" class="alert">
+                                <div *ngIf="correoelectronicocliente.errors?.required">
+                                    El Correo electronico es obligatorio.
+                                </div>
+                            </div>
+                    </div>
+                </div>
+
+                <hr class="py-1" *ngIf="!clienteExistente " />
+                <h4 class="pb-1" *ngIf="!clienteExistente ">Dirección</h4>
+                <div class="row" *ngIf="!clienteExistente ">
+                    <div class="col">
+                        <label for="calle1cliente" class="form-label">Calle<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control" id="calle1cliente" name="calle1cliente" ngModel #calle1cliente="ngModel"
+                            [(ngModel)]="cliente.calle1cliente">
+                    </div>
+
+                    <div class="col">
+                        <label for="calle2cliente" class="form-label">Calle 2</label>
+                        <input type="text" class="form-control" id="calle1" name="calle2cliente" ngModel #calle2cliente="ngModel"
+                            [(ngModel)]="cliente.calle2cliente">
+                    </div>
+                </div>
+
+                <div class="row mt-4" *ngIf="!clienteExistente ">
+                    <div class="col-md-2">
+                        <label for="noExtcliente" class="form-label">Número Exterior<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control" name="noExtcliente" ngModel #noExtcliente="ngModel"
+                            [(ngModel)]="cliente.noExtcliente">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="noIntcliente" class="form-label">Número Interior</label>
+                        <input type="text" class="form-control" name="noIntcliente" ngModel #noIntcliente="ngModel"
+                            [(ngModel)]="cliente.noIntcliente">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="codigoPostalcliente" class="form-label">Código Postal<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control" maxlength="5" name="codigoPostalcliente"
+                            [ngModel]="selectedCodigoPostalcliente" (change)="onCodigoPostalCliente($event.target.value)" ngModel
+                            #codigoPostalcliente="ngModel" pattern="[0-9]*">
+
+                    </div>
+
+                    <div class="col">
+                        <label for="coloniacliente" class="form-label">Colonia<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="coloniacliente" ngModel #coloniacliente="ngModel"
+                        [(ngModel)]="cliente.idColoniacliente" (change)="onColoniaCliente($event.target.value)">
+                            <option *ngFor="let coloniacliente of coloniascliente" [value]="coloniacliente.idColonia">
+                                {{coloniacliente.nombre}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-4" *ngIf="!clienteExistente ">
+                    <div class="col">
+                        <label for="ciudadcliente" class="form-label">Ciudad<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="ciudadcliente" (change)="onCiudadCliente($event.target.value)">
+                            <option *ngFor="let ciudadcliente of ciudadescliente" [value]="ciudadcliente.idCiudad">
+                                {{ciudadcliente.nombre}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <label for="estadocliente" class="form-label">Estado<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="estadocliente" (change)="onEstadoCliente($event.target.value)">
+                            <option *ngFor="let estadocliente of estadoscliente" [value]="estadocliente.idEstado">
+                                {{estadocliente.nombre}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <label for="paiscliente" class="form-label">País<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="paiscliente">
+                            <option *ngFor="let paiscliente of paisescliente" [value]="paiscliente.idPais">
+                                {{paiscliente.nombre}}
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <hr class="py-1" *ngIf="!clienteExistente "/>
+                <h4 class="pb-1" *ngIf="!clienteExistente ">Información Bancaria</h4>
+                <div class="row" *ngIf="!clienteExistente ">
+                    <div class="col-md-3">
+                        <label for="bancocliente" class="form-label">Banco<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="bancocliente" (change)="onBancoCliente($event.target.value)">
+                          <option value="" selected disabled hidden>Seleccionar</option>
+                          <option *ngFor="let bancocliente of bancoscliente" [value]="bancocliente.idBanco">
+                            {{bancocliente.nombre}}
+                          </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="tipocuentacliente" class="form-label">Tipo de Cuenta<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="tipocuentacliente" ngModel #tipocuentacliente="ngModel" [(ngModel)]="cliente.tipoCuentacliente"
+                          (change)="onTipoCuentaCliente($event.target.value)">
+                          <option value="" selected disabled hidden>Seleccionar</option>
+                          <option value="CLABE">CLABE</option>
+                          <option value="Numero de Tarjeta">Numero de Tarjeta</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="numerocuentacliente" class="form-label">Numero<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control" name="numerocuentacliente" [(ngModel)]="cliente.numerocuentacliente" ngModel
+                          #numerocuentacliente="ngModel">
+                    </div>
+                </div>
+
+                <div class="row pb-4">
+                    <div class="col-md-12"><span class="font-italic">Los campos con </span><span
+                            class="text-danger font-italic">*</span><span class="font-italic"> son obligatorios</span>
+                    </div>
+                </div>
+
                 <div class="row text-center pb-4">
                     <div class="col">
                         <button *ngIf="!idCliente" type="button" class="btn btn-primary"
@@ -593,6 +806,7 @@
                         <!-- <button type="button" [disabled]="!myForm.form.valid" class="btn btn-primary" (click)="guardarColaborador(myForm)"> Grabar Colaborador </button> -->
                     </div>
                 </div>
+
             </div>
         </mat-tab>
     </mat-tab-group>

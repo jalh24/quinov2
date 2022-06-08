@@ -1,0 +1,96 @@
+<form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
+    <ngb-toast-container></ngb-toast-container>
+            <div class="container mt-5 pt-0 pb-0 bg-white rounded-top shadow">
+                <div class="row">
+                <div class="col-md-5">
+                    <h2 class="text-center pt-4"><small>Cotizador de Servicios</small></h2>
+                    <div class="text-center padding-vertical-1">
+                        <!-- <div class="btn-group-vertical" role="group">
+                            <button type="button" class="btn btn-primary btn-sm">Precios de Lista</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm">Paquetes</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm">Polizas</button>
+                        </div> -->
+                    </div>
+                    <hr style="margin-top: 0; margin-bottom: 0;"/>
+                    <div class="text-center padding-vertical-1">
+                      <div class="form-group">
+                        <label for="tipoServicio">Tipo de servicio</label>
+                        <select class="form-control" id="tipoServicio" name="tipoServicio" ngModel #tipoServicio="ngModel" [(ngModel)]="cotizadorCliente.tipoServicio">
+                          <option value="1">Cuidador</option>
+                          <option value="2">Enfermera</option>
+                          <option value="3">Enfermera COVID</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="text-center padding-vertical-1">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="fechaEntrada" class="form-label">Entrada<span class="text-danger"> *</span></label>
+                          <input type="date" class="form-control" id="fechaEntrada" name="fechaEntrada" ngModel #fechaEntrada="ngModel" [(ngModel)]="cotizadorCliente.fechaEntrada" (change)="onEntradaSalida()">        
+                        </div>
+  
+                        <div class="col-md-6">
+                            <label for="fechaSalida" class="form-label">Salida<span class="text-danger"> *</span></label>
+                            <input type="date" class="form-control" id="fechaSalida" name="fechaSalida" ngModel #fechaSalida="ngModel" [(ngModel)]="cotizadorCliente.fechaSalida" (change)="onEntradaSalida()">           
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center padding-vertical-1">
+                      <div class="col-md-12">
+                        <p class="align-center">
+                            Horas por día
+                        </p>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <button class="btn btn-secondary" type="button" id="restaHoras" (click)="onMinus()">-</button>
+                                </div>
+                                <input class="form-control align-center no-fill" type="number" name="horas" id="horas" min="4" max="24" readonly="readonly" ngModel #horas="ngModel" [(ngModel)]="cotizadorCliente.horas">
+                                <div class="input-group-append" style="cursor: pointer;">
+                                  <button class="btn btn-secondary" type="button" id="sumaHoras" (click)="onPlus()">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="text-center padding-vertical-1">
+                      <div class="col-md-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="hospital" />
+                          <label class="form-check-label" for="hospital">Servicio en hospital</label>
+                        </div>
+
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="fueraArea"/>
+                          <label class="form-check-label" for="fueraArea">Servicio fuera del area</label>
+                        </div>
+
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="masculino"/>
+                          <label class="form-check-label" for="masculino">Enfermero/cuidador masculino</label>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="text-center padding-vertical-1 pb-4">
+                      <button class="btn btn-primary" type="button" id="sumaHoras" (click)="onCotizar()">Cotizar</button>
+                    </div>
+                </div>
+                <div class="col-md-7 segCol">
+                  <div class="text-center padding-vertical-1 pt-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel tortor et libero tristique ullamcorper. Nam eu elit efficitur, dictum elit a, pharetra eros. Vestibulum ultrices sit amet nisi a placerat. Pellentesque eu urna ac arcu suscipit tempor id eu ipsum. In hac habitasse platea dictumst. Donec euismod nulla a turpis dignissim, eu porta nisi scelerisque. Nulla dictum dolor quis tortor dictum tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed et leo et nisi blandit commodo. Quisque lacinia nulla sed velit lacinia, quis vulputate mauris porttitor. Curabitur et odio felis. Sed sit amet ex non augue faucibus pulvinar. Proin a lectus consectetur, suscipit risus in, faucibus tellus.
+                  </div>
+                  <div class="text-center padding-vertical-1" *ngIf="cotizarClick">
+                    <h1>{{cotizadorCliente.cotizacion | currency}}</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+    <!-- <div class="container bg-white rounded-bottom shadow">
+      <div class="row text-center pb-4">
+        <div class="col">
+          <button type="button" class="btn btn-primary" (click)="onCotizar()"> Cotizar </button>
+        </div>
+      </div>
+    </div> -->
+</form>

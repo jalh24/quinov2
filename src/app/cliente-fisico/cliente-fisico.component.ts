@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { Cliente } from '../_model/cliente';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 
 @Component({
@@ -17,9 +18,14 @@ import { ActivatedRoute } from '@angular/router';
 export class ClienteFisicoComponent implements OnInit {
   faSignOutAlt = faSignOutAlt;
   selectedPais = 1;
+  selectedPaisCliente = 1;
   selectedEstado = null;
   selectedCodigoPostal = null;
+  selectedCodigoPostalcliente = null;
 
+  selectedItems: any = [];
+  usuariosFacturacionSettings: IDropdownSettings = {};
+  usuariosFacturacion: any;
   public cliente: Cliente;
   httpOptions = {
     headers: new HttpHeaders({
@@ -27,22 +33,31 @@ export class ClienteFisicoComponent implements OnInit {
       Token: localStorage.getItem('token')
     })
   };
+  clienteExistente = false;
   textBoxDisabledSeg = true;
+  accionInfoPaciente = true;
+  existeUsuarioFacturacion = false;
   sexos: any[];
   complexiones: any[];
   parentescos: any[];
   colonias: any[];
+  coloniascliente: any[];
   ciudades: any[];
+  ciudadescliente: any[];
   ciudadesDir: any[];
   estadosDir: any[];
+  estadoscliente: any[];
+  bancoscliente: any[];
   estados: any[];
   paises: any[];
+  paisescliente: any[];
   estadosCiviles: any[];
   tiposTelefono: any[];
   datos: any;
   idCliente: number;
   selected = new FormControl(0);
   @ViewChild('myForm') ngForm: NgForm;
+  clienteInfoInicial: any;
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private toastService: NgbToastService
@@ -58,6 +73,17 @@ export class ClienteFisicoComponent implements OnInit {
     this.comboSexos();
     this.comboEstadosCiviles();
     this.comboTiposTelefono();
+    this.comboBancos();
+    this.comboUsuariosFacturacion();
+
+    this.usuariosFacturacionSettings = {
+      singleSelection: false,
+      idField: 'idUsuarioFacturacion',
+      textField: 'nombrecompleto',
+      unSelectAllText: 'Quitar Selecciones',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
 
     this.route.queryParams.subscribe(params=>{
       this.idCliente = params['idCliente'];
@@ -120,13 +146,35 @@ export class ClienteFisicoComponent implements OnInit {
     this.cliente.idTipoCliente = null;
     this.cliente.rfc = null;
     this.cliente.contactosCliente = [];
-    
+    this.cliente.nombrecliente = null;
+    this.cliente.a_paternocliente = null;
+    this.cliente.a_maternocliente = null;
+    this.cliente.telefonocliente = null;
+    this.cliente.correoelectronicocliente = null;
+    this.cliente.calle1cliente = null;
+    this.cliente.calle2cliente = null;
+    this.cliente.noExtcliente = null;
+    this.cliente.noIntcliente = null;
+    this.cliente.codigoPostalcliente = null;
+    this.cliente.idColoniacliente = null;
+    this.cliente.idCiudadcliente = null;
+    this.cliente.idEstadocliente = null;
+    this.cliente.idPaiscliente = null;
+    this.cliente.idBancocliente = null;
+    this.cliente.tipoCuentacliente = null;
+    this.cliente.numerocuentacliente = null;
+    this.cliente.clienteExistente = null;
+    this.cliente.clienteExistenteSelected = null;
   }
 
-  public guardarCliente(ngForm: NgForm) {
-    
+  public guardarCliente(ngForm: NgForm) { 
+       
+    this.cliente.clienteExistente = this.clienteExistente;
+    console.log(this.cliente.clienteExistenteSelected);
+
     this.cliente.idPais = 1;
     this.cliente.idPaisNacimiento = 1;
+    this.cliente.idPaiscliente = 1;
     this.cliente.idTipoCliente = false;
 
    console.log(this.cliente);
@@ -146,12 +194,26 @@ export class ClienteFisicoComponent implements OnInit {
       this.datos = data.data;
       console.log(this.datos);
       this.cliente = this.datos[0];
+      this.cliente.idPaiscliente = 1;
+      console.log(this.cliente);
+      if (this.cliente.idUsuarioFacturacion != null) {
+        // this.selectedItems.push(this.cliente.usuarioFacturacion);
+        console.log(this.selectedItems);
+        this.existeUsuarioFacturacion = true;
+        this.clienteExistente = true;
+      } else {
+        this.existeUsuarioFacturacion = false;
+        this.clienteExistente = false;
+      }
       this.comboCiudades(this.cliente.idEstadoNacimiento);
       this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
       this.onCodigoPostal(this.cliente.codigoPostal);
+      this.onCodigoPostalCliente(this.cliente.codigoPostalcliente);
       this.onColonia(this.cliente.idColonia);
+      this.onColoniaCliente(this.cliente.idColoniacliente);
       //this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
       this.selectedCodigoPostal = this.cliente.codigoPostal;
+      this.selectedCodigoPostalcliente = this.cliente.codigoPostalcliente;
       this.cliente.peso = Math.floor(this.cliente.peso);
       // this.cliente.estatura = Math.floor(this.cliente.estatura);
       // this.datos.cuentas.forEach(element => {
@@ -164,7 +226,10 @@ export class ClienteFisicoComponent implements OnInit {
 
   public editarCliente(ngForm: NgForm){
     
-    this.http.put<any>('/api/cliente/update', this.cliente, this.httpOptions).subscribe(data => {
+    // let object = {cliente: this.cliente, idUsuarioFacturacion: null};
+    this.cliente.clienteExistente = this.clienteExistente;
+
+    this.http.post<any>('/api/cliente/update', this.cliente, this.httpOptions).subscribe(data => {
       window.history.back();
       this.showSuccess(NgbToastType.Success, "Se edito el cliente exitosamente");
     });
@@ -177,7 +242,7 @@ export class ClienteFisicoComponent implements OnInit {
 
   }
   pagDelante(index) {
-    if (this.selected.value < 5) {
+    if (this.selected.value < 6) {
       this.selected.setValue(this.selected.value + index);
     }
 
@@ -207,6 +272,13 @@ export class ClienteFisicoComponent implements OnInit {
     this.textBoxDisabledSeg = true;
   }
 
+  enableAccionInfoPaciente() {
+    this.accionInfoPaciente = false;
+  }
+  disableAccionInfoPaciente() {
+    this.accionInfoPaciente = true;
+  }
+
   public comboEstadosCiviles() {
     this.http.get<any>('/api/catalogo/comboEstadosCiviles',this.httpOptions).subscribe(data => {
       this.estadosCiviles = data.data;
@@ -228,6 +300,15 @@ export class ClienteFisicoComponent implements OnInit {
   public comboSexos() {
     this.http.get<any>('/api/catalogo/sexos',this.httpOptions).subscribe(data => {
       this.sexos = data.data;
+    });
+  }
+
+  public comboUsuariosFacturacion() {
+    this.http.get<any>('/api/cliente/usuariosFacturacion', this.httpOptions).subscribe(data => {
+      this.usuariosFacturacion = data.data;
+      this.selectedItems = [
+        { item_id: 1, item_text: 'Mauricio Tamez Zertuche' }
+      ];
     });
   }
 
@@ -265,6 +346,12 @@ export class ClienteFisicoComponent implements OnInit {
     });
   }
 
+  public comboBancos() {
+    this.http.get<any>('/api/catalogo/bancos', this.httpOptions).subscribe(data => {
+      this.bancoscliente = data.data;
+    });
+  }
+
   public comboParentescos() {
     this.http.get<any>('/api/catalogo/parentescos',this.httpOptions).subscribe(data => {
       this.parentescos = data.data;
@@ -274,6 +361,7 @@ export class ClienteFisicoComponent implements OnInit {
   public comboPaises() {
     this.http.get<any>('/api/catalogo/paises',this.httpOptions).subscribe(data => {
       this.paises = data.data;
+      this.paisescliente = data.data;
     });
   }
 
@@ -291,6 +379,36 @@ export class ClienteFisicoComponent implements OnInit {
       });
     });
   }
+
+    public onCodigoPostalCliente(selectedCodigoPostalcliente) {
+    this.cliente.codigoPostalcliente = selectedCodigoPostalcliente;
+    this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostalcliente,this.httpOptions).subscribe(data => {
+      this.coloniascliente = data.data;
+      this.cliente.idCiudadcliente = data.data[0].idCiudad;
+      this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad,this.httpOptions).subscribe(dataCiudad => {
+        this.ciudadescliente = dataCiudad.data;
+        this.cliente.idEstadocliente = dataCiudad.data[0].idEstado;
+        this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado,this.httpOptions).subscribe(data => {
+          this.estadoscliente = data.data;
+        });
+      });
+    });
+  }
+
+  onTipoCuentaCliente(event) {
+    this.cliente.tipoCuentacliente = event;
+  }
+
+  onItemSelect(item: any) {
+    this.cliente.clienteExistenteSelected = item.idUsuarioFacturacion;
+    console.log(item);
+  }
+
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
+
  onTelefono1(telefono){
 if (this.cliente.telefonoContacto == null) {
   this.cliente.telefonoContacto = telefono;
@@ -300,17 +418,40 @@ if (this.cliente.telefonoContacto == null) {
 
 //}
  }
+
+ onClienteExistente() {
+  this.clienteExistente = !this.clienteExistente;
+}
+
+
   onColonia(value: any) {
-    this.cliente.idColonia = value;
-    
+    this.cliente.idColonia = value;   
+  }
+
+  onColoniaCliente(value: any) {
+    this.cliente.idColoniacliente = value;
+    console.log(value);
   }
 
   onCiudad(value: any) {
     this.cliente.idCiudad = value;
   }
 
+  onCiudadCliente(value: any) {
+    this.cliente.idCiudadcliente = value;
+    console.log(value);
+  }
+
+  onBancoCliente(value: any) {
+    this.cliente.idBancocliente = value;
+  }
+
   onEstado(value: any) {
     this.cliente.idEstado = value;
+  }
+
+  onEstadoCliente(value: any) {
+    this.cliente.idEstadocliente = value;
   }
 
   onEstadoCivil(value: any) {

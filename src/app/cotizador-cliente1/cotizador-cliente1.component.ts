@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { TooltipPosition } from '@angular/material/tooltip';
-import { faHandHoldingMedical, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHandHoldingMedical } from '@fortawesome/free-solid-svg-icons';
 import { CotizadorCliente } from '../_model/cotizadorCliente';
 
 @Component({
@@ -11,12 +9,8 @@ import { CotizadorCliente } from '../_model/cotizadorCliente';
   styleUrls: ['./cotizador-cliente.component.scss']
 })
 export class CotizadorClienteComponent implements OnInit {
-
-  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
-  position = new FormControl(this.positionOptions[0]);
   
   faHandHoldingMedical = faHandHoldingMedical;
-  faQuestionCircle = faQuestionCircle;
   precioLista: boolean;
   paquetes: boolean;
   poliza: boolean;
@@ -44,12 +38,6 @@ export class CotizadorClienteComponent implements OnInit {
     })
   };
   cotizarClick: boolean = false;
-  fueraAreaFlag: boolean = false;
-  domingoLunes: boolean = false;
-  consecutivos: boolean = false;
-  cuidadorFlag: boolean = false;
-  enfermeroFlag: boolean = false;
-  enfermeroCovidFlag: boolean = false;
 
   constructor(private http: HttpClient,) { }
 
@@ -67,45 +55,18 @@ export class CotizadorClienteComponent implements OnInit {
     this.cotizadorCliente.fechaEntrada = null;
     this.cotizadorCliente.fechaSalida = null;
     this.cotizadorCliente.horas = 4;
-    this.cotizadorCliente.dias = 0;
     this.cotizadorCliente.domingos = null;
     this.cotizadorCliente.autoPropio = false;
     this.cotizadorCliente.uber = false;
     this.cotizadorCliente.festivos = null;
     this.cotizadorCliente.cotizacion = null;
     this.cotizadorCliente.hospital = 0;
-    this.cotizadorCliente.fueraArea = 1;
+    this.cotizadorCliente.fueraArea = 0;
     this.cotizadorCliente.masculino = 0;
     this.cotizadorCliente.noTaxis = 0;
     this.cotizadorCliente.domingo = 0;
     this.cotizadorCliente.asueto = 0;
     this.cotizadorCliente.cotizacion = 0;
-    this.cotizadorCliente.precioListaCuidador = 0;
-    this.cotizadorCliente.precioListaEnfermera = 0;
-    this.cotizadorCliente.precioListaEnfermeraCovid = 0;
-    this.cotizadorCliente.precioListaCuidadorPorDia = 0;
-    this.cotizadorCliente.precioListaEnfermeraPorDia = 0;
-    this.cotizadorCliente.precioListaEnfermeraCovidPorDia = 0;
-    this.cotizadorCliente.precioPaqueteCuidador = 0;
-    this.cotizadorCliente.precioPaqueteEnfermera = 0;
-    this.cotizadorCliente.precioPaqueteEnfermeraCovid = 0;
-    this.cotizadorCliente.precioPaqueteCuidadorPorDia = 0;
-    this.cotizadorCliente.precioPaqueteEnfermeraPorDia = 0;
-    this.cotizadorCliente.precioPaqueteEnfermeraCovidPorDia = 0;
-    this.cotizadorCliente.polizaCuidadora1 = 0;
-    this.cotizadorCliente.polizaCuidadora2 = 0;
-    this.cotizadorCliente.polizaCuidadora3 = 0;
-    this.cotizadorCliente.polizaCuidadora4 = 0;
-    this.cotizadorCliente.polizaEnfermera1 = 0;
-    this.cotizadorCliente.polizaEnfermera2 = 0;
-    this.cotizadorCliente.polizaEnfermera3 = 0;
-    this.cotizadorCliente.polizaEnfermera4 = 0;
-    this.cotizadorCliente.polizaEnfermeraCovid1 = 0;
-    this.cotizadorCliente.polizaEnfermeraCovid2 = 0;
-    this.cotizadorCliente.polizaEnfermeraCovid3 = 0;
-    this.cotizadorCliente.polizaEnfermeraCovid4 = 0;
-    this.cotizadorCliente.tipoServicio = 1;
-    this.cotizadorCliente.generoColaborador = 3;
     this.comboDatos();
   }
 
@@ -215,40 +176,8 @@ export class CotizadorClienteComponent implements OnInit {
     }
   }
 
-  onPlusDias() {
-    if (this.cotizadorCliente.dias <= 7 && this.cotizadorCliente.dias > 0) {
-      if (this.cotizadorCliente.dias + 1 < 8) {
-        this.cotizadorCliente.dias += 1;
-      }
-    }
-  }
-
-  onMinusDias() {
-    if (this.cotizadorCliente.dias <= 7 && this.cotizadorCliente.dias > 0) {
-      if (this.cotizadorCliente.dias - 1 > 0) {
-        this.cotizadorCliente.dias -= 1;
-      }
-    }
-  }
-
-  onPlusTaxis() {
-    if (this.cotizadorCliente.noTaxis <= 2 && this.cotizadorCliente.noTaxis > 0) {
-      if (this.cotizadorCliente.noTaxis + 1 < 3) {
-        this.cotizadorCliente.noTaxis += 1;
-      }
-    }
-  }
-
-  onMinusTaxis() {
-    if (this.cotizadorCliente.noTaxis <= 2 && this.cotizadorCliente.noTaxis > 0) {
-      if (this.cotizadorCliente.noTaxis - 1 > 0) {
-        this.cotizadorCliente.noTaxis -= 1;
-      }
-    }
-  }
-
   public comboDatos() {
-    this.http.get<any>('/api/cotizador/datosServicio?idTipoCosto=' + 1).subscribe(data => {
+    this.http.get<any>('/api/cotizador/datosServicio?idTipoCosto=' + 1, this.httpOptions).subscribe(data => {
       this.costoTurnoBajo = data.costoServicio;
       this.gastoServicioBajo = data.gastoServicio;
       this.costoTurnoBajo.forEach((value,index) => {
@@ -262,7 +191,7 @@ export class CotizadorClienteComponent implements OnInit {
       });
       console.log(this.costoTurnoBajo);
     });
-    this.http.get<any>('/api/cotizador/datosServicio?idTipoCosto=' + 2).subscribe(data => {
+    this.http.get<any>('/api/cotizador/datosServicio?idTipoCosto=' + 2, this.httpOptions).subscribe(data => {
       this.costoTurnoMedio = data.costoServicio;
       this.gastoServicioMedio = data.gastoServicio;
       this.costoTurnoMedio.forEach((value,index) => {
@@ -276,7 +205,7 @@ export class CotizadorClienteComponent implements OnInit {
       });
       console.log(this.costoTurnoMedio);
     });
-    this.http.get<any>('/api/cotizador/datosServicio?idTipoCosto=' + 3).subscribe(data => {
+    this.http.get<any>('/api/cotizador/datosServicio?idTipoCosto=' + 3, this.httpOptions).subscribe(data => {
       this.costoTurnoAlto = data.costoServicio;
       this.gastoServicioAlto = data.gastoServicio;
       this.costoTurnoAlto.forEach((value,index) => {
@@ -290,9 +219,8 @@ export class CotizadorClienteComponent implements OnInit {
       });
       console.log(this.costoTurnoAlto);
     });
-    console.log("antes metodo");
-    this.http.get<any>('/api/cotizador/datosCotizador').subscribe(data => {
-      console.log(data);
+
+    this.http.get<any>('/api/cotizador/datosCotizador', this.httpOptions).subscribe(data => {
       this.polizas = data.polizas;
       this.pagosPersonal = data.pagosPersonal;
       this.preciosCliente = data.preciosCliente;
@@ -311,158 +239,38 @@ export class CotizadorClienteComponent implements OnInit {
     });
   }
 
-  ifDiaSelect(event) {
-    if ( event.target.checked ) {
-      this.cotizadorCliente.dias += 1;
-    } else {
-      if ( !event.target.checked ) {
-        this.cotizadorCliente.dias -= 1;
-      }
-    }
-  }
-
   onCotizar() {
     this.cotizarClick = true;
-    // var domingo = <HTMLInputElement> document.getElementById("domingo");
-    // var festivo = <HTMLInputElement> document.getElementById("festivo");
-    var fueraArea = <HTMLInputElement> document.getElementById("fueraArea");
     var hospital = <HTMLInputElement> document.getElementById("hospital");
-    // var masculino = <HTMLInputElement> document.getElementById("masculino");
-    var lunes = <HTMLInputElement> document.getElementById("lunes");
-    var martes = <HTMLInputElement> document.getElementById("martes");
-    var miercoles = <HTMLInputElement> document.getElementById("miercoles");
-    var jueves = <HTMLInputElement> document.getElementById("jueves");
-    var viernes = <HTMLInputElement> document.getElementById("viernes");
-    var sabado = <HTMLInputElement> document.getElementById("sabado");
-    var domingo = <HTMLInputElement> document.getElementById("domingo");
-    var diasSemana:number[] = [];
-
-    if (lunes.checked == true) {
-      diasSemana.push(1);
-    }
-    if (martes.checked == true) {
-      diasSemana.push(2);
-    }
-    if (miercoles.checked == true) {
-      diasSemana.push(3);
-    }
-    if (jueves.checked == true) {
-      diasSemana.push(4);
-    }
-    if (viernes.checked == true) {
-      diasSemana.push(5);
-    }
-    if (sabado.checked == true) {
-      diasSemana.push(6);
-    }
-    if (domingo.checked == true) {
-      diasSemana.push(7);
-    }
-
-    if (this.cotizadorCliente.tipoServicio == 1) {
-      this.cuidadorFlag = true;
-      this.enfermeroFlag = false;
-      this.enfermeroCovidFlag = false;
-    } else {
-      if (this.cotizadorCliente.tipoServicio == 2) {
-        this.cuidadorFlag = false;
-        this.enfermeroFlag = true;
-        this.enfermeroCovidFlag = false;
-      } else {
-        if (this.cotizadorCliente.tipoServicio == 3) {
-          this.cuidadorFlag = false;
-          this.enfermeroFlag = false;
-          this.enfermeroCovidFlag = true;
-        }
-      }
-    }
-
-    if (this.cotizadorCliente.generoColaborador == 1) {
-      this.cotizadorCliente.masculino = 1;
-    } else {
-      if (this.cotizadorCliente.generoColaborador == 2) {
-        this.cotizadorCliente.masculino = 0;
-      } else {
-        this.cotizadorCliente.masculino = 0;
-      }
-    }
-
-    console.log(diasSemana);
-    
-    diasSemana.sort();
-
-    if (diasSemana.includes(1) && diasSemana.includes(7)) {
-      this.domingoLunes = true;
-      diasSemana.splice(diasSemana.length-1,1);
-      diasSemana.splice(0,1);
-      console.log(diasSemana);
-    } else {
-      this.domingoLunes = false;
-    }
-
-    diasSemana.forEach((value, index) => {
-      if (index < diasSemana.length-1) {
-        // if (value + 1 == diasSemana[index+1]) {
-          console.log(diasSemana[index+1] - value);
-        if (diasSemana[index+1] - value == 1) {
-          this.consecutivos = true;
-        } else {
-          this.consecutivos = false;
-          // if (this.domingoLunes == true) {
-          //   this.consecutivos = true;
-          // }
-        }
-      }
-      
-    });
-
-    if (this.cotizadorCliente.horas == 24 && this.consecutivos == true) {
-      this.consecutivos = true;
-    } else {
-      this.consecutivos = false;
-    }
-   
-
-
-    this.cotizadorCliente.domingo = 1;
-    // if (domingo.checked == true) {
-    //   this.cotizadorCliente.domingo = 1;
-    // } else {
-    //   this.cotizadorCliente.domingo = 0;
-    // }
-    this.cotizadorCliente.asueto = 1;
-    // if (festivo.checked == true) {
-    //   this.cotizadorCliente.asueto = 1;
-    // } else {
-    //   this.cotizadorCliente.asueto = 0;
-    // }
+    var fueraArea = <HTMLInputElement> document.getElementById("fueraArea");
+    var masculino = <HTMLInputElement> document.getElementById("masculino");
     if (hospital.checked == true) {
       this.cotizadorCliente.hospital = 1;
     } else {
       this.cotizadorCliente.hospital = 0;
     }
-    // if (fueraArea.checked == true) {
-    //   this.cotizadorCliente.fueraArea = 1;
-    //   // this.cotizadorCliente.noTaxis = 1; //revisar
-    // } else {
-    //   this.cotizadorCliente.fueraArea = 0;
-    //   // this.cotizadorCliente.noTaxis = 0; //revisar
-    // }
-    // if (masculino.checked == true) {
-    //   this.cotizadorCliente.masculino = 1;
-    // } else {
-    //   this.cotizadorCliente.masculino = 0;
-    // }
-    // if (this.cotizadorCliente.domingos > 0) { // revisar
-    //   this.cotizadorCliente.domingo = 1;
-    // } else {
-    //   this.cotizadorCliente.domingo = 0;
-    // }
-    // if (this.cotizadorCliente.festivos > 0) {
-    //   this.cotizadorCliente.asueto = 1;
-    // } else {
-    //   this.cotizadorCliente.asueto = 0;
-    // }
+    if (fueraArea.checked == true) {
+      this.cotizadorCliente.fueraArea = 1;
+      this.cotizadorCliente.noTaxis = 1; //revisar
+    } else {
+      this.cotizadorCliente.fueraArea = 0;
+      this.cotizadorCliente.noTaxis = 0; //revisar
+    }
+    if (masculino.checked == true) {
+      this.cotizadorCliente.masculino = 1;
+    } else {
+      this.cotizadorCliente.masculino = 0;
+    }
+    if (this.cotizadorCliente.domingos > 0) { // revisar
+      this.cotizadorCliente.domingo = 1;
+    } else {
+      this.cotizadorCliente.domingo = 0;
+    }
+    if (this.cotizadorCliente.festivos > 0) {
+      this.cotizadorCliente.asueto = 1;
+    } else {
+      this.cotizadorCliente.asueto = 0;
+    }
     this.calculos2();
   }
 
@@ -648,87 +456,59 @@ export class CotizadorClienteComponent implements OnInit {
     // var f30 = 5900;
     // var f31 = 6900;
     // var f32 = 7900;
-    var c30 = 0;
-    var c31 = 0;
-    var c32 = 0;
-    var d30 = 0;
-    var d31 = 0;
-    var d32 = 0;
-    var e30 = 0;
-    var e31 = 0;
-    var e32 = 0;
-    var f30 = 0;
-    var f31 = 0;
-    var f32 = 0;
-    if (this.cotizadorCliente.masculino == 1) {
-      c30 = this.polizas[0].precio*1.2;
-      c31 = this.polizas[1].precio*1.2;
-      c32 = this.polizas[2].precio*1.2;
-      d30 = this.polizas[3].precio*1.2;
-      d31 = this.polizas[4].precio*1.2;
-      d32 = this.polizas[5].precio*1.2;
-      e30 = this.polizas[6].precio*1.2;
-      e31 = this.polizas[7].precio*1.2;
-      e32 = this.polizas[8].precio*1.2;
-      f30 = this.polizas[9].precio*1.2;
-      f31 = this.polizas[10].precio*1.2;
-      f32 = this.polizas[11].precio*1.2;
+    var c30 = this.polizas[0].precio;
+    var c31 = this.polizas[1].precio;
+    var c32 = this.polizas[2].precio;
+    var d30 = this.polizas[3].precio;
+    var d31 = this.polizas[4].precio;
+    var d32 = this.polizas[5].precio;
+    var e30 = this.polizas[6].precio;
+    var e31 = this.polizas[7].precio;
+    var e32 = this.polizas[8].precio;
+    var f30 = this.polizas[9].precio;
+    var f31 = this.polizas[10].precio;
+    var f32 = this.polizas[11].precio;
+    if (this.cotizadorCliente.tipoServicio == 1) {
+      this.cotizadorCliente.cotizacion = Math.round(c13);
     } else {
-      c30 = this.polizas[0].precio;
-      c31 = this.polizas[1].precio;
-      c32 = this.polizas[2].precio;
-      d30 = this.polizas[3].precio;
-      d31 = this.polizas[4].precio;
-      d32 = this.polizas[5].precio;
-      e30 = this.polizas[6].precio;
-      e31 = this.polizas[7].precio;
-      e32 = this.polizas[8].precio;
-      f30 = this.polizas[9].precio;
-      f31 = this.polizas[10].precio;
-      f32 = this.polizas[11].precio;
+      if (this.cotizadorCliente.tipoServicio == 2) {
+        this.cotizadorCliente.cotizacion = Math.round(c14);
+      } else {
+        if (this.cotizadorCliente.tipoServicio == 3) {
+          this.cotizadorCliente.cotizacion = Math.round(c15);
+        }
+      }
     }
-    // var c30 = this.polizas[0].precio;
-    // var c31 = this.polizas[1].precio;
-    // var c32 = this.polizas[2].precio;
-    // var d30 = this.polizas[3].precio;
-    // var d31 = this.polizas[4].precio;
-    // var d32 = this.polizas[5].precio;
-    // var e30 = this.polizas[6].precio;
-    // var e31 = this.polizas[7].precio;
-    // var e32 = this.polizas[8].precio;
-    // var f30 = this.polizas[9].precio;
-    // var f31 = this.polizas[10].precio;
-    // var f32 = this.polizas[11].precio;
-    this.cotizadorCliente.precioListaCuidador = Math.round(c13);
-    this.cotizadorCliente.precioListaEnfermera = Math.round(c14);
-    this.cotizadorCliente.precioListaEnfermeraCovid = Math.round(c15);
-    this.cotizadorCliente.precioListaCuidadorPorDia = Math.round(d13);
-    this.cotizadorCliente.precioListaEnfermeraPorDia = Math.round(d14);
-    this.cotizadorCliente.precioListaEnfermeraCovidPorDia = Math.round(d15);
-    this.cotizadorCliente.precioPaqueteCuidador = Math.round(c21);
-    this.cotizadorCliente.precioPaqueteEnfermera = Math.round(c22);
-    this.cotizadorCliente.precioPaqueteEnfermeraCovid = Math.round(c23);
-    this.cotizadorCliente.precioPaqueteCuidadorPorDia = Math.round(d21);
-    this.cotizadorCliente.precioPaqueteEnfermeraPorDia = Math.round(d22);
-    this.cotizadorCliente.precioPaqueteEnfermeraCovidPorDia = Math.round(d23);
-    this.cotizadorCliente.polizaCuidadora1 = Math.round(c30);
-    this.cotizadorCliente.polizaCuidadora2 = Math.round(d30);
-    this.cotizadorCliente.polizaCuidadora3 = Math.round(e30);
-    this.cotizadorCliente.polizaCuidadora4 = Math.round(f30);
-    this.cotizadorCliente.polizaEnfermera1 = Math.round(c31);
-    this.cotizadorCliente.polizaEnfermera2 = Math.round(d31);
-    this.cotizadorCliente.polizaEnfermera3 = Math.round(e31);
-    this.cotizadorCliente.polizaEnfermera4 = Math.round(f31);
-    this.cotizadorCliente.polizaEnfermeraCovid1 = Math.round(c32);
-    this.cotizadorCliente.polizaEnfermeraCovid2 = Math.round(d32);
-    this.cotizadorCliente.polizaEnfermeraCovid3 = Math.round(e32);
-    this.cotizadorCliente.polizaEnfermeraCovid4 = Math.round(f32);
+    // this.cotizadorInternoServicio.precioListaCuidador = Math.round(c13);
+    // this.cotizadorInternoServicio.precioListaEnfermera = Math.round(c14);
+    // this.cotizadorInternoServicio.precioListaEnfermeraCovid = Math.round(c15);
+    // // this.cotizadorInternoServicio.precioListaCuidadorPorDia = Math.round(d13);
+    // // this.cotizadorInternoServicio.precioListaEnfermeraPorDia = Math.round(d14);
+    // // this.cotizadorInternoServicio.precioListaEnfermeraCovidPorDia = Math.round(d15);
+    // this.cotizadorInternoServicio.precioPaqueteCuidador = Math.round(c21);
+    // this.cotizadorInternoServicio.precioPaqueteEnfermera = Math.round(c22);
+    // this.cotizadorInternoServicio.precioPaqueteEnfermeraCovid = Math.round(c23);
+    // // this.cotizadorInternoServicio.precioPaqueteCuidadorPorDia = Math.round(d21);
+    // // this.cotizadorInternoServicio.precioPaqueteEnfermeraPorDia = Math.round(d22);
+    // // this.cotizadorInternoServicio.precioPaqueteEnfermeraCovidPorDia = Math.round(d23);
+    // this.cotizadorInternoServicio.polizaCuidadora1 = Math.round(c30);
+    // this.cotizadorInternoServicio.polizaCuidadora2 = Math.round(d30);
+    // this.cotizadorInternoServicio.polizaCuidadora3 = Math.round(e30);
+    // this.cotizadorInternoServicio.polizaCuidadora4 = Math.round(f30);
+    // this.cotizadorInternoServicio.polizaEnfermera1 = Math.round(c31);
+    // this.cotizadorInternoServicio.polizaEnfermera2 = Math.round(d31);
+    // this.cotizadorInternoServicio.polizaEnfermera3 = Math.round(e31);
+    // this.cotizadorInternoServicio.polizaEnfermera4 = Math.round(f31);
+    // this.cotizadorInternoServicio.polizaEnfermeraCovid1 = Math.round(c32);
+    // this.cotizadorInternoServicio.polizaEnfermeraCovid2 = Math.round(d32);
+    // this.cotizadorInternoServicio.polizaEnfermeraCovid3 = Math.round(e32);
+    // this.cotizadorInternoServicio.polizaEnfermeraCovid4 = Math.round(f32);
 
-    console.log(c13);
-    console.log(c14);
-    console.log(c15);
+    // console.log(c13);
+    // console.log(c14);
+    // console.log(c15);
 
-    console.log(c21,c22,c23);
+    // console.log(c21,c22,c23);
   }
 
 }
