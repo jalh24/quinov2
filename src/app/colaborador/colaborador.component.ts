@@ -5,7 +5,7 @@ import { Pago } from '../_model/pago';
 import { DataTableDirective } from 'angular-datatables';
 import { Estudio } from '../_model/estudio';
 import { Subject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Experiencia } from '../_model/experiencia';
 import { NgbToastService, NgbToastType, NgbToast } from 'ngb-toast';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -13,6 +13,7 @@ import { Estatus } from '../_model/estatus';
 import { FormControl } from '@angular/forms';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HistorialServicio } from '../_model/historialservicio';
 
 @Component({
   selector: 'app-colaborador',
@@ -58,6 +59,16 @@ export class ColaboradorComponent implements OnInit {
   experienciaColumns: string[] = ['institucion', 'comentario', 'fechaInicio', 'fechaFin', 'telefono', 'deleteExperiencia'];
   @ViewChild('experiencasTable', { static: true }) experiencasTable: MatTable<any>;
 
+  HISTORIALSERVICIO_DATA: HistorialServicio[] = [];
+  historialServicioSource = new MatTableDataSource<HistorialServicio>(this.HISTORIALSERVICIO_DATA);
+
+  historialServicioColumns: string[] = ['fecha', 'responsable', 'observaciones', 'deleteHistorialServicio'];
+  @ViewChild('historialServicioTable', { static: true }) historialServicioTable: MatTable<any>;
+
+  selectedHistorialServicioItems2Ind: any = [];
+  selectedHistorialServicioItems2: any = [];
+  selectedHistorialServicioItems2Tbl: any = [];
+
   textBoxDisabledCed = true;
   textBoxDisabledSeg = true;
   textBoxDisabledOtraEsp = true;
@@ -85,10 +96,11 @@ export class ColaboradorComponent implements OnInit {
   dtTriggerEstudio = new Subject();
   dtTriggerPago = new Subject();
   dtTriggerExperiencia = new Subject();
-
+  indexNuevo: number = 1000000;
   idPago: number;
   idEstudio: number;
   idExperiencia: number;
+  idHistorialServicio: number;
   visaImagenDatos: any;
   visaImagenNombre: any;
   comprobantePagoImagenDatos: any;
@@ -153,9 +165,13 @@ export class ColaboradorComponent implements OnInit {
   estudio: Estudio;
   experiencias: Experiencia[];
   experiencia: Experiencia;
+  tablaHistorialServicioVacia: boolean = false;
+  historialServicios: HistorialServicio[];
+  historialServicio: HistorialServicio;
   dtOptionsPago: any = {};
   dtOptionsEstudio: any = {};
   dtOptionsExperiencia: any = {};
+  dtOptionsHistorialServicio: any = {};
   estatusEstudios: Estatus[];
   estatusSelected: string;
   gradoEstudios: any[];
@@ -173,6 +189,7 @@ export class ColaboradorComponent implements OnInit {
       this.dtTriggerEstudio.next();
       this.dtTriggerPago.next();
       this.dtOptionsExperiencia.next();
+      this.dtOptionsHistorialServicio.next();
     });
   }
 
@@ -268,6 +285,25 @@ export class ColaboradorComponent implements OnInit {
         return row;
       }
     };
+
+    this.dtOptionsHistorialServicio = {
+      select: true,
+      rowCallback: (row: Node, data: any | Object, index: number) => {
+        const self = this;
+        $('td', row).on('click', () => {
+          if (self.historialServicio !== null) {
+            if (self.historialServicio.idHistorialServicio === data.idHistorialServicio) {
+              this.historialServicio = null;
+            } else {
+              self.historialServicio = data;
+            }
+          } else {
+            self.colaborador = data;
+          }
+        });
+        return row;
+      }
+    };
   }
 
   inicializaObjetos() {
@@ -352,6 +388,7 @@ export class ColaboradorComponent implements OnInit {
     this.idEstudio = 0;
     this.idPago = 0;
     this.idExperiencia = 0;
+    this.idHistorialServicio = 0;
     this.pagos = [];
     this.pago = {
       idPago: null,
@@ -384,10 +421,18 @@ export class ColaboradorComponent implements OnInit {
       referencia: null,
       telefono: null
     };
+    this.historialServicios = [];
+    this.historialServicio = {
+      idHistorialServicio: null,
+      fechaHistorialServicio: null,
+      responsableHistorialServicio: null,
+      observacionesHistorialServicio: null
+    };
     this.especialidadesSelected = [];
     this.habilidadesSelected = [];
     this.zonasSelected = [];
     this.experienciaSource.data = [];
+    this.historialServicioSource.data = [];
     this.pagoSource.data = [];
     this.estudioSource.data = [];
     this.curpExiste = false;
@@ -451,6 +496,13 @@ export class ColaboradorComponent implements OnInit {
         experiencia = element;
         this.agregarExperiencia(experiencia);
       });
+      // this.datos.historialServicio.forEach(element => {
+      //   let historialServicio = new HistorialServicio;
+      //   historialServicio.fechaHistorialServicio = element.fecha;
+      //   historialServicio.responsableHistorialServicio = element.responsable;
+      //   historialServicio.observacionesHistorialServicio = element.observaciones;
+      //   this.agregarHistorialServicio(historialServicio);
+      // });
       if (this.datos[0].visaImagen != null) {
         this.textBoxDisabledVis = false;
         this.archivosDescargaVisa = true;
@@ -487,6 +539,17 @@ export class ColaboradorComponent implements OnInit {
         this.colaborador.zonas = data.data;
         this.zonasSelected = this.colaborador.zonas;
       });
+    });
+
+    this.http.post<any>('/api/colaborador/historialServiciosColaborador?idColaborador', { idColaborador: idColaborador }, this.httpOptions).subscribe(data => {
+      this.selectedHistorialServicioItems2Tbl = data.data;
+      this.historialServicioSource = new MatTableDataSource(this.selectedHistorialServicioItems2Tbl);
+      if(this.selectedHistorialServicioItems2Tbl == []) {
+        this.tablaHistorialServicioVacia = true;
+      } else {
+        this.tablaHistorialServicioVacia = false;
+      }
+      console.log(this.selectedHistorialServicioItems2Tbl);
     });
   }
 
@@ -653,7 +716,9 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.estudios = this.estudioSource.data;
     this.colaborador.experiencias = this.experienciaSource.data;
     this.colaborador.especialidades = this.especialidadesSelected;
+    this.colaborador.historialServicios = this.selectedHistorialServicioItems2Tbl;
     this.colaborador.habilidades = this.habilidadesSelected;
+    console.log(this.colaborador.historialServicios);
     if (this.colaborador.idColaborador) {
       if (ngForm.valid) {
         this.http.post<any>('/api/colaborador/update', this.colaborador, this.httpOptions).subscribe(data => {
@@ -996,6 +1061,89 @@ export class ColaboradorComponent implements OnInit {
     };
   }
 
+  agregarHistorialServicio(historialServicioParam: any) {
+    console.log(historialServicioParam);
+    if (historialServicioParam != null) {
+      this.historialServicio = historialServicioParam;
+    }
+    if (this.historialServicio.idHistorialServicio == null) {
+      if (this.historialServicioSource.data.length == 0) {
+        this.idHistorialServicio = this.historialServicioSource.data.length + 1;
+      } else {
+        this.idHistorialServicio = this.historialServicioSource.data[this.historialServicioSource.data.length - 1].idHistorialServicio + 1;
+      }
+      this.historialServicio.idHistorialServicio = this.idHistorialServicio;
+    }
+    console.log(this.historialServicio);
+    this.HISTORIALSERVICIO_DATA.push(this.historialServicio);
+    this.historialServicioSource = new MatTableDataSource(this.HISTORIALSERVICIO_DATA);
+    console.log(this.historialServicioSource);
+
+    this.historialServicio = {
+      idHistorialServicio: null,
+      fechaHistorialServicio: null,
+      responsableHistorialServicio: null,
+      observacionesHistorialServicio: null
+    };
+  }
+
+  agregarHistorialServicio1() {
+    // this.selectedHistorialServicioItems2Ind.push(this.historialServicio);
+
+  //   this.selectedHistorialServicioItems2Ind = Object.keys(this.selectedHistorialServicioItems2).map(index => {
+  //     let person = this.selectedHistorialServicioItems2[index];
+  //     return person;
+  // });
+  
+  let nuevoHistorial = {idHistorialServicio: this.indexNuevo, idColaborador: this.idColaborador != null ? this.idColaborador : null
+  , fecha: this.historialServicio.fechaHistorialServicio, responsable: this.historialServicio.responsableHistorialServicio,
+  observaciones: this.historialServicio.observacionesHistorialServicio};
+  // nuevoHistorial["idHistorialServicio"] = this.indexNuevo;
+  this.indexNuevo++;
+
+  // nuevoHistorial["idColaborador"] = this.idColaborador != null ? this.idColaborador : null;
+  // nuevoHistorial["fecha"] = this.historialServicio.fechaHistorialServicio;
+  // nuevoHistorial["responsable"] = this.historialServicio.responsableHistorialServicio;
+  // nuevoHistorial["observaciones"] = this.historialServicio.observacionesHistorialServicio;
+
+  // if (this.selectedHistorialServicioItems2Tbl.length>0) {
+  //   this.selectedHistorialServicioItems2Tbl.push(this.selectedHistorialServicioItems2Ind);
+  // } else {
+  //   if (this.selectedHistorialServicioItems2Tbl.length==0 || this.selectedHistorialServicioItems2Tbl.length==undefined) {
+  //     this.selectedHistorialServicioItems2Tbl=this.selectedHistorialServicioItems2Ind;
+  //   }
+  // }
+
+  this.selectedHistorialServicioItems2Tbl.push(nuevoHistorial);
+
+
+  this.historialServicioSource = new MatTableDataSource(this.selectedHistorialServicioItems2Tbl);
+  console.log(this.selectedHistorialServicioItems2Tbl);
+  this.historialServicio = {
+    idHistorialServicio: null,
+    fechaHistorialServicio: null,
+    responsableHistorialServicio: null,
+    observacionesHistorialServicio: null
+  };
+  // this.selectedHistorialServicioItems2 = null;
+  // this.selectedHistorialServicioItems2Ind = [];
+  console.log(this.selectedHistorialServicioItems2Tbl);
+  }
+
+  agregarHistorialServicioExistente() {
+
+    let nuevoHistorial = {idColaborador: this.idColaborador,
+      fecha: this.historialServicio.fechaHistorialServicio,
+      responsable: this.historialServicio.responsableHistorialServicio,
+      observaciones: this.historialServicio.observacionesHistorialServicio};
+
+    this.http.post<any>('/api/colaborador/createHistorialServicioExistente', nuevoHistorial, this.httpOptions).subscribe(data => {
+      this.showSuccess(NgbToastType.Success, "Se agrego nueva observación");
+      this.selectedHistorialServicioItems2Tbl.push(nuevoHistorial);
+      this.historialServicioSource = new MatTableDataSource(this.selectedHistorialServicioItems2Tbl);
+    });
+  }
+
   editaEstudio(estudioTmp: any) {
     this.estudio = estudioTmp;
   }
@@ -1026,6 +1174,42 @@ export class ColaboradorComponent implements OnInit {
     });
   }
 
+  borraHistorialServicio(historialServicioTmp) {
+    this.HISTORIALSERVICIO_DATA = this.HISTORIALSERVICIO_DATA.filter((value, key) => {
+      return value.idHistorialServicio != historialServicioTmp.idHistorialServicio;
+    });
+    this.historialServicioSource.data = this.historialServicioSource.data.filter((value, key) => {
+      return value.idHistorialServicio != historialServicioTmp.idHistorialServicio;
+    });
+  }
+
+  borraHistorialServicioExistente(historialServicioTmp) {
+    console.log(historialServicioTmp);
+
+    this.http.post<any>('/api/colaborador/borrarHistorialServicioExistente', historialServicioTmp.idHistorialServicio, this.httpOptions).subscribe(data => {
+      this.showSuccess(NgbToastType.Success, "Se eliminó observación");
+
+      
+      // this.selectedHistorialServicioItems2Tbl.push(nuevoHistorial);
+      // this.historialServicioSource = new MatTableDataSource(this.selectedHistorialServicioItems2Tbl);
+    });
+
+    for(var i = 0; i < this.selectedHistorialServicioItems2Tbl.length; i++) {
+      if(this.selectedHistorialServicioItems2Tbl[i].idHistorialServicio == historialServicioTmp.idHistorialServicio) {
+        this.selectedHistorialServicioItems2Tbl.splice(i, 1);
+          break;
+      }
+  }
+    this.historialServicioSource = new MatTableDataSource(this.selectedHistorialServicioItems2Tbl);
+      
+    // this.HISTORIALSERVICIO_DATA = this.HISTORIALSERVICIO_DATA.filter((value, key) => {
+    //   return value.idHistorialServicio != historialServicioTmp.idHistorialServicio;
+    // });
+    // this.historialServicioSource.data = this.historialServicioSource.data.filter((value, key) => {
+    //   return value.idHistorialServicio != historialServicioTmp.idHistorialServicio;
+    // });
+  }
+
   pagAtras(index) {
     if (this.selected.value > 0) {
       this.selected.setValue(this.selected.value - index);
@@ -1033,7 +1217,7 @@ export class ColaboradorComponent implements OnInit {
   }
 
   pagDelante(index) {
-    if (this.selected.value < 7) {
+    if (this.selected.value < 8) {
       this.selected.setValue(this.selected.value + index);
     }
   }
@@ -1073,6 +1257,15 @@ export class ColaboradorComponent implements OnInit {
       fechaFin: null,
       referencia: null,
       telefono: null
+    };
+  }
+
+  limpiarHistorialServicio() {
+    this.historialServicio = {
+      idHistorialServicio: null,
+      fechaHistorialServicio: null,
+      responsableHistorialServicio: null,
+      observacionesHistorialServicio: null
     };
   }
 

@@ -72,6 +72,7 @@ export class Colaborador {
     public horario: any;
     public estudios: any[];
     public experiencias: any[];
+    public historialServicios: any[];
     public cuentasColaborador: any[];
     public contactosColaborador: any[];
     public idPermanencia: number;

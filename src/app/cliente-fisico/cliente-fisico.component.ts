@@ -8,6 +8,7 @@ import { Cliente } from '../_model/cliente';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { UsuarioFacturacion } from '../_model/usuarioFacturacion';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class ClienteFisicoComponent implements OnInit {
   usuariosFacturacionSettings: IDropdownSettings = {};
   usuariosFacturacion: any;
   public cliente: Cliente;
+  public usuarioFacturacion: UsuarioFacturacion;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -37,6 +39,7 @@ export class ClienteFisicoComponent implements OnInit {
   textBoxDisabledSeg = true;
   accionInfoPaciente = true;
   existeUsuarioFacturacion = false;
+  combinacionClienteUsuarioFacturacion: {};
   sexos: any[];
   complexiones: any[];
   parentescos: any[];
@@ -53,6 +56,10 @@ export class ClienteFisicoComponent implements OnInit {
   paisescliente: any[];
   estadosCiviles: any[];
   tiposTelefono: any[];
+  validacionCorreo: any[];
+  infoUsuarioFacturacion: any[];
+  validacionCorreoFlag: boolean = false;
+  botonValidarFlag: boolean = false;
   datos: any;
   idCliente: number;
   selected = new FormControl(0);
@@ -77,7 +84,7 @@ export class ClienteFisicoComponent implements OnInit {
     this.comboUsuariosFacturacion();
 
     this.usuariosFacturacionSettings = {
-      singleSelection: false,
+      singleSelection: true,
       idField: 'idUsuarioFacturacion',
       textField: 'nombrecompleto',
       unSelectAllText: 'Quitar Selecciones',
@@ -146,25 +153,49 @@ export class ClienteFisicoComponent implements OnInit {
     this.cliente.idTipoCliente = null;
     this.cliente.rfc = null;
     this.cliente.contactosCliente = [];
-    this.cliente.nombrecliente = null;
-    this.cliente.a_paternocliente = null;
-    this.cliente.a_maternocliente = null;
-    this.cliente.telefonocliente = null;
-    this.cliente.correoelectronicocliente = null;
-    this.cliente.calle1cliente = null;
-    this.cliente.calle2cliente = null;
-    this.cliente.noExtcliente = null;
-    this.cliente.noIntcliente = null;
-    this.cliente.codigoPostalcliente = null;
-    this.cliente.idColoniacliente = null;
-    this.cliente.idCiudadcliente = null;
-    this.cliente.idEstadocliente = null;
-    this.cliente.idPaiscliente = null;
-    this.cliente.idBancocliente = null;
-    this.cliente.tipoCuentacliente = null;
-    this.cliente.numerocuentacliente = null;
-    this.cliente.clienteExistente = null;
-    this.cliente.clienteExistenteSelected = null;
+    this.usuarioFacturacion = new UsuarioFacturacion;
+    this.usuarioFacturacion.nombre = null;
+    this.usuarioFacturacion.a_paterno = null;
+    this.usuarioFacturacion.a_materno = null;
+    this.usuarioFacturacion.telefono = null;
+    this.usuarioFacturacion.correoElectronico = null;
+    this.usuarioFacturacion.calle1 = null;
+    this.usuarioFacturacion.calle2 = null;
+    this.usuarioFacturacion.noExt = null;
+    this.usuarioFacturacion.noInt = null;
+    this.usuarioFacturacion.codigoPostal = null;
+    this.usuarioFacturacion.idColonia = null;
+    this.usuarioFacturacion.idCiudad = null;
+    this.usuarioFacturacion.idEstado = null;
+    this.usuarioFacturacion.idPais = null;
+    this.usuarioFacturacion.idBanco = null;
+    this.usuarioFacturacion.tipoCuenta = null;
+    this.usuarioFacturacion.numeroCuenta = null;
+    this.usuarioFacturacion.clienteExistente = null;
+    this.usuarioFacturacion.clienteExistenteSelected = null;
+  }
+
+  inicializaUsuarioFacturacion() {
+    this.usuarioFacturacion = new UsuarioFacturacion;
+    this.usuarioFacturacion.nombre = null;
+    this.usuarioFacturacion.a_paterno = null;
+    this.usuarioFacturacion.a_materno = null;
+    this.usuarioFacturacion.telefono = null;
+    this.usuarioFacturacion.correoElectronico = null;
+    this.usuarioFacturacion.calle1 = null;
+    this.usuarioFacturacion.calle2 = null;
+    this.usuarioFacturacion.noExt = null;
+    this.usuarioFacturacion.noInt = null;
+    this.usuarioFacturacion.codigoPostal = null;
+    this.usuarioFacturacion.idColonia = null;
+    this.usuarioFacturacion.idCiudad = null;
+    this.usuarioFacturacion.idEstado = null;
+    this.usuarioFacturacion.idPais = null;
+    this.usuarioFacturacion.idBanco = null;
+    this.usuarioFacturacion.tipoCuenta = null;
+    this.usuarioFacturacion.numeroCuenta = null;
+    this.usuarioFacturacion.clienteExistente = null;
+    this.usuarioFacturacion.clienteExistenteSelected = null;
   }
 
   public guardarCliente(ngForm: NgForm) { 
@@ -178,8 +209,9 @@ export class ClienteFisicoComponent implements OnInit {
     this.cliente.idTipoCliente = false;
 
    console.log(this.cliente);
+    this.combinacionClienteUsuarioFacturacion = {cliente:this.cliente, usuariofacturacion:this.usuarioFacturacion};
     if (ngForm.valid) {
-      this.http.post<any>('/api/cliente/create', this.cliente,this.httpOptions).subscribe(data => {
+      this.http.post<any>('/api/cliente/create', this.combinacionClienteUsuarioFacturacion,this.httpOptions).subscribe(data => {
         this.showSuccess(NgbToastType.Success, "Se registro el cliente exitosamente");
         window.history.back();
       });
@@ -189,15 +221,49 @@ export class ClienteFisicoComponent implements OnInit {
     }
 
   }
+
+  onValidar() {
+    this.validacionCorreoFlag = true;
+    this.http.get<any>('/api/cliente/validacionCorreo?correoElectronico=' + this.usuarioFacturacion.correoElectronico,this.httpOptions).subscribe(data => {
+      this.validacionCorreo = data.data;
+      if (this.validacionCorreo[0]['validacionCorreo'] == "1") {
+        this.botonValidarFlag = false;
+        // this.validacionCorreoFlag = true;
+        this.http.get<any>('/api/cliente/usuariosFacturacionCorreo?correoElectronico=' + this.usuarioFacturacion.correoElectronico,this.httpOptions).subscribe(data => {
+          this.infoUsuarioFacturacion = data.data;
+          this.usuarioFacturacion = this.infoUsuarioFacturacion[0];
+          console.log(this.usuarioFacturacion);
+          this.onCodigoPostalCliente(this.usuarioFacturacion.codigoPostal);
+          this.selectedCodigoPostalcliente = this.usuarioFacturacion.codigoPostal;
+          this.clienteExistente = true;
+          this.cliente.clienteExistenteSelected = this.usuarioFacturacion.idUsuarioFacturacion;
+        });
+      } else if (this.validacionCorreo[0]['validacionCorreo'] == "0") {
+        this.botonValidarFlag = true;
+        // this.validacionCorreoFlag = false;
+        this.clienteExistente = false;
+      }
+    });
+    console.log(this.botonValidarFlag);
+  }
+
+
+
+
   public llenarCampos(idCliente) {
     this.http.post<any>('/api/cliente/clienteId', { idCliente: idCliente },this.httpOptions).subscribe(data => {
       this.datos = data.data;
       console.log(this.datos);
       this.cliente = this.datos[0];
+      this.usuarioFacturacion = this.datos['usuarioFacturacion'];
+      if (this.usuarioFacturacion == undefined) {
+        this.inicializaUsuarioFacturacion();
+      }
+      console.log(this.usuarioFacturacion);
       this.cliente.idPaiscliente = 1;
-      console.log(this.cliente);
+      console.log(this.datos);
       if (this.cliente.idUsuarioFacturacion != null) {
-        // this.selectedItems.push(this.cliente.usuarioFacturacion);
+        this.selectedItems.push(this.datos.usuarioFacturacion);
         console.log(this.selectedItems);
         this.existeUsuarioFacturacion = true;
         this.clienteExistente = true;
@@ -208,12 +274,12 @@ export class ClienteFisicoComponent implements OnInit {
       this.comboCiudades(this.cliente.idEstadoNacimiento);
       this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
       this.onCodigoPostal(this.cliente.codigoPostal);
-      this.onCodigoPostalCliente(this.cliente.codigoPostalcliente);
+      this.onCodigoPostalCliente(this.usuarioFacturacion.codigoPostal);
       this.onColonia(this.cliente.idColonia);
-      this.onColoniaCliente(this.cliente.idColoniacliente);
+      this.onColoniaCliente(this.usuarioFacturacion.idColonia);
       //this.onCiudadNacimiento(this.cliente.idCiudadNacimiento);
       this.selectedCodigoPostal = this.cliente.codigoPostal;
-      this.selectedCodigoPostalcliente = this.cliente.codigoPostalcliente;
+      this.selectedCodigoPostalcliente = this.usuarioFacturacion.codigoPostal;
       this.cliente.peso = Math.floor(this.cliente.peso);
       // this.cliente.estatura = Math.floor(this.cliente.estatura);
       // this.datos.cuentas.forEach(element => {
@@ -228,8 +294,9 @@ export class ClienteFisicoComponent implements OnInit {
     
     // let object = {cliente: this.cliente, idUsuarioFacturacion: null};
     this.cliente.clienteExistente = this.clienteExistente;
-
-    this.http.post<any>('/api/cliente/update', this.cliente, this.httpOptions).subscribe(data => {
+    this.combinacionClienteUsuarioFacturacion = {cliente:this.cliente, usuariofacturacion:this.usuarioFacturacion};
+    console.log(this.combinacionClienteUsuarioFacturacion);
+    this.http.post<any>('/api/cliente/update', this.combinacionClienteUsuarioFacturacion, this.httpOptions).subscribe(data => {
       window.history.back();
       this.showSuccess(NgbToastType.Success, "Se edito el cliente exitosamente");
     });
@@ -306,9 +373,6 @@ export class ClienteFisicoComponent implements OnInit {
   public comboUsuariosFacturacion() {
     this.http.get<any>('/api/cliente/usuariosFacturacion', this.httpOptions).subscribe(data => {
       this.usuariosFacturacion = data.data;
-      this.selectedItems = [
-        { item_id: 1, item_text: 'Mauricio Tamez Zertuche' }
-      ];
     });
   }
 
@@ -365,6 +429,10 @@ export class ClienteFisicoComponent implements OnInit {
     });
   }
 
+  public onEditarInformacion() {
+    this.botonValidarFlag = true;
+  }
+
   public onCodigoPostal(selectedCodigoPostal) {
     this.cliente.codigoPostal = selectedCodigoPostal;
     this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostal,this.httpOptions).subscribe(data => {
@@ -381,13 +449,14 @@ export class ClienteFisicoComponent implements OnInit {
   }
 
     public onCodigoPostalCliente(selectedCodigoPostalcliente) {
-    this.cliente.codigoPostalcliente = selectedCodigoPostalcliente;
+    // this.cliente.codigoPostalcliente = selectedCodigoPostalcliente;
+    this.usuarioFacturacion.codigoPostal = selectedCodigoPostalcliente;
     this.http.get<any>('/api/catalogo/coloniasByCodigoPostal?codigoPostal=' + selectedCodigoPostalcliente,this.httpOptions).subscribe(data => {
       this.coloniascliente = data.data;
-      this.cliente.idCiudadcliente = data.data[0].idCiudad;
+      this.usuarioFacturacion.idCiudad = data.data[0].idCiudad;
       this.http.get<any>('/api/catalogo/ciudadByCodigoPostal?idCiudad=' + data.data[0].idCiudad,this.httpOptions).subscribe(dataCiudad => {
         this.ciudadescliente = dataCiudad.data;
-        this.cliente.idEstadocliente = dataCiudad.data[0].idEstado;
+        this.usuarioFacturacion.idEstado = dataCiudad.data[0].idEstado;
         this.http.get<any>('/api/catalogo/estadoByCodigoPostal?idEstado=' + dataCiudad.data[0].idEstado,this.httpOptions).subscribe(data => {
           this.estadoscliente = data.data;
         });
@@ -469,6 +538,7 @@ if (this.cliente.telefonoContacto == null) {
 
   onCiudadNacimiento(value: any) {
     this.cliente.idCiudadNacimiento = value;
+    console.log(value);
   }
   onTipoTel1(value: any) {
     this.cliente.idTipoTelefono = value;

@@ -74,7 +74,7 @@ export class CotizadorClienteComponent implements OnInit {
     this.cotizadorCliente.festivos = null;
     this.cotizadorCliente.cotizacion = null;
     this.cotizadorCliente.hospital = 0;
-    this.cotizadorCliente.fueraArea = 1;
+    this.cotizadorCliente.fueraArea = 0;
     this.cotizadorCliente.masculino = 0;
     this.cotizadorCliente.noTaxis = 0;
     this.cotizadorCliente.domingo = 0;
@@ -424,13 +424,13 @@ export class CotizadorClienteComponent implements OnInit {
    
 
 
-    this.cotizadorCliente.domingo = 1;
+    this.cotizadorCliente.domingo = 0;
     // if (domingo.checked == true) {
     //   this.cotizadorCliente.domingo = 1;
     // } else {
     //   this.cotizadorCliente.domingo = 0;
     // }
-    this.cotizadorCliente.asueto = 1;
+    this.cotizadorCliente.asueto = 0;
     // if (festivo.checked == true) {
     //   this.cotizadorCliente.asueto = 1;
     // } else {
@@ -441,13 +441,13 @@ export class CotizadorClienteComponent implements OnInit {
     } else {
       this.cotizadorCliente.hospital = 0;
     }
-    // if (fueraArea.checked == true) {
-    //   this.cotizadorCliente.fueraArea = 1;
-    //   // this.cotizadorCliente.noTaxis = 1; //revisar
-    // } else {
-    //   this.cotizadorCliente.fueraArea = 0;
-    //   // this.cotizadorCliente.noTaxis = 0; //revisar
-    // }
+    if (fueraArea.checked == true) {
+      this.cotizadorCliente.fueraArea = 1;
+      this.cotizadorCliente.noTaxis = 1; //revisar
+    } else {
+      this.cotizadorCliente.fueraArea = 0;
+      this.cotizadorCliente.noTaxis = 0; //revisar
+    }
     // if (masculino.checked == true) {
     //   this.cotizadorCliente.masculino = 1;
     // } else {
