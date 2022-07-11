@@ -1,34 +1,14 @@
 <h1 mat-dialog-title>{{colaborador?.nombre}} {{colaborador?.a_paterno}} {{colaborador?.a_materno}} </h1>
 <div mat-dialog-content>
-  <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item waves-effect waves-light">
       <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
     </li>
     <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="dirección-tab" data-toggle="tab" href="#dirección" role="tab" aria-controls="dirección" aria-selected="false">Dirección</a>
+      <a class="nav-link" id="historial-tab" data-toggle="tab" href="#historial" role="tab" aria-controls="historial" aria-selected="false">Historial</a>
     </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="informacionPersonal-tab" data-toggle="tab" href="#informacionPersonal" role="tab" aria-controls="informacionPersonal" aria-selected="false">Información Personal</a>
-    </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="pago-tab" data-toggle="tab" href="#pago" role="tab" aria-controls="pago" aria-selected="false">Pago</a>
-    </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="estudios-tab" data-toggle="tab" href="#estudios" role="tab" aria-controls="estudios" aria-selected="false">Estudios</a>
-    </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="experienciaLaboral-tab" data-toggle="tab" href="#experienciaLaboral" role="tab" aria-controls="experienciaLaboral" aria-selected="false">Experiencia Laboral</a>
-    </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="competencias-tab" data-toggle="tab" href="#competencias" role="tab" aria-controls="competencias" aria-selected="false">Competencias</a>
-    </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="disponibilidadTrabajo-tab" data-toggle="tab" href="#disponibilidadTrabajo" role="tab" aria-controls="disponibilidadTrabajo" aria-selected="false">Disponibilidad de Trabajo</a>
-    </li>
-    <li class="nav-item waves-effect waves-light">
-      <a class="nav-link" id="otros-tab" data-toggle="tab" href="#otros" role="tab" aria-controls="otros" aria-selected="false">Otros</a>
-    </li>
-  </ul> -->
+   
+  </ul> 
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
       <div *ngIf="fotoFlag">
@@ -348,41 +328,28 @@
         </tbody>
       </table>
     </div>
-    <!-- <div class="tab-pane fade" id="dirección" role="tabpanel" aria-labelledby="dirección-tab">
+    <div class="tab-pane fade" id="historial" role="tabpanel" aria-labelledby="historial-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
-            <th scope="col" colspan="8">Dirección</th>
+            <th scope="col" colspan="10">Historial</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Calle</th>
-            <td colspan="3">{{colaborador?.calle1}}</td>
-            <th scope="row">Calle 2</th>
-            <td colspan="3">{{colaborador?.calle2}}</td>   
+            <th scope="row">Nombre</th>
+            <td>""</td>
+            <th scope="row">Especialidades</th>
+            <td>""</td>
+            <th scope="row">Telefono)</th>
+            <td>""</td>
+            <th scope="row">Correo Electronico</th>
+            <td>""</td>          
           </tr>
-          <tr>
-            <th scope="row">Número Exterior</th>
-            <td>{{colaborador?.noExt}}</td>
-            <th scope="row">Número Interior</th>
-            <td>{{colaborador?.noInt}}</td>
-            <th scope="row">Código Postal</th>
-            <td>{{colaborador?.codigoPostal}}</td>
-            <th scope="row">Colonia</th>
-            <td>{{colaborador?.coloniaDir}}</td>
-          </tr>
-          <tr>
-            <th scope="row">Ciudad</th>
-            <td>{{colaborador?.ciudadDir}}</td>
-            <th scope="row">Estado</th>
-            <td>{{colaborador?.estadoDir}}</td>
-            <th scope="row">País</th>
-            <td colspan="3">{{colaborador?.paisDir}}</td>
-          </tr>
+       
         </tbody>
       </table>
-    </div> -->
+    </div>
     <!-- <div class="tab-pane fade" id="informacionPersonal" role="tabpanel" aria-labelledby="informacionPersonal-tab">
       <table class="table table-bordered">
         <thead class="thead-light">
