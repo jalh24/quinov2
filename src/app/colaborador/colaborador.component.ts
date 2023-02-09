@@ -40,6 +40,7 @@ export class ColaboradorComponent implements OnInit {
   archivosDescargaIne2: boolean = false;
   archivosDescargaFoto: boolean = false;
   archivosDescargaComprobanteDomicilio: boolean = false;
+  archivosDescargaCV: boolean = false;
   selected = new FormControl(0);
   ESTUDIO_DATA: Estudio[] = [];
   estudioSource = new MatTableDataSource<Estudio>(this.ESTUDIO_DATA);
@@ -117,6 +118,8 @@ export class ColaboradorComponent implements OnInit {
   fotoImagenNombre: any;
   comprobanteDomicilioImagenDatos: any;
   comprobanteDomicilioImagenNombre: any;
+  cvDatos: any;
+  cvNombre: any;
   public colaborador: Colaborador;
   diasLaborales: any = {
     todosDias: false,
@@ -385,6 +388,8 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.referenciaDireccion = null;
     this.colaborador.idPermanencia = null;
     this.colaborador.idGradoEstudio = null;
+    this.colaborador.cvFile = null;
+    this.colaborador.cvNombre = null;
     this.idEstudio = 0;
     this.idPago = 0;
     this.idExperiencia = 0;
@@ -535,6 +540,11 @@ export class ColaboradorComponent implements OnInit {
         this.comprobanteDomicilioImagenDatos = this.datos[0].comprobanteDomicilio;
         this.comprobanteDomicilioImagenNombre = this.datos[0].comprobanteNombre;
       }
+      if (this.datos[0].cvFile != null) {
+        this.archivosDescargaCV = true;
+        this.cvDatos = this.datos[0].cvFile;
+        this.cvNombre = this.datos[0].cvNombre;
+      }
       this.http.post<any>('/api/colaborador/zonasLaborales', { idColaborador: idColaborador }, this.httpOptions).subscribe(data => {
         this.colaborador.zonas = data.data;
         this.zonasSelected = this.colaborador.zonas;
@@ -618,6 +628,14 @@ export class ColaboradorComponent implements OnInit {
     const downloadLink = document.createElement("a");
     downloadLink.href = linkSource;
     downloadLink.download = this.comprobanteDomicilioImagenNombre;
+    downloadLink.click();
+  }
+  
+  downloadBase64FileCV() {
+    const linkSource = this.cvDatos;
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = this.cvNombre;
     downloadLink.click();
   }
 
@@ -720,6 +738,7 @@ export class ColaboradorComponent implements OnInit {
     this.colaborador.habilidades = this.habilidadesSelected;
     console.log(this.colaborador.historialServicios);
     if (this.colaborador.idColaborador) {
+      // this.colaborador.cv = this.datos[0].cvFile;
       if (ngForm.valid) {
         this.http.post<any>('/api/colaborador/update', this.colaborador, this.httpOptions).subscribe(data => {
           this.showSuccess(NgbToastType.Success, "Se actualizo el colaborador exitosamente");
@@ -907,6 +926,22 @@ export class ColaboradorComponent implements OnInit {
     };
   }
 
+  public onCV(files: FileList) {
+    let me = this;
+    let file = files[0];
+    let currentDate = new Date();
+    let extension = file.type.split("/");
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.colaborador.cvFile = reader.result;
+      me.colaborador.cvNombre = currentDate.getTime() + "." + extension[1];
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
+
   public onPagoFileSelected(files: FileList) {
     let me = this;
     let file = files[0];
@@ -985,8 +1020,10 @@ export class ColaboradorComponent implements OnInit {
     if (this.pago.idPago == null || pagoParam != null) {
       if (this.pagoSource.data.length == 0) {
         this.idPago = this.pagoSource.data.length + 1;
+        console.log("yes1");
       } else {
         this.idPago++;
+        console.log("yess1");
       }
       this.pago.idPago = this.idPago;
     }
@@ -1039,14 +1076,17 @@ export class ColaboradorComponent implements OnInit {
     if (experienciaParam != null) {
       this.experiencia = experienciaParam;
     }
-    if (this.experiencia.idExperiencia == null) {
+    if (this.experiencia.idExperiencia == null || experienciaParam != null) {
       if (this.experienciaSource.data.length == 0) {
         this.idExperiencia = this.experienciaSource.data.length + 1;
+        console.log("yes");
       } else {
         this.idExperiencia++;
+        console.log("yess");
       }
       this.experiencia.idExperiencia = this.idExperiencia;
     }
+    console.log(this.experiencia);
     this.EXPERIENCIA_DATA.push(this.experiencia);
     this.experienciaSource = new MatTableDataSource(this.EXPERIENCIA_DATA);
 

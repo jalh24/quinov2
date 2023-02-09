@@ -81,6 +81,8 @@ export class Colaborador {
     public especialidades: any[];
     public habilidades: any[];
     public idGradoEstudio: number;
+    public cvFile: any;
+    public cvNombre: any;
     constructor() {
     }
 }

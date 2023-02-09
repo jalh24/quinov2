@@ -337,14 +337,38 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Nombre</th>
-            <td>""</td>
-            <th scope="row">Especialidades</th>
-            <td>""</td>
-            <th scope="row">Telefono)</th>
-            <td>""</td>
-            <th scope="row">Correo Electronico</th>
-            <td>""</td>          
+            <td>
+              <div class="form-group dynamic-element1">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="fechaHistorialServicio" class="form-label">Fecha<span class="text-danger"> *</span></label>
+                    <input type="date" class="form-control" id="fechaHistorialServicio" name="fechaHistorialServicio" value="yyyy-MM-dd" ngModel #fechaHistorialServicio="ngModel"
+                    [(ngModel)]="historialservicio.fechaHistorialServicio" disabled>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="responsableHistorialServicio" class="form-label">Nombre de la persona que registra</label>
+                    <input type="text" class="form-control" name="responsableHistorialServicio" ngModel #responsableHistorialServicio="ngModel"
+                    [(ngModel)]="historialservicio.responsableHistorialServicio" disabled>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="observacionesHistorialServicio" class="form-label">Observaciones</label>
+                    <textarea name="observacionesHistorialServicio" class="form-control" rows="6" ngModel #observacionesHistorialServicio="ngModel"
+                    [(ngModel)]="historialservicio.observacionesHistorialServicio" disabled></textarea>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <tr *ngFor="let historialServicio of historialServicios">
+                <td (click)="llenarCamposHistorialServicio(historialServicio)">
+                  Historial del día: {{historialServicio.fecha}}
+                </td>
+              </tr>
+            </td>          
           </tr>
        
         </tbody>

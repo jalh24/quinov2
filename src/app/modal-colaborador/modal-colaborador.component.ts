@@ -1,8 +1,10 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { DialogData } from '../colaboradores/colaboradores.component';
+import { HistorialServicio } from '../_model/historialservicio';
 
 @Component({
   selector: 'app-modal-colaborador',
@@ -10,9 +12,18 @@ import { DialogData } from '../colaboradores/colaboradores.component';
   styleUrls: ['./modal-colaborador.component.scss']
 })
 export class ModalColaboradorComponent implements OnInit {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Token: localStorage.getItem('token')
+    })
+  };
+
+  historialServicios: any = [];
+  public historialservicio: HistorialServicio;
   colaborador: any;
   disponibilidad: any;
-  constructor(public dialogRef: MatDialogRef<ModalColaboradorComponent>, private router:Router,
+  constructor(public dialogRef: MatDialogRef<ModalColaboradorComponent>, private router:Router, private http: HttpClient,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   fotoFlag: boolean = false;
@@ -28,15 +39,52 @@ export class ModalColaboradorComponent implements OnInit {
       sabado: "",
       domingo: ""
     };
+    this.inicializaObjetos();
     this.getColaboradores2();
+  }
+
+  inicializaObjetos() {
+    this.historialservicio = new HistorialServicio();
+    this.historialservicio.fechaHistorialServicio = "";
+    this.historialservicio.responsableHistorialServicio = "";
+    this.historialservicio.observacionesHistorialServicio="";
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  getHistorialServicios() {
+    this.http.post<any>('/api/colaborador/historialServiciosColaborador?idColaborador', { idColaborador: this.colaborador.idColaborador }, this.httpOptions).subscribe(data => {
+      this.historialServicios = data.data;
+      // this.historialServicios = this.historialServicios.reverse();
+
+      this.historialServicios = this.historialServicios.map((obj) => {
+        return { ...obj, fecha: new Date(obj.fecha), responsable: obj.responsable, observaciones: obj.observaciones };
+      });
+
+      console.log(this.historialServicios);
+
+      this.historialServicios = this.historialServicios.sort(
+        (objA, objB) => objB.fecha.getTime() - objA.fecha.getTime(),
+      );
+      this.historialServicios.forEach((element, index) => {
+        this.historialServicios[index].fecha = element.fecha.toISOString().split('T')[0];
+      });
+
+      // console.log(this.historialServicios);
+    });
+  }
+
+  llenarCamposHistorialServicio(element) {
+    this.historialservicio.fechaHistorialServicio = element.fecha;
+    this.historialservicio.responsableHistorialServicio = element.responsable;
+    this.historialservicio.observacionesHistorialServicio = element.observaciones;
+  }
+
   public getColaboradores2(event?: PageEvent) {
     if (this.data) {
+      console.log(this.data.data);
       this.colaborador = this.data.data;
       this.colaborador.habilidades = JSON.parse(this.colaborador.habilidades);
       this.colaborador.especialidades = JSON.parse(this.colaborador.especialidades);
@@ -110,37 +158,39 @@ export class ModalColaboradorComponent implements OnInit {
       } else if (this.colaborador.ayudaPaciente==0){
         this.colaborador.ayudaPaciente = "No";
       }
-      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18))=="Matutino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18))=="Vespertino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18))=="Nocturno")){
+      console.log(this.colaborador.horario);
+      console.log(this.colaborador.horario.indexOf("todosDiasTurno")+17);
+      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18))=="TodoElDia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18))=="Dia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18))=="Noche")){
         this.disponibilidad.todosDias = this.colaborador.horario.substring(this.colaborador.horario.indexOf("todosDiasTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("todosDiasTurno")+18));
       } else {
         this.disponibilidad.todosDias = "";
       }
-      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("lunesTurno")+13,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("lunesTurno")+14))=="Matutino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("lunesTurno")+13,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("lunesTurno")+14))=="Vespertino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("lunesTurno")+13,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("lunesTurno")+14))=="Nocturno")){
+      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("lunesTurno")+13,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("lunesTurno")+14))=="TodoElDia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("lunesTurno")+13,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("lunesTurno")+14))=="Dia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("lunesTurno")+13,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("lunesTurno")+14))=="Noche")){
         this.disponibilidad.lunes = this.colaborador.horario.substring(this.colaborador.horario.indexOf("lunesTurno")+13,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("lunesTurno")+14));
       } else {
         this.disponibilidad.lunes = "";
       }
-      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("martesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("martesTurno")+15))=="Matutino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("martesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("martesTurno")+15))=="Vespertino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("martesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("martesTurno")+15))=="Nocturno")){
+      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("martesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("martesTurno")+15))=="TodoElDia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("martesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("martesTurno")+15))=="Dia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("martesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("martesTurno")+15))=="Noche")){
         this.disponibilidad.martes = this.colaborador.horario.substring(this.colaborador.horario.indexOf("martesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("martesTurno")+15));
       } else {
         this.disponibilidad.martes = "";
       }
-      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("miercolesTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("miercolesTurno")+18))=="Matutino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("miercolesTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("miercolesTurno")+18))=="Vespertino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("miercolesTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("miercolesTurno")+18))=="Nocturno")){
+      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("miercolesTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("miercolesTurno")+18))=="TodoElDia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("miercolesTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("miercolesTurno")+18))=="Dia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("miercolesTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("miercolesTurno")+18))=="Noche")){
         this.disponibilidad.miercoles = this.colaborador.horario.substring(this.colaborador.horario.indexOf("miercolesTurno")+17,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("miercolesTurno")+18));
       } else {
         this.disponibilidad.miercoles = "";
       }
-      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("juevesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("juevesTurno")+15))=="Matutino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("juevesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("juevesTurno")+15))=="Vespertino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("juevesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("juevesTurno")+15))=="Nocturno")){
+      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("juevesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("juevesTurno")+15))=="TodoElDia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("juevesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("juevesTurno")+15))=="Dia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("juevesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("juevesTurno")+15))=="Noche")){
         this.disponibilidad.jueves = this.colaborador.horario.substring(this.colaborador.horario.indexOf("juevesTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("juevesTurno")+15));
       } else {
         this.disponibilidad.jueves = "";
       }
-      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("viernesTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("viernesTurno")+16))=="Matutino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("viernesTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("viernesTurno")+16))=="Vespertino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("viernesTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("viernesTurno")+16))=="Nocturno")){
+      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("viernesTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("viernesTurno")+16))=="TodoElDia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("viernesTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("viernesTurno")+16))=="Dia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("viernesTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("viernesTurno")+16))=="Noche")){
         this.disponibilidad.viernes = this.colaborador.horario.substring(this.colaborador.horario.indexOf("viernesTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("viernesTurno")+16));
       } else {
         this.disponibilidad.viernes = "";
       }
-      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("sabadoTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("sabadoTurno")+15))=="Matutino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("sabadoTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("sabadoTurno")+15))=="Vespertino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("sabadoTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("sabadoTurno")+15))=="Nocturno")){
+      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("sabadoTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("sabadoTurno")+15))=="TodoElDia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("sabadoTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("sabadoTurno")+15))=="Dia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("sabadoTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("sabadoTurno")+15))=="Noche")){
         this.disponibilidad.sabado = this.colaborador.horario.substring(this.colaborador.horario.indexOf("sabadoTurno")+14,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("sabadoTurno")+15));
       } else {
         this.disponibilidad.sabado = "";
@@ -150,7 +200,7 @@ export class ModalColaboradorComponent implements OnInit {
       // } else {
       //   this.disponibilidad.domingo = "";
       // }
-      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("domingoTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("domingoTurno")+16))=="Matutino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("domingoTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("domingoTurno")+16))=="Vespertino")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("domingoTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("domingoTurno")+16))=="Nocturno")){
+      if((this.colaborador.horario.substring(this.colaborador.horario.indexOf("domingoTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("domingoTurno")+16))=="TodoElDia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("domingoTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("domingoTurno")+16))=="Dia")||(this.colaborador.horario.substring(this.colaborador.horario.indexOf("domingoTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("domingoTurno")+16))=="Noche")){
         this.disponibilidad.domingo = this.colaborador.horario.substring(this.colaborador.horario.indexOf("domingoTurno")+15,this.colaborador.horario.indexOf('"',this.colaborador.horario.indexOf("domingoTurno")+16));
       } else {
         this.disponibilidad.domingo = "";
@@ -160,6 +210,7 @@ export class ModalColaboradorComponent implements OnInit {
       if (this.colaborador.foto) {
         this.fotoFlag = true;
       }
+      this.getHistorialServicios();
     }
     return event;
   }
