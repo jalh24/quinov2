@@ -15,6 +15,11 @@ import { MatTab } from '@angular/material/tabs';
 import { ModalColaboradorComponent } from '../modal-colaborador/modal-colaborador.component';
 import { faUserNurse, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { ServicioFiltro } from '../_model/servicioFiltro';
+import { ModalBitacorasServicioComponent } from '../modal-bitacoras-servicio/modal-bitacoras-servicio.component';
+
+export interface DialogData {
+  data: any;
+}
 
 @Component({
   selector: 'app-gestion-servicio',
@@ -58,6 +63,23 @@ export class GestionServicioComponent implements OnInit {
     private router: Router,
     private http: HttpClient, private dialog: MatDialog
   ) { this.servicioFiltro = new ServicioFiltro(); }
+
+  openDialog(idServ): void {
+    this.http.post<any>('/api/bitacora/bitacoraId', { idServicio: idServ }, this.httpOptions).subscribe(data => {
+      let envio = data.data;
+      console.log(envio)
+      // envio.cuentasColaborador = data.data.cuentas;
+      // envio.estudios = data.data.estudios;
+      // envio.experiencia = data.data.experiencia;
+      const dialogRef = this.dialog.open(ModalBitacorasServicioComponent, {
+        width: '1110px',
+        data: { data: envio }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    });
+  }
 
   ngOnInit(): void {
     this.comboResponsables();

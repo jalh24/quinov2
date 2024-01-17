@@ -273,8 +273,8 @@
                 <div class="row mt-4 pb-4">
                     <div class="col-md-2">
                         <label for="telefono" class="form-label">Teléfono 1<span class="text-danger"> *</span></label>
-                        <input maxlength="10" size="10" type="tel" (change)="onTelefono1($event.target.value)" class="form-control" name="telefono" ngModel
-                            #telefono="ngModel" [(ngModel)]="cliente.telefono" placeholder="10 Dígitos"
+                        <input maxlength="12" size="12" type="tel" (change)="onTelefono1($event.target.value)" class="form-control" name="telefono" ngModel
+                            #telefono="ngModel" [(ngModel)]="cliente.telefono" placeholder="12 Dígitos"
                             pattern="[0-9]*" minlength="10">
                         <!-- <input maxlength="10" size="10" type="tel" class="form-control" name="telefono1" ngModel #telefono1="ngModel" [(ngModel)]="cliente.telefono" placeholder="10 Dígitos" pattern="[0-9]*" minlength="10" required> -->
                     </div>
@@ -292,8 +292,8 @@
 
                     <div class="col-md-2">
                         <label for="telefono2" class="form-label">Teléfono 2</label>
-                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefono2"
-                            placeholder="10 Dígitos" ngModel #telefono2="ngModel" [(ngModel)]="cliente.telefono2"
+                        <input maxlength="12" size="12" type="tel" class="form-control" name="telefono2"
+                            placeholder="12 Dígitos" ngModel #telefono2="ngModel" [(ngModel)]="cliente.telefono2"
                             pattern="[0-9]*" minlength="10">
                     </div>
 
@@ -374,8 +374,8 @@
                     <div class="col">
                         <label for="telefonoContacto" class="form-label">Telefono<span class="text-danger">
                                 *</span></label>
-                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefonoContacto"
-                            placeholder="10 Dígitos" ngModel #telefonoContacto="ngModel"
+                        <input maxlength="12" size="12" type="tel" class="form-control" name="telefonoContacto"
+                            placeholder="12 Dígitos" ngModel #telefonoContacto="ngModel"
                             [(ngModel)]="cliente.telefonoContacto" pattern="[0-9]*" minlength="10">
                     </div>
                     <div class="col">
@@ -416,8 +416,8 @@
                     <div class="col">
                         <label for="telefonoContacto2" class="form-label">Telefono<span class="text-danger">
                                 *</span></label>
-                        <input maxlength="10" size="10" type="tel" class="form-control" name="telefonoContacto2"
-                            placeholder="10 Dígitos"  ngModel #telefonoContacto2="ngModel"
+                        <input maxlength="12" size="12" type="tel" class="form-control" name="telefonoContacto2"
+                            placeholder="12 Dígitos"  ngModel #telefonoContacto2="ngModel"
                             [(ngModel)]="cliente.telefonoContacto2" pattern="[0-9]*" minlength="10">
                     </div>
                     <div class="col">

@@ -1,0 +1,100 @@
+<mat-accordion>
+  <!-- #enddocregion basic-panel -->
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false" *ngFor="let bitacora of bitacoras">
+      <mat-expansion-panel-header>
+        <mat-panel-title style="font-size: 111%;">
+          {{bitacora.nombrecompleto}}
+        </mat-panel-title>
+        <mat-panel-description style="font-size: 111%;">
+          {{bitacora.fechaCaptura}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+              <tr>
+                  <th scope="col" colspan="3">Alimentación</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Desayuno</th>
+              <th scope="row">Comida</th>
+              <th scope="row">Cena</th>
+            </tr>
+            <tr>
+              <td>{{bitacora.desayuno}}</td>
+              <td>{{bitacora.comida}}</td>
+              <td>{{bitacora.cena}}</td>
+            </tr>
+          </tbody> 
+        </table>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+              <tr>
+                  <th scope="col" colspan="1">Cuidados / Actividades</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let actividad of bitacora.actividad">
+              <td>{{actividad}}</td>
+            </tr>
+          </tbody> 
+        </table>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+              <tr>
+                  <th scope="col" colspan="1">Estado de ánimo</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{bitacora.idEstadoAnimo}}</td>
+            </tr>
+          </tbody> 
+        </table>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+              <tr>
+                  <th scope="col" colspan="4">Mediciones</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Temperatura</th>
+              <th scope="row">Presión arterial</th>
+              <th scope="row">Nivel de ázucar</th>
+              <th scope="row">Nivel de oxígeno</th>
+            </tr>
+            <tr>
+              <td>{{bitacora.temperaturaCorporal}}°</td>
+              <td>{{bitacora.presionSistolica}}/{{bitacora.presionDiastolica}} mm Hg</td>
+              <td>{{bitacora.glucosa}} mg/dL</td>
+              <td>{{bitacora.saturacionOxigeno}}%</td>
+            </tr>
+          </tbody> 
+        </table>
+    </mat-expansion-panel>
+  </mat-accordion>
+<!-- <table *ngFor="let bitacora of bitacoras" class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col" colspan="4">{{bitacora.nombrecompleto}}</th>
+            <th scope="col" colspan="4">{{bitacora.fechaCaptura}}</th>
+        </tr>
+    </thead>   
+    <tr>
+      <td>Alfreds Futterkiste</td>
+      <td>Maria Anders</td>
+      <td>Germany</td>
+    </tr>
+    <tr>
+      <td>Centro comercial Moctezuma</td>
+      <td>Francisco Chang</td>
+      <td>Mexico</td>
+    </tr>
+  </table> -->
+<div mat-dialog-actions>
+  <button class="btn btn-primary" (click)="onNoClick()">Cerrar</button>
+
+</div>

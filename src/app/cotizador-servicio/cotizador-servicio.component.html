@@ -1,0 +1,166 @@
+<form style="background: #00D8D6; background: linear-gradient(to right, #00D8D6, #6EC1E4);" #myForm="ngForm">
+    <ngb-toast-container></ngb-toast-container>
+    <mat-tab-group mat-align-tabs="center" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+        <mat-tab label="Cotizador">
+            <div class="container mt-5 pt-4 bg-white rounded-top shadow">
+                <h3 class="text-center">Cotizador de Servicios</h3>
+                <hr class="py-1" />
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="tipoColaborador" class="form-label">Tipo de Servicio<span class="text-danger">
+                            *</span></label>
+                        <select class="form-control" name="tipoColaborador" (change)="onTipoColaborador($event.target.value)"
+                          #tipoColaborador="ngModel" [ngModel]="cotizadorServicio.idTipoColaborador" ngModel>
+                          <option value="" selected disabled hidden>Seleccionar</option>
+                          <option *ngFor="let tipoColaborador of tiposColaboradores" [value]="tipoColaborador.idTipoColaborador">
+                            {{tipoColaborador.nombre}}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-3">
+                        <label for="sexo" class="form-label">Genero de Colaborador<span class="text-danger"> *</span></label>
+                        <select class="form-control" name="sexo" ngModel (change)="onSexo($event.target.value)" #sexo="ngModel"
+                          [ngModel]="cotizadorServicio.idSexo">
+                          <option value="" selected disabled hidden>Seleccionar</option>
+                          <option *ngFor="let sexo of sexos" [value]="sexo.idSexo">
+                            {{sexo.nombre}}
+                          </option>          
+                        </select>
+                      </div>
+                </div>
+                <div class="row mt-4 pb-4">
+                    <div class="col-md-3">
+                        <label for="fechaEntrada" class="form-label">Entrada<span class="text-danger"> *</span></label>
+                        <input type="datetime-local" class="form-control" id="fechaEntrada" name="fechaEntrada" ngModel #fechaEntrada="ngModel" [(ngModel)]="cotizadorServicio.fechaEntrada" (change)="onEntradaSalida()">           
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="fechaSalida" class="form-label">Salida<span class="text-danger"> *</span></label>
+                        <input type="datetime-local" class="form-control" id="fechaSalida" name="fechaSalida" ngModel #fechaSalida="ngModel" [(ngModel)]="cotizadorServicio.fechaSalida" (change)="onEntradaSalida()">           
+                    </div>
+                    
+                    <div class="col-md-1">
+                        <label for="horas" class="form-label">Horas</label>
+                        <input type="text" class="form-control" id="horas" name="horas" value="{{cotizadorServicio.horas}}"
+                          onkeydown="return false" disabled>
+                    </div>
+
+                    <div class="col-md-1">
+                      <label for="domingos" class="form-label">Domingos</label>
+                      <input type="text" class="form-control" id="domingos" name="domingos" value="{{cotizadorServicio.domingos}}"
+                        onkeydown="return false" disabled>
+                    </div>
+
+                    <div class="col-md-1">
+                      <label for="primaDominical" class="form-label">Prima %</label>
+                      <input type="number" class="form-control" id="primaDominical" name="primaDominical" min="0" max="25">
+                    </div>
+
+                    <div class="col-md-2">
+                      <!-- <label for="festivos" class="form-label">Festivos</label>
+                      <input type="text" class="form-control" id="festivos" name="festivos" value="{{cotizadorServicio.festivos}}"
+                        onkeydown="return false" disabled>
+                        <button type="button" class="btn btn-secondary">
+                          <fa-icon [icon]="faPlus"></fa-icon>
+                        </button> -->
+                        <label for="festivos" class="form-label">Festivos</label>
+                        <div class="input-group">
+                          
+                      <input type="text" class="form-control" id="festivos" name="festivos" value="{{cotizadorServicio.festivos}}"
+                        onkeydown="return false" disabled>
+                        <button type="button" class="btn btn-secondary" (click)="onFestivoPlus()">
+                          <fa-icon [icon]="faPlus"></fa-icon>
+                        </button>
+                        <button type="button" class="btn btn-secondary" (click)="onFestivoMinus()">
+                          <fa-icon [icon]="faMinus"></fa-icon>
+                        </button>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-1">
+                      <label for="primaFestivos" class="form-label">Prima %</label>
+                      <input type="number" class="form-control" id="primaFestivos" name="primaFestivos" min="0" max="100">
+                    </div>
+                </div>
+
+                <div class="row mt-4 pb-4">
+                  <div class="col-md-1">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="hospitalCheck">
+                      <label class="form-check-label" for="hospitalCheck">Hospital</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="proteccionCheck">
+                      <label class="form-check-label" for="proteccionCheck">Equipo de Protección</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="autoPropioCheck" name="autoPropioCheck" ngModel
+                      #autoPropioCheck="ngModel" [(ngModel)]="cotizadorServicio.autoPropio" [checked]="cotizadorServicio.autoPropio" (click)="checkboxesAutoPropioUBER(0,$event.currentTarget.checked)">
+                      <label class="form-check-label" for="autoPropioCheck">Auto Propio</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="uberCheck" name="uberCheck" ngModel
+                      #uberCheck="ngModel" [(ngModel)]="cotizadorServicio.uber" [checked]="cotizadorServicio.uber" (click)="checkboxesAutoPropioUBER(1,$event.currentTarget.checked)">
+                      <label class="form-check-label" for="uberCheck">UBER</label>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <label for="comisiones" class="form-label">Comisiones<span class="text-danger"> *</span></label>
+                    <select class="form-control" name="comisiones" ngModel (change)="onComisiones($event.target.value)" #comisiones="ngModel"
+                      [ngModel]="cotizadorServicio.comisiones">
+                      <option value="" selected disabled hidden>Seleccionar</option>
+                      <option value="1">Primer Nivel</option>
+                      <option value="2">Segundo Nivel</option>
+                      <option value="3">Tercer Nivel</option>
+                      <option value="4">Convenio Especial</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-2">
+                    <label for="zonaLaboral" class="form-label">Zona Laboral<span class="text-danger">
+                        *</span></label>
+                    <select class="form-control" name="zonaLaboral" (change)="onZonaLaboral($event.target.value)"
+                      #zonaLaboral="ngModel" [ngModel]="cotizadorServicio.idZonaLaboral" ngModel>
+                      <option value="" selected disabled hidden>Seleccionar</option>
+                      <option *ngFor="let zonaLaboral of zonasLaborales" [value]="zonaLaboral.idZonaLaboral">
+                        {{zonaLaboral.nombre}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-1">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="terminalCheck">
+                      <label class="form-check-label" for="terminalCheck">Terminal</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-4 pb-4" *ngIf=cotizarClick>
+                  <div class="col-md-12"><h3 class="text-center">{{cotizadorServicio.cotizacion}}</h3></div>                  
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div class="container bg-white rounded-bottom shadow">
+      <div class="row text-center pb-4">
+        <div class="col">
+          <button type="button" class="btn btn-primary" (click)="onCotizar()"> Cotizar </button>
+        </div>
+      </div>
+      <div class="row text-center pb-4" *ngIf="cotizarClick">
+        <div class="col">
+          <button type="button" class="btn btn-primary mr-1" (click)="openDialog(0)"> Paciente Existente </button>
+          <button type="button" class="btn btn-primary" (click)="openDialog(1)"> Paciente Nuevo </button>
+        </div>
+      </div>
+    </div>
+</form>
